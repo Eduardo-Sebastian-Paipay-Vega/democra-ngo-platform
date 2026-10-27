@@ -482,8 +482,8 @@ npm run test:coverage # Jest con cobertura
 
 ```bash
 # 1. Clonar repositorio
-git clone https://github.com/Eduardo-Sebastian-Paipay-Vega/02042026_01_pyDemocra.git
-cd 02042026_01_pyDemocra
+git clone https://github.com/Eduardo-Sebastian-Paipay-Vega/democra-ngo-platform.git
+cd democra-ngo-platform
 
 # 2. Instalar dependencias (solo en raíz — monorepo single-package.json)
 npm install
