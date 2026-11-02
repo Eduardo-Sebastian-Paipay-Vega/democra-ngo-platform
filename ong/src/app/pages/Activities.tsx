@@ -60,7 +60,7 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void
       className="flex items-center justify-between rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="text-[12px] text-[var(--t-text-secondary)]">
         {message}
       </p>
       <button
@@ -125,7 +125,7 @@ const columns: Column<OperationActivityRow>[] = [
     render: (item) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{item.name}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {item.taskName} - {item.projectName}
         </div>
       </div>
@@ -140,7 +140,7 @@ const columns: Column<OperationActivityRow>[] = [
     key: "schedule",
     label: "Horario",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-tertiary)" }}>
+      <span className="text-[12px] text-[var(--t-text-tertiary)]">
         {item.scheduleText}
       </span>
     ),
@@ -149,7 +149,7 @@ const columns: Column<OperationActivityRow>[] = [
     key: "location",
     label: "Ubicacion",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-tertiary)" }}>
+      <span className="text-[12px] text-[var(--t-text-tertiary)]">
         {item.locationName}
       </span>
     ),
@@ -158,7 +158,7 @@ const columns: Column<OperationActivityRow>[] = [
     key: "meta",
     label: "Horas estimadas",
     render: (item) => (
-      <span className="line-clamp-1 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="line-clamp-1 text-[12px] text-[var(--t-text-dim)]">
         {item.meta}
       </span>
     ),
@@ -167,7 +167,7 @@ const columns: Column<OperationActivityRow>[] = [
     key: "volunteers",
     label: "Vol.",
     render: (item) => (
-      <span className="tabular-nums text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="tabular-nums text-[12px] text-[var(--t-text-secondary)]">
         {item.assignedVolunteers}
       </span>
     ),
@@ -824,11 +824,11 @@ export function Activities() {
                 className="rounded-2xl p-4"
                 style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
               >
-                <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="text-[11px] text-[var(--t-text-dim)]">
                   {item.label}
                 </p>
                 <div className="mt-2 flex items-center justify-between">
-                  <p className="tabular-nums text-[20px]" style={{ color: "var(--t-text)" }}>
+                  <p className="tabular-nums text-[20px] text-[var(--t-text)]">
                     {item.count}
                   </p>
                   <StatusDot variant={item.variant}>{item.label}</StatusDot>
@@ -878,10 +878,10 @@ export function Activities() {
       >
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               {editingActivityId ? "Editar actividad" : "Crear actividad"}
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Completa los datos operativos para guardar la actividad.
             </p>
           </div>
@@ -1024,10 +1024,10 @@ export function Activities() {
       <ModalShell open={isDetailModalOpen} onClose={closeDetailModal} width="max-w-[1100px]">
         <div className="flex items-start justify-between gap-3 px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Detalle de actividad
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Revisa relaciones y asignaciones sin ensuciar la vista principal.
             </p>
           </div>
@@ -1054,12 +1054,12 @@ export function Activities() {
 
         <div className="max-h-[75vh] space-y-4 overflow-y-auto p-4">
           {!selectedActivityId && (
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Selecciona una actividad para ver su detalle.
             </p>
           )}
           {selectedActivityId && detailLoading && (
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Cargando detalle...
             </p>
           )}
@@ -1081,15 +1081,15 @@ export function Activities() {
 
               <div className="grid grid-cols-1 gap-3 md:grid-cols-4">
                 <div>
-                  <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[11px] text-[var(--t-text-dim)]">
                     Actividad
                   </p>
-                  <p className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <p className="text-[13px] text-[var(--t-text)]">
                     {detail.activity.name}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[11px] text-[var(--t-text-dim)]">
                     Estado
                   </p>
                   <StatusDot variant={detail.activity.statusVariant}>
@@ -1097,50 +1097,50 @@ export function Activities() {
                   </StatusDot>
                 </div>
                 <div>
-                  <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[11px] text-[var(--t-text-dim)]">
                     Proyecto
                   </p>
-                  <p className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <p className="text-[13px] text-[var(--t-text)]">
                     {detail.activity.projectName}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[11px] text-[var(--t-text-dim)]">
                     Tarea
                   </p>
-                  <p className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <p className="text-[13px] text-[var(--t-text)]">
                     {detail.activity.taskName}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[11px] text-[var(--t-text-dim)]">
                     Ubicacion
                   </p>
-                  <p className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <p className="text-[13px] text-[var(--t-text)]">
                     {detail.activity.locationName || "No documentada"}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[11px] text-[var(--t-text-dim)]">
                     Fechas
                   </p>
-                  <p className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <p className="text-[13px] text-[var(--t-text)]">
                     {detail.activity.scheduleText}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[11px] text-[var(--t-text-dim)]">
                     Horas estimadas
                   </p>
-                  <p className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <p className="text-[13px] text-[var(--t-text)]">
                     {detail.activity.meta || "-"}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[11px] text-[var(--t-text-dim)]">
                     Asignados
                   </p>
-                  <p className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <p className="text-[13px] text-[var(--t-text)]">
                     {activeAssignmentCount}
                   </p>
                 </div>
@@ -1150,13 +1150,13 @@ export function Activities() {
                 className="rounded-xl p-3"
                 style={{ background: "var(--t-input-bg)", border: "1px solid var(--t-border)" }}
               >
-                <p className="mb-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                <p className="mb-1 text-[12px] text-[var(--t-text-secondary)]">
                   Descripcion
                 </p>
-                <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="text-[12px] text-[var(--t-text-dim)]">
                   {detail.activity.description || "Sin descripcion registrada."}
                 </p>
-                <p className="mt-3 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="mt-3 text-[12px] text-[var(--t-text-dim)]">
                   {relations
                     ? `Asistencias ${relations.attendanceCount} / Horas ${relations.hoursCount} / Evidencias ${relations.evidenceCount}`
                     : "Sin resumen de relaciones por el momento."}
@@ -1168,11 +1168,11 @@ export function Activities() {
                   className="rounded-xl p-3"
                   style={{ background: "var(--t-input-bg)", border: "1px solid var(--t-border)" }}
                 >
-                  <p className="mb-2 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                  <p className="mb-2 text-[12px] text-[var(--t-text-secondary)]">
                     Equipo asignado
                   </p>
                   {assignmentLoading && (
-                    <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                    <p className="text-[12px] text-[var(--t-text-dim)]">
                       Cargando asignaciones...
                     </p>
                   )}
@@ -1182,17 +1182,17 @@ export function Activities() {
                   {!assignmentLoading && !assignmentError && (
                     <div className="space-y-2">
                       {assignmentRows.length === 0 && (
-                        <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                        <p className="text-[12px] text-[var(--t-text-dim)]">
                           No hay voluntarios asignados.
                         </p>
                       )}
                       {assignmentRows.map((assignment) => (
                         <div key={assignment.id} className="flex items-center justify-between gap-2">
                           <div>
-                            <p className="text-[12px]" style={{ color: "var(--t-text)" }}>
+                            <p className="text-[12px] text-[var(--t-text)]">
                               {assignment.volunteerName}
                             </p>
-                            <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                            <p className="text-[11px] text-[var(--t-text-dim)]">
                               {assignment.role || "Sin rol"}
                             </p>
                           </div>
@@ -1249,33 +1249,33 @@ export function Activities() {
                   className="rounded-xl p-3"
                   style={{ background: "var(--t-input-bg)", border: "1px solid var(--t-border)" }}
                 >
-                  <p className="mb-2 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                  <p className="mb-2 text-[12px] text-[var(--t-text-secondary)]">
                     Horas relacionadas
                   </p>
                   <div className="space-y-2">
                     {detail.hours.slice(0, 5).map((hour) => (
-                      <div key={hour.id} className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                      <div key={hour.id} className="text-[12px] text-[var(--t-text-dim)]">
                         {hour.date} - {hour.volunteerName} - {hour.minutes} min ({hour.statusName})
                       </div>
                     ))}
                     {detail.hours.length === 0 && (
-                      <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                      <p className="text-[12px] text-[var(--t-text-dim)]">
                         Sin horas registradas.
                       </p>
                     )}
                   </div>
 
-                  <p className="mb-2 mt-4 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                  <p className="mb-2 mt-4 text-[12px] text-[var(--t-text-secondary)]">
                     Evidencias relacionadas
                   </p>
                   <div className="space-y-2">
                     {detail.evidences.slice(0, 5).map((evidence) => (
-                      <div key={evidence.id} className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                      <div key={evidence.id} className="text-[12px] text-[var(--t-text-dim)]">
                         {evidence.uploadedAt} - {evidence.typeName} - {evidence.validationStatusName}
                       </div>
                     ))}
                     {detail.evidences.length === 0 && (
-                      <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                      <p className="text-[12px] text-[var(--t-text-dim)]">
                         Sin evidencias registradas.
                       </p>
                     )}
@@ -1290,10 +1290,10 @@ export function Activities() {
       <ModalShell open={isStatusModalOpen} onClose={closeStatusModal} width="max-w-[520px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Cambiar estado de actividad
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Selecciona el nuevo estado desde el catalogo real.
             </p>
           </div>
@@ -1308,7 +1308,7 @@ export function Activities() {
           </button>
         </div>
         <div className="space-y-3 p-4">
-          <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+          <p className="text-[12px] text-[var(--t-text-dim)]">
             {statusTargetRow?.name ?? "Actividad"}
           </p>
           <SelectFilter
@@ -1335,10 +1335,10 @@ export function Activities() {
       >
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Confirmar cancelacion operativa
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Esta accion marcara la actividad como cancelada dentro del contrato operativo vigente.
             </p>
           </div>
@@ -1353,7 +1353,7 @@ export function Activities() {
           </button>
         </div>
         <div className="space-y-3 p-4">
-          <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+          <p className="text-[12px] text-[var(--t-text-dim)]">
             {deleteTargetRow
               ? `Se cancelara la actividad "${deleteTargetRow.name}" actualizando su propio estado.`
               : ""}
@@ -1376,10 +1376,10 @@ export function Activities() {
       >
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Confirmar retiro de asignacion
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               La asignacion se retirara de la actividad y dejara de aparecer en el equipo asignado.
             </p>
           </div>
@@ -1394,7 +1394,7 @@ export function Activities() {
           </button>
         </div>
         <div className="space-y-3 p-4">
-          <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+          <p className="text-[12px] text-[var(--t-text-dim)]">
             {assignmentToDeactivate
               ? `Se retirara la asignacion de ${assignmentToDeactivate.volunteerName}.`
               : ""}

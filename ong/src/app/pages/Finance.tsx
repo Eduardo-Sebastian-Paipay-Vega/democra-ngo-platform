@@ -25,16 +25,16 @@ type FinanceView = "accounts" | "categories" | "transactions" | "reports" | "spo
 
 function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void }) {
   return (
-    <div className="flex items-center justify-between rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{message}</p>
-      <button type="button" className="rounded-md px-2 py-1 text-[11px] hover:bg-[var(--t-hover)]" style={{ color: "var(--t-text-secondary)" }} onClick={onRetry}>Reintentar</button>
+    <div className="flex items-center justify-between rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+      <p className="text-[12px] text-[var(--t-text-secondary)]">{message}</p>
+      <button type="button" className="rounded-md px-2 py-1 text-[11px] hover:bg-[var(--t-hover)] text-[var(--t-text-secondary)]" onClick={onRetry}>Reintentar</button>
     </div>
   );
 }
 
 function SelectField({ value, onChange, options, disabled = false }: { value: string; onChange: (value: string) => void; options: Array<{ value: string; label: string }>; disabled?: boolean; }) {
   return (
-    <select value={value} onChange={(event) => onChange(event.target.value)} disabled={disabled} className="h-9 rounded-xl px-3 text-[12px] outline-none disabled:cursor-not-allowed disabled:opacity-70" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }}>
+    <select value={value} onChange={(event) => onChange(event.target.value)} disabled={disabled} className="h-9 rounded-xl px-3 text-[12px] outline-none disabled:cursor-not-allowed disabled:opacity-70 border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]">
       {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
     </select>
   );
@@ -42,18 +42,18 @@ function SelectField({ value, onChange, options, disabled = false }: { value: st
 
 function DetailField({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}>
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>{label}</p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{value || "-"}</p>
+    <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)]">
+      <p className="text-[11px] text-[var(--t-text-dim)]">{label}</p>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">{value || "-"}</p>
     </div>
   );
 }
 
 function SummaryField({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>{label}</p>
-      <p className="mt-1 text-[20px]" style={{ color: "var(--t-text)" }}>{value}</p>
+    <div className="rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+      <p className="text-[11px] text-[var(--t-text-dim)]">{label}</p>
+      <p className="mt-1 text-[20px] text-[var(--t-text)]">{value}</p>
     </div>
   );
 }
@@ -69,33 +69,33 @@ function formatNumber(value: number | null) {
 }
 
 const accountColumns: Column<any>[] = [
-  { key: "name", label: "Cuenta", render: (item) => <div><div style={{ color: "var(--t-text)" }}>{item.name}</div><div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>{item.typeLabel}</div></div> },
-  { key: "currency", label: "Moneda", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{item.currency}</span> },
-  { key: "balance", label: "Saldo", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{formatMoney(item.balance)}</span> },
+  { key: "name", label: "Cuenta", render: (item) => <div><div>{item.name}</div><div className="mt-0.5 text-[11px] text-[var(--t-text)]" style={{ color: "var(--t-text-dim)" }}>{item.typeLabel}</div></div> },
+  { key: "currency", label: "Moneda", render: (item) => <span className="text-[12px] text-[var(--t-text-secondary)]">{item.currency}</span> },
+  { key: "balance", label: "Saldo", render: (item) => <span className="text-[12px] text-[var(--t-text-secondary)]">{formatMoney(item.balance)}</span> },
   { key: "status", label: "Estado", render: (item) => <StatusDot variant={item.statusVariant}>{item.activeLabel}</StatusDot> },
 ];
 
 const categoryColumns: Column<any>[] = [
   { key: "name", label: "Categoria", render: (item) => <span style={{ color: "var(--t-text)" }}>{item.name}</span> },
   { key: "type", label: "Tipo", render: (item) => <StatusDot variant="info">{item.typeLabel}</StatusDot> },
-  { key: "trace", label: "Trazabilidad", render: (item) => <div className="text-[12px]" style={{ color: "var(--t-text-dim)" }}><div>{item.transactionCount} transacciones</div><div>Ultima: {item.lastTransactionAt}</div></div> },
+  { key: "trace", label: "Trazabilidad", render: (item) => <div className="text-[12px] text-[var(--t-text-dim)]"><div>{item.transactionCount} transacciones</div><div>Ultima: {item.lastTransactionAt}</div></div> },
 ];
 
 const transactionColumns: Column<any>[] = [
-  { key: "account", label: "Cuenta / Categoria", render: (item) => <div><div style={{ color: "var(--t-text)" }}>{item.accountName}</div><div className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>{item.categoryName}</div></div> },
+  { key: "account", label: "Cuenta / Categoria", render: (item) => <div><div>{item.accountName}</div><div className="text-[11px] text-[var(--t-text)]" style={{ color: "var(--t-text-dim)" }}>{item.categoryName}</div></div> },
   { key: "type", label: "Tipo", render: (item) => <StatusDot variant={item.statusVariant}>{item.typeName}</StatusDot> },
-  { key: "approval", label: "Aprobacion", render: (item) => <div><StatusDot variant={item.approvalVariant}>{item.approvalStateName}</StatusDot><div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>{item.approvalKind === "not-required" ? "No aplica" : item.approvalRequestedAt}</div></div> },
-  { key: "amount", label: "Monto", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{formatMoney(item.amount)}</span> },
-  { key: "date", label: "Fecha", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{item.date}</span> },
-  { key: "project", label: "Proyecto", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{item.projectName}</span> },
+  { key: "approval", label: "Aprobacion", render: (item) => <div><StatusDot variant={item.approvalVariant}>{item.approvalStateName}</StatusDot><div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">{item.approvalKind === "not-required" ? "No aplica" : item.approvalRequestedAt}</div></div> },
+  { key: "amount", label: "Monto", render: (item) => <span className="text-[12px] text-[var(--t-text-secondary)]">{formatMoney(item.amount)}</span> },
+  { key: "date", label: "Fecha", render: (item) => <span className="text-[12px] text-[var(--t-text-dim)]">{item.date}</span> },
+  { key: "project", label: "Proyecto", render: (item) => <span className="text-[12px] text-[var(--t-text-dim)]">{item.projectName}</span> },
 ];
 
 const reportColumns: Column<any>[] = [
-  { key: "date", label: "Fecha", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{item.date}</span> },
+  { key: "date", label: "Fecha", render: (item) => <span className="text-[12px] text-[var(--t-text-secondary)]">{item.date}</span> },
   { key: "account", label: "Cuenta", render: (item) => <span style={{ color: "var(--t-text)" }}>{item.accountName}</span> },
-  { key: "category", label: "Categoria", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{item.categoryName}</span> },
+  { key: "category", label: "Categoria", render: (item) => <span className="text-[12px] text-[var(--t-text-dim)]">{item.categoryName}</span> },
   { key: "type", label: "Tipo", render: (item) => <StatusDot variant={item.statusVariant}>{item.typeName}</StatusDot> },
-  { key: "amount", label: "Monto", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{formatMoney(item.amount)}</span> },
+  { key: "amount", label: "Monto", render: (item) => <span className="text-[12px] text-[var(--t-text-secondary)]">{formatMoney(item.amount)}</span> },
 ];
 
 export function Finance() {
@@ -278,8 +278,8 @@ export function Finance() {
             { label: "Editar", onClick: (row) => { setEditingAccount(row); setAccountForm({ name: row.name, typeCode: row.typeCode, currency: row.currency, balance: String(row.balance), active: row.active }); setAccountError(null); setAccountFormOpen(true); } },
             { label: "Inactivar", onClick: (row) => setAccountRemoveTarget(row), variant: "destructive" },
           ]} />
-          <div className="flex justify-between rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{(accounts.total === 0 ? 0 : (accountsPage - 1) * PAGE_SIZE + 1)}-{Math.min(accounts.total, accountsPage * PAGE_SIZE)} de {accounts.total}</p>
+          <div className="flex justify-between rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+            <p className="text-[12px] text-[var(--t-text-dim)]">{(accounts.total === 0 ? 0 : (accountsPage - 1) * PAGE_SIZE + 1)}-{Math.min(accounts.total, accountsPage * PAGE_SIZE)} de {accounts.total}</p>
             <div className="flex gap-2">
               <OutlineButton size="sm" onClick={() => setAccountsPage((current) => current - 1)} disabled={accountsPage <= 1}>Anterior</OutlineButton>
               <OutlineButton size="sm" onClick={() => setAccountsPage((current) => current + 1)} disabled={accountsPage * PAGE_SIZE >= accounts.total}>Siguiente</OutlineButton>
@@ -308,8 +308,8 @@ export function Finance() {
             { label: "Editar", onClick: (row) => { setEditingCategory(row); setCategoryForm({ name: row.name, type: row.typeKind === "egreso" ? "egreso" : "ingreso" }); setCategoryError(null); setCategoryFormOpen(true); } },
             { label: "Eliminar", onClick: (row) => setCategoryRemoveTarget(row), variant: "destructive" },
           ]} />
-          <div className="flex justify-between rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{(categories.total === 0 ? 0 : (categoriesPage - 1) * PAGE_SIZE + 1)}-{Math.min(categories.total, categoriesPage * PAGE_SIZE)} de {categories.total}</p>
+          <div className="flex justify-between rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+            <p className="text-[12px] text-[var(--t-text-dim)]">{(categories.total === 0 ? 0 : (categoriesPage - 1) * PAGE_SIZE + 1)}-{Math.min(categories.total, categoriesPage * PAGE_SIZE)} de {categories.total}</p>
             <div className="flex gap-2">
               <OutlineButton size="sm" onClick={() => setCategoriesPage((current) => current - 1)} disabled={categoriesPage <= 1}>Anterior</OutlineButton>
               <OutlineButton size="sm" onClick={() => setCategoriesPage((current) => current + 1)} disabled={categoriesPage * PAGE_SIZE >= categories.total}>Siguiente</OutlineButton>
@@ -328,8 +328,8 @@ export function Finance() {
             <SelectField value={transactionsType} onChange={(value) => { setTransactionsType(value); setTransactionsPage(1); }} options={transactionTypeOptions} />
             <SelectField value={transactionsProject} onChange={(value) => { setTransactionsProject(value); setTransactionsPage(1); }} options={transactionProjectOptions} />
             <SelectField value={transactionsApproval} onChange={(value) => { setTransactionsApproval(value as FinancialApprovalKind | "all"); setTransactionsPage(1); }} options={transactionApprovalOptions} />
-            <input type="date" value={transactionsDateFrom} onChange={(event) => { setTransactionsDateFrom(event.target.value); setTransactionsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input type="date" value={transactionsDateTo} onChange={(event) => { setTransactionsDateTo(event.target.value); setTransactionsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input type="date" value={transactionsDateFrom} onChange={(event) => { setTransactionsDateFrom(event.target.value); setTransactionsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input type="date" value={transactionsDateTo} onChange={(event) => { setTransactionsDateTo(event.target.value); setTransactionsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
           {transactions.error && <ErrorBlock message={transactions.error} onRetry={transactions.refresh} />}
           {transactions.warnings.length > 0 && <ErrorBlock message={transactions.warnings.join(" ")} onRetry={transactions.refresh} />}
@@ -340,8 +340,8 @@ export function Finance() {
             { label: "Rechazar", onClick: (row) => openApprovalResolution(row, "reject"), variant: "destructive" },
             { label: "Eliminar", onClick: (row) => setTransactionRemoveTarget(row), variant: "destructive" },
           ]} />
-          <div className="flex justify-between rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{(transactions.total === 0 ? 0 : (transactionsPage - 1) * PAGE_SIZE + 1)}-{Math.min(transactions.total, transactionsPage * PAGE_SIZE)} de {transactions.total}</p>
+          <div className="flex justify-between rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+            <p className="text-[12px] text-[var(--t-text-dim)]">{(transactions.total === 0 ? 0 : (transactionsPage - 1) * PAGE_SIZE + 1)}-{Math.min(transactions.total, transactionsPage * PAGE_SIZE)} de {transactions.total}</p>
             <div className="flex gap-2">
               <OutlineButton size="sm" onClick={() => setTransactionsPage((current) => current - 1)} disabled={transactionsPage <= 1}>Anterior</OutlineButton>
               <OutlineButton size="sm" onClick={() => setTransactionsPage((current) => current + 1)} disabled={transactionsPage * PAGE_SIZE >= transactions.total}>Siguiente</OutlineButton>
@@ -360,8 +360,8 @@ export function Finance() {
             <SelectField value={reportsType} onChange={(value) => { setReportsType(value); setReportsPage(1); }} options={transactionTypeOptions} />
             <SelectField value={reportsProject} onChange={(value) => { setReportsProject(value); setReportsPage(1); }} options={transactionProjectOptions} />
             <SelectField value={reportsApproval} onChange={(value) => { setReportsApproval(value as FinancialApprovalKind | "all"); setReportsPage(1); }} options={transactionApprovalOptions} />
-            <input type="date" value={reportsDateFrom} onChange={(event) => { setReportsDateFrom(event.target.value); setReportsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input type="date" value={reportsDateTo} onChange={(event) => { setReportsDateTo(event.target.value); setReportsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input type="date" value={reportsDateFrom} onChange={(event) => { setReportsDateFrom(event.target.value); setReportsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input type="date" value={reportsDateTo} onChange={(event) => { setReportsDateTo(event.target.value); setReportsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
             <GradientButton size="sm" onClick={async () => { const file = await reports.exportCsv(); if (!file) return; downloadCsv(file.content, file.fileName, file.mimeType); }} disabled={reports.isExporting}>{reports.isExporting ? "Exportando..." : "Exportar CSV"}</GradientButton>
             <OutlineButton size="sm" onClick={printPdf} disabled={reports.loading || reports.rows.length === 0}>Exportar PDF</OutlineButton>
           </div>
@@ -373,8 +373,8 @@ export function Finance() {
             <SummaryField label="Transacciones" value={String(reports.totals.transactionCount)} />
           </div>
           <DataTable columns={reportColumns} data={reports.rows} loading={reports.loading} emptyMessage="No hay transacciones para el reporte." />
-          <div className="flex justify-between rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{(reports.total === 0 ? 0 : (reportsPage - 1) * PAGE_SIZE + 1)}-{Math.min(reports.total, reportsPage * PAGE_SIZE)} de {reports.total}</p>
+          <div className="flex justify-between rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+            <p className="text-[12px] text-[var(--t-text-dim)]">{(reports.total === 0 ? 0 : (reportsPage - 1) * PAGE_SIZE + 1)}-{Math.min(reports.total, reportsPage * PAGE_SIZE)} de {reports.total}</p>
             <div className="flex gap-2">
               <OutlineButton size="sm" onClick={() => setReportsPage((current) => current - 1)} disabled={reportsPage <= 1}>Anterior</OutlineButton>
               <OutlineButton size="sm" onClick={() => setReportsPage((current) => current + 1)} disabled={reportsPage * PAGE_SIZE >= reports.total}>Siguiente</OutlineButton>
@@ -400,41 +400,41 @@ export function Finance() {
             <SummaryField label="Verificación Webhook" value="HMAC-SHA256 Activa" />
           </div>
 
-          <div className="rounded-2xl p-4 space-y-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-            <h3 className="text-[14px] font-medium" style={{ color: "var(--t-text)" }}>Adaptadores de Pago & Webhooks Salientes (M14 / RF-088 - RF-095)</h3>
+          <div className="rounded-2xl p-4 space-y-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+            <h3 className="text-[14px] font-medium text-[var(--t-text)]">Adaptadores de Pago & Webhooks Salientes (M14 / RF-088 - RF-095)</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="rounded-xl p-3" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}>
+              <div className="rounded-xl p-3 bg-[var(--t-hover)] border border-[var(--t-border)]">
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-[13px]" style={{ color: "var(--t-text)" }}>Stripe SDK</span>
+                  <span className="font-semibold text-[13px] text-[var(--t-text)]">Stripe SDK</span>
                   <StatusDot variant="success">Conectado</StatusDot>
                 </div>
-                <p className="text-[11px] mt-1" style={{ color: "var(--t-text-dim)" }}>Cobro único y suscripciones recurrentes internacionales.</p>
+                <p className="text-[11px] mt-1 text-[var(--t-text-dim)]">Cobro único y suscripciones recurrentes internacionales.</p>
               </div>
 
-              <div className="rounded-xl p-3" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}>
+              <div className="rounded-xl p-3 bg-[var(--t-hover)] border border-[var(--t-border)]">
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-[13px]" style={{ color: "var(--t-text)" }}>Culqi</span>
+                  <span className="font-semibold text-[13px] text-[var(--t-text)]">Culqi</span>
                   <StatusDot variant="success">Conectado</StatusDot>
                 </div>
-                <p className="text-[11px] mt-1" style={{ color: "var(--t-text-dim)" }}>Pasarela peruana para tarjetas de crédito/débito locales.</p>
+                <p className="text-[11px] mt-1 text-[var(--t-text-dim)]">Pasarela peruana para tarjetas de crédito/débito locales.</p>
               </div>
 
-              <div className="rounded-xl p-3" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}>
+              <div className="rounded-xl p-3 bg-[var(--t-hover)] border border-[var(--t-border)]">
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-[13px]" style={{ color: "var(--t-text)" }}>MercadoPago</span>
+                  <span className="font-semibold text-[13px] text-[var(--t-text)]">MercadoPago</span>
                   <StatusDot variant="success">Conectado</StatusDot>
                 </div>
-                <p className="text-[11px] mt-1" style={{ color: "var(--t-text-dim)" }}>Checkout transparente y billeteras digitales (Yape/Plin).</p>
+                <p className="text-[11px] mt-1 text-[var(--t-text-dim)]">Checkout transparente y billeteras digitales (Yape/Plin).</p>
               </div>
             </div>
           </div>
 
           <DataTable
             columns={[
-              { key: "donor", label: "Donante", render: (item) => <div><div style={{ color: "var(--t-text)" }}>{item.donor_name}</div><div className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>{item.donor_email}</div></div> },
+              { key: "donor", label: "Donante", render: (item) => <div><div>{item.donor_name}</div><div className="text-[11px] text-[var(--t-text)]" style={{ color: "var(--t-text-dim)" }}>{item.donor_email}</div></div> },
               { key: "gateway", label: "Pasarela", render: (item) => <StatusDot variant="info">{item.gateway_name}</StatusDot> },
-              { key: "type", label: "Frecuencia", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{item.subscription_frequency}</span> },
-              { key: "amount", label: "Monto", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{formatMoney(item.amount)}</span> },
+              { key: "type", label: "Frecuencia", render: (item) => <span className="text-[12px] text-[var(--t-text-secondary)]">{item.subscription_frequency}</span> },
+              { key: "amount", label: "Monto", render: (item) => <span className="text-[12px] text-[var(--t-text-secondary)]">{formatMoney(item.amount)}</span> },
       // @ts-ignore
       // @ts-ignore
               { key: "status", label: "Estado BD", render: (item) => <StatusDot variant={item.status === "active" ? "success" : "neutral"}>{item.status}</StatusDot> },
@@ -453,20 +453,20 @@ export function Finance() {
       )}
       <ModalShell open={accountFormOpen} onClose={() => setAccountFormOpen(false)} width="max-w-[760px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
-          <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>{editingAccount ? "Editar cuenta" : "Nueva cuenta"}</h3>
+          <h3 className="text-[14px] text-[var(--t-text)]">{editingAccount ? "Editar cuenta" : "Nueva cuenta"}</h3>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setAccountFormOpen(false)}>X</button>
         </div>
         <div className="space-y-3 p-4">
           {accountError && <ErrorBlock message={accountError} onRetry={() => setAccountError(null)} />}
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <input value={accountForm.name} onChange={(event) => setAccountForm((current) => ({ ...current, name: event.target.value }))} placeholder="Nombre de cuenta" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input value={accountForm.name} onChange={(event) => setAccountForm((current) => ({ ...current, name: event.target.value }))} placeholder="Nombre de cuenta" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
             <SelectField value={accountForm.typeCode} onChange={(value) => setAccountForm((current) => ({ ...current, typeCode: value }))} options={[{ value: "", label: "Selecciona tipo de cuenta" }, ...accounts.accountTypeOptions]} />
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <SelectField value={accountForm.currency} onChange={(value) => setAccountForm((current) => ({ ...current, currency: value }))} options={accounts.currencyOptions.length ? accounts.currencyOptions : [{ value: "PEN", label: "PEN" }]} />
-            <input type="number" value={accountForm.balance} onChange={(event) => setAccountForm((current) => ({ ...current, balance: event.target.value }))} placeholder="Saldo actual" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input type="number" value={accountForm.balance} onChange={(event) => setAccountForm((current) => ({ ...current, balance: event.target.value }))} placeholder="Saldo actual" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
-          <label className="flex items-center gap-2 text-[12px]" style={{ color: "var(--t-text-secondary)" }}><input type="checkbox" checked={accountForm.active} onChange={(event) => setAccountForm((current) => ({ ...current, active: event.target.checked }))} />Cuenta activa</label>
+          <label className="flex items-center gap-2 text-[12px] text-[var(--t-text-secondary)]"><input type="checkbox" checked={accountForm.active} onChange={(event) => setAccountForm((current) => ({ ...current, active: event.target.checked }))} />Cuenta activa</label>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => {
               if (!accountForm.name.trim() || !accountForm.typeCode.trim()) { setAccountError("Nombre y tipo de cuenta son obligatorios."); return; }
@@ -506,7 +506,7 @@ export function Finance() {
 
       <ModalShell open={Boolean(accountRemoveTarget)} onClose={() => setAccountRemoveTarget(null)} width="max-w-[520px]">
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>{accountRemoveTarget ? `Inactivar la cuenta ${accountRemoveTarget.name}?` : "Confirma la inactivacion."}</p>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">{accountRemoveTarget ? `Inactivar la cuenta ${accountRemoveTarget.name}?` : "Confirma la inactivacion."}</p>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => { if (!accountRemoveTarget) return; await accounts.remove(accountRemoveTarget.id); toast.success("Cuenta inactivada."); setAccountRemoveTarget(null); }} disabled={accounts.isRemoving}>{accounts.isRemoving ? "Guardando..." : "Confirmar"}</GradientButton>
             <OutlineButton size="sm" onClick={() => setAccountRemoveTarget(null)} disabled={accounts.isRemoving}>Cancelar</OutlineButton>
@@ -516,12 +516,12 @@ export function Finance() {
 
       <ModalShell open={categoryFormOpen} onClose={() => setCategoryFormOpen(false)} width="max-w-[620px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
-          <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>{editingCategory ? "Editar categoria" : "Nueva categoria"}</h3>
+          <h3 className="text-[14px] text-[var(--t-text)]">{editingCategory ? "Editar categoria" : "Nueva categoria"}</h3>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setCategoryFormOpen(false)}>X</button>
         </div>
         <div className="space-y-3 p-4">
           {categoryError && <ErrorBlock message={categoryError} onRetry={() => setCategoryError(null)} />}
-          <input value={categoryForm.name} onChange={(event) => setCategoryForm((current) => ({ ...current, name: event.target.value }))} placeholder="Nombre de categoria" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+          <input value={categoryForm.name} onChange={(event) => setCategoryForm((current) => ({ ...current, name: event.target.value }))} placeholder="Nombre de categoria" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           <SelectField value={categoryForm.type} onChange={(value) => setCategoryForm((current) => ({ ...current, type: value }))} options={[{ value: "ingreso", label: "Ingreso" }, { value: "egreso", label: "Egreso" }]} />
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => {
@@ -558,7 +558,7 @@ export function Finance() {
 
       <ModalShell open={Boolean(categoryRemoveTarget)} onClose={() => setCategoryRemoveTarget(null)} width="max-w-[520px]">
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>{categoryRemoveTarget ? `Eliminar la categoria ${categoryRemoveTarget.name}?` : "Confirma la eliminacion."}</p>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">{categoryRemoveTarget ? `Eliminar la categoria ${categoryRemoveTarget.name}?` : "Confirma la eliminacion."}</p>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => { if (!categoryRemoveTarget) return; await categories.remove(categoryRemoveTarget.id); toast.success("Categoria eliminada."); setCategoryRemoveTarget(null); }} disabled={categories.isRemoving}>{categories.isRemoving ? "Eliminando..." : "Confirmar"}</GradientButton>
             <OutlineButton size="sm" onClick={() => setCategoryRemoveTarget(null)} disabled={categories.isRemoving}>Cancelar</OutlineButton>
@@ -567,7 +567,7 @@ export function Finance() {
       </ModalShell>
       <ModalShell open={transactionFormOpen} onClose={() => setTransactionFormOpen(false)} width="max-w-[860px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
-          <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>{editingTransaction ? "Editar transaccion" : "Nueva transaccion"}</h3>
+          <h3 className="text-[14px] text-[var(--t-text)]">{editingTransaction ? "Editar transaccion" : "Nueva transaccion"}</h3>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setTransactionFormOpen(false)}>X</button>
         </div>
         <div className="space-y-3 p-4">
@@ -578,13 +578,13 @@ export function Finance() {
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <SelectField value={transactionForm.typeCode} onChange={(value) => setTransactionForm((current) => ({ ...current, typeCode: value }))} options={[{ value: "ingreso", label: "Ingreso" }, { value: "egreso", label: "Egreso" }]} />
-            <input type="number" min="0.01" step="0.01" value={transactionForm.amount} onChange={(event) => setTransactionForm((current) => ({ ...current, amount: event.target.value }))} placeholder="Monto" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input type="number" min="0.01" step="0.01" value={transactionForm.amount} onChange={(event) => setTransactionForm((current) => ({ ...current, amount: event.target.value }))} placeholder="Monto" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <input type="date" value={transactionForm.transactionDate} onChange={(event) => setTransactionForm((current) => ({ ...current, transactionDate: event.target.value }))} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input type="date" value={transactionForm.transactionDate} onChange={(event) => setTransactionForm((current) => ({ ...current, transactionDate: event.target.value }))} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
             <SelectField value={transactionForm.projectId} onChange={(value) => setTransactionForm((current) => ({ ...current, projectId: value }))} options={[{ value: "all", label: "Proyecto (opcional)" }, ...transactions.projectOptions]} disabled={!transactions.support.projectLink} />
           </div>
-          <textarea value={transactionForm.description} onChange={(event) => setTransactionForm((current) => ({ ...current, description: event.target.value }))} rows={4} placeholder="Descripcion" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+          <textarea value={transactionForm.description} onChange={(event) => setTransactionForm((current) => ({ ...current, description: event.target.value }))} rows={4} placeholder="Descripcion" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => {
               if (transactionForm.accountId === "all" || transactionForm.categoryId === "all" || !transactionForm.amount) { setTransactionError("Cuenta, categoria y monto son obligatorios."); return; }
@@ -626,23 +626,23 @@ export function Finance() {
                 <DetailField label="Comentario aprobacion" value={transactionDetail.detail.transaction.approvalComment || "-"} />
               </div>
               {transactionDetail.detail.transaction.approvalKind !== "not-required" && (
-                <div className="flex flex-wrap items-center gap-2 rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+                <div className="flex flex-wrap items-center gap-2 rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
                   <StatusDot variant={transactionDetail.detail.transaction.approvalVariant}>{transactionDetail.detail.transaction.approvalStateName}</StatusDot>
                   <OutlineButton size="sm" onClick={() => openApprovalResolution(transactionDetail.detail?.transaction, "approve")} disabled={transactions.isResolving}>Aprobar</OutlineButton>
                   <OutlineButton size="sm" onClick={() => openApprovalResolution(transactionDetail.detail?.transaction, "reject")} disabled={transactions.isResolving}>Rechazar</OutlineButton>
                 </div>
               )}
-              <div className="rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+              <div className="rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
                 <div className="flex items-center justify-between">
-                  <p className="text-[12px]" style={{ color: "var(--t-text)" }}>Comprobantes</p>
+                  <p className="text-[12px] text-[var(--t-text)]">Comprobantes</p>
                   <OutlineButton size="sm" onClick={() => { setReceiptForm({ routeInput: "", fileType: "", file: null }); setReceiptError(null); setReceiptOpen(true); }}>Adjuntar</OutlineButton>
                 </div>
                 {receipts.error && <div className="mt-2"><ErrorBlock message={receipts.error} onRetry={receipts.refresh} /></div>}
-                {!receipts.loading && receipts.rows.length === 0 && <p className="mt-2 text-[12px]" style={{ color: "var(--t-text-dim)" }}>Sin comprobantes adjuntos.</p>}
+                {!receipts.loading && receipts.rows.length === 0 && <p className="mt-2 text-[12px] text-[var(--t-text-dim)]">Sin comprobantes adjuntos.</p>}
                 <div className="mt-2 space-y-2">
                   {receipts.rows.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}>
-                      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                    <div key={item.id} className="flex items-center justify-between rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)]">
+                      <div className="text-[12px] text-[var(--t-text-secondary)]">
                         <div>{item.route}</div>
                         <div style={{ color: "var(--t-text-dim)" }}>{item.fileType} - {item.uploadedAt}</div>
                       </div>
@@ -658,7 +658,7 @@ export function Finance() {
 
       <ModalShell open={Boolean(transactionRemoveTarget)} onClose={() => setTransactionRemoveTarget(null)} width="max-w-[520px]">
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>{transactionRemoveTarget ? `Eliminar definitivamente la transaccion ${transactionRemoveTarget.id}?` : "Confirma la eliminacion definitiva."}</p>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">{transactionRemoveTarget ? `Eliminar definitivamente la transaccion ${transactionRemoveTarget.id}?` : "Confirma la eliminacion definitiva."}</p>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => { if (!transactionRemoveTarget) return; await transactions.remove({ transactionId: transactionRemoveTarget.id }); toast.success("Transaccion eliminada."); setTransactionRemoveTarget(null); }} disabled={transactions.isRemoving}>{transactions.isRemoving ? "Eliminando..." : "Confirmar"}</GradientButton>
             <OutlineButton size="sm" onClick={() => setTransactionRemoveTarget(null)} disabled={transactions.isRemoving}>Cancelar</OutlineButton>
@@ -669,16 +669,16 @@ export function Finance() {
       <ModalShell open={approvalResolutionOpen} onClose={() => setApprovalResolutionOpen(false)} width="max-w-[640px]">
         <div className="space-y-3 p-4">
           {approvalResolutionError && <ErrorBlock message={approvalResolutionError} onRetry={() => setApprovalResolutionError(null)} />}
-          <div className="rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>Transaccion</p>
-            <p className="mt-1 text-[13px]" style={{ color: "var(--t-text)" }}>{approvalResolutionTarget?.accountName ?? "-"} / {approvalResolutionTarget?.categoryName ?? "-"}</p>
-            <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{approvalResolutionTarget?.date ?? "-"} · {approvalResolutionTarget ? formatMoney(approvalResolutionTarget.amount) : "-"}</p>
+          <div className="rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+            <p className="text-[12px] text-[var(--t-text-dim)]">Transaccion</p>
+            <p className="mt-1 text-[13px] text-[var(--t-text)]">{approvalResolutionTarget?.accountName ?? "-"} / {approvalResolutionTarget?.categoryName ?? "-"}</p>
+            <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">{approvalResolutionTarget?.date ?? "-"} · {approvalResolutionTarget ? formatMoney(approvalResolutionTarget.amount) : "-"}</p>
           </div>
-          <div className="rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>Accion</p>
+          <div className="rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+            <p className="text-[12px] text-[var(--t-text-dim)]">Accion</p>
             <StatusDot variant={approvalResolutionMode === "approve" ? "success" : "destructive"}>{approvalResolutionMode === "approve" ? "Aprobar egreso" : "Rechazar egreso"}</StatusDot>
           </div>
-          <textarea value={approvalResolutionComment} onChange={(event) => setApprovalResolutionComment(event.target.value)} rows={4} placeholder={approvalResolutionMode === "approve" ? "Comentario opcional de aprobacion" : "Motivo del rechazo"} className="w-full rounded-xl px-3 py-2 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+          <textarea value={approvalResolutionComment} onChange={(event) => setApprovalResolutionComment(event.target.value)} rows={4} placeholder={approvalResolutionMode === "approve" ? "Comentario opcional de aprobacion" : "Motivo del rechazo"} className="w-full rounded-xl px-3 py-2 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => {
               if (!approvalResolutionTarget) return;
@@ -703,10 +703,10 @@ export function Finance() {
       <ModalShell open={receiptOpen} onClose={() => setReceiptOpen(false)} width="max-w-[640px]">
         <div className="space-y-3 p-4">
           {receiptError && <ErrorBlock message={receiptError} onRetry={() => setReceiptError(null)} />}
-          <input value={receiptForm.routeInput} onChange={(event) => setReceiptForm((current) => ({ ...current, routeInput: event.target.value }))} placeholder="Ruta o enlace del comprobante" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+          <input value={receiptForm.routeInput} onChange={(event) => setReceiptForm((current) => ({ ...current, routeInput: event.target.value }))} placeholder="Ruta o enlace del comprobante" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <input value={receiptForm.fileType} onChange={(event) => setReceiptForm((current) => ({ ...current, fileType: event.target.value }))} placeholder="Tipo de archivo" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input type="file" onChange={(event) => setReceiptForm((current) => ({ ...current, file: event.target.files?.[0] ?? null }))} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input value={receiptForm.fileType} onChange={(event) => setReceiptForm((current) => ({ ...current, fileType: event.target.value }))} placeholder="Tipo de archivo" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input type="file" onChange={(event) => setReceiptForm((current) => ({ ...current, file: event.target.files?.[0] ?? null }))} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => {
@@ -726,19 +726,19 @@ export function Finance() {
 
       <ModalShell open={sponsorshipFormOpen} onClose={() => setSponsorshipFormOpen(false)} width="max-w-[640px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
-          <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>Nuevo apadrinamiento (Supabase DB)</h3>
+          <h3 className="text-[14px] text-[var(--t-text)]">Nuevo apadrinamiento (Supabase DB)</h3>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setSponsorshipFormOpen(false)}>X</button>
         </div>
         <div className="space-y-3 p-4">
           {sponsorshipError && <ErrorBlock message={sponsorshipError} onRetry={() => setSponsorshipError(null)} />}
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <input value={sponsorshipForm.donor_name} onChange={(e) => setSponsorshipForm((curr) => ({ ...curr, donor_name: e.target.value }))} placeholder="Nombre del donante" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input value={sponsorshipForm.donor_email} onChange={(e) => setSponsorshipForm((curr) => ({ ...curr, donor_email: e.target.value }))} placeholder="Correo del donante" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input value={sponsorshipForm.donor_name} onChange={(e) => setSponsorshipForm((curr) => ({ ...curr, donor_name: e.target.value }))} placeholder="Nombre del donante" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input value={sponsorshipForm.donor_email} onChange={(e) => setSponsorshipForm((curr) => ({ ...curr, donor_email: e.target.value }))} placeholder="Correo del donante" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
             <SelectField value={sponsorshipForm.gateway_name} onChange={(val) => setSponsorshipForm((curr) => ({ ...curr, gateway_name: val }))} options={[{ value: "stripe", label: "Stripe SDK" }, { value: "culqi", label: "Culqi" }, { value: "mercadopago", label: "MercadoPago" }]} />
             <SelectField value={sponsorshipForm.subscription_frequency} onChange={(val) => setSponsorshipForm((curr) => ({ ...curr, subscription_frequency: val }))} options={[{ value: "monthly", label: "Mensual" }, { value: "annual", label: "Anual" }, { value: "one_time", label: "Única" }]} />
-            <input type="number" value={sponsorshipForm.amount} onChange={(e) => setSponsorshipForm((curr) => ({ ...curr, amount: e.target.value }))} placeholder="Monto (PEN)" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input type="number" value={sponsorshipForm.amount} onChange={(e) => setSponsorshipForm((curr) => ({ ...curr, amount: e.target.value }))} placeholder="Monto (PEN)" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => {

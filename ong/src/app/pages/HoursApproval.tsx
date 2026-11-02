@@ -48,7 +48,7 @@ const columns: Column<OperationApprovalRow>[] = [
     render: (item) => (
       <div>
         <div style={{ color: "var(--t-text-secondary)" }}>{item.entityTitle || "-"}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {item.entitySubtitle || "-"}
         </div>
       </div>
@@ -58,7 +58,7 @@ const columns: Column<OperationApprovalRow>[] = [
     key: "context",
     label: "Contexto",
     render: (item) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-tertiary)" }}>
+      <div className="text-[12px] text-[var(--t-text-tertiary)]">
         <div>{item.contextDate || "-"}</div>
         <div>{item.contextMeta || "-"}</div>
       </div>
@@ -199,7 +199,7 @@ export function HoursApproval() {
 
       {error && (
         <motion.div variants={fadeUp}>
-          <div className="rounded-2xl px-4 py-3 text-[12px]" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+          <div className="rounded-2xl px-4 py-3 text-[12px] bg-[var(--t-surface)] border border-[var(--t-border)]">
             <p style={{ color: "var(--t-text-secondary)" }}>{error}</p>
           </div>
         </motion.div>
@@ -223,12 +223,12 @@ export function HoursApproval() {
         <div className="space-y-3 p-4">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>Detalle de aprobacion</h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>Registro de aprobaciones de horas del período seleccionado.</p>
+              <h3 className="text-[14px] text-[var(--t-text)]">Detalle de aprobacion</h3>
+              <p className="text-[12px] text-[var(--t-text-dim)]">Registro de aprobaciones de horas del período seleccionado.</p>
             </div>
             <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setIsDetailOpen(false)}>X</button>
           </div>
-          {detailLoading && <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>Cargando detalle...</p>}
+          {detailLoading && <p className="text-[12px] text-[var(--t-text-secondary)]">Cargando detalle...</p>}
           {!detailLoading && detailError && <p className="text-[12px]" style={{ color: "var(--t-danger, #ef4444)" }}>{detailError}</p>}
           {!detailLoading && !detailError && detail && (
             <>
@@ -236,13 +236,13 @@ export function HoursApproval() {
                 <StatusDot variant={detail.approval.statusVariant}>{detail.approval.statusName || "-"}</StatusDot>
               </div>
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Voluntario</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.approval.subjectName || "-"}</p></div>
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Actividad</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.approval.entityTitle || "-"}</p></div>
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Proyecto</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.approval.entitySubtitle || "-"}</p></div>
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Solicitado por</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{`${detail.approval.requestedBy || "-"} (${detail.approval.requestedAt || "-"})`}</p></div>
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Resuelto por</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{`${detail.approval.approvedBy || "-"} (${detail.approval.approvedAt || "-"})`}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Voluntario</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.approval.subjectName || "-"}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Actividad</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.approval.entityTitle || "-"}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Proyecto</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.approval.entitySubtitle || "-"}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Solicitado por</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{`${detail.approval.requestedBy || "-"} (${detail.approval.requestedAt || "-"})`}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Resuelto por</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{`${detail.approval.approvedBy || "-"} (${detail.approval.approvedAt || "-"})`}</p></div>
               </div>
-              <div className="rounded-2xl px-4 py-3 text-[12px]" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+              <div className="rounded-2xl px-4 py-3 text-[12px] bg-[var(--t-surface)] border border-[var(--t-border)]">
                 <p style={{ color: "var(--t-text-secondary)" }}>{detail.approval.comment || "Sin comentario de resolucion."}</p>
               </div>
             </>
@@ -253,10 +253,10 @@ export function HoursApproval() {
       <ModalShell open={isResolutionOpen} onClose={() => setIsResolutionOpen(false)} width="max-w-[560px]">
         <div className="space-y-3 p-4">
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               {resolutionTarget?.action === "approved" ? "Aprobar horas" : "Rechazar horas"}
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               El comentario quedará registrado como observación de la resolución.
             </p>
           </div>

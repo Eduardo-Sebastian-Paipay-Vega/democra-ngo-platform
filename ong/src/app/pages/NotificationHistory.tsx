@@ -107,7 +107,7 @@ export function NotificationHistory() {
       key: "created",
       label: "Fecha",
       render: (row) => (
-        <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{row.createdAtLabel}</span>
+        <span className="text-[12px] text-[var(--t-text-secondary)]">{row.createdAtLabel}</span>
       ),
     },
     {
@@ -115,7 +115,7 @@ export function NotificationHistory() {
       label: "Destinatario",
       render: (row) => (
         <div>
-          <div className="font-medium text-[13px]" style={{ color: "var(--t-text)" }}>{row.recipientLabel}</div>
+          <div className="font-medium text-[13px] text-[var(--t-text)]">{row.recipientLabel}</div>
         </div>
       ),
     },
@@ -124,7 +124,7 @@ export function NotificationHistory() {
       label: "Título",
       render: (row) => (
         <div className="max-w-[200px] truncate" title={row.title}>
-          <span className="font-medium text-[13px]" style={{ color: "var(--t-text)" }}>{row.title}</span>
+          <span className="font-medium text-[13px] text-[var(--t-text)]">{row.title}</span>
         </div>
       ),
     },
@@ -132,7 +132,7 @@ export function NotificationHistory() {
       key: "channel",
       label: "Canal",
       render: (row) => (
-        <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{row.channelLabel}</span>
+        <span className="text-[12px] text-[var(--t-text-secondary)]">{row.channelLabel}</span>
       ),
     },
     {
@@ -193,12 +193,12 @@ export function NotificationHistory() {
           { label: "Con error", value: data.summary.withErrors, icon: XCircle, color: "var(--t-destructive)" },
           { label: "Con plantilla", value: data.summary.linkedTemplates, icon: FileText, color: "var(--t-info)" },
         ].map((kpi, idx) => (
-          <div key={idx} className="flex flex-col p-4 rounded-2xl border" style={{ background: "var(--t-surface)", borderColor: "var(--t-border)" }}>
+          <div key={idx} className="flex flex-col p-4 rounded-2xl border bg-[var(--t-surface)] border-[var(--t-border)]">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[13px] font-medium" style={{ color: "var(--t-text-secondary)" }}>{kpi.label}</span>
+              <span className="text-[13px] font-medium text-[var(--t-text-secondary)]">{kpi.label}</span>
               <kpi.icon className="w-4 h-4 opacity-70" style={{ color: kpi.color }} />
             </div>
-            <span className="text-3xl font-semibold tracking-tight" style={{ color: "var(--t-text)" }}>{kpi.value.toLocaleString()}</span>
+            <span className="text-3xl font-semibold tracking-tight text-[var(--t-text)]">{kpi.value.toLocaleString()}</span>
           </div>
         ))}
       </div>
@@ -243,10 +243,10 @@ export function NotificationHistory() {
                 </button>
               </PopoverTrigger>
               <PopoverContent className="w-[320px] p-4" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border-strong)" }} align="end">
-                <h4 className="text-[13px] font-semibold mb-4" style={{ color: "var(--t-text)" }}>Filtros de búsqueda</h4>
+                <h4 className="text-[13px] font-semibold mb-4 text-[var(--t-text)]">Filtros de búsqueda</h4>
                 <div className="space-y-3">
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-medium uppercase tracking-wider" style={{ color: "var(--t-text-dim)" }}>Destinatario</label>
+                    <label className="text-[11px] font-medium uppercase tracking-wider text-[var(--t-text-dim)]">Destinatario</label>
                     <NotificationsSelectField
                       value={recipientId}
                       onChange={(value) => { setRecipientId(value); setPage(1); }}
@@ -254,7 +254,7 @@ export function NotificationHistory() {
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-medium uppercase tracking-wider" style={{ color: "var(--t-text-dim)" }}>Canal</label>
+                    <label className="text-[11px] font-medium uppercase tracking-wider text-[var(--t-text-dim)]">Canal</label>
                     <NotificationsSelectField
                       value={channelCode}
                       onChange={(value) => { setChannelCode(value); setPage(1); }}
@@ -262,7 +262,7 @@ export function NotificationHistory() {
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-medium uppercase tracking-wider" style={{ color: "var(--t-text-dim)" }}>Estado</label>
+                    <label className="text-[11px] font-medium uppercase tracking-wider text-[var(--t-text-dim)]">Estado</label>
                     <NotificationsSelectField
                       value={deliveryState}
                       onChange={(value) => { setDeliveryState(value); setPage(1); }}
@@ -271,7 +271,7 @@ export function NotificationHistory() {
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-medium uppercase tracking-wider" style={{ color: "var(--t-text-dim)" }}>Desde</label>
+                      <label className="text-[11px] font-medium uppercase tracking-wider text-[var(--t-text-dim)]">Desde</label>
                       <input
                         type="date"
                         value={dateFrom}
@@ -281,7 +281,7 @@ export function NotificationHistory() {
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-medium uppercase tracking-wider" style={{ color: "var(--t-text-dim)" }}>Hasta</label>
+                      <label className="text-[11px] font-medium uppercase tracking-wider text-[var(--t-text-dim)]">Hasta</label>
                       <input
                         type="date"
                         value={dateTo}
@@ -299,12 +299,12 @@ export function NotificationHistory() {
 
         <div className="mt-4">
           {!loading && data.rows.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed rounded-2xl" style={{ borderColor: "var(--t-border)" }}>
+            <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed rounded-2xl border-[var(--t-border)]">
               <div className="bg-[var(--t-hover)] p-4 rounded-full mb-4">
                 <Bell className="w-8 h-8 opacity-40" style={{ color: "var(--t-text-secondary)" }} />
               </div>
-              <h3 className="text-[15px] font-medium" style={{ color: "var(--t-text)" }}>No se encontraron notificaciones</h3>
-              <p className="mt-1 text-[13px] max-w-sm" style={{ color: "var(--t-text-secondary)" }}>
+              <h3 className="text-[15px] font-medium text-[var(--t-text)]">No se encontraron notificaciones</h3>
+              <p className="mt-1 text-[13px] max-w-sm text-[var(--t-text-secondary)]">
                 Ajusta los filtros de búsqueda o limpia las condiciones para ver el historial general de comunicaciones.
               </p>
               {activeFiltersCount > 0 && (
@@ -332,7 +332,7 @@ export function NotificationHistory() {
             className="mt-4 flex items-center justify-between rounded-2xl px-4 py-3 border"
             style={{ background: "var(--t-surface)", borderColor: "var(--t-border)" }}
           >
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Mostrando <strong style={{ color: "var(--t-text)" }}>{(page - 1) * PAGE_SIZE + 1}-{Math.min(data.total, page * PAGE_SIZE)}</strong> de <strong style={{ color: "var(--t-text)" }}>{data.total}</strong> registros
             </p>
             <div className="flex items-center gap-1.5">
@@ -352,7 +352,7 @@ export function NotificationHistory() {
               >
                 Anterior
               </button>
-              <span className="mx-2 text-[12px] font-semibold" style={{ color: "var(--t-text)" }}>
+              <span className="mx-2 text-[12px] font-semibold text-[var(--t-text)]">
                 Página {page}
               </span>
               <button
@@ -373,7 +373,7 @@ export function NotificationHistory() {
         <div className="p-5">
           <div className="flex items-center gap-2 mb-4">
             <FileJson className="h-5 w-5" style={{ color: "var(--t-primary)" }} />
-            <h3 className="text-[15px] font-medium" style={{ color: "var(--t-text)" }}>Metadata / Payload (JSON)</h3>
+            <h3 className="text-[15px] font-medium text-[var(--t-text)]">Metadata / Payload (JSON)</h3>
           </div>
           <div className="rounded-xl overflow-hidden" style={{ border: "1px solid var(--t-border)", background: "#1a1a1a" }}>
             <NotificationsCodePreview value={payloadModalOpen.data || "{}"} />
@@ -387,14 +387,14 @@ export function NotificationHistory() {
       {/* Modal: Detalle Completo original */}
       <ModalShell open={Boolean(detailNotificationId)} onClose={closeDetailModal} width="max-w-[980px]">
         <div className="space-y-4 p-5">
-          <div className="flex items-center justify-between pb-3 border-b" style={{ borderColor: "var(--t-border)" }}>
+          <div className="flex items-center justify-between pb-3 border-b border-[var(--t-border)]">
             <div className="flex items-center gap-2">
               <Eye className="h-5 w-5" style={{ color: "var(--t-text)" }} />
               <div>
-                <h3 className="text-[15px] font-medium" style={{ color: "var(--t-text)" }}>
+                <h3 className="text-[15px] font-medium text-[var(--t-text)]">
                   Detalle de Notificación
                 </h3>
-                <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="text-[12px] text-[var(--t-text-dim)]">
                   Registro de log inmutable
                 </p>
               </div>
@@ -407,7 +407,7 @@ export function NotificationHistory() {
           )}
 
           {detail.loading && (
-            <p className="text-[13px] py-4 text-center" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[13px] py-4 text-center text-[var(--t-text-dim)]">
               Cargando detalle desde la base de datos...
             </p>
           )}
@@ -443,9 +443,9 @@ export function NotificationHistory() {
                 >
                   <div className="flex items-center gap-2">
                     <Bell className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                    <h4 className="text-[13px] font-medium" style={{ color: "var(--t-text)" }}>Título del Mensaje</h4>
+                    <h4 className="text-[13px] font-medium text-[var(--t-text)]">Título del Mensaje</h4>
                   </div>
-                  <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>
+                  <p className="text-[13px] text-[var(--t-text-secondary)]">
                     {detail.data.title}
                   </p>
                 </div>
@@ -472,7 +472,7 @@ export function NotificationHistory() {
               >
                 <div className="mb-3 flex items-center gap-2">
                   <MessageSquare className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                  <h4 className="text-[13px] font-medium" style={{ color: "var(--t-text)" }}>Cuerpo del Mensaje</h4>
+                  <h4 className="text-[13px] font-medium text-[var(--t-text)]">Cuerpo del Mensaje</h4>
                 </div>
                 <NotificationsCodePreview value={detail.data.message} />
               </div>

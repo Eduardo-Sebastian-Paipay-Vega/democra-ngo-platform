@@ -83,9 +83,9 @@ function clearRecentSearchesStorage() {
 function ResultSkeleton() {
   return (
     <div className="space-y-2">
-      <div className="h-14 animate-pulse rounded-xl" style={{ background: "var(--t-input-bg)" }} />
-      <div className="h-14 animate-pulse rounded-xl" style={{ background: "var(--t-input-bg)" }} />
-      <div className="h-14 animate-pulse rounded-xl" style={{ background: "var(--t-input-bg)" }} />
+      <div className="h-14 animate-pulse rounded-xl bg-[var(--t-input-bg)]" />
+      <div className="h-14 animate-pulse rounded-xl bg-[var(--t-input-bg)]" />
+      <div className="h-14 animate-pulse rounded-xl bg-[var(--t-input-bg)]" />
     </div>
   );
 }
@@ -131,11 +131,11 @@ function SearchResultItem({
 
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <p className="truncate text-[13px] font-medium" style={{ color: "var(--t-text)" }}>
+          <p className="truncate text-[13px] font-medium text-[var(--t-text)]">
             {item.title}
           </p>
         </div>
-        <p className="truncate text-[12px] mt-0.5" style={{ color: "var(--t-text-dim)" }}>
+        <p className="truncate text-[12px] mt-0.5 text-[var(--t-text-dim)]">
           {item.subtitle}
         </p>
       </div>
@@ -274,7 +274,7 @@ export function GlobalSearch() {
             )}
           </div>
         </div>
-        <div className="mt-2.5 px-2 flex items-center justify-between text-[13px]" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="mt-2.5 px-2 flex items-center justify-between text-[13px] text-[var(--t-text-secondary)]">
           <span>Mínimo {minLength} caracteres. Búsqueda parcial sin distinguir mayúsculas.</span>
           {hasSearched && !loading && !error ? (
             <span>{totalResults} resultado(s)</span>
@@ -293,7 +293,7 @@ export function GlobalSearch() {
         >
           <div className="flex items-center gap-2">
             <AlertCircle className="h-4 w-4 shrink-0" style={{ color: "var(--t-text-secondary)" }} />
-            <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>{error}</p>
+            <p className="text-[13px] text-[var(--t-text-secondary)]">{error}</p>
           </div>
           <button
             onClick={retry}
@@ -314,7 +314,7 @@ export function GlobalSearch() {
               style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-[13px] font-semibold flex items-center gap-2" style={{ color: "var(--t-text)" }}>
+                <h3 className="text-[13px] font-semibold flex items-center gap-2 text-[var(--t-text)]">
                   <History className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} /> Búsquedas recientes
                 </h3>
                 <button
@@ -353,17 +353,17 @@ export function GlobalSearch() {
               >
                 <Search className="h-6 w-6" />
               </div>
-              <h3 className="text-[14px] font-medium mb-1" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] font-medium mb-1 text-[var(--t-text)]">
                 Comienza a escribir para buscar
               </h3>
-              <p className="text-[13px] max-w-sm" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[13px] max-w-sm text-[var(--t-text-dim)]">
                 Encuentra cualquier entidad dentro de tu organización ingresando un nombre, DNI, o título de proyecto.
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-2">
-                <span className="rounded-full px-3 py-1 text-[11px] font-medium" style={{ background: "var(--t-input-bg)", color: "var(--t-text-dim)" }}>Voluntarios</span>
-                <span className="rounded-full px-3 py-1 text-[11px] font-medium" style={{ background: "var(--t-input-bg)", color: "var(--t-text-dim)" }}>Proyectos</span>
-                <span className="rounded-full px-3 py-1 text-[11px] font-medium" style={{ background: "var(--t-input-bg)", color: "var(--t-text-dim)" }}>Actividades</span>
-                <span className="rounded-full px-3 py-1 text-[11px] font-medium" style={{ background: "var(--t-input-bg)", color: "var(--t-text-dim)" }}>Solicitudes</span>
+                <span className="rounded-full px-3 py-1 text-[11px] font-medium bg-[var(--t-input-bg)] text-[var(--t-text-dim)]">Voluntarios</span>
+                <span className="rounded-full px-3 py-1 text-[11px] font-medium bg-[var(--t-input-bg)] text-[var(--t-text-dim)]">Proyectos</span>
+                <span className="rounded-full px-3 py-1 text-[11px] font-medium bg-[var(--t-input-bg)] text-[var(--t-text-dim)]">Actividades</span>
+                <span className="rounded-full px-3 py-1 text-[11px] font-medium bg-[var(--t-input-bg)] text-[var(--t-text-dim)]">Solicitudes</span>
               </div>
             </div>
           )}
@@ -394,10 +394,10 @@ export function GlobalSearch() {
             >
               <AlertCircle className="h-6 w-6" />
             </div>
-            <p className="text-[14px] font-medium mb-1" style={{ color: "var(--t-text)" }}>
+            <p className="text-[14px] font-medium mb-1 text-[var(--t-text)]">
               No se encontraron resultados para "{lastSearchedTerm}"
             </p>
-            <p className="text-[13px] mb-4" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[13px] mb-4 text-[var(--t-text-dim)]">
               Revisa la ortografía o intenta buscar con otros términos.
             </p>
             <button

@@ -76,7 +76,7 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void
       className="flex items-center justify-between rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="text-[12px] text-[var(--t-text-secondary)]">
         {message}
       </p>
       <button
@@ -109,10 +109,10 @@ function DetailField({ label, value }: { label: string; value: string }) {
       className="rounded-xl px-3 py-2"
       style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[11px] text-[var(--t-text-dim)]">
         {label}
       </p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
         {value || "-"}
       </p>
     </div>
@@ -156,7 +156,7 @@ const columns: Column<AdmissionInterviewRow>[] = [
     key: "scheduledAt",
     label: "Fecha",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text)" }}>
+      <span className="text-[12px] text-[var(--t-text)]">
         {item.scheduledAt}
       </span>
     ),
@@ -165,7 +165,7 @@ const columns: Column<AdmissionInterviewRow>[] = [
     key: "interviewer",
     label: "Entrevistador",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {item.interviewerLabel}
       </span>
     ),
@@ -191,7 +191,7 @@ const columns: Column<AdmissionInterviewRow>[] = [
     key: "score",
     label: "Puntaje",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {formatScore(item.score)}
       </span>
     ),
@@ -205,7 +205,7 @@ const columns: Column<AdmissionInterviewRow>[] = [
       const cleanComment = parts.find(p => p.trim().startsWith("COMENTARIOS:"))?.replace("COMENTARIOS:", "").trim() || item.comment;
       
       return (
-        <span className="line-clamp-2 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+        <span className="line-clamp-2 text-[12px] text-[var(--t-text-dim)]">
           {cleanComment || "-"}
         </span>
       )
@@ -458,7 +458,7 @@ export function AdmissionInterviews() {
           >
             <Users size={24} strokeWidth={1.5} style={{ color: "var(--t-text-dim)" }} />
           </div>
-          <h3 className="text-sm font-medium mb-1" style={{ color: "var(--t-text)" }}>
+          <h3 className="text-sm font-medium mb-1 text-[var(--t-text)]">
             No hay postulantes en fase de entrevistas
           </h3>
           <p
@@ -512,7 +512,7 @@ export function AdmissionInterviews() {
             >
               {requests.loading ? (
                 <div className="flex h-full items-center justify-center">
-                  <p className="text-[13px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[13px] text-[var(--t-text-dim)]">
                     Cargando postulantes...
                   </p>
                 </div>
@@ -524,7 +524,7 @@ export function AdmissionInterviews() {
                   >
                     <FileText size={24} strokeWidth={1.5} style={{ color: "var(--t-text-dim)" }} />
                   </div>
-                  <h3 className="text-sm font-medium mb-1" style={{ color: "var(--t-text)" }}>
+                  <h3 className="text-sm font-medium mb-1 text-[var(--t-text)]">
                     Sin coincidencias
                   </h3>
                   <p
@@ -535,7 +535,7 @@ export function AdmissionInterviews() {
                   </p>
                 </div>
               ) : (
-                <div className="flex flex-col divide-y" style={{ borderColor: "var(--t-border)" }}>
+                <div className="flex flex-col divide-y border-[var(--t-border)]">
                   {filteredRequests.map(row => (
                     <button
                       key={row.id}
@@ -555,10 +555,10 @@ export function AdmissionInterviews() {
                            e.currentTarget.style.background = "transparent";
                       }}
                     >
-                      <p className="text-[13px] font-medium" style={{ color: "var(--t-text)" }}>
+                      <p className="text-[13px] font-medium text-[var(--t-text)]">
                         {row.fullName}
                       </p>
-                      <p className="text-[11px]" style={{ color: "var(--t-text-secondary)" }}>
+                      <p className="text-[11px] text-[var(--t-text-secondary)]">
                         {row.email}
                       </p>
                       <div className="mt-1">
@@ -597,7 +597,7 @@ export function AdmissionInterviews() {
                 >
                   <Users size={24} strokeWidth={1.5} style={{ color: "var(--t-text-dim)" }} />
                 </div>
-                <h3 className="text-sm font-medium mb-1" style={{ color: "var(--t-text)" }}>
+                <h3 className="text-sm font-medium mb-1 text-[var(--t-text)]">
                   Selecciona un postulante
                 </h3>
                 <p
@@ -617,7 +617,7 @@ export function AdmissionInterviews() {
                   }}
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-[14px] font-medium" style={{ color: "var(--t-text)" }}>
+                    <h3 className="text-[14px] font-medium text-[var(--t-text)]">
                       Detalle del postulante
                     </h3>
                     <GradientButton size="sm" onClick={openCreateModal}>
@@ -638,16 +638,16 @@ export function AdmissionInterviews() {
                     background: "var(--t-surface)",
                   }}
                 >
-                  <h3 className="text-[14px] font-medium mb-4" style={{ color: "var(--t-text)" }}>
+                  <h3 className="text-[14px] font-medium mb-4 text-[var(--t-text)]">
                     Historial de entrevistas
                   </h3>
                   {interviews.rows.length === 0 && !interviews.loading ? (
                     <div className="flex-1 flex flex-col items-center justify-center py-10">
                        <Clock size={24} strokeWidth={1.5} className="mb-3" style={{ color: "var(--t-text-dim)" }} />
-                       <h3 className="text-sm font-medium mb-1" style={{ color: "var(--t-text)" }}>
+                       <h3 className="text-sm font-medium mb-1 text-[var(--t-text)]">
                           Sin entrevistas
                        </h3>
-                       <p className="text-xs text-center text-balance max-w-xs mb-4" style={{ color: "var(--t-text-secondary)" }}>
+                       <p className="text-xs text-center text-balance max-w-xs mb-4 text-[var(--t-text-secondary)]">
                           Aún no se ha programado una entrevista para este postulante.
                        </p>
                     </div>
@@ -682,10 +682,10 @@ export function AdmissionInterviews() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               {editingInterview ? "Editar entrevista" : "Nueva entrevista"}
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Postulante: {selectedRequest?.fullName ?? "-"}
             </p>
           </div>
@@ -865,7 +865,7 @@ export function AdmissionInterviews() {
         width="max-w-[520px]"
       >
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">
             {removeInterview
               ? `¿Eliminar la entrevista de ${removeInterview.requestName} programada para ${removeInterview.scheduledAt}?`
               : "Confirma la eliminación."}

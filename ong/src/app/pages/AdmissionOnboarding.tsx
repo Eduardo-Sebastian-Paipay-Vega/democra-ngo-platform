@@ -65,7 +65,7 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void
       className="flex items-center justify-between rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="text-[12px] text-[var(--t-text-secondary)]">
         {message}
       </p>
       <button
@@ -86,7 +86,7 @@ function InfoBlock({ message }: { message: string }) {
       className="rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[12px] text-[var(--t-text-dim)]">
         {message}
       </p>
     </div>
@@ -111,10 +111,10 @@ function DetailField({ label, value }: { label: string; value: string }) {
       className="rounded-xl px-3 py-2"
       style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[11px] text-[var(--t-text-dim)]">
         {label}
       </p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
         {value || "-"}
       </p>
     </div>
@@ -159,7 +159,7 @@ const columns: Column<AdmissionOnboardingStepRow>[] = [
     label: "Paso",
     render: (item) => (
       <div>
-        <div className="flex items-center gap-1.5" style={{ color: "var(--t-text)" }}>
+        <div className="flex items-center gap-1.5 text-[var(--t-text)]">
           {item.isLocked && (
             <span title={item.blockReason ?? "Paso bloqueado"} style={{ color: "var(--t-text-dim)" }}>
               🔒
@@ -167,7 +167,7 @@ const columns: Column<AdmissionOnboardingStepRow>[] = [
           )}
           {item.stepName}
         </div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {item.isLocked ? item.blockReason ?? "Bloqueado" : `Orden: ${item.order}`}
         </div>
       </div>
@@ -195,7 +195,7 @@ const columns: Column<AdmissionOnboardingStepRow>[] = [
     key: "evidenceUrl",
     label: "Evidencia",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="text-[12px] text-[var(--t-text-dim)]">
         {item.evidenceUrl ? "Registrada" : "Sin evidencia"}
       </span>
     ),
@@ -204,7 +204,7 @@ const columns: Column<AdmissionOnboardingStepRow>[] = [
     key: "completedAt",
     label: "Fecha",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="text-[12px] text-[var(--t-text-dim)]">
         {item.completedAt ?? "-"}
       </span>
     ),
@@ -688,7 +688,7 @@ export function AdmissionOnboarding() {
                   <DetailField label="Registro" value={new Date(selectedRequest.submittedAt).toLocaleDateString()} />
                 </div>
               ) : (
-                <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="text-[12px] text-[var(--t-text-dim)]">
                   Selecciona una solicitud para revisar sus pasos de onboarding.
                 </p>
               )}
@@ -773,10 +773,10 @@ export function AdmissionOnboarding() {
               style={{ borderBottom: "1px solid var(--t-border)" }}
             >
               <div>
-                <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+                <h3 className="text-[14px] text-[var(--t-text)]">
                   Actualizar paso
                 </h3>
-                <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="text-[12px] text-[var(--t-text-dim)]">
                   {stepFormTarget ? `${stepFormTarget.volunteerName} - ${stepFormTarget.stepName}` : "-"}
                 </p>
               </div>
@@ -844,19 +844,19 @@ export function AdmissionOnboarding() {
                   }}
                 />
                 {stepFormState.evidenceFile && (
-                  <p className="text-[11px]" style={{ color: "var(--t-text-secondary)" }}>
+                  <p className="text-[11px] text-[var(--t-text-secondary)]">
                     Archivo seleccionado: {stepFormState.evidenceFile.name}
                   </p>
                 )}
                 {!stepFormState.evidenceFile &&
                   !stepFormState.removeEvidence &&
                   stepFormState.existingEvidenceUrl && (
-                    <p className="break-all text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                    <p className="break-all text-[11px] text-[var(--t-text-dim)]">
                       Evidencia actual: {stepFormState.existingEvidenceUrl}
                     </p>
                   )}
                 {stepFormState.removeEvidence && (
-                  <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[11px] text-[var(--t-text-dim)]">
                     La evidencia actual se eliminara al guardar este paso.
                   </p>
                 )}

@@ -17,7 +17,7 @@ export function PlaceholderPage({ title, description }: { title: string; descrip
           style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
         >
           <Construction className="h-6 w-6 mx-auto mb-3" style={{ color: "var(--t-text-dim)" }} />
-          <p className="text-[13px]" style={{ color: "var(--t-text-tertiary)" }}>
+          <p className="text-[13px] text-[var(--t-text-tertiary)]">
             Esta página está en construcción
           </p>
         </div>

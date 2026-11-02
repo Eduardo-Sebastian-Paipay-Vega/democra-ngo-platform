@@ -105,7 +105,7 @@ const columns: Column<SystemUserRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.fullName}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.documentLabel}
         </div>
       </div>
@@ -117,7 +117,7 @@ const columns: Column<SystemUserRow>[] = [
     render: (row) => (
       <div className="space-y-1">
         <StatusDot variant={resolveAccessVariant(row)}>{row.accessStatusLabel}</StatusDot>
-        <div className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="text-[11px] text-[var(--t-text-dim)]">
           {row.isBlocked ? "Perfil bloqueado" : row.pinStatusLabel}
         </div>
       </div>
@@ -128,10 +128,10 @@ const columns: Column<SystemUserRow>[] = [
     label: "Roles y sedes",
     render: (row) => (
       <div>
-        <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="text-[12px] text-[var(--t-text-secondary)]">
           {row.roleSummary}
         </div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.sedeSummary}
         </div>
       </div>
@@ -141,11 +141,11 @@ const columns: Column<SystemUserRow>[] = [
     key: "sessions",
     label: "Sesiones",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.totalSessionCount === null
           ? "Sin permiso"
           : `${row.activeSessionCount ?? 0} activas / ${row.totalSessionCount} total`}
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.lastSessionAtLabel}
         </div>
       </div>
@@ -155,7 +155,7 @@ const columns: Column<SystemUserRow>[] = [
     key: "updated",
     label: "Actualizado",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.updatedAtLabel}
       </span>
     ),
@@ -581,10 +581,10 @@ export function SystemUsers() {
           <div className="flex items-center gap-2">
             <UserCog className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Detalle del perfil
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Perfil e información de accesos institucionales del usuario.
               </p>
             </div>
@@ -620,12 +620,12 @@ export function SystemUsers() {
               >
                 <div className="flex items-center gap-2">
                   <Shield className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                  <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <h4 className="text-[13px] text-[var(--t-text)]">
                     Asignaciones institucionales
                   </h4>
                 </div>
                 {detailUser.roleAssignments.length === 0 ? (
-                  <p className="mt-3 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="mt-3 text-[12px] text-[var(--t-text-dim)]">
                     El perfil aun no tiene acceso institucional.
                   </p>
                 ) : (
@@ -636,10 +636,10 @@ export function SystemUsers() {
                         className="rounded-xl px-3 py-2"
                         style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
                       >
-                        <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                        <p className="text-[12px] text-[var(--t-text-secondary)]">
                           {assignment.roleName}
                         </p>
-                        <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                        <p className="text-[11px] text-[var(--t-text-dim)]">
                           {assignment.sedeName} · {assignment.createdAtLabel}
                         </p>
                       </div>
@@ -656,12 +656,12 @@ export function SystemUsers() {
         <div className="space-y-4 p-4">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 {editingUser?.isSystemUser
                   ? "Editar accesos institucionales"
                   : "Habilitar acceso institucional"}
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Actualiza los accesos institucionales del perfil seleccionado. La creación de credenciales de acceso se gestiona de forma independiente.
               </p>
             </div>
@@ -765,10 +765,10 @@ export function SystemUsers() {
         <div className="space-y-4 p-4">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Crear o invitar usuario
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Crea un acceso seguro o envia una invitacion para que la persona pueda ingresar a la plataforma.
               </p>
               <SettingsTechnicalDetails details="La operacion se ejecuta de forma segura desde el servidor y requiere permisos de gestion de usuarios o acceso de administrador." />
@@ -791,7 +791,7 @@ export function SystemUsers() {
 
           <div className="grid gap-3 md:grid-cols-2">
             <div className="space-y-1">
-              <label className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+              <label className="text-[11px] text-[var(--t-text-dim)]">
                 Modo
               </label>
               <SettingsSelectField
@@ -809,7 +809,7 @@ export function SystemUsers() {
               />
             </div>
             <div className="space-y-1">
-              <label className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+              <label className="text-[11px] text-[var(--t-text-dim)]">
                 Voluntario a vincular
               </label>
               <SettingsSelectField
@@ -965,16 +965,16 @@ export function SystemUsers() {
           <div className="flex items-center gap-2">
             <KeyRound className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Revocar accesos institucionales
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Esta acción eliminará todos los accesos institucionales del usuario seleccionado.
               </p>
             </div>
           </div>
 
-          <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+          <p className="text-[12px] text-[var(--t-text-secondary)]">
             {revokeTarget
               ? `Se revocaran todos los accesos institucionales de ${revokeTarget.fullName}.`
               : "Confirma la revocacion del acceso institucional."}
@@ -1008,10 +1008,10 @@ export function SystemUsers() {
           <div className="flex items-center gap-2">
             <KeyRound className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Revocar sesiones del usuario
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 La operacion usa la Edge Function `admin-revoke-user-sessions`, que revoca
                 `public.sessions` por `public.fn_remote_revoke_app_session`. La invalidacion
                 global de refresh tokens de Supabase Auth sigue condicionada a que el backend
@@ -1027,7 +1027,7 @@ export function SystemUsers() {
             />
           )}
 
-          <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+          <p className="text-[12px] text-[var(--t-text-secondary)]">
             {sessionRevokeTarget
               ? `Se revocaran las sesiones activas visibles de ${sessionRevokeTarget.fullName}.`
               : "Confirma la revocacion de sesiones."}

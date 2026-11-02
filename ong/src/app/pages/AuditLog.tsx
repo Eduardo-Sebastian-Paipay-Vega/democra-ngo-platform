@@ -39,7 +39,7 @@ const columns: Column<GovernanceAuditEvent>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.schemaName}.{row.tableName}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.recordPk ? 'PK: ' + row.recordPk : ""}
         </div>
       </div>
@@ -66,7 +66,7 @@ const columns: Column<GovernanceAuditEvent>[] = [
     key: "actor",
     label: "Actor",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         <div>{row.actorLabel}</div>
         <div style={{ color: "var(--t-text-dim)" }}>{row.sourceLabel}</div>
       </div>
@@ -76,7 +76,7 @@ const columns: Column<GovernanceAuditEvent>[] = [
     key: "date",
     label: "Fecha",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.occurredAtLabel}
       </span>
     ),
@@ -240,7 +240,7 @@ export function AuditLog() {
                 style={{ borderColor: 'var(--t-border)', background: 'var(--t-surface)' }}
               >
                 <div className="space-y-3">
-                  <h4 className="font-medium text-[13px]" style={{ color: 'var(--t-text)' }}>Filtros de Auditoria</h4>
+                  <h4 className="font-medium text-[13px] text-[var(--t-text)]">Filtros de Auditoria</h4>
                   <GovernanceSelectField
                     value={schemaFilter}
                     onChange={setSchemaFilter}
@@ -268,7 +268,7 @@ export function AuditLog() {
                   />
                   
                   <div className="pt-2">
-                    <label className="mb-1 block text-[11px] font-medium" style={{ color: "var(--t-text-dim)" }}>
+                    <label className="mb-1 block text-[11px] font-medium text-[var(--t-text-dim)]">
                       Rango de fechas
                     </label>
                     <div className="flex gap-2">
@@ -324,10 +324,10 @@ export function AuditLog() {
           <div className="flex items-center gap-2">
             <FileText className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Detalle de auditoria
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 {detailRow?.summary}
               </p>
             </div>
@@ -357,7 +357,7 @@ export function AuditLog() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <ShieldAlert className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                    <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                    <p className="text-[12px] text-[var(--t-text-secondary)]">
                       Before / old_data
                     </p>
                   </div>
@@ -367,7 +367,7 @@ export function AuditLog() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <ShieldAlert className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                    <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                    <p className="text-[12px] text-[var(--t-text-secondary)]">
                       After / new_data
                     </p>
                   </div>

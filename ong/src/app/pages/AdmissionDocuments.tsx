@@ -38,7 +38,7 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void
       className="flex items-center justify-between rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="text-[12px] text-[var(--t-text-secondary)]">
         {message}
       </p>
       <button
@@ -103,10 +103,10 @@ function DetailField({ label, value }: { label: string; value: string }) {
       className="rounded-xl px-3 py-2"
       style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[11px] text-[var(--t-text-dim)]">
         {label}
       </p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
         {value || "-"}
       </p>
     </div>
@@ -127,7 +127,7 @@ const columns: Column<AdmissionDocumentRow>[] = [
         <StatusDot variant={item.estadoValidacion === "APROBADO" ? "success" : item.estadoValidacion === "RECHAZADO" ? "destructive" : "warning"}>
           {item.estadoValidacion === "APROBADO" ? "Aprobado" : item.estadoValidacion === "RECHAZADO" ? "Rechazado" : "Pendiente"}
         </StatusDot>
-        <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <p className="text-[11px] text-[var(--t-text-dim)]">
           {item.verifiedByLabel ?? "Sin verificador"}
         </p>
       </div>
@@ -137,7 +137,7 @@ const columns: Column<AdmissionDocumentRow>[] = [
     key: "updatedAt",
     label: "Actualizado",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="text-[12px] text-[var(--t-text-dim)]">
         {item.updatedAt}
       </span>
     ),
@@ -348,7 +348,7 @@ export function AdmissionDocuments() {
             }}
           >
             <div className="flex justify-between items-start mb-2">
-              <span className="text-xs" style={{ color: "var(--t-text-secondary)" }}>
+              <span className="text-xs text-[var(--t-text-secondary)]">
                 Solicitudes
               </span>
               <div
@@ -363,7 +363,7 @@ export function AdmissionDocuments() {
                 Total
               </div>
             </div>
-            <div className="text-2xl font-bold" style={{ color: "var(--t-text)" }}>
+            <div className="text-2xl font-bold text-[var(--t-text)]">
               {requests.loading ? "…" : kpiTotalRequests}
             </div>
           </div>
@@ -377,7 +377,7 @@ export function AdmissionDocuments() {
             }}
           >
             <div className="flex justify-between items-start mb-2">
-              <span className="text-xs" style={{ color: "var(--t-text-secondary)" }}>
+              <span className="text-xs text-[var(--t-text-secondary)]">
                 Pendientes
               </span>
               <div
@@ -392,7 +392,7 @@ export function AdmissionDocuments() {
                 {kpiPendingDocs} pend.
               </div>
             </div>
-            <div className="text-2xl font-bold" style={{ color: "var(--t-text)" }}>
+            <div className="text-2xl font-bold text-[var(--t-text)]">
               {documents.loading ? "…" : kpiPendingDocs}
             </div>
           </div>
@@ -406,7 +406,7 @@ export function AdmissionDocuments() {
             }}
           >
             <div className="flex justify-between items-start mb-2">
-              <span className="text-xs" style={{ color: "var(--t-text-secondary)" }}>
+              <span className="text-xs text-[var(--t-text-secondary)]">
                 Tasa Aprobación
               </span>
               <div
@@ -421,7 +421,7 @@ export function AdmissionDocuments() {
                 {kpiApprovalRate}%
               </div>
             </div>
-            <div className="text-2xl font-bold" style={{ color: "var(--t-text)" }}>
+            <div className="text-2xl font-bold text-[var(--t-text)]">
               {documents.loading ? "…" : `${kpiApprovalRate}%`}
             </div>
           </div>
@@ -435,7 +435,7 @@ export function AdmissionDocuments() {
             }}
           >
             <div className="flex justify-between items-start mb-2">
-              <span className="text-xs" style={{ color: "var(--t-text-secondary)" }}>
+              <span className="text-xs text-[var(--t-text-secondary)]">
                 Rechazados
               </span>
               <div
@@ -450,7 +450,7 @@ export function AdmissionDocuments() {
                 {kpiRejectedDocs}
               </div>
             </div>
-            <div className="text-2xl font-bold" style={{ color: "var(--t-text)" }}>
+            <div className="text-2xl font-bold text-[var(--t-text)]">
               {documents.loading ? "…" : kpiRejectedDocs}
             </div>
           </div>
@@ -482,7 +482,7 @@ export function AdmissionDocuments() {
           >
             <BarChart3 size={24} strokeWidth={1.5} style={{ color: "var(--t-text-dim)" }} />
           </div>
-          <h3 className="text-sm font-medium mb-1" style={{ color: "var(--t-text)" }}>
+          <h3 className="text-sm font-medium mb-1 text-[var(--t-text)]">
             Aún no hay solicitudes pendientes
           </h3>
           <p
@@ -511,7 +511,7 @@ export function AdmissionDocuments() {
             >
               {requests.loading ? (
                 <div className="flex h-full items-center justify-center">
-                  <p className="text-[13px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[13px] text-[var(--t-text-dim)]">
                     Cargando postulantes...
                   </p>
                 </div>
@@ -523,7 +523,7 @@ export function AdmissionDocuments() {
                   >
                     <FileText size={24} strokeWidth={1.5} style={{ color: "var(--t-text-dim)" }} />
                   </div>
-                  <h3 className="text-sm font-medium mb-1" style={{ color: "var(--t-text)" }}>
+                  <h3 className="text-sm font-medium mb-1 text-[var(--t-text)]">
                     Sin coincidencias
                   </h3>
                   <p
@@ -534,7 +534,7 @@ export function AdmissionDocuments() {
                   </p>
                 </div>
               ) : (
-                <div className="flex flex-col divide-y" style={{ borderColor: "var(--t-border)" }}>
+                <div className="flex flex-col divide-y border-[var(--t-border)]">
                   {requests.rows.map(row => (
                     <button
                       key={row.id}
@@ -554,10 +554,10 @@ export function AdmissionDocuments() {
                           e.currentTarget.style.background = "transparent";
                       }}
                     >
-                      <p className="text-[13px] font-medium" style={{ color: "var(--t-text)" }}>
+                      <p className="text-[13px] font-medium text-[var(--t-text)]">
                         {row.fullName}
                       </p>
-                      <p className="text-[11px]" style={{ color: "var(--t-text-secondary)" }}>
+                      <p className="text-[11px] text-[var(--t-text-secondary)]">
                         {row.email}
                       </p>
                       <div className="mt-1">
@@ -595,7 +595,7 @@ export function AdmissionDocuments() {
                 >
                   <FileText size={24} strokeWidth={1.5} style={{ color: "var(--t-text-dim)" }} />
                 </div>
-                <h3 className="text-sm font-medium mb-1" style={{ color: "var(--t-text)" }}>
+                <h3 className="text-sm font-medium mb-1 text-[var(--t-text)]">
                   Selecciona un postulante
                 </h3>
                 <p
@@ -615,10 +615,10 @@ export function AdmissionDocuments() {
                   }}
                 >
                   <div>
-                    <h3 className="text-[16px] font-medium" style={{ color: "var(--t-text)" }}>
+                    <h3 className="text-[16px] font-medium text-[var(--t-text)]">
                       {selectedRequest.fullName}
                     </h3>
-                    <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                    <p className="text-[12px] text-[var(--t-text-secondary)]">
                       {selectedRequest.email} • {selectedRequest.stateName}
                     </p>
                   </div>
@@ -655,10 +655,10 @@ export function AdmissionDocuments() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               {editingDocument ? "Editar documento" : "Solicitar documento"}
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Postulante: {selectedRequest?.fullName ?? "-"}
             </p>
           </div>
@@ -727,12 +727,12 @@ export function AdmissionDocuments() {
               }
             />
             {formState.file && (
-              <p className="text-[11px]" style={{ color: "var(--t-text-secondary)" }}>
+              <p className="text-[11px] text-[var(--t-text-secondary)]">
                 Archivo seleccionado: {formState.file.name}
               </p>
             )}
             {!formState.file && formState.existingFileUrl && (
-              <p className="break-all text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="break-all text-[11px] text-[var(--t-text-dim)]">
                 Archivo actual: {formState.existingFileUrl}
               </p>
             )}
@@ -839,7 +839,7 @@ export function AdmissionDocuments() {
         width="max-w-[520px]"
       >
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">
             {removeDocument
               ? `¿Eliminar el documento ${removeDocument.type} de ${removeDocument.requestName}?`
               : "Confirma la eliminación."}

@@ -52,7 +52,7 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void
       className="flex items-center justify-between rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="text-[12px] text-[var(--t-text-secondary)]">
         {message}
       </p>
       <button
@@ -85,10 +85,10 @@ function DetailField({ label, value }: { label: string; value: string }) {
       className="rounded-xl px-3 py-2"
       style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[11px] text-[var(--t-text-dim)]">
         {label}
       </p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
         {value || "-"}
       </p>
     </div>
@@ -145,11 +145,11 @@ const columns: Column<OperationApprovalRow>[] = [
           )}
           
           <div>
-            <div className="font-medium text-[13px]" style={{ color: "var(--t-text)" }}>
+            <div className="font-medium text-[13px] text-[var(--t-text)]">
               {item.subjectName && item.subjectName !== "-" ? item.subjectName : item.entityTitle}
             </div>
-            <div className="mt-0.5 flex flex-wrap items-center gap-2 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
-              <span className="rounded-sm px-1.5 py-0.5" style={{ background: "var(--t-hover)", color: "var(--t-text-secondary)" }}>
+            <div className="mt-0.5 flex flex-wrap items-center gap-2 text-[11px] text-[var(--t-text-dim)]">
+              <span className="rounded-sm px-1.5 py-0.5 bg-[var(--t-hover)] text-[var(--t-text-secondary)]">
                 {item.entityTable === "horas_actividad" ? "Horas" : item.entityTable === "evidencias_actividad" ? "Evidencia" : "Admisión"}
               </span>
               <span>•</span>
@@ -170,8 +170,8 @@ const columns: Column<OperationApprovalRow>[] = [
     label: "Solicitado",
     render: (item) => (
       <div className="flex flex-col">
-        <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{item.requestedBy || "-"}</span>
-        <span className="text-[11px]" style={{ color: "var(--t-text-tertiary)" }}>Hace {timeAgo(item.requestedAt)}</span>
+        <span className="text-[12px] text-[var(--t-text-secondary)]">{item.requestedBy || "-"}</span>
+        <span className="text-[11px] text-[var(--t-text-tertiary)]">Hace {timeAgo(item.requestedAt)}</span>
       </div>
     ),
   },
@@ -180,8 +180,8 @@ const columns: Column<OperationApprovalRow>[] = [
     label: "Resolución",
     render: (item) => (
       <div className="flex flex-col">
-        <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{item.approvedBy || "-"}</span>
-        <span className="text-[11px]" style={{ color: "var(--t-text-tertiary)" }}>
+        <span className="text-[12px] text-[var(--t-text-secondary)]">{item.approvedBy || "-"}</span>
+        <span className="text-[11px] text-[var(--t-text-tertiary)]">
           {item.approvedAt && item.approvedAt !== "-" ? `Hace ${timeAgo(item.approvedAt)}` : "-"}
         </span>
       </div>
@@ -466,7 +466,7 @@ export function Approvals() {
         />
       </motion.div>
 
-      <motion.div variants={fadeUp} className="rounded-2xl border px-4 py-4 backdrop-blur-xl space-y-4" style={{ background: "var(--t-surface)", borderColor: "var(--t-border)" }}>
+      <motion.div variants={fadeUp} className="rounded-2xl border px-4 py-4 backdrop-blur-xl space-y-4 bg-[var(--t-surface)] border-[var(--t-border)]">
         {/* Top bar with Tabs and Search */}
         <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
           <Tabs value={statusFilter} onValueChange={(val) => setStatusFilter(val as any)} className="w-full xl:w-auto">
@@ -490,7 +490,7 @@ export function Approvals() {
         </div>
 
         {/* Filters Group */}
-        <div className="flex flex-wrap items-center gap-3 border-t pt-4" style={{ borderColor: "var(--t-border)" }}>
+        <div className="flex flex-wrap items-center gap-3 border-t pt-4 border-[var(--t-border)]">
            <div className="w-[180px]">
              <Select value={entityTypeFilter} onValueChange={setEntityTypeFilter}>
                 <SelectTrigger>
@@ -519,9 +519,9 @@ export function Approvals() {
            </div>
            
            {/* DateRangePicker styled inputs */}
-           <div className="flex items-center rounded-md border h-9" style={{ borderColor: "var(--t-border)", background: "var(--t-input-bg)" }}>
+           <div className="flex items-center rounded-md border h-9 border-[var(--t-border)] bg-[var(--t-input-bg)]">
              <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="h-full w-[120px] rounded-l-md bg-transparent px-3 text-[12px] outline-none" style={{ color: "var(--t-text)", colorScheme: "dark" }} />
-             <span className="px-2 text-[12px]" style={{ color: "var(--t-text-dim)" }}>-</span>
+             <span className="px-2 text-[12px] text-[var(--t-text-dim)]">-</span>
              <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="h-full w-[120px] rounded-r-md bg-transparent px-3 text-[12px] outline-none" style={{ color: "var(--t-text)", colorScheme: "dark" }} />
            </div>
            
@@ -578,12 +578,12 @@ export function Approvals() {
           ]}
           emptyMessage={
             <div className="flex flex-col items-center justify-center space-y-3 py-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full" style={{ background: "var(--t-hover)" }}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--t-hover)]">
                 <Inbox className="h-6 w-6" style={{ color: "var(--t-text-tertiary)" }} />
               </div>
               <div className="text-center">
-                <p className="text-[14px] font-medium" style={{ color: "var(--t-text)" }}>Bandeja vacía</p>
-                <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-dim)" }}>No hay aprobaciones que coincidan con los filtros actuales.</p>
+                <p className="text-[14px] font-medium text-[var(--t-text)]">Bandeja vacía</p>
+                <p className="mt-1 text-[12px] text-[var(--t-text-dim)]">No hay aprobaciones que coincidan con los filtros actuales.</p>
               </div>
               {(entityTypeFilter !== 'all' || volunteerFilter !== 'all' || dateFrom || dateTo || searchValue || statusFilter !== 'all') && (
                 <OutlineButton 
@@ -611,7 +611,7 @@ export function Approvals() {
           className="flex items-center justify-between gap-3 rounded-2xl px-4 py-3"
           style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
         >
-          <p className="text-[12px]" style={{ color: "var(--t-text-tertiary)" }}>
+          <p className="text-[12px] text-[var(--t-text-tertiary)]">
             Mostrando {fromRow}-{toRow} de {total} registros
           </p>
           <div className="flex gap-2">
@@ -639,10 +639,10 @@ export function Approvals() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Solicitar revisión
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Marca el registro de horas como pendiente para una nueva revisión.
             </p>
           </div>
@@ -725,10 +725,10 @@ export function Approvals() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Detalle de aprobación
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Información detallada del registro de horas seleccionado.
             </p>
           </div>
@@ -781,10 +781,10 @@ export function Approvals() {
                 className="rounded-2xl px-4 py-3"
                 style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
               >
-                <p className="text-[12px]" style={{ color: "var(--t-text)" }}>
+                <p className="text-[12px] text-[var(--t-text)]">
                   {detail.context.title || "-"}
                 </p>
-                <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="mt-1 text-[12px] text-[var(--t-text-dim)]">
                   {detail.context.summary || "-"}
                 </p>
 
@@ -842,14 +842,14 @@ export function Approvals() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               {resolutionTarget
                 ? resolutionTarget.action === "approved"
                   ? "Aprobar horas"
                   : "Rechazar horas"
                 : "Resolver aprobación"}
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               El comentario es opcional y quedará registrado como observación de la resolución.
             </p>
           </div>

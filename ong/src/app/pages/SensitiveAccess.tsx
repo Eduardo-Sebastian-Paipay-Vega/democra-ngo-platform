@@ -79,7 +79,7 @@ const logColumns: Column<SensitiveAccessLogRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.subjectName}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.subjectDocument}
         </div>
         <div className="mt-1">
@@ -92,7 +92,7 @@ const logColumns: Column<SensitiveAccessLogRow>[] = [
     key: "actor",
     label: "Actor",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.actorLabel}
       </div>
     ),
@@ -101,7 +101,7 @@ const logColumns: Column<SensitiveAccessLogRow>[] = [
     key: "reason",
     label: "Motivo",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.reason}
       </span>
     ),
@@ -111,10 +111,10 @@ const logColumns: Column<SensitiveAccessLogRow>[] = [
     label: "Fecha",
     render: (row) => (
       <div className="flex flex-col">
-        <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+        <span className="text-[12px] text-[var(--t-text-secondary)]">
           {row.accessedAtLabel}
         </span>
-        <span className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <span className="text-[11px] text-[var(--t-text-dim)]">
           {row.accessedAt ? `hace ${formatDistanceToNow(new Date(row.accessedAt), { locale: es })}` : ""}
         </span>
       </div>
@@ -129,7 +129,7 @@ const constraintColumns: Column<RoleAccessConstraintRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.roleName}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.sedeName}
         </div>
       </div>
@@ -139,7 +139,7 @@ const constraintColumns: Column<RoleAccessConstraintRow>[] = [
     key: "scope",
     label: "Restriccion",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {getConstraintScopeLabel(row)}
       </span>
     ),
@@ -148,7 +148,7 @@ const constraintColumns: Column<RoleAccessConstraintRow>[] = [
     key: "network",
     label: "Red",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.ipCidr || "Sin filtro IP"}
       </span>
     ),
@@ -158,10 +158,10 @@ const constraintColumns: Column<RoleAccessConstraintRow>[] = [
     label: "Creado",
     render: (row) => (
       <div className="flex flex-col">
-        <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+        <span className="text-[12px] text-[var(--t-text-secondary)]">
           {row.createdAtLabel}
         </span>
-        <span className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <span className="text-[11px] text-[var(--t-text-dim)]">
           {row.createdAt ? `hace ${formatDistanceToNow(new Date(row.createdAt), { locale: es })}` : ""}
         </span>
       </div>
@@ -523,10 +523,10 @@ export function SensitiveAccess() {
           <div className="flex items-center gap-2">
             <UserRound className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Detalle de acceso sensible
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 {selectedLog?.sourceTable ?? "Bitacora sensible"}
               </p>
             </div>
@@ -556,10 +556,10 @@ export function SensitiveAccess() {
         <div className="space-y-4 p-4">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 {editingConstraint ? "Editar restriccion" : "Nueva restriccion"}
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Restricción de acceso por rol y sede.
               </p>
             </div>
@@ -607,7 +607,7 @@ export function SensitiveAccess() {
                 color: "var(--t-text-secondary)",
               }}
             />
-            <label className="flex items-center gap-2 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+            <label className="flex items-center gap-2 text-[12px] text-[var(--t-text-secondary)]">
               <input
                 type="checkbox"
                 checked={constraintForm.requireTrustedDevice}
@@ -675,7 +675,7 @@ export function SensitiveAccess() {
         width="max-w-[520px]"
       >
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">
             {removeConstraint
               ? `Eliminar la restriccion del rol ${removeConstraint.roleName}?`
               : "Confirma la eliminacion de la restriccion."}

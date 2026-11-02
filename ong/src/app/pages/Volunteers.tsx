@@ -101,13 +101,13 @@ export function Volunteers() {
               className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
               style={{ background: "var(--t-hover)" }}
             >
-              <span className="text-[13px] font-medium" style={{ color: "var(--t-text-secondary)" }}>
+              <span className="text-[13px] font-medium text-[var(--t-text-secondary)]">
                 {row.fullName.substring(0, 2).toUpperCase()}
               </span>
             </div>
           )}
           <div>
-            <div className="font-medium flex items-center gap-1.5" style={{ color: "var(--t-text)" }}>
+            <div className="font-medium flex items-center gap-1.5 text-[var(--t-text)]">
               {row.fullName}
               {row.documentCount === 0 && (
                 <TooltipProvider delayDuration={200}>
@@ -123,7 +123,7 @@ export function Volunteers() {
                 </TooltipProvider>
               )}
             </div>
-            <div className="mt-0.5 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+            <div className="mt-0.5 text-[12px] text-[var(--t-text-secondary)]">
               {row.documentLabel.replace('Documento Nacional de Identidad', 'DNI')}
             </div>
           </div>
@@ -180,9 +180,9 @@ export function Volunteers() {
       key: "metrics",
       label: "Operación",
       render: (row) => (
-        <div className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>
-          <div className="font-medium" style={{ color: "var(--t-text)" }}>{row.approvedHours} h aprobadas</div>
-          <div className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="text-[13px] text-[var(--t-text-secondary)]">
+          <div className="font-medium text-[var(--t-text)]">{row.approvedHours} h aprobadas</div>
+          <div className="text-[12px] text-[var(--t-text-dim)]">
             {row.projectCount} proyectos / {row.activityCount} {row.activityCount === 1 ? 'actividad' : 'actividades'}
           </div>
         </div>
@@ -192,7 +192,7 @@ export function Volunteers() {
       key: "updatedAt",
       label: "Actualizado",
       render: (row) => (
-        <span className="text-[13px]" style={{ color: "var(--t-text-dim)" }}>
+        <span className="text-[13px] text-[var(--t-text-dim)]">
           {formatPeopleDate(row.updatedAt)}
         </span>
       ),

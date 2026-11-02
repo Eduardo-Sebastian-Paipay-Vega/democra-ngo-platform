@@ -199,10 +199,10 @@ export function Login() {
           style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
         >
           <div className="mb-8 text-center">
-            <h1 className="text-[22px] font-semibold" style={{ color: "var(--t-text)" }}>
+            <h1 className="text-[22px] font-semibold text-[var(--t-text)]">
               Verifica tu identidad
             </h1>
-            <p className="mt-1 text-[13px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="mt-1 text-[13px] text-[var(--t-text-dim)]">
               Detectamos un acceso desde un dispositivo nuevo. Ingresa el código que te enviamos
               {pendingStepUp.deliveryHint ? ` a ${pendingStepUp.deliveryHint}` : " por correo"}.
             </p>
@@ -210,7 +210,7 @@ export function Login() {
 
           <form onSubmit={handleVerifyOtp} className="space-y-4">
             <label className="block space-y-1.5">
-              <span className="text-[12px] font-medium" style={{ color: "var(--t-text-dim)" }}>
+              <span className="text-[12px] font-medium text-[var(--t-text-dim)]">
                 Código OTP
               </span>
               <input
@@ -278,17 +278,17 @@ export function Login() {
         style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
       >
         <div className="mb-8 text-center">
-          <h1 className="text-[22px] font-semibold" style={{ color: "var(--t-text)" }}>
+          <h1 className="text-[22px] font-semibold text-[var(--t-text)]">
             Iniciar sesión
           </h1>
-          <p className="mt-1 text-[13px]" style={{ color: "var(--t-text-dim)" }}>
+          <p className="mt-1 text-[13px] text-[var(--t-text-dim)]">
             Ingresa tus credenciales para acceder a la plataforma.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <label className="block space-y-1.5">
-            <span className="text-[12px] font-medium" style={{ color: "var(--t-text-dim)" }}>
+            <span className="text-[12px] font-medium text-[var(--t-text-dim)]">
               Correo electrónico
             </span>
             <input
@@ -308,7 +308,7 @@ export function Login() {
           </label>
 
           <label className="block space-y-1.5">
-            <span className="text-[12px] font-medium" style={{ color: "var(--t-text-dim)" }}>
+            <span className="text-[12px] font-medium text-[var(--t-text-dim)]">
               Contraseña
             </span>
             <div className="relative">

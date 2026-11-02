@@ -54,12 +54,12 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry?: () => voi
 
 function EmptyState({ title, description }: { title: string; description?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center py-12 px-4 text-center rounded-2xl border border-dashed" style={{ borderColor: "var(--t-border)" }}>
+    <div className="flex flex-col items-center justify-center py-12 px-4 text-center rounded-2xl border border-dashed border-[var(--t-border)]">
       <div className="bg-[var(--t-hover)] p-4 rounded-full mb-4">
         <Inbox className="h-8 w-8" style={{ color: "var(--t-text-dim)" }} />
       </div>
-      <h3 className="text-[15px] font-medium" style={{ color: "var(--t-text)" }}>{title}</h3>
-      {description && <p className="mt-1 text-[13px] max-w-sm" style={{ color: "var(--t-text-secondary)" }}>{description}</p>}
+      <h3 className="text-[15px] font-medium text-[var(--t-text)]">{title}</h3>
+      {description && <p className="mt-1 text-[13px] max-w-sm text-[var(--t-text-secondary)]">{description}</p>}
     </div>
   );
 }
@@ -68,8 +68,8 @@ function ModalHeader({ title, description, onClose }: { title: string; descripti
   return (
     <div className="flex items-start justify-between gap-4 px-4 pt-4">
       <div>
-        <h3 className="text-[15px] font-medium" style={{ color: "var(--t-text)" }}>{title}</h3>
-        {description && <p className="mt-0.5 text-[12px]" style={{ color: "var(--t-text-dim)" }}>{description}</p>}
+        <h3 className="text-[15px] font-medium text-[var(--t-text)]">{title}</h3>
+        {description && <p className="mt-0.5 text-[12px] text-[var(--t-text-dim)]">{description}</p>}
       </div>
       <button
         onClick={onClose}
@@ -85,7 +85,7 @@ function ModalHeader({ title, description, onClose }: { title: string; descripti
 function Field({ label, error, required, children }: { label: string; error?: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div className="space-y-1">
-      <label className="text-[12px] font-medium" style={{ color: "var(--t-text-secondary)" }}>
+      <label className="text-[12px] font-medium text-[var(--t-text-secondary)]">
         {label}
         {required && <span className="text-red-400 ml-1">*</span>}
       </label>
@@ -136,7 +136,7 @@ const cursoColumns: Column<CursoRow>[] = [
         )}
         <div>
           <div style={{ color: "var(--t-text)", fontWeight: 500 }}>{item.nombre}</div>
-          <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+          <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
             {item.displayCode}{item.descripcion ? ` · ${item.descripcion}` : ""}
           </div>
         </div>
@@ -157,7 +157,7 @@ const cursoColumns: Column<CursoRow>[] = [
     key: "horasCertificacion",
     label: "Horas",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {item.horasCertificacion ? `${item.horasCertificacion}h` : "N/A"}
       </span>
     ),
@@ -185,7 +185,7 @@ const inscripcionColumns: Column<InscripcionRow>[] = [
     key: "nota",
     label: "Nota",
     render: (item) => (
-      <span className="tabular-nums text-[12px] font-medium" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="tabular-nums text-[12px] font-medium text-[var(--t-text-secondary)]">
         {item.nota !== null ? item.nota.toFixed(2) : "-"}
       </span>
     ),
@@ -203,7 +203,7 @@ const inscripcionColumns: Column<InscripcionRow>[] = [
 
 const certificadoColumns: Column<CertificadoRow>[] = [
   { key: "voluntarioNombre", label: "Voluntario", render: (item) => <span style={{ color: "var(--t-text)", fontWeight: 500 }}>{item.voluntarioNombre}</span> },
-  { key: "fechaEmision", label: "Fecha de emisión", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{item.fechaEmision}</span> },
+  { key: "fechaEmision", label: "Fecha de emisión", render: (item) => <span className="text-[12px] text-[var(--t-text-secondary)]">{item.fechaEmision}</span> },
 ];
 
 // ─── Export ───────────────────────────────────────────────────────────────────
@@ -689,8 +689,8 @@ export function Courses() {
             </Field>
 
             <Field label="Estado inicial">
-              <label className="flex h-9 items-center justify-between rounded-xl px-3 cursor-pointer" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)" }}>
-                <span className="text-[13px]" style={{ color: "var(--t-text)" }}>Activo</span>
+              <label className="flex h-9 items-center justify-between rounded-xl px-3 cursor-pointer border border-[var(--t-border)] bg-[var(--t-input-bg)]">
+                <span className="text-[13px] text-[var(--t-text)]">Activo</span>
                 <div
                   className={cn(
                     "relative flex h-5 w-9 cursor-pointer items-center rounded-full p-0.5 transition-colors",
@@ -728,7 +728,7 @@ export function Courses() {
           />
           {cursoFormErrors.global && <p className="text-[13px] text-red-400 p-2 bg-red-500/10 rounded-lg">{cursoFormErrors.global}</p>}
           
-          <div className="flex justify-end gap-3 pt-4 border-t" style={{ borderColor: "var(--t-border)" }}>
+          <div className="flex justify-end gap-3 pt-4 border-t border-[var(--t-border)]">
             <OutlineButton onClick={() => setCursoModalOpen(false)} disabled={savingCurso}>Cancelar</OutlineButton>
             <GradientButton onClick={() => void submitCurso()} disabled={savingCurso}>
               {savingCurso ? <><RefreshCw className="h-4 w-4 animate-spin mr-2" /> Guardando...</> : "Crear curso"}
@@ -754,7 +754,7 @@ export function Courses() {
               ))}
             </select>
           </Field>
-          <div className="flex justify-end gap-3 pt-4 border-t" style={{ borderColor: "var(--t-border)" }}>
+          <div className="flex justify-end gap-3 pt-4 border-t border-[var(--t-border)]">
             <OutlineButton onClick={() => setEnrollModalOpen(false)} disabled={enrolling}>Cancelar</OutlineButton>
             <GradientButton onClick={() => void submitEnroll()} disabled={enrolling}>
               {enrolling ? <><RefreshCw className="h-4 w-4 animate-spin mr-2" /> Inscribiendo...</> : "Inscribir"}
@@ -809,7 +809,7 @@ export function Courses() {
             </div>
           )}
           
-          <div className="flex justify-end gap-3 pt-4 border-t" style={{ borderColor: "var(--t-border)" }}>
+          <div className="flex justify-end gap-3 pt-4 border-t border-[var(--t-border)]">
             <OutlineButton onClick={() => setEditInscripcion(null)} disabled={saving}>Cancelar</OutlineButton>
             <GradientButton onClick={() => void submitEdit()} disabled={saving}>
               {saving ? <><RefreshCw className="h-4 w-4 animate-spin mr-2" /> Guardando...</> : "Guardar cambios"}

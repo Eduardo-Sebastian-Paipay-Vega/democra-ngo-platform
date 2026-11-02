@@ -72,7 +72,7 @@ const sessionColumns: Column<SessionRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.userLabel}</div>
-        <div className="mt-0.5 text-xs" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="mt-0.5 text-xs text-[var(--t-text-secondary)]">
           {row.sessionType} · {row.ip}
         </div>
       </div>
@@ -82,9 +82,9 @@ const sessionColumns: Column<SessionRow>[] = [
     key: "origin",
     label: "Origen",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.terminalName}
-        <div className="mt-0.5 text-xs" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="mt-0.5 text-xs text-[var(--t-text-secondary)]">
           {row.deviceLabel}
         </div>
       </div>
@@ -111,9 +111,9 @@ const sessionColumns: Column<SessionRow>[] = [
     key: "created",
     label: "Creada",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.createdAtLabel}
-        <div className="mt-0.5 text-xs" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="mt-0.5 text-xs text-[var(--t-text-secondary)]">
           Expira {row.expiresAtLabel}
         </div>
       </div>
@@ -128,7 +128,7 @@ const deviceColumns: Column<DeviceRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.deviceFingerprint}</div>
-        <div className="mt-0.5 text-xs" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="mt-0.5 text-xs text-[var(--t-text-secondary)]">
           {row.userLabel}
         </div>
       </div>
@@ -147,9 +147,9 @@ const deviceColumns: Column<DeviceRow>[] = [
     key: "lastSeen",
     label: "Ultima actividad",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.lastSeenAtLabel}
-        <div className="mt-0.5 text-xs" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="mt-0.5 text-xs text-[var(--t-text-secondary)]">
           {row.lastIp}
         </div>
       </div>
@@ -159,7 +159,7 @@ const deviceColumns: Column<DeviceRow>[] = [
     key: "sessions",
     label: "Sesiones activas",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.activeSessionCount}
       </span>
     ),
@@ -173,7 +173,7 @@ const terminalColumns: Column<TerminalRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.name}</div>
-        <div className="mt-0.5 text-xs" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="mt-0.5 text-xs text-[var(--t-text-secondary)]">
           {row.createdAtLabel}
         </div>
       </div>
@@ -183,9 +183,9 @@ const terminalColumns: Column<TerminalRow>[] = [
     key: "sessions",
     label: "Uso",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.sessionCount} sesiones
-        <div className="mt-0.5 text-xs" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="mt-0.5 text-xs text-[var(--t-text-secondary)]">
           {row.activeSessionCount} activas
         </div>
       </div>
@@ -200,7 +200,7 @@ const authColumns: Column<AuthEventRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.eventType}</div>
-        <div className="mt-0.5 text-xs" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="mt-0.5 text-xs text-[var(--t-text-secondary)]">
           {row.userLabel}
         </div>
       </div>
@@ -219,9 +219,9 @@ const authColumns: Column<AuthEventRow>[] = [
     key: "origin",
     label: "Origen",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.terminalName}
-        <div className="mt-0.5 text-xs" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="mt-0.5 text-xs text-[var(--t-text-secondary)]">
           {row.deviceLabel}
         </div>
       </div>
@@ -231,7 +231,7 @@ const authColumns: Column<AuthEventRow>[] = [
     key: "date",
     label: "Fecha",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.createdAtLabel}
       </span>
     ),
@@ -484,7 +484,7 @@ export function Security() {
         >
           <div className="mb-4 flex items-center gap-2">
             <Clock3 className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-            <h2 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h2 className="text-[14px] text-[var(--t-text)]">
               Sesiones
             </h2>
           </div>
@@ -575,10 +575,10 @@ export function Security() {
           <div className="flex items-center gap-2">
             <ShieldCheck className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Detalle de sesión
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Información de la sesión activa o histórica.
               </p>
             </div>
@@ -611,10 +611,10 @@ export function Security() {
           <div className="flex items-center gap-2">
             <Smartphone className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Detalle del dispositivo
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Información del dispositivo registrado.
               </p>
             </div>
@@ -661,10 +661,10 @@ export function Security() {
         <div className="space-y-4 p-4">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 {editingTerminal ? "Editar terminal" : "Nuevo terminal"}
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Registra o actualiza un terminal de acceso del tenant.
               </p>
             </div>
@@ -721,7 +721,7 @@ export function Security() {
         width="max-w-[560px]"
       >
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">
             {removeTerminal
               ? `¿Eliminar el terminal ${removeTerminal.name}? Las sesiones históricas asociadas quedarán sin terminal asignado.`
               : "Confirma la eliminacion del terminal."}
@@ -752,10 +752,10 @@ export function Security() {
       >
         <div className="space-y-4 p-4">
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Cerrar sesión
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Cierra la sesión de forma remota e inmediata. El usuario deberá autenticarse nuevamente.
             </p>
           </div>
@@ -804,10 +804,10 @@ export function Security() {
           <div className="flex items-center gap-2">
             <ScrollText className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Detalle de evento de autenticación
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Información del evento de autenticación registrado.
               </p>
             </div>

@@ -68,8 +68,8 @@ const templateColumns: Column<NotificationTemplateRow>[] = [
     label: "Plantilla",
     render: (row) => (
       <div>
-        <div className="font-medium" style={{ color: "var(--t-text)" }}>{row.name}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="font-medium text-[var(--t-text)]">{row.name}</div>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.subject || "Sin asunto"}
         </div>
       </div>
@@ -91,7 +91,7 @@ const templateColumns: Column<NotificationTemplateRow>[] = [
         // ignore
       }
       return (
-        <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="text-[12px] text-[var(--t-text-secondary)]">
           <div className="font-semibold">{row.eventCode || "Sin codigo_evento"}</div>
           <div className="mt-1.5 flex flex-wrap gap-1">
             {Array.isArray(vars) && vars.length > 0 ? (
@@ -109,7 +109,7 @@ const templateColumns: Column<NotificationTemplateRow>[] = [
                 </span>
               ))
             ) : (
-              <span className="text-[10px] italic" style={{ color: "var(--t-text-dim)" }}>
+              <span className="text-[10px] italic text-[var(--t-text-dim)]">
                 Sin variables
               </span>
             )}
@@ -122,7 +122,7 @@ const templateColumns: Column<NotificationTemplateRow>[] = [
     key: "content",
     label: "Contenido",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         <div className="line-clamp-2 leading-relaxed">{row.contentSummary}</div>
       </div>
     ),
@@ -136,9 +136,9 @@ const templateColumns: Column<NotificationTemplateRow>[] = [
     key: "updated",
     label: "Actualizado",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         <div>{row.updatedAtLabel}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.updatedByLabel}
         </div>
       </div>
@@ -322,7 +322,7 @@ export function NotificationTemplates() {
       >
         <div className="mb-4 flex items-center gap-2">
           <Bell className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-          <h2 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+          <h2 className="text-[14px] text-[var(--t-text)]">
             Plantillas documentadas
           </h2>
         </div>
@@ -356,8 +356,8 @@ export function NotificationTemplates() {
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--t-hover)]">
                   <Mail className="h-6 w-6" style={{ color: "var(--t-text-dim)" }} />
                 </div>
-                <h3 className="text-[14px] font-medium" style={{ color: "var(--t-text)" }}>Sin plantillas</h3>
-                <p className="mt-1 max-w-[250px] text-center text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <h3 className="text-[14px] font-medium text-[var(--t-text)]">Sin plantillas</h3>
+                <p className="mt-1 max-w-[250px] text-center text-[12px] text-[var(--t-text-dim)]">
                   No se encontraron plantillas con los filtros actuales.
                 </p>
                 {data.access.canManageTemplates && (
@@ -396,10 +396,10 @@ export function NotificationTemplates() {
           <div className="flex items-center gap-2">
             <Eye className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Detalle de plantilla
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 comunicaciones.plantillas_notificacion
               </p>
             </div>
@@ -410,7 +410,7 @@ export function NotificationTemplates() {
           )}
 
           {detail.loading && (
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Cargando detalle...
             </p>
           )}
@@ -440,7 +440,7 @@ export function NotificationTemplates() {
                 >
                   <div className="mb-3 flex items-center gap-2">
                     <MessageSquare className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                    <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                    <h4 className="text-[13px] text-[var(--t-text)]">
                       Cuerpo texto
                     </h4>
                   </div>
@@ -453,7 +453,7 @@ export function NotificationTemplates() {
                 >
                   <div className="mb-3 flex items-center gap-2">
                     <FileText className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                    <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                    <h4 className="text-[13px] text-[var(--t-text)]">
                       Cuerpo HTML
                     </h4>
                   </div>
@@ -467,7 +467,7 @@ export function NotificationTemplates() {
               >
                 <div className="mb-3 flex items-center gap-2">
                   <Braces className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                  <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <h4 className="text-[13px] text-[var(--t-text)]">
                     Variables JSON
                   </h4>
                 </div>
@@ -482,10 +482,10 @@ export function NotificationTemplates() {
         <div className="space-y-4 p-4">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 {editingTemplate ? "Editar plantilla" : "Nueva plantilla"}
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 La BD real persiste `codigo_canal`, `nombre_plantilla`, `asunto`, `cuerpo_html`, `cuerpo_texto`, `variables`, `codigo_evento` y `activa`.
               </p>
             </div>
@@ -530,7 +530,7 @@ export function NotificationTemplates() {
             >
               <div className="mb-2 flex items-center gap-2">
                 <Zap className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                <h4 className="text-[13px] text-[var(--t-text)]">
                   Codigo evento
                 </h4>
               </div>
@@ -551,7 +551,7 @@ export function NotificationTemplates() {
             >
               <div className="mb-2 flex items-center gap-2">
                 <Power className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                <h4 className="text-[13px] text-[var(--t-text)]">
                   Estado
                 </h4>
               </div>
@@ -578,7 +578,7 @@ export function NotificationTemplates() {
             >
               <div className="mb-2 flex items-center gap-2">
                 <Mail className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                <h4 className="text-[13px] text-[var(--t-text)]">
                   Asunto
                 </h4>
               </div>
@@ -599,7 +599,7 @@ export function NotificationTemplates() {
             >
               <div className="mb-2 flex items-center gap-2">
                 <FileJson className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                <h4 className="text-[13px] text-[var(--t-text)]">
                   Variables JSON
                 </h4>
               </div>
@@ -620,7 +620,7 @@ export function NotificationTemplates() {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <MessageSquare className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                <h4 className="text-[13px] text-[var(--t-text)]">
                   Cuerpo texto
                 </h4>
               </div>
@@ -639,7 +639,7 @@ export function NotificationTemplates() {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <FileText className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                <h4 className="text-[13px] text-[var(--t-text)]">
                   Cuerpo HTML
                 </h4>
               </div>
@@ -660,7 +660,7 @@ export function NotificationTemplates() {
             className="rounded-2xl px-4 py-3"
             style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
           >
-            <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+            <p className="text-[12px] text-[var(--t-text-secondary)]">
               La pantalla persiste `variables` y `codigo_evento` como metadata real de la tabla. No existe motor documental de disparo, render ni envio desde frontend.
             </p>
           </div>

@@ -136,7 +136,7 @@ export function MedicalRecords() {
           </div>
           <div>
             <div style={{ color: "var(--t-text)" }}>{row.personName}</div>
-            <div className="mt-0.5 text-[12px] font-medium" style={{ color: "var(--t-text-secondary)" }}>
+            <div className="mt-0.5 text-[12px] font-medium text-[var(--t-text-secondary)]">
               {row.documentLabel}
             </div>
           </div>

@@ -40,7 +40,7 @@ const deleteColumns: Column<GovernanceAuditEvent>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.schemaName}.{row.tableName}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           PK: {row.recordPk ?? "Sin PK"}
         </div>
       </div>
@@ -50,7 +50,7 @@ const deleteColumns: Column<GovernanceAuditEvent>[] = [
     key: "actor",
     label: "Actor",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.actorLabel}
       </span>
     ),
@@ -64,7 +64,7 @@ const deleteColumns: Column<GovernanceAuditEvent>[] = [
     key: "date",
     label: "Fecha",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.occurredAtLabel}
       </span>
     ),
@@ -78,7 +78,7 @@ const restoreColumns: Column<GovernanceRestoreCandidateRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.entityLabel}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.schemaName}.{row.tableName}
         </div>
       </div>
@@ -88,7 +88,7 @@ const restoreColumns: Column<GovernanceRestoreCandidateRow>[] = [
     key: "scope",
     label: "Alcance",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.scopeLabel}
       </span>
     ),
@@ -97,9 +97,9 @@ const restoreColumns: Column<GovernanceRestoreCandidateRow>[] = [
     key: "deletedBy",
     label: "Eliminado por",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.deletedByLabel}
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.deletedAtLabel}
         </div>
       </div>
@@ -158,11 +158,11 @@ export function SoftDelete() {
             />
           </div>
           {data.warnings.length > 0 && (
-            <p className="mt-2 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="mt-2 text-[12px] text-[var(--t-text-dim)]">
               {data.warnings.join(" ")}
             </p>
           )}
-          <p className="mt-2 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+          <p className="mt-2 text-[12px] text-[var(--t-text-dim)]">
             Política de retención activa: {data.retentionPolicyLabel}. Si la política no está disponible, se mostrará una advertencia.
           </p>
         </div>
@@ -183,7 +183,7 @@ export function SoftDelete() {
         >
           <div className="mb-4 flex items-center gap-2">
             <ArchiveRestore className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-            <h2 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h2 className="text-[14px] text-[var(--t-text)]">
               Registros restaurables
             </h2>
           </div>
@@ -221,7 +221,7 @@ export function SoftDelete() {
         >
           <div className="mb-4 flex items-center gap-2">
             <Trash2 className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-            <h2 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h2 className="text-[14px] text-[var(--t-text)]">
               Eventos DELETE detectados
             </h2>
           </div>
@@ -249,15 +249,15 @@ export function SoftDelete() {
       >
         <div className="space-y-4 p-4">
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Restaurar registro
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               La restauracion limpia `is_deleted`, `deleted_at` y `deleted_by` sobre la whitelist real de tablas con soft delete.
             </p>
           </div>
 
-          <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+          <p className="text-[12px] text-[var(--t-text-secondary)]">
             {restoreTarget
               ? `Se restaurara ${restoreTarget.entityLabel.toLowerCase()} de ${restoreTarget.schemaName}.${restoreTarget.tableName}.`
               : "Confirma la restauracion del registro."}
@@ -268,10 +268,10 @@ export function SoftDelete() {
               className="rounded-xl px-3 py-2"
               style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
             >
-              <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[11px] text-[var(--t-text-dim)]">
                 Fuente documental
               </p>
-              <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+              <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
                 {restoreTarget.sourceReference}
               </p>
             </div>

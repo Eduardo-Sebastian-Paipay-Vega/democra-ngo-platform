@@ -40,7 +40,7 @@ const templateColumns: Column<IdCardTemplateSummaryRow>[] = [
     label: "Plantilla",
     render: (row) => (
       <div className="flex items-center gap-3">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded bg-[var(--t-surface)]" style={{ border: "1px solid var(--t-border)" }}>
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded bg-[var(--t-surface)] border border-[var(--t-border)]">
           {/* Suponemos que baseImageUrl vendrá en la fila */}
           {/* @ts-ignore */}
           {row.baseImageUrl ? (
@@ -51,8 +51,8 @@ const templateColumns: Column<IdCardTemplateSummaryRow>[] = [
           )}
         </div>
         <div>
-          <div className="font-medium" style={{ color: "var(--t-text)" }}>{row.name}</div>
-          <div className="mt-0.5 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+          <div className="font-medium text-[var(--t-text)]">{row.name}</div>
+          <div className="mt-0.5 text-[12px] text-[var(--t-text-secondary)]">
             {row.templateWidth} x {row.templateHeight} px
           </div>
         </div>
@@ -63,7 +63,7 @@ const templateColumns: Column<IdCardTemplateSummaryRow>[] = [
     key: "fields",
     label: "Campos",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.fieldCount} coordenadas configuradas
       </div>
     ),
@@ -81,7 +81,7 @@ const templateColumns: Column<IdCardTemplateSummaryRow>[] = [
     key: "updated",
     label: "Actualizada",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="text-[12px] text-[var(--t-text-dim)]">
         {row.updatedAtLabel}
       </span>
     ),
@@ -94,7 +94,7 @@ const cardColumns: Column<IdCardListRow>[] = [
     label: "Voluntario",
     render: (row) => (
       <div className="flex items-center gap-3">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--t-surface)]" style={{ border: "1px solid var(--t-border)" }}>
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--t-surface)] border border-[var(--t-border)]">
           {/* @ts-ignore */}
           {row.avatarUrl ? (
             // @ts-ignore
@@ -104,8 +104,8 @@ const cardColumns: Column<IdCardListRow>[] = [
           )}
         </div>
         <div>
-          <div className="font-medium" style={{ color: "var(--t-text)" }}>{row.volunteerName}</div>
-          <div className="mt-0.5 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+          <div className="font-medium text-[var(--t-text)]">{row.volunteerName}</div>
+          <div className="mt-0.5 text-[12px] text-[var(--t-text-secondary)]">
             {row.documentLabel}
           </div>
         </div>
@@ -121,7 +121,7 @@ const cardColumns: Column<IdCardListRow>[] = [
           <QrCode className="h-3.5 w-3.5" style={{ color: "var(--t-text-dim)" }} />
           <span style={{ color: "var(--t-text-secondary)" }}>{row.cardCode}</span>
         </div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.qrPayload}
         </div>
       </div>
@@ -131,7 +131,7 @@ const cardColumns: Column<IdCardListRow>[] = [
     key: "template",
     label: "Plantilla",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.templateName}
       </span>
     ),
@@ -145,10 +145,10 @@ const cardColumns: Column<IdCardListRow>[] = [
     key: "issued",
     label: "Emitida",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         <div>{row.issuedAtLabel}</div>
         {row.expiresAtLabel && row.expiresAtLabel !== "Sin fecha" && (
-          <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+          <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
             Expira: {row.expiresAtLabel}
           </div>
         )}
@@ -164,10 +164,10 @@ function SummaryCard({ label, value, icon: Icon }: { label: string; value: strin
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
       <div className="relative z-10">
-        <p className="text-[12px] font-medium" style={{ color: "var(--t-text-secondary)" }}>
+        <p className="text-[12px] font-medium text-[var(--t-text-secondary)]">
           {label}
         </p>
-        <p className="mt-0.5 text-3xl font-bold tracking-tight" style={{ color: "var(--t-text)" }}>
+        <p className="mt-0.5 text-3xl font-bold tracking-tight text-[var(--t-text)]">
           {value}
         </p>
       </div>
@@ -441,10 +441,10 @@ export function IdCards() {
       <motion.div variants={fadeUp as any} className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="text-[16px]" style={{ color: "var(--t-text)" }}>
+            <h2 className="text-[16px] text-[var(--t-text)]">
               Plantillas
             </h2>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Configura la imagen de fondo y la posición de cada campo visible en la credencial.
             </p>
           </div>
@@ -473,10 +473,10 @@ export function IdCards() {
       <motion.div variants={fadeUp as any} className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="text-[16px]" style={{ color: "var(--t-text)" }}>
+            <h2 className="text-[16px] text-[var(--t-text)]">
               Credenciales emitidas
             </h2>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Credenciales emitidas con foto, nombre, documento, código y QR del voluntario.
             </p>
           </div>
