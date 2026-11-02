@@ -265,6 +265,12 @@ describe("Proyectos Projects Service - Zero-Fail Tolerance Suite", () => {
       });
       vi.mocked(shared.ongSchema).mockReturnValue({ from: ongFromMock } as any);
 
+      // archiveProject obtiene los estados via fetchProjectStateOptions(), que vive dentro
+      // de shared.ts y usa su ongSchema LOCAL (no el export mockeado arriba), por lo que
+      // stubbear ongSchema no intercepta esa consulta. Mockeamos la funcion directamente
+      // para simular "sin estados catalogados" y ejercitar el fallback esperado.
+      vi.spyOn(shared, "fetchProjectStateOptions").mockResolvedValue([]);
+
       await expect(archiveProject("proj-1")).rejects.toThrow(
         "No existe un estado catalogado para archivar proyectos."
       );
