@@ -72,10 +72,14 @@ describe("Areas Page - Zero-Fail Tolerance", () => {
       </ErrorBoundary>
     );
 
+    // useAreas captura el fallo de listAreas y lo expone como estado `error`
+    // (no vía toast); Areas.tsx renderiza el panel de error con el mensaje.
+    // La página no se rompe: la cabecera sigue presente.
     await waitFor(() => {
-      expect(toast.error).toHaveBeenCalledWith("503 Timeout");
-      expect(screen.getByText("Áreas Organizacionales")).toBeInTheDocument();
+      expect(screen.getByText("No se pudo cargar las áreas")).toBeInTheDocument();
     });
+    expect(screen.getByText("503 Timeout")).toBeInTheDocument();
+    expect(screen.getByText("Áreas Organizacionales")).toBeInTheDocument();
   });
 
   it("should not break when creating an area fails", async () => {
@@ -84,24 +88,31 @@ describe("Areas Page - Zero-Fail Tolerance", () => {
 
     render(<Areas />);
 
+    // Con 0 áreas, Areas.tsx muestra el estado vacío del rediseño.
     await waitFor(() => {
-      expect(screen.getByText("No se encontraron áreas. Crea la primera con el botón de arriba.")).toBeInTheDocument();
+      expect(screen.getByText("No hay áreas registradas")).toBeInTheDocument();
     });
 
+    // Abrir el modal de creación (hay varios botones "Nueva área": cabecera +
+    // estado vacío; cualquiera abre el modal).
     const createButton = screen.getAllByRole("button", { name: /Nueva área/i })[0];
     fireEvent.click(createButton);
 
-    const inputName = screen.getByPlaceholderText("Nombre del área");
-    const inputCode = screen.getByPlaceholderText("Ej. ADMIN, TEC, OPS");
-    
-    fireEvent.change(inputName, { target: { value: "Test Area" } });
-    fireEvent.change(inputCode, { target: { value: "TEST" } });
+    // Placeholders reales del formulario rediseñado.
+    const inputCode = screen.getByPlaceholderText("Ej: FIN-01");
+    const inputName = screen.getByPlaceholderText("Ej: Finanzas");
 
-    const submitButton = screen.getByRole("button", { name: /Crear área/i });
+    fireEvent.change(inputCode, { target: { value: "TEST" } });
+    fireEvent.change(inputName, { target: { value: "Test Area" } });
+
+    const submitButton = screen.getByRole("button", { name: "Guardar" });
     fireEvent.click(submitButton);
 
+    // El hook useAreas atrapa el error de createArea y lo notifica por toast,
+    // sin tumbar la página.
     await waitFor(() => {
-      expect(screen.getByText("Save failed")).toBeInTheDocument(); // formError
+      expect(toast.error).toHaveBeenCalledWith("Save failed");
     });
+    expect(screen.getByText("Áreas Organizacionales")).toBeInTheDocument();
   });
 });

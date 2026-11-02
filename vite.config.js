@@ -161,6 +161,10 @@ export default defineConfig({
     globals: true,
     environment: "happy-dom",
     setupFiles: ["./vitest.setup.ts"],
+    // Holgura para waitFor/findBy a 5000 ms (ver vitest.setup.ts) y para tests
+    // async de servicios bajo carga. El default de 5000 ms quedaría justo.
+    testTimeout: 15000,
+    hookTimeout: 15000,
     include: ["src/**/*.test.{ts,tsx}", "ong/src/**/*.test.{ts,tsx}"],
     coverage: {
       provider: "v8",

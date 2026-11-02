@@ -1,5 +1,16 @@
 import "@testing-library/jest-dom/vitest";
 import { vi, beforeAll, afterAll } from "vitest";
+import { configure } from "@testing-library/react";
+
+// ─── Tolerancia a entornos bajo carga (anti-flaky) ───────────────────────────
+// El timeout por defecto de las utilidades asíncronas de Testing Library
+// (`waitFor`, `findBy*`) es 1000 ms. En máquinas cargadas o con varios workers
+// de Vitest en paralelo, un render + efecto async de React puede superar ese
+// margen y hacer que un test correcto falle de forma intermitente (p. ej. los
+// de Areas.test.tsx). Subirlo a 5000 ms elimina esa fragilidad sin cambiar la
+// lógica de ninguna prueba; el `testTimeout` de Vitest (ver vitest.config.ts /
+// vite.config.js) se eleva en consecuencia para dejar holgura por encima.
+configure({ asyncUtilTimeout: 5000 });
 
 // Mock de matchMedia (requerido por Radix UI, re-charts, etc. en JSDOM)
 Object.defineProperty(window, "matchMedia", {

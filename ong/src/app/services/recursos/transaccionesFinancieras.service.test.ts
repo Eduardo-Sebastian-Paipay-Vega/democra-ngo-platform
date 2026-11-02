@@ -17,6 +17,13 @@ vi.mock("./shared", async (importOriginal) => {
     ongSchema: vi.fn(),
     loadCatalogRows: vi.fn().mockResolvedValue([]),
     resolveFinancialAccountTypeCatalog: vi.fn().mockResolvedValue({ labels: new Map() }),
+    // resolveProfileLabels usa publicSchema() (cliente Supabase real), que NO
+    // está mockeado aquí. rejectEgreso -> resolveEgresoApproval llama a
+    // getTransaccionFinancieraById ANTES de validar el comentario, y ese camino
+    // invoca resolveProfileLabels -> intento de red real contra el host
+    // placeholder. Bajo carga ese fetch tardaba y disparaba el timeout de 5000ms
+    // (TST-ERR-118 flaky). Mockearlo deja la prueba hermética y determinista.
+    resolveProfileLabels: vi.fn().mockResolvedValue(new Map()),
   };
 });
 
