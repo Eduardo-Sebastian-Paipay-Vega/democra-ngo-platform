@@ -96,7 +96,7 @@ const roleColumns: Column<RoleRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.name}</div>
-        <div className="mt-0.5 flex items-center gap-2 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 flex items-center gap-2 text-[11px] text-[var(--t-text-dim)]">
           <span>Nivel {row.hierarchyLevel}</span>
           <StatusDot variant={row.isSystemRole ? "info" : "secondary"}>
             {row.isSystemRole ? "Sistema" : "Custom"}
@@ -109,9 +109,9 @@ const roleColumns: Column<RoleRow>[] = [
     key: "permissions",
     label: "Permisos",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.permissionCount} permisos
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.permissionSummary}
         </div>
       </div>
@@ -121,9 +121,9 @@ const roleColumns: Column<RoleRow>[] = [
     key: "users",
     label: "Usuarios",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         {row.userCount} usuarios
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.assignmentCount} asignaciones por sede
         </div>
       </div>
@@ -133,7 +133,7 @@ const roleColumns: Column<RoleRow>[] = [
     key: "updated",
     label: "Actualizado",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.updatedAtLabel}
       </span>
     ),
@@ -147,7 +147,7 @@ const permissionColumns: Column<PermissionCatalogRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.id}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.description}
         </div>
       </div>
@@ -164,7 +164,7 @@ const permissionColumns: Column<PermissionCatalogRow>[] = [
     key: "roles",
     label: "Roles vinculados",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.assignedRoleCount}
       </span>
     ),
@@ -397,7 +397,7 @@ export function Roles() {
         >
           <div className="mb-4 flex items-center gap-2">
             <Shield className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-            <h2 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h2 className="text-[14px] text-[var(--t-text)]">
               Roles institucionales
             </h2>
           </div>
@@ -447,7 +447,7 @@ export function Roles() {
         >
           <div className="mb-4 flex items-center gap-2">
             <ListChecks className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-            <h2 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h2 className="text-[14px] text-[var(--t-text)]">
               Catalogo de permisos reales
             </h2>
           </div>
@@ -475,10 +475,10 @@ export function Roles() {
           <div className="flex items-center gap-2">
             <Eye className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Detalle del rol
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 public.roles + public.role_permissions + public.user_roles_sedes
               </p>
             </div>
@@ -506,12 +506,12 @@ export function Roles() {
                 >
                   <div className="flex items-center gap-2">
                     <Shield className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                    <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                    <h4 className="text-[13px] text-[var(--t-text)]">
                       Permisos asignados
                     </h4>
                   </div>
                   {detailRole.permissions.length === 0 ? (
-                    <p className="mt-3 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                    <p className="mt-3 text-[12px] text-[var(--t-text-dim)]">
                       Este rol no tiene permisos asignados.
                     </p>
                   ) : (
@@ -522,10 +522,10 @@ export function Roles() {
                           className="rounded-xl px-3 py-2"
                           style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
                         >
-                          <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                          <p className="text-[12px] text-[var(--t-text-secondary)]">
                             {permission.id}
                           </p>
-                          <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                          <p className="text-[11px] text-[var(--t-text-dim)]">
                             {permission.module} Â· {permission.description}
                           </p>
                         </div>
@@ -540,12 +540,12 @@ export function Roles() {
                 >
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                    <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                    <h4 className="text-[13px] text-[var(--t-text)]">
                       Usuarios vinculados
                     </h4>
                   </div>
                   {detailRole.assignments.length === 0 ? (
-                    <p className="mt-3 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                    <p className="mt-3 text-[12px] text-[var(--t-text-dim)]">
                       El rol no esta asignado a usuarios del tenant.
                     </p>
                   ) : (
@@ -556,10 +556,10 @@ export function Roles() {
                           className="rounded-xl px-3 py-2"
                           style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
                         >
-                          <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                          <p className="text-[12px] text-[var(--t-text-secondary)]">
                             {assignment.userLabel}
                           </p>
-                          <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                          <p className="text-[11px] text-[var(--t-text-dim)]">
                             {assignment.sedeName} Â· {assignment.createdAtLabel}
                           </p>
                         </div>
@@ -577,10 +577,10 @@ export function Roles() {
         <div className="space-y-4 p-5">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h3 className="text-[15px] font-semibold" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[15px] font-semibold text-[var(--t-text)]">
                 {editingRole ? "Editar rol" : "Nuevo rol"}
               </h3>
-              <p className="text-[12px] mt-0.5" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] mt-0.5 text-[var(--t-text-dim)]">
                 Configura el nombre, nivel y permisos del rol.
               </p>
             </div>
@@ -744,16 +744,16 @@ export function Roles() {
           <div className="flex items-center gap-2">
             <Shield className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Eliminar rol
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 La eliminacion es fisica y cascada sobre permisos y asignaciones por sede.
               </p>
             </div>
           </div>
 
-          <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+          <p className="text-[12px] text-[var(--t-text-secondary)]">
             {removeRole
               ? `Se eliminara el rol ${removeRole.name} y ${removeRole.assignmentCount} asignaciones institucionales vinculadas.`
               : "Confirma la eliminacion del rol."}

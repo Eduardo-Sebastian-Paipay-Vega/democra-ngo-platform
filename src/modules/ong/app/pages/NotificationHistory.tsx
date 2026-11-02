@@ -35,7 +35,7 @@ const historyColumns: Column<NotificationHistoryRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.recipientLabel}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.recipientId}
         </div>
       </div>
@@ -47,7 +47,7 @@ const historyColumns: Column<NotificationHistoryRow>[] = [
     render: (row) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.title}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.messagePreview}
         </div>
       </div>
@@ -59,7 +59,7 @@ const historyColumns: Column<NotificationHistoryRow>[] = [
     render: (row) => (
       <div>
         <StatusDot variant={row.deliveryStatusVariant}>{row.deliveryStatusLabel}</StatusDot>
-        <div className="mt-1 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-1 text-[11px] text-[var(--t-text-dim)]">
           {row.channelLabel}
         </div>
       </div>
@@ -74,9 +74,9 @@ const historyColumns: Column<NotificationHistoryRow>[] = [
     key: "created",
     label: "Registrado",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         <div>{row.createdAtLabel}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.createdByLabel}
         </div>
       </div>
@@ -208,12 +208,12 @@ export function NotificationHistory() {
           />
         </div>
         {data.warnings.map((item) => (
-          <p key={item} className="mt-2 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+          <p key={item} className="mt-2 text-[12px] text-[var(--t-text-dim)]">
             {item}
           </p>
         ))}
         {data.unsupportedFlows.map((item) => (
-          <p key={item} className="mt-2 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+          <p key={item} className="mt-2 text-[12px] text-[var(--t-text-dim)]">
             {item}
           </p>
         ))}
@@ -245,7 +245,7 @@ export function NotificationHistory() {
       >
         <div className="mb-4 flex items-center gap-2">
           <Clock3 className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-          <h2 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+          <h2 className="text-[14px] text-[var(--t-text)]">
             Eventos registrados
           </h2>
         </div>
@@ -339,7 +339,7 @@ export function NotificationHistory() {
           className="mt-4 flex justify-between rounded-2xl px-4 py-3"
           style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
         >
-          <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+          <p className="text-[12px] text-[var(--t-text-dim)]">
             {data.total === 0 ? 0 : (page - 1) * PAGE_SIZE + 1}-{Math.min(data.total, page * PAGE_SIZE)} de {data.total}
           </p>
           <div className="flex gap-2">
@@ -362,10 +362,10 @@ export function NotificationHistory() {
           <div className="flex items-center gap-2">
             <Eye className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Detalle del historial
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Estado actual y contexto de la notificaciÃ³n.
               </p>
             </div>
@@ -376,7 +376,7 @@ export function NotificationHistory() {
           )}
 
           {detail.loading && (
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Cargando detalle...
             </p>
           )}
@@ -415,11 +415,11 @@ export function NotificationHistory() {
               >
                 <div className="mb-2 flex items-center gap-2">
                   <Bell className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                  <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <h4 className="text-[13px] text-[var(--t-text)]">
                     Titulo
                   </h4>
                 </div>
-                <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                <p className="text-[12px] text-[var(--t-text-secondary)]">
                   {detail.data.title}
                 </p>
               </div>
@@ -430,7 +430,7 @@ export function NotificationHistory() {
               >
                 <div className="mb-3 flex items-center gap-2">
                   <MessageSquare className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                  <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <h4 className="text-[13px] text-[var(--t-text)]">
                     Mensaje
                   </h4>
                 </div>
@@ -443,7 +443,7 @@ export function NotificationHistory() {
               >
                 <div className="mb-3 flex items-center gap-2">
                   <FileJson className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-                  <h4 className="text-[13px]" style={{ color: "var(--t-text)" }}>
+                  <h4 className="text-[13px] text-[var(--t-text)]">
                     Payload
                   </h4>
                 </div>

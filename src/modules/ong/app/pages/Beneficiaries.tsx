@@ -37,7 +37,7 @@ const columns: Column<BeneficiaryListRow>[] = [
           <UserRound className="h-3.5 w-3.5" style={{ color: "var(--t-text-dim)" }} />
           <span style={{ color: "var(--t-text)" }}>{row.fullName}</span>
         </div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.documentLabel}
         </div>
       </div>
@@ -52,7 +52,7 @@ const columns: Column<BeneficiaryListRow>[] = [
     key: "tracking",
     label: "Relacion",
     render: (row) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <div className="text-[12px] text-[var(--t-text-secondary)]">
         <div>{row.projectCount} proyectos</div>
         <div>{row.hasMedicalRecord ? `${row.medicalRecordCount} fichas` : "Sin ficha medica"}</div>
       </div>
@@ -62,7 +62,7 @@ const columns: Column<BeneficiaryListRow>[] = [
     key: "updatedAt",
     label: "Actualizado",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="text-[12px] text-[var(--t-text-dim)]">
         {formatPeopleDate(row.updatedAt)}
       </span>
     ),

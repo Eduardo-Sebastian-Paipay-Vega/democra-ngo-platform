@@ -67,7 +67,7 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void
       className="flex items-center justify-between rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="text-[12px] text-[var(--t-text-secondary)]">
         {message}
       </p>
       <button
@@ -100,10 +100,10 @@ function DetailField({ label, value }: { label: string; value: string }) {
       className="rounded-xl px-3 py-2"
       style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[11px] text-[var(--t-text-dim)]">
         {label}
       </p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
         {value || "-"}
       </p>
     </div>
@@ -147,7 +147,7 @@ const columns: Column<AdmissionInterviewRow>[] = [
     key: "scheduledAt",
     label: "Fecha",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text)" }}>
+      <span className="text-[12px] text-[var(--t-text)]">
         {item.scheduledAt}
       </span>
     ),
@@ -156,7 +156,7 @@ const columns: Column<AdmissionInterviewRow>[] = [
     key: "interviewer",
     label: "Entrevistador",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {item.interviewerLabel}
       </span>
     ),
@@ -182,7 +182,7 @@ const columns: Column<AdmissionInterviewRow>[] = [
     key: "score",
     label: "Puntaje",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {formatScore(item.score)}
       </span>
     ),
@@ -191,7 +191,7 @@ const columns: Column<AdmissionInterviewRow>[] = [
     key: "comment",
     label: "Comentario",
     render: (item) => (
-      <span className="line-clamp-2 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="line-clamp-2 text-[12px] text-[var(--t-text-dim)]">
         {item.comment || "-"}
       </span>
     ),
@@ -409,7 +409,7 @@ export function AdmissionInterviews() {
               <DetailField label="Estado" value={selectedRequest.stateName} />
             </div>
           ) : (
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Selecciona una solicitud para gestionar sus entrevistas.
             </p>
           )}
@@ -438,10 +438,10 @@ export function AdmissionInterviews() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               {editingInterview ? "Editar entrevista" : "Nueva entrevista"}
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Solicitud: {selectedRequest?.fullName ?? "-"}
             </p>
           </div>
@@ -584,7 +584,7 @@ export function AdmissionInterviews() {
         width="max-w-[520px]"
       >
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">
             {removeInterview
               ? `Eliminar la entrevista de ${removeInterview.requestName} programada para ${removeInterview.scheduledAt}?`
               : "Confirma la eliminacion."}

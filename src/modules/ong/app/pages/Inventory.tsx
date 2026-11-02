@@ -24,16 +24,16 @@ type InventoryView = "items" | "locations" | "movements" | "kardex";
 
 function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void }) {
   return (
-    <div className="flex items-center justify-between rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{message}</p>
-      <button type="button" className="rounded-md px-2 py-1 text-[11px] hover:bg-[var(--t-hover)]" style={{ color: "var(--t-text-secondary)" }} onClick={onRetry}>Reintentar</button>
+    <div className="flex items-center justify-between rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+      <p className="text-[12px] text-[var(--t-text-secondary)]">{message}</p>
+      <button type="button" className="rounded-md px-2 py-1 text-[11px] hover:bg-[var(--t-hover)] text-[var(--t-text-secondary)]" onClick={onRetry}>Reintentar</button>
     </div>
   );
 }
 
 function SelectField({ value, onChange, options, disabled = false }: { value: string; onChange: (value: string) => void; options: Array<{ value: string; label: string }>; disabled?: boolean; }) {
   return (
-    <select value={value} onChange={(event) => onChange(event.target.value)} disabled={disabled} className="h-9 rounded-xl px-3 text-[12px] outline-none disabled:cursor-not-allowed disabled:opacity-70" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }}>
+    <select value={value} onChange={(event) => onChange(event.target.value)} disabled={disabled} className="h-9 rounded-xl px-3 text-[12px] outline-none disabled:cursor-not-allowed disabled:opacity-70 border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]">
       {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
     </select>
   );
@@ -41,9 +41,9 @@ function SelectField({ value, onChange, options, disabled = false }: { value: st
 
 function DetailField({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}>
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>{label}</p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{value || "-"}</p>
+    <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)]">
+      <p className="text-[11px] text-[var(--t-text-dim)]">{label}</p>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">{value || "-"}</p>
     </div>
   );
 }
@@ -63,8 +63,8 @@ const itemColumns: Column<any>[] = [
         </AvatarFallback>
       </Avatar>
       <div>
-        <div className="font-medium" style={{ color: "var(--t-text)" }}>{item.name}</div>
-        <div className="mt-1 inline-flex items-center rounded-sm px-1.5 py-0.5 text-[10px] uppercase font-mono" style={{ background: "var(--t-hover)", color: "var(--t-text-dim)", border: "1px solid var(--t-border)" }}>
+        <div className="font-medium text-[var(--t-text)]">{item.name}</div>
+        <div className="mt-1 inline-flex items-center rounded-sm px-1.5 py-0.5 text-[10px] uppercase font-mono bg-[var(--t-hover)] text-[var(--t-text-dim)] border border-[var(--t-border)]">
           CÓD: {item.code}{item.sku ? ` • ${item.sku}` : ""}
         </div>
       </div>
@@ -97,18 +97,18 @@ const itemColumns: Column<any>[] = [
 ];
 
 const locationColumns: Column<any>[] = [
-  { key: "name", label: "Ubicacion", render: (item) => <div><div className="font-medium" style={{ color: "var(--t-text)" }}>{item.name}</div><div className="mt-1 inline-flex items-center rounded-sm px-1.5 py-0.5 text-[10px] uppercase font-mono" style={{ background: "var(--t-hover)", color: "var(--t-text-dim)", border: "1px solid var(--t-border)" }}>CÓD: {item.code}</div></div> },
-  { key: "country", label: "Pais", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{item.countryLabel}</span> },
-  { key: "address", label: "Direccion", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{item.address || "-"}</span> },
+  { key: "name", label: "Ubicacion", render: (item) => <div><div className="font-medium text-[var(--t-text)]">{item.name}</div><div className="mt-1 inline-flex items-center rounded-sm px-1.5 py-0.5 text-[10px] uppercase font-mono" style={{ background: "var(--t-hover)", color: "var(--t-text-dim)", border: "1px solid var(--t-border)" }}>CÓD: {item.code}</div></div> },
+  { key: "country", label: "Pais", render: (item) => <span className="text-[12px] text-[var(--t-text-secondary)]">{item.countryLabel}</span> },
+  { key: "address", label: "Direccion", render: (item) => <span className="text-[12px] text-[var(--t-text-dim)]">{item.address || "-"}</span> },
   { key: "status", label: "Activo", render: (item) => <StatusDot variant={item.statusVariant}>{item.activeLabel}</StatusDot> },
 ];
 
 const movementColumns: Column<any>[] = [
-  { key: "item", label: "Item", render: (item) => <div><div className="font-medium" style={{ color: "var(--t-text)" }}>{item.itemName}</div><div className="mt-1 inline-flex items-center rounded-sm px-1.5 py-0.5 text-[10px] uppercase font-mono" style={{ background: "var(--t-hover)", color: "var(--t-text-dim)", border: "1px solid var(--t-border)" }}>CÓD: {item.itemId}</div></div> },
+  { key: "item", label: "Item", render: (item) => <div><div className="font-medium text-[var(--t-text)]">{item.itemName}</div><div className="mt-1 inline-flex items-center rounded-sm px-1.5 py-0.5 text-[10px] uppercase font-mono" style={{ background: "var(--t-hover)", color: "var(--t-text-dim)", border: "1px solid var(--t-border)" }}>CÓD: {item.itemId}</div></div> },
   { key: "type", label: "Tipo", render: (item) => <StatusDot variant={item.statusVariant}>{item.typeName}</StatusDot> },
-  { key: "quantity", label: "Cantidad", render: (item) => <span className="text-[13px] font-medium" style={{ color: "var(--t-text-secondary)" }}>{formatNumber(item.quantity)}</span> },
-  { key: "path", label: "Origen / Destino", render: (item) => <div className="text-[12px]" style={{ color: "var(--t-text-dim)" }}><div>Origen: {item.originName}</div><div>Destino: {item.destinationName}</div></div> },
-  { key: "trace", label: "Registro", render: (item) => <div className="text-[12px]" style={{ color: "var(--t-text-dim)" }}><div>{item.date}</div><div>{item.registeredBy}</div></div> },
+  { key: "quantity", label: "Cantidad", render: (item) => <span className="text-[13px] font-medium text-[var(--t-text-secondary)]">{formatNumber(item.quantity)}</span> },
+  { key: "path", label: "Origen / Destino", render: (item) => <div className="text-[12px] text-[var(--t-text-dim)]"><div>Origen: {item.originName}</div><div>Destino: {item.destinationName}</div></div> },
+  { key: "trace", label: "Registro", render: (item) => <div className="text-[12px] text-[var(--t-text-dim)]"><div>{item.date}</div><div>{item.registeredBy}</div></div> },
 ];
 
 export function Inventory() {
@@ -221,9 +221,9 @@ export function Inventory() {
             { label: "Editar", onClick: (row) => { setEditingItem(row); setItemForm({ code: row.code, name: row.name, description: row.description, unitCode: row.unitCode, stateCode: row.stateCode, active: row.active }); setItemError(null); setItemFormOpen(true); } },
             { label: "Inactivar", onClick: (row) => setItemRemoveTarget(row), variant: "destructive" },
           ]} />
-          <div className="flex justify-between items-center rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+          <div className="flex justify-between items-center rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
             <div className="flex items-center gap-3">
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{(items.total === 0 ? 0 : (itemsPage - 1) * PAGE_SIZE + 1)}-{Math.min(items.total, itemsPage * PAGE_SIZE)} de {items.total}</p>
+              <p className="text-[12px] text-[var(--t-text-dim)]">{(items.total === 0 ? 0 : (itemsPage - 1) * PAGE_SIZE + 1)}-{Math.min(items.total, itemsPage * PAGE_SIZE)} de {items.total}</p>
               <button onClick={() => items.refresh()} className="text-[var(--t-text-dim)] hover:text-[var(--t-text)] transition-colors" title="Refrescar items">
                 <RefreshCw size={14} />
               </button>
@@ -245,9 +245,9 @@ export function Inventory() {
             { label: "Editar", onClick: (row) => { setEditingLocation(row); setLocationForm({ code: row.code, name: row.name, address: row.address, latitude: row.latitude === null ? "" : String(row.latitude), longitude: row.longitude === null ? "" : String(row.longitude), countryCode: row.countryCode, active: row.active }); setLocationError(null); setLocationFormOpen(true); } },
             { label: "Inactivar", onClick: (row) => setLocationRemoveTarget(row), variant: "destructive" },
           ]} />
-          <div className="flex justify-between items-center rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+          <div className="flex justify-between items-center rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
             <div className="flex items-center gap-3">
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{(locations.total === 0 ? 0 : (locationsPage - 1) * PAGE_SIZE + 1)}-{Math.min(locations.total, locationsPage * PAGE_SIZE)} de {locations.total}</p>
+              <p className="text-[12px] text-[var(--t-text-dim)]">{(locations.total === 0 ? 0 : (locationsPage - 1) * PAGE_SIZE + 1)}-{Math.min(locations.total, locationsPage * PAGE_SIZE)} de {locations.total}</p>
               <button onClick={() => locations.refresh()} className="text-[var(--t-text-dim)] hover:text-[var(--t-text)] transition-colors" title="Refrescar ubicaciones">
                 <RefreshCw size={14} />
               </button>
@@ -268,8 +268,8 @@ export function Inventory() {
             <SelectField value={movementsType} onChange={(value) => { setMovementsType(value); setMovementsPage(1); }} options={movementTypeOptions} />
             <SelectField value={movementsOrigin} onChange={(value) => { setMovementsOrigin(value); setMovementsPage(1); }} options={movementLocationOptions} />
             <SelectField value={movementsDestination} onChange={(value) => { setMovementsDestination(value); setMovementsPage(1); }} options={movementLocationOptions} />
-            <input type="date" value={movementsDateFrom} onChange={(event) => { setMovementsDateFrom(event.target.value); setMovementsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input type="date" value={movementsDateTo} onChange={(event) => { setMovementsDateTo(event.target.value); setMovementsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input type="date" value={movementsDateFrom} onChange={(event) => { setMovementsDateFrom(event.target.value); setMovementsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input type="date" value={movementsDateTo} onChange={(event) => { setMovementsDateTo(event.target.value); setMovementsPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
           {movements.error && <ErrorBlock message={movements.error} onRetry={movements.refresh} />}
           {movements.warnings.length > 0 && <ErrorBlock message={movements.warnings.join(" ")} onRetry={movements.refresh} />}
@@ -278,9 +278,9 @@ export function Inventory() {
             { label: "Editar", onClick: (row) => { setEditingMovement(row); setMovementForm({ itemId: row.itemId, typeId: row.typeCode, quantity: String(row.quantity), originId: row.originId ?? "all", destinationId: row.destinationId ?? "all", transactionDate: row.rawDate.slice(0, 10) }); setMovementError(null); setMovementFormOpen(true); } },
             { label: "Eliminar", onClick: (row) => setMovementRemoveTarget(row), variant: "destructive" },
           ]} />
-          <div className="flex justify-between items-center rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+          <div className="flex justify-between items-center rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
             <div className="flex items-center gap-3">
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{(movements.total === 0 ? 0 : (movementsPage - 1) * PAGE_SIZE + 1)}-{Math.min(movements.total, movementsPage * PAGE_SIZE)} de {movements.total}</p>
+              <p className="text-[12px] text-[var(--t-text-dim)]">{(movements.total === 0 ? 0 : (movementsPage - 1) * PAGE_SIZE + 1)}-{Math.min(movements.total, movementsPage * PAGE_SIZE)} de {movements.total}</p>
               <button onClick={() => movements.refresh()} className="text-[var(--t-text-dim)] hover:text-[var(--t-text)] transition-colors" title="Refrescar movimientos">
                 <RefreshCw size={14} />
               </button>
@@ -300,14 +300,14 @@ export function Inventory() {
             <SelectField value={kardexItem} onChange={(value) => { setKardexItem(value); setKardexPage(1); }} options={kardexItemOptions} />
             <SelectField value={kardexLocation} onChange={(value) => { setKardexLocation(value); setKardexPage(1); }} options={kardexLocationOptions} />
             <SelectField value={kardexType} onChange={(value) => { setKardexType(value); setKardexPage(1); }} options={kardexTypeOptions} />
-            <input type="date" value={kardexDateFrom} onChange={(event) => { setKardexDateFrom(event.target.value); setKardexPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input type="date" value={kardexDateTo} onChange={(event) => { setKardexDateTo(event.target.value); setKardexPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input type="date" value={kardexDateFrom} onChange={(event) => { setKardexDateFrom(event.target.value); setKardexPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input type="date" value={kardexDateTo} onChange={(event) => { setKardexDateTo(event.target.value); setKardexPage(1); }} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
           {kardex.error && <ErrorBlock message={kardex.error} onRetry={kardex.refresh} />}
           <DataTable columns={movementColumns} data={kardex.rows} loading={kardex.loading} emptyMessage="No hay movimientos para el kardex." />
-          <div className="flex justify-between items-center rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+          <div className="flex justify-between items-center rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
             <div className="flex items-center gap-3">
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{(kardex.total === 0 ? 0 : (kardexPage - 1) * PAGE_SIZE + 1)}-{Math.min(kardex.total, kardexPage * PAGE_SIZE)} de {kardex.total}</p>
+              <p className="text-[12px] text-[var(--t-text-dim)]">{(kardex.total === 0 ? 0 : (kardexPage - 1) * PAGE_SIZE + 1)}-{Math.min(kardex.total, kardexPage * PAGE_SIZE)} de {kardex.total}</p>
               <button onClick={() => kardex.refresh()} className="text-[var(--t-text-dim)] hover:text-[var(--t-text)] transition-colors" title="Refrescar kardex">
                 <RefreshCw size={14} />
               </button>
@@ -321,21 +321,21 @@ export function Inventory() {
       )}
       <ModalShell open={itemFormOpen} onClose={() => setItemFormOpen(false)} width="max-w-[860px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
-          <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>{editingItem ? "Editar item" : "Nuevo item"}</h3>
+          <h3 className="text-[14px] text-[var(--t-text)]">{editingItem ? "Editar item" : "Nuevo item"}</h3>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setItemFormOpen(false)}>X</button>
         </div>
         <div className="space-y-3 p-4">
           {itemError && <ErrorBlock message={itemError} onRetry={() => setItemError(null)} />}
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <input value={itemForm.code} onChange={(event) => setItemForm((current) => ({ ...current, code: event.target.value }))} placeholder="Codigo" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input value={itemForm.name} onChange={(event) => setItemForm((current) => ({ ...current, name: event.target.value }))} placeholder="Nombre" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input value={itemForm.code} onChange={(event) => setItemForm((current) => ({ ...current, code: event.target.value }))} placeholder="Codigo" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input value={itemForm.name} onChange={(event) => setItemForm((current) => ({ ...current, name: event.target.value }))} placeholder="Nombre" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <SelectField value={itemForm.unitCode} onChange={(value) => setItemForm((current) => ({ ...current, unitCode: value }))} options={items.unitOptions.length ? items.unitOptions : [{ value: "", label: "Sin unidades" }]} />
             <SelectField value={itemForm.stateCode} onChange={(value) => setItemForm((current) => ({ ...current, stateCode: value }))} options={items.stateOptions.length ? items.stateOptions : [{ value: "", label: "Sin estados" }]} />
           </div>
-          <textarea value={itemForm.description} onChange={(event) => setItemForm((current) => ({ ...current, description: event.target.value }))} rows={4} placeholder="Descripcion" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-          <label className="flex items-center gap-2 text-[12px]" style={{ color: "var(--t-text-secondary)" }}><input type="checkbox" checked={itemForm.active} onChange={(event) => setItemForm((current) => ({ ...current, active: event.target.checked }))} />Item activo</label>
+          <textarea value={itemForm.description} onChange={(event) => setItemForm((current) => ({ ...current, description: event.target.value }))} rows={4} placeholder="Descripcion" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+          <label className="flex items-center gap-2 text-[12px] text-[var(--t-text-secondary)]"><input type="checkbox" checked={itemForm.active} onChange={(event) => setItemForm((current) => ({ ...current, active: event.target.checked }))} />Item activo</label>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => {
               if (!itemForm.code.trim() || !itemForm.name.trim() || !itemForm.unitCode || !itemForm.stateCode) { setItemError("Codigo, nombre, unidad y estado son obligatorios."); return; }
@@ -376,7 +376,7 @@ export function Inventory() {
 
       <ModalShell open={Boolean(itemRemoveTarget)} onClose={() => setItemRemoveTarget(null)} width="max-w-[520px]">
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>{itemRemoveTarget ? `Inactivar el item ${itemRemoveTarget.name}?` : "Confirma la inactivacion."}</p>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">{itemRemoveTarget ? `Inactivar el item ${itemRemoveTarget.name}?` : "Confirma la inactivacion."}</p>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => { if (!itemRemoveTarget) return; await items.remove(itemRemoveTarget.id); toast.success("Item inactivado."); setItemRemoveTarget(null); }} disabled={items.isRemoving}>{items.isRemoving ? "Guardando..." : "Confirmar"}</GradientButton>
             <OutlineButton size="sm" onClick={() => setItemRemoveTarget(null)} disabled={items.isRemoving}>Cancelar</OutlineButton>
@@ -386,22 +386,22 @@ export function Inventory() {
 
       <ModalShell open={locationFormOpen} onClose={() => setLocationFormOpen(false)} width="max-w-[860px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
-          <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>{editingLocation ? "Editar ubicacion" : "Nueva ubicacion"}</h3>
+          <h3 className="text-[14px] text-[var(--t-text)]">{editingLocation ? "Editar ubicacion" : "Nueva ubicacion"}</h3>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setLocationFormOpen(false)}>X</button>
         </div>
         <div className="space-y-3 p-4">
           {locationError && <ErrorBlock message={locationError} onRetry={() => setLocationError(null)} />}
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <input value={locationForm.code} onChange={(event) => setLocationForm((current) => ({ ...current, code: event.target.value }))} placeholder="Codigo" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input value={locationForm.name} onChange={(event) => setLocationForm((current) => ({ ...current, name: event.target.value }))} placeholder="Nombre" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input value={locationForm.code} onChange={(event) => setLocationForm((current) => ({ ...current, code: event.target.value }))} placeholder="Codigo" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input value={locationForm.name} onChange={(event) => setLocationForm((current) => ({ ...current, name: event.target.value }))} placeholder="Nombre" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
             <SelectField value={locationForm.countryCode} onChange={(value) => setLocationForm((current) => ({ ...current, countryCode: value }))} options={locations.countryOptions.length ? locations.countryOptions : [{ value: "PE", label: "PE" }]} />
-            <input value={locationForm.latitude} onChange={(event) => setLocationForm((current) => ({ ...current, latitude: event.target.value }))} placeholder="Latitud" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input value={locationForm.longitude} onChange={(event) => setLocationForm((current) => ({ ...current, longitude: event.target.value }))} placeholder="Longitud" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input value={locationForm.latitude} onChange={(event) => setLocationForm((current) => ({ ...current, latitude: event.target.value }))} placeholder="Latitud" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input value={locationForm.longitude} onChange={(event) => setLocationForm((current) => ({ ...current, longitude: event.target.value }))} placeholder="Longitud" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
-          <textarea value={locationForm.address} onChange={(event) => setLocationForm((current) => ({ ...current, address: event.target.value }))} rows={3} placeholder="Direccion" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-          <label className="flex items-center gap-2 text-[12px]" style={{ color: "var(--t-text-secondary)" }}><input type="checkbox" checked={locationForm.active} onChange={(event) => setLocationForm((current) => ({ ...current, active: event.target.checked }))} />Ubicacion activa</label>
+          <textarea value={locationForm.address} onChange={(event) => setLocationForm((current) => ({ ...current, address: event.target.value }))} rows={3} placeholder="Direccion" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+          <label className="flex items-center gap-2 text-[12px] text-[var(--t-text-secondary)]"><input type="checkbox" checked={locationForm.active} onChange={(event) => setLocationForm((current) => ({ ...current, active: event.target.checked }))} />Ubicacion activa</label>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => {
               if (!locationForm.code.trim() || !locationForm.name.trim()) { setLocationError("Codigo y nombre son obligatorios."); return; }
@@ -440,7 +440,7 @@ export function Inventory() {
 
       <ModalShell open={Boolean(locationRemoveTarget)} onClose={() => setLocationRemoveTarget(null)} width="max-w-[520px]">
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>{locationRemoveTarget ? `Inactivar la ubicacion ${locationRemoveTarget.name}?` : "Confirma la inactivacion."}</p>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">{locationRemoveTarget ? `Inactivar la ubicacion ${locationRemoveTarget.name}?` : "Confirma la inactivacion."}</p>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => { if (!locationRemoveTarget) return; await locations.remove(locationRemoveTarget.id); toast.success("Ubicacion inactivada."); setLocationRemoveTarget(null); }} disabled={locations.isRemoving}>{locations.isRemoving ? "Guardando..." : "Confirmar"}</GradientButton>
             <OutlineButton size="sm" onClick={() => setLocationRemoveTarget(null)} disabled={locations.isRemoving}>Cancelar</OutlineButton>
@@ -450,7 +450,7 @@ export function Inventory() {
 
       <ModalShell open={movementFormOpen} onClose={() => setMovementFormOpen(false)} width="max-w-[860px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
-          <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>{editingMovement ? "Editar movimiento" : "Nuevo movimiento"}</h3>
+          <h3 className="text-[14px] text-[var(--t-text)]">{editingMovement ? "Editar movimiento" : "Nuevo movimiento"}</h3>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setMovementFormOpen(false)}>X</button>
         </div>
         <div className="space-y-3 p-4">
@@ -460,8 +460,8 @@ export function Inventory() {
             <SelectField value={movementForm.typeId} onChange={(value) => setMovementForm((current) => ({ ...current, typeId: value }))} options={movementTypeOptions} />
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <input type="number" min="0.01" step="0.01" value={movementForm.quantity} onChange={(event) => setMovementForm((current) => ({ ...current, quantity: event.target.value }))} placeholder="Cantidad" className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input type="date" value={movementForm.transactionDate} onChange={(event) => setMovementForm((current) => ({ ...current, transactionDate: event.target.value }))} className="h-9 rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input type="number" min="0.01" step="0.01" value={movementForm.quantity} onChange={(event) => setMovementForm((current) => ({ ...current, quantity: event.target.value }))} placeholder="Cantidad" className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input type="date" value={movementForm.transactionDate} onChange={(event) => setMovementForm((current) => ({ ...current, transactionDate: event.target.value }))} className="h-9 rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <SelectField value={movementForm.originId} onChange={(value) => setMovementForm((current) => ({ ...current, originId: value }))} options={movementLocationOptions} />
@@ -505,7 +505,7 @@ export function Inventory() {
 
       <ModalShell open={Boolean(movementRemoveTarget)} onClose={() => setMovementRemoveTarget(null)} width="max-w-[520px]">
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>{movementRemoveTarget ? `Eliminar el movimiento ${movementRemoveTarget.id}?` : "Confirma la eliminacion."}</p>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">{movementRemoveTarget ? `Eliminar el movimiento ${movementRemoveTarget.id}?` : "Confirma la eliminacion."}</p>
           <div className="flex gap-2">
             <GradientButton size="sm" onClick={async () => { if (!movementRemoveTarget) return; await movements.remove({ movementId: movementRemoveTarget.id }); toast.success("Movimiento eliminado."); setMovementRemoveTarget(null); }} disabled={movements.isRemoving}>{movements.isRemoving ? "Eliminando..." : "Confirmar"}</GradientButton>
             <OutlineButton size="sm" onClick={() => setMovementRemoveTarget(null)} disabled={movements.isRemoving}>Cancelar</OutlineButton>

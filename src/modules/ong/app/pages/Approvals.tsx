@@ -80,7 +80,7 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void
       className="flex items-center justify-between rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="text-[12px] text-[var(--t-text-secondary)]">
         {message}
       </p>
       <button
@@ -113,10 +113,10 @@ function DetailField({ label, value }: { label: string; value: string }) {
       className="rounded-xl px-3 py-2"
       style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[11px] text-[var(--t-text-dim)]">
         {label}
       </p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
         {value || "-"}
       </p>
     </div>
@@ -130,10 +130,10 @@ const columns: Column<OperationApprovalRow>[] = [
     render: (item) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{item.entityTitle}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {item.subjectName !== "-" ? `${item.subjectName} Â· ${item.entitySubtitle}` : item.entitySubtitle}
         </div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {item.entityId}
         </div>
       </div>
@@ -148,7 +148,7 @@ const columns: Column<OperationApprovalRow>[] = [
     key: "requested",
     label: "Solicitado",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-tertiary)" }}>
+      <span className="text-[12px] text-[var(--t-text-tertiary)]">
         {item.requestedBy} - {item.requestedAt}
       </span>
     ),
@@ -157,7 +157,7 @@ const columns: Column<OperationApprovalRow>[] = [
     key: "approved",
     label: "Resuelto",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-tertiary)" }}>
+      <span className="text-[12px] text-[var(--t-text-tertiary)]">
         {item.approvedBy} - {item.approvedAt}
       </span>
     ),
@@ -557,7 +557,7 @@ export function Approvals() {
           className="flex items-center justify-between gap-3 rounded-2xl px-4 py-3"
           style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
         >
-          <p className="text-[12px]" style={{ color: "var(--t-text-tertiary)" }}>
+          <p className="text-[12px] text-[var(--t-text-tertiary)]">
             Mostrando {fromRow}-{toRow} de {total} registros
           </p>
           <div className="flex gap-2">
@@ -585,10 +585,10 @@ export function Approvals() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Solicitar revisiÃ³n
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Introduce el ID del registro de horas para enviarlo a revisiÃ³n pendiente.
             </p>
           </div>
@@ -671,10 +671,10 @@ export function Approvals() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Detalle de aprobaciÃ³n
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Estado actual y contexto del registro vinculado a esta aprobaciÃ³n.
             </p>
           </div>
@@ -730,10 +730,10 @@ export function Approvals() {
                 className="rounded-2xl px-4 py-3"
                 style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
               >
-                <p className="text-[12px]" style={{ color: "var(--t-text)" }}>
+                <p className="text-[12px] text-[var(--t-text)]">
                   {detail.context.title}
                 </p>
-                <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="mt-1 text-[12px] text-[var(--t-text-dim)]">
                   {detail.context.summary}
                 </p>
 
@@ -791,14 +791,14 @@ export function Approvals() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               {resolutionTarget
                 ? resolutionTarget.action === "approved"
                   ? "Aprobar horas"
                   : "Rechazar horas"
                 : "Resolver aprobaciÃ³n"}
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               El comentario es opcional y queda registrado en la aprobaciÃ³n y en el registro de horas.
             </p>
           </div>

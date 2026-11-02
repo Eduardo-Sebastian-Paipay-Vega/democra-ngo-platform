@@ -75,7 +75,7 @@ const cursoColumns: Column<CursoRow>[] = [
       <div>
         <div style={{ color: "var(--t-text)" }}>{row.nombre}</div>
         {row.descripcion && (
-          <div className="mt-0.5 text-[11px] line-clamp-1" style={{ color: "var(--t-text-dim)" }}>
+          <div className="mt-0.5 text-[11px] line-clamp-1 text-[var(--t-text-dim)]">
             {row.descripcion}
           </div>
         )}
@@ -86,7 +86,7 @@ const cursoColumns: Column<CursoRow>[] = [
     key: "horas",
     label: "Horas",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.horasCertificacion != null ? `${row.horasCertificacion}h` : "â€”"}
       </span>
     ),
@@ -95,7 +95,7 @@ const cursoColumns: Column<CursoRow>[] = [
     key: "inscripciones",
     label: "Inscritos",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.inscripciones}
       </span>
     ),
@@ -113,7 +113,7 @@ const cursoColumns: Column<CursoRow>[] = [
     key: "creado",
     label: "Creado",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.creadoEn}
       </span>
     ),
@@ -125,7 +125,7 @@ const inscripcionColumns: Column<InscripcionRow>[] = [
     key: "voluntario",
     label: "Voluntario",
     render: (row) => (
-      <span className="text-[13px]" style={{ color: "var(--t-text)" }}>
+      <span className="text-[13px] text-[var(--t-text)]">
         {row.voluntarioNombre}
       </span>
     ),
@@ -154,7 +154,7 @@ const inscripcionColumns: Column<InscripcionRow>[] = [
           Ver
         </a>
       ) : (
-        <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>â€”</span>
+        <span className="text-[12px] text-[var(--t-text-dim)]">â€”</span>
       )
     ),
   },
@@ -162,7 +162,7 @@ const inscripcionColumns: Column<InscripcionRow>[] = [
     key: "fecha",
     label: "Inscrito el",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <span className="text-[12px] text-[var(--t-text-secondary)]">
         {row.creadoEn}
       </span>
     ),
@@ -371,8 +371,8 @@ export function Courses() {
                 <Icon className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
               </div>
               <div>
-                <p className="text-[18px] font-semibold" style={{ color: "var(--t-text)" }}>{value}</p>
-                <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>{label}</p>
+                <p className="text-[18px] font-semibold text-[var(--t-text)]">{value}</p>
+                <p className="text-[11px] text-[var(--t-text-dim)]">{label}</p>
               </div>
             </div>
           ))}
@@ -434,10 +434,10 @@ export function Courses() {
         <div className="space-y-4 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 {editingCurso ? "Editar curso" : "Nuevo curso"}
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 Los datos se guardan en academico.cursos del tenant.
               </p>
             </div>
@@ -461,7 +461,7 @@ export function Courses() {
 
           <div className="space-y-3">
             <div>
-              <label className="mb-1 block text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+              <label className="mb-1 block text-[11px] text-[var(--t-text-dim)]">
                 Nombre del curso *
               </label>
               <input
@@ -474,7 +474,7 @@ export function Courses() {
             </div>
 
             <div>
-              <label className="mb-1 block text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+              <label className="mb-1 block text-[11px] text-[var(--t-text-dim)]">
                 DescripciÃ³n
               </label>
               <textarea
@@ -488,7 +488,7 @@ export function Courses() {
             </div>
 
             <div>
-              <label className="mb-1 block text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+              <label className="mb-1 block text-[11px] text-[var(--t-text-dim)]">
                 Horas de certificaciÃ³n
               </label>
               <input
@@ -503,7 +503,7 @@ export function Courses() {
             </div>
 
             {editingCurso && (
-              <label className="flex items-center gap-2 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+              <label className="flex items-center gap-2 text-[12px] text-[var(--t-text-secondary)]">
                 <input
                   type="checkbox"
                   checked={form.activo}
@@ -530,10 +530,10 @@ export function Courses() {
         <div className="space-y-4 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] text-[var(--t-text)]">
                 Inscripciones â€” {inscripcionesCurso?.nombre}
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 academico.inscripciones + academico.certificados
               </p>
             </div>

@@ -55,7 +55,7 @@ function FieldItem({
     >
       <div className="flex items-center gap-2 mb-1.5">
         {icon}
-        <span className="text-xs font-medium" style={{ color: "var(--t-text-dim)" }}>
+        <span className="text-xs font-medium text-[var(--t-text-dim)]">
           {label}
         </span>
       </div>
@@ -74,7 +74,7 @@ function FieldItem({
           </button>
         </div>
       ) : (
-        <span className="text-xs font-semibold break-words" style={{ color: "var(--t-text)" }}>
+        <span className="text-xs font-semibold break-words text-[var(--t-text)]">
           {value}
         </span>
       )}
@@ -167,7 +167,7 @@ export function MyProfile() {
           className="w-full rounded-2xl p-6 text-center"
           style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
         >
-          <p className="text-[13px]" style={{ color: "var(--t-text-dim)" }}>
+          <p className="text-[13px] text-[var(--t-text-dim)]">
             Cargando informaciÃ³n del perfilâ€¦
           </p>
         </div>
@@ -233,10 +233,10 @@ export function MyProfile() {
                   </div>
 
                   <div className="pt-2">
-                    <h2 className="text-xl font-bold flex items-center gap-2" style={{ color: "var(--t-text)" }}>
+                    <h2 className="text-xl font-bold flex items-center gap-2 text-[var(--t-text)]">
                       {profile?.full_name ?? "Sin nombre registrado"}
                     </h2>
-                    <p className="text-xs flex items-center gap-1.5 mt-0.5" style={{ color: "var(--t-text-dim)" }}>
+                    <p className="text-xs flex items-center gap-1.5 mt-0.5 text-[var(--t-text-dim)]">
                       <Mail className="h-3.5 w-3.5 text-neutral-500 dark:text-zinc-400" />
                       {email ?? "â€”"}
                     </p>
@@ -279,10 +279,10 @@ export function MyProfile() {
                   <User className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold" style={{ color: "var(--t-text)" }}>
+                  <h3 className="text-sm font-semibold text-[var(--t-text)]">
                     InformaciÃ³n Personal
                   </h3>
-                  <p className="text-xs" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-xs text-[var(--t-text-dim)]">
                     Datos bÃ¡sicos e identificaciÃ³n del titular
                   </p>
                 </div>
@@ -340,10 +340,10 @@ export function MyProfile() {
                   <Building2 className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold" style={{ color: "var(--t-text)" }}>
+                  <h3 className="text-sm font-semibold text-[var(--t-text)]">
                     OrganizaciÃ³n & Permisos
                   </h3>
-                  <p className="text-xs" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-xs text-[var(--t-text-dim)]">
                     FiliaciÃ³n institucional y nivel de acceso
                   </p>
                 </div>
@@ -387,10 +387,10 @@ export function MyProfile() {
                     <Shield className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold" style={{ color: "var(--t-text)" }}>
+                    <h3 className="text-sm font-semibold text-[var(--t-text)]">
                       Seguridad & Actividad Reciente
                     </h3>
-                    <p className="text-xs" style={{ color: "var(--t-text-dim)" }}>
+                    <p className="text-xs text-[var(--t-text-dim)]">
                       Monitoreo de la sesión y protecciÃ³n de credenciales
                     </p>
                   </div>
@@ -425,7 +425,7 @@ export function MyProfile() {
       {/* Modal Shell de EdiciÃ³n de Perfil (CRUD Supabase DB) */}
       <ModalShell open={editModalOpen} onClose={() => setEditModalOpen(false)} width="max-w-[640px]">
         <div className="flex items-center justify-between border-b border-neutral-200 dark:border-zinc-800 px-5 py-4">
-          <h3 className="text-base font-semibold" style={{ color: "var(--t-text)" }}>
+          <h3 className="text-base font-semibold text-[var(--t-text)]">
             Editar Perfil de Usuario (BD)
           </h3>
           <button
@@ -439,7 +439,7 @@ export function MyProfile() {
 
         <div className="space-y-4 p-5">
           <div className="space-y-1.5">
-            <label className="text-xs font-medium" style={{ color: "var(--t-text-dim)" }}>
+            <label className="text-xs font-medium text-[var(--t-text-dim)]">
               Nombre Completo
             </label>
             <input
@@ -458,7 +458,7 @@ export function MyProfile() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-medium" style={{ color: "var(--t-text-dim)" }}>
+              <label className="text-xs font-medium text-[var(--t-text-dim)]">
                 Tipo de Documento
               </label>
               <select
@@ -479,7 +479,7 @@ export function MyProfile() {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-medium" style={{ color: "var(--t-text-dim)" }}>
+              <label className="text-xs font-medium text-[var(--t-text-dim)]">
                 NÃºmero de Documento
               </label>
               <input
@@ -498,7 +498,7 @@ export function MyProfile() {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium" style={{ color: "var(--t-text-dim)" }}>
+            <label className="text-xs font-medium text-[var(--t-text-dim)]">
               GÃ©nero
             </label>
             <select

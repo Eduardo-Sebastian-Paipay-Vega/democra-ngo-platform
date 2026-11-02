@@ -53,9 +53,9 @@ type RegistrationCodeForm = {
 
 function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void }) {
   return (
-    <div className="flex items-center justify-between rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{message}</p>
-      <button type="button" className="rounded-md px-2 py-1 text-[11px] hover:bg-[var(--t-hover)]" style={{ color: "var(--t-text-secondary)" }} onClick={onRetry}>
+    <div className="flex items-center justify-between rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+      <p className="text-[12px] text-[var(--t-text-secondary)]">{message}</p>
+      <button type="button" className="rounded-md px-2 py-1 text-[11px] hover:bg-[var(--t-hover)] text-[var(--t-text-secondary)]" onClick={onRetry}>
         Reintentar
       </button>
     </div>
@@ -69,9 +69,9 @@ function FieldError({ message }: { message?: string | null }) {
 
 function DetailField({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}>
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>{label}</p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{value || "-"}</p>
+    <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)]">
+      <p className="text-[11px] text-[var(--t-text-dim)]">{label}</p>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">{value || "-"}</p>
     </div>
   );
 }
@@ -104,9 +104,9 @@ function SelectField({
 
 function SummaryField({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>{label}</p>
-      <p className="mt-1 text-[20px]" style={{ color: "var(--t-text)" }}>{value}</p>
+    <div className="rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+      <p className="text-[11px] text-[var(--t-text-dim)]">{label}</p>
+      <p className="mt-1 text-[20px] text-[var(--t-text)]">{value}</p>
     </div>
   );
 }
@@ -129,18 +129,18 @@ const columns: Column<AdmissionRequestRow>[] = [
     render: (item) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{item.fullName}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>{item.email}</div>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">{item.email}</div>
       </div>
     ),
   },
   { key: "stateName", label: "Estado", render: (item) => <StatusDot variant={item.stateVariant}>{item.stateName}</StatusDot> },
-  { key: "submittedAt", label: "Solicitud", render: (item) => <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{item.submittedAt}</span> },
-  { key: "notes", label: "Notas", render: (item) => <span className="line-clamp-2 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{item.notes || "-"}</span> },
+  { key: "submittedAt", label: "Solicitud", render: (item) => <span className="text-[12px] text-[var(--t-text-dim)]">{item.submittedAt}</span> },
+  { key: "notes", label: "Notas", render: (item) => <span className="line-clamp-2 text-[12px] text-[var(--t-text-secondary)]">{item.notes || "-"}</span> },
   {
     key: "resolvedVolunteerName",
     label: "Voluntario",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="text-[12px] text-[var(--t-text-dim)]">
         {item.linkedVolunteerName ?? item.resolvedVolunteerName ?? "Pendiente"}
       </span>
     ),
@@ -395,7 +395,7 @@ export function AdmissionRequests() {
       {admission.warnings.length > 0 && (
         <div className="space-y-2">
           {admission.warnings.map((warning) => (
-            <div key={warning} className="rounded-2xl px-4 py-3 text-[12px]" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+            <div key={warning} className="rounded-2xl px-4 py-3 text-[12px] bg-[var(--t-surface)] border border-[var(--t-border)]">
               <p style={{ color: "var(--t-text-tertiary)" }}>{warning}</p>
             </div>
           ))}
@@ -424,8 +424,8 @@ export function AdmissionRequests() {
         ]}
       />
 
-      <div className="flex items-center justify-between rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-        <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{fromRow}-{toRow} de {admission.total}</p>
+      <div className="flex items-center justify-between rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+        <p className="text-[12px] text-[var(--t-text-dim)]">{fromRow}-{toRow} de {admission.total}</p>
         <div className="flex gap-2">
           <OutlineButton size="sm" onClick={() => setPage((current) => current - 1)} disabled={page <= 1}>Anterior</OutlineButton>
           <OutlineButton size="sm" onClick={() => setPage((current) => current + 1)} disabled={page * PAGE_SIZE >= admission.total}>Siguiente</OutlineButton>
@@ -435,8 +435,8 @@ export function AdmissionRequests() {
       <ModalShell open={isRequestFormOpen} onClose={() => setIsRequestFormOpen(false)} width="max-w-[760px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>{isEditingRequest ? "Editar solicitud" : "Nueva solicitud"}</h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{isEditingRequest ? "Actualiza el expediente." : "Registro real en rrhh.solicitudes_admision."}</p>
+            <h3 className="text-[14px] text-[var(--t-text)]">{isEditingRequest ? "Editar solicitud" : "Nueva solicitud"}</h3>
+            <p className="text-[12px] text-[var(--t-text-dim)]">{isEditingRequest ? "Actualiza el expediente." : "Registro real en rrhh.solicitudes_admision."}</p>
           </div>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setIsRequestFormOpen(false)}>X</button>
         </div>
@@ -444,20 +444,20 @@ export function AdmissionRequests() {
           {requestError && <ErrorBlock message={requestError} onRetry={() => setRequestError(null)} />}
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <div className="space-y-1">
-              <input value={requestForm.nombres} onChange={(event) => setRequestForm((current) => ({ ...current, nombres: event.target.value }))} placeholder="Nombres" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+              <input value={requestForm.nombres} onChange={(event) => setRequestForm((current) => ({ ...current, nombres: event.target.value }))} placeholder="Nombres" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
               <FieldError message={!requestForm.nombres.trim() && requestError ? "Los nombres son obligatorios." : undefined} />
             </div>
             <div className="space-y-1">
-              <input value={requestForm.apellidos} onChange={(event) => setRequestForm((current) => ({ ...current, apellidos: event.target.value }))} placeholder="Apellidos" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+              <input value={requestForm.apellidos} onChange={(event) => setRequestForm((current) => ({ ...current, apellidos: event.target.value }))} placeholder="Apellidos" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
               <FieldError message={!requestForm.apellidos.trim() && requestError ? "Los apellidos son obligatorios." : undefined} />
             </div>
           </div>
           <div className="space-y-1">
-            <input value={requestForm.email} onChange={(event) => setRequestForm((current) => ({ ...current, email: event.target.value }))} placeholder="Correo" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input value={requestForm.email} onChange={(event) => setRequestForm((current) => ({ ...current, email: event.target.value }))} placeholder="Correo" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
             <FieldError message={!requestForm.email.trim() && requestError ? "El correo es obligatorio." : undefined} />
           </div>
           {!isEditingRequest && <SelectField value={requestForm.stateCode} onChange={(value) => setRequestForm((current) => ({ ...current, stateCode: value as AdmissionStateCode }))} options={stateOptions} disabled={admission.isCreating} />}
-          <textarea value={requestForm.notes} onChange={(event) => setRequestForm((current) => ({ ...current, notes: event.target.value }))} rows={4} placeholder="Notas" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+          <textarea value={requestForm.notes} onChange={(event) => setRequestForm((current) => ({ ...current, notes: event.target.value }))} rows={4} placeholder="Notas" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           <div className="flex flex-wrap gap-2">
             <GradientButton size="sm" onClick={() => void submitRequest()} disabled={admission.isCreating || admission.isUpdating}>{admission.isCreating || admission.isUpdating ? "Guardando..." : "Guardar"}</GradientButton>
             <OutlineButton size="sm" onClick={() => setIsRequestFormOpen(false)} disabled={admission.isCreating || admission.isUpdating}>Cancelar</OutlineButton>
@@ -467,13 +467,13 @@ export function AdmissionRequests() {
       <ModalShell open={Boolean(detailRequestId)} onClose={closeDetailModal} width="max-w-[920px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>Expediente de admision</h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>Vista consolidada del expediente real.</p>
+            <h3 className="text-[14px] text-[var(--t-text)]">Expediente de admision</h3>
+            <p className="text-[12px] text-[var(--t-text-dim)]">Vista consolidada del expediente real.</p>
           </div>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={closeDetailModal}>X</button>
         </div>
         <div className="max-h-[75vh] space-y-3 overflow-y-auto p-4">
-          {detail.loading && <div className="rounded-2xl px-4 py-3 text-[12px]" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>Cargando expediente...</div>}
+          {detail.loading && <div className="rounded-2xl px-4 py-3 text-[12px] bg-[var(--t-surface)] border border-[var(--t-border)]">Cargando expediente...</div>}
           {!detail.loading && detail.error && <ErrorBlock message={detail.error} onRetry={detail.refresh} />}
           {!detail.loading && !detail.error && detail.detail && (
             <>
@@ -488,8 +488,8 @@ export function AdmissionRequests() {
                 )}
               </div>
               {detail.detail.warnings.length > 0 && (
-                <div className="space-y-2 rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-                  {detail.detail.warnings.map((warning) => <p key={warning} className="text-[12px]" style={{ color: "var(--t-text-tertiary)" }}>{warning}</p>)}
+                <div className="space-y-2 rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+                  {detail.detail.warnings.map((warning) => <p key={warning} className="text-[12px] text-[var(--t-text-tertiary)]">{warning}</p>)}
                 </div>
               )}
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -511,14 +511,14 @@ export function AdmissionRequests() {
                 <SummaryField label="Eventos" value={String(detail.detail.history.length)} />
               </div>
               {detail.detail.history.length > 0 && (
-                <div className="rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
-                  <p className="text-[12px]" style={{ color: "var(--t-text)" }}>Historial</p>
+                <div className="rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
+                  <p className="text-[12px] text-[var(--t-text)]">Historial</p>
                   <div className="mt-2 space-y-2">
                     {detail.detail.history.map((item) => (
-                      <div key={item.id} className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}>
-                        <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{item.title}</p>
-                        {item.subtitle && <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>{item.subtitle}</p>}
-                        <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>{item.time}</p>
+                      <div key={item.id} className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)]">
+                        <p className="text-[12px] text-[var(--t-text-secondary)]">{item.title}</p>
+                        {item.subtitle && <p className="text-[11px] text-[var(--t-text-dim)]">{item.subtitle}</p>}
+                        <p className="text-[11px] text-[var(--t-text-dim)]">{item.time}</p>
                       </div>
                     ))}
                   </div>
@@ -531,15 +531,15 @@ export function AdmissionRequests() {
       <ModalShell open={Boolean(stateTarget)} onClose={() => setStateTarget(null)} width="max-w-[620px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>Cambiar estado</h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{stateTarget ? `${stateTarget.fullName} (${stateTarget.stateName})` : "Actualiza el flujo de admision."}</p>
+            <h3 className="text-[14px] text-[var(--t-text)]">Cambiar estado</h3>
+            <p className="text-[12px] text-[var(--t-text-dim)]">{stateTarget ? `${stateTarget.fullName} (${stateTarget.stateName})` : "Actualiza el flujo de admision."}</p>
           </div>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setStateTarget(null)}>X</button>
         </div>
         <div className="space-y-3 p-4">
           {stateError && <ErrorBlock message={stateError} onRetry={() => setStateError(null)} />}
           <SelectField value={stateCode} onChange={(value) => setStateCode(value as AdmissionStateCode)} options={stateOptions} disabled={admission.isChangingState} />
-          <textarea value={stateComment} onChange={(event) => setStateComment(event.target.value)} rows={4} placeholder="Comentario" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+          <textarea value={stateComment} onChange={(event) => setStateComment(event.target.value)} rows={4} placeholder="Comentario" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           <div className="flex flex-wrap gap-2">
             <GradientButton size="sm" onClick={() => void submitState()} disabled={admission.isChangingState}>{admission.isChangingState ? "Guardando..." : "Confirmar"}</GradientButton>
             <OutlineButton size="sm" onClick={() => setStateTarget(null)} disabled={admission.isChangingState}>Cancelar</OutlineButton>
@@ -549,8 +549,8 @@ export function AdmissionRequests() {
       <ModalShell open={Boolean(convertTarget)} onClose={() => setConvertTarget(null)} width="max-w-[840px]">
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>Convertir a voluntario</h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>{convertTarget ? `Creacion o vinculacion real en ong.voluntarios para ${convertTarget.fullName}.` : "Conversor de admision."}</p>
+            <h3 className="text-[14px] text-[var(--t-text)]">Convertir a voluntario</h3>
+            <p className="text-[12px] text-[var(--t-text-dim)]">{convertTarget ? `Creacion o vinculacion real en ong.voluntarios para ${convertTarget.fullName}.` : "Conversor de admision."}</p>
           </div>
           <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setConvertTarget(null)}>X</button>
         </div>
@@ -558,7 +558,7 @@ export function AdmissionRequests() {
           {convertError && <ErrorBlock message={convertError} onRetry={() => setConvertError(null)} />}
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <div className="space-y-1">
-              <input value={convertForm.numeroDocumento} onChange={(event) => setConvertForm((current) => ({ ...current, numeroDocumento: event.target.value }))} placeholder="Numero de documento" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+              <input value={convertForm.numeroDocumento} onChange={(event) => setConvertForm((current) => ({ ...current, numeroDocumento: event.target.value }))} placeholder="Numero de documento" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
               <FieldError message={!convertForm.numeroDocumento.trim() && convertError ? "El numero de documento es obligatorio." : undefined} />
             </div>
             <div className="space-y-1">
@@ -572,10 +572,10 @@ export function AdmissionRequests() {
             <SelectField value={convertForm.codigoEstado} onChange={(value) => setConvertForm((current) => ({ ...current, codigoEstado: value }))} options={volunteerStates} disabled={admission.isConverting || catalogs.loading} />
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <input value={convertForm.telefono} onChange={(event) => setConvertForm((current) => ({ ...current, telefono: event.target.value }))} placeholder="Telefono" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
-            <input type="date" value={convertForm.fechaNacimiento} onChange={(event) => setConvertForm((current) => ({ ...current, fechaNacimiento: event.target.value }))} className="h-9 w-full rounded-xl px-3 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+            <input value={convertForm.telefono} onChange={(event) => setConvertForm((current) => ({ ...current, telefono: event.target.value }))} placeholder="Telefono" className="h-9 w-full rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
+            <input type="date" value={convertForm.fechaNacimiento} onChange={(event) => setConvertForm((current) => ({ ...current, fechaNacimiento: event.target.value }))} className="h-9 w-full rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           </div>
-          <textarea value={convertForm.observaciones} onChange={(event) => setConvertForm((current) => ({ ...current, observaciones: event.target.value }))} rows={4} placeholder="Observaciones para el alta del voluntario" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none" style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }} />
+          <textarea value={convertForm.observaciones} onChange={(event) => setConvertForm((current) => ({ ...current, observaciones: event.target.value }))} rows={4} placeholder="Observaciones para el alta del voluntario" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-input-bg)] text-[var(--t-text-secondary)]" />
           <div className="flex flex-wrap gap-2">
             <GradientButton size="sm" onClick={() => void submitConvert()} disabled={admission.isConverting || catalogs.loading}>{admission.isConverting ? "Convirtiendo..." : "Convertir"}</GradientButton>
             <OutlineButton size="sm" onClick={() => setConvertTarget(null)} disabled={admission.isConverting}>Cancelar</OutlineButton>
@@ -589,8 +589,8 @@ export function AdmissionRequests() {
       >
         <div className="flex items-start justify-between px-4 py-3" style={{ borderBottom: "1px solid var(--t-border)" }}>
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>Generar codigo de registro</h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">Generar codigo de registro</h3>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               La emision usa `rrhh.fn_generate_registration_code` y el consumo publico queda cerrado por la Edge Function `consume-volunteer-registration-code`.
             </p>
           </div>
@@ -638,7 +638,7 @@ export function AdmissionRequests() {
               className="h-9 rounded-xl px-3 text-[12px] outline-none"
               style={{ border: "1px solid var(--t-border)", background: "var(--t-input-bg)", color: "var(--t-text-secondary)" }}
             />
-            <div className="rounded-xl px-3 py-2 text-[12px]" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)", color: "var(--t-text-secondary)" }}>
+            <div className="rounded-xl px-3 py-2 text-[12px] bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-secondary)]">
               Solicitante: {registrationTarget?.fullName ?? "-"}
             </div>
           </div>
@@ -652,10 +652,10 @@ export function AdmissionRequests() {
           </div>
 
           {generatedRegistrationCode && (
-            <div className="rounded-2xl px-4 py-3" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+            <div className="rounded-2xl px-4 py-3 bg-[var(--t-surface)] border border-[var(--t-border)]">
               <div className="flex flex-wrap items-center gap-2">
                 <StatusDot variant="success">Codigo activo</StatusDot>
-                <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <span className="text-[12px] text-[var(--t-text-dim)]">
                   Expira {generatedRegistrationCode.expiresAt}
                 </span>
               </div>
@@ -673,7 +673,7 @@ export function AdmissionRequests() {
                   label="Enlace publico"
                   value={generatedRegistrationLink || "No se pudo construir el enlace publico."}
                 />
-                <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="text-[12px] text-[var(--t-text-dim)]">
                   Comparte este enlace para que el postulante consuma el codigo, cargue sus documentos y se vincule de forma real con `auth.users`, `public.profiles` y `ong.voluntarios`.
                 </p>
               </div>

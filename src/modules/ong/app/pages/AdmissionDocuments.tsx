@@ -31,7 +31,7 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void
       className="flex items-center justify-between rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="text-[12px] text-[var(--t-text-secondary)]">
         {message}
       </p>
       <button
@@ -96,10 +96,10 @@ function DetailField({ label, value }: { label: string; value: string }) {
       className="rounded-xl px-3 py-2"
       style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[11px] text-[var(--t-text-dim)]">
         {label}
       </p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
         {value || "-"}
       </p>
     </div>
@@ -120,7 +120,7 @@ const columns: Column<AdmissionDocumentRow>[] = [
         <StatusDot variant={item.estadoValidacion === "APROBADO" ? "success" : item.estadoValidacion === "RECHAZADO" ? "destructive" : "warning"}>
           {item.estadoValidacion === "APROBADO" ? "Aprobado" : item.estadoValidacion === "RECHAZADO" ? "Rechazado" : "Pendiente"}
         </StatusDot>
-        <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <p className="text-[11px] text-[var(--t-text-dim)]">
           {item.verifiedByLabel ?? "Sin verificador"}
         </p>
       </div>
@@ -130,7 +130,7 @@ const columns: Column<AdmissionDocumentRow>[] = [
     key: "updatedAt",
     label: "Actualizado",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="text-[12px] text-[var(--t-text-dim)]">
         {item.updatedAt}
       </span>
     ),
@@ -334,10 +334,10 @@ export function AdmissionDocuments() {
               filters={[]}
             />
             
-            <div className="flex h-[600px] flex-col overflow-y-auto rounded-2xl" style={{ border: "1px solid var(--t-border)", background: "var(--t-surface)" }}>
+            <div className="flex h-[600px] flex-col overflow-y-auto rounded-2xl border border-[var(--t-border)] bg-[var(--t-surface)]">
               {requests.loading ? (
                 <div className="flex h-full items-center justify-center">
-                  <p className="text-[13px]" style={{ color: "var(--t-text-dim)" }}>Cargando postulantes...</p>
+                  <p className="text-[13px] text-[var(--t-text-dim)]">Cargando postulantes...</p>
                 </div>
               ) : requests.rows.length === 0 ? (
                 <div className="flex h-full items-center justify-center p-4">
@@ -354,8 +354,8 @@ export function AdmissionDocuments() {
                       onClick={() => setSelectedRequestId(row.id)}
                       className={`flex flex-col items-start gap-1 p-4 text-left transition-colors hover:bg-[var(--t-hover)] ${selectedRequestId === row.id ? 'bg-[var(--t-hover)]' : ''}`}
                     >
-                      <p className="text-[13px] font-medium" style={{ color: "var(--t-text)" }}>{row.fullName}</p>
-                      <p className="text-[11px]" style={{ color: "var(--t-text-secondary)" }}>{row.email}</p>
+                      <p className="text-[13px] font-medium text-[var(--t-text)]">{row.fullName}</p>
+                      <p className="text-[11px] text-[var(--t-text-secondary)]">{row.email}</p>
                       <div className="mt-1">
                         <StatusDot variant={row.stateCode === "APROBADA" ? "success" : row.stateCode === "RECHAZADA" ? "destructive" : "warning"}>
                           {row.stateName}
@@ -370,7 +370,7 @@ export function AdmissionDocuments() {
 
           <div className="flex flex-col gap-4">
             {hasBlockingError ? null : !selectedRequest ? (
-              <div className="flex h-[600px] items-center justify-center rounded-2xl" style={{ border: "1px solid var(--t-border)", background: "var(--t-surface)" }}>
+              <div className="flex h-[600px] items-center justify-center rounded-2xl border border-[var(--t-border)] bg-[var(--t-surface)]">
                 <EmptyState
                   title="Selecciona un postulante"
                   description="Haz clic en un postulante de la lista para gestionar sus documentos."
@@ -378,10 +378,10 @@ export function AdmissionDocuments() {
               </div>
             ) : (
               <>
-                <div className="flex flex-col gap-4 rounded-2xl p-4 sm:flex-row sm:items-center sm:justify-between" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+                <div className="flex flex-col gap-4 rounded-2xl p-4 sm:flex-row sm:items-center sm:justify-between bg-[var(--t-surface)] border border-[var(--t-border)]">
                   <div>
-                    <h3 className="text-[16px] font-medium" style={{ color: "var(--t-text)" }}>{selectedRequest.fullName}</h3>
-                    <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{selectedRequest.email} • {selectedRequest.stateName}</p>
+                    <h3 className="text-[16px] font-medium text-[var(--t-text)]">{selectedRequest.fullName}</h3>
+                    <p className="text-[12px] text-[var(--t-text-secondary)]">{selectedRequest.email} • {selectedRequest.stateName}</p>
                   </div>
                   <GradientButton size="sm" onClick={openCreateModal}>
                     Solicitar documento
@@ -415,10 +415,10 @@ export function AdmissionDocuments() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               {editingDocument ? "Editar documento" : "Solicitar documento"}
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Postulante: {selectedRequest?.fullName ?? "-"}
             </p>
           </div>
@@ -484,12 +484,12 @@ export function AdmissionDocuments() {
               }
             />
             {formState.file && (
-              <p className="text-[11px]" style={{ color: "var(--t-text-secondary)" }}>
+              <p className="text-[11px] text-[var(--t-text-secondary)]">
                 Archivo seleccionado: {formState.file.name}
               </p>
             )}
             {!formState.file && formState.existingFileUrl && (
-              <p className="break-all text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="break-all text-[11px] text-[var(--t-text-dim)]">
                 Archivo actual: {formState.existingFileUrl}
               </p>
             )}
@@ -594,7 +594,7 @@ export function AdmissionDocuments() {
         width="max-w-[520px]"
       >
         <div className="space-y-3 p-4">
-          <p className="text-[13px]" style={{ color: "var(--t-text-secondary)" }}>
+          <p className="text-[13px] text-[var(--t-text-secondary)]">
             {removeDocument
               ? `¿Eliminar el documento ${removeDocument.type} de ${removeDocument.requestName}?`
               : "Confirma la eliminación."}

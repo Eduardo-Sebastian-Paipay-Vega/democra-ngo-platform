@@ -30,7 +30,7 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void
       className="flex items-center justify-between rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="text-[12px] text-[var(--t-text-secondary)]">
         {message}
       </p>
       <button
@@ -51,7 +51,7 @@ function InfoBlock({ message }: { message: string }) {
       className="rounded-2xl px-4 py-3"
       style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[12px] text-[var(--t-text-dim)]">
         {message}
       </p>
     </div>
@@ -76,10 +76,10 @@ function DetailField({ label, value }: { label: string; value: string }) {
       className="rounded-xl px-3 py-2"
       style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[11px] text-[var(--t-text-dim)]">
         {label}
       </p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
         {value || "-"}
       </p>
     </div>
@@ -125,7 +125,7 @@ const columns: Column<AdmissionOnboardingStepRow>[] = [
     render: (item) => (
       <div>
         <div style={{ color: "var(--t-text)" }}>{item.stepName}</div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           Orden: {item.order}
         </div>
       </div>
@@ -153,7 +153,7 @@ const columns: Column<AdmissionOnboardingStepRow>[] = [
     key: "evidenceUrl",
     label: "Evidencia",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="text-[12px] text-[var(--t-text-dim)]">
         {item.evidenceUrl ? "Registrada" : "Sin evidencia"}
       </span>
     ),
@@ -162,7 +162,7 @@ const columns: Column<AdmissionOnboardingStepRow>[] = [
     key: "completedAt",
     label: "Fecha",
     render: (item) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="text-[12px] text-[var(--t-text-dim)]">
         {item.completedAt ?? "-"}
       </span>
     ),

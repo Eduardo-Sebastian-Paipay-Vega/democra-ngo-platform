@@ -1546,12 +1546,12 @@ export function Attendance() {
         <div className="space-y-3 p-4">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>Detalle de asistencia</h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>InformaciÃ³n completa del registro de asistencia.</p>
+              <h3 className="text-[14px] text-[var(--t-text)]">Detalle de asistencia</h3>
+              <p className="text-[12px] text-[var(--t-text-dim)]">InformaciÃ³n completa del registro de asistencia.</p>
             </div>
             <button type="button" className="rounded-md px-2 py-1 text-[12px]" onClick={() => setIsDetailOpen(false)}>âœ•</button>
           </div>
-          {detailLoading && <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>Cargando detalle...</p>}
+          {detailLoading && <p className="text-[12px] text-[var(--t-text-secondary)]">Cargando detalle...</p>}
           {!detailLoading && detailError && <p className="text-[12px]" style={{ color: "var(--t-danger, #ef4444)" }}>{detailError}</p>}
           {!detailLoading && !detailError && detail && (
             <>
@@ -1560,14 +1560,14 @@ export function Attendance() {
                 <StatusDot variant="secondary">{detail.sourceLabel}</StatusDot>
               </div>
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Voluntario</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.volunteerName}</p></div>
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Actividad</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.activityName}</p></div>
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Proyecto</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.projectName}</p></div>
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Fecha</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.dateLabel}</p></div>
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Entrada</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.entryLabel}</p></div>
-                <div className="rounded-xl px-3 py-2" style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}><p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>Salida</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.exitLabel}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Voluntario</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.volunteerName}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Actividad</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.activityName}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Proyecto</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.projectName}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Fecha</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.dateLabel}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Entrada</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.entryLabel}</p></div>
+                <div className="rounded-xl px-3 py-2 bg-[var(--t-hover)] border border-[var(--t-border)] text-[var(--t-text-dim)]"><p className="text-[11px]">Salida</p><p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>{detail.exitLabel}</p></div>
               </div>
-              <div className="rounded-2xl px-4 py-3 text-[12px]" style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}>
+              <div className="rounded-2xl px-4 py-3 text-[12px] bg-[var(--t-surface)] border border-[var(--t-border)]">
                 <p style={{ color: "var(--t-text-secondary)" }}>{detail.observation}</p>
               </div>
             </>
@@ -1578,8 +1578,8 @@ export function Attendance() {
       {/* â”€â”€ Registrar salida â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <ModalShell open={isCloseOpen} onClose={() => setIsCloseOpen(false)} width="max-w-[560px]">
         <div className="space-y-3 p-4">
-          <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>Registrar salida</h3>
-          <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>Indica la hora de salida del voluntario.</p>
+          <h3 className="text-[14px] text-[var(--t-text)]">Registrar salida</h3>
+          <p className="text-[12px] text-[var(--t-text-dim)]">Indica la hora de salida del voluntario.</p>
           <input type="time" value={closingExitTime} onChange={(event) => { setClosingExitTime(event.target.value); setClosingError(null); }} className="h-9 w-full rounded-xl px-3 text-[12px] outline-none" style={INPUT_STYLE} />
           <textarea value={closingObservation} onChange={(event) => { setClosingObservation(event.target.value); setClosingError(null); }} rows={3} placeholder="Observacion opcional" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none" style={INPUT_STYLE} />
           {closingError && <p className="text-[11px]" style={{ color: "var(--t-danger, #ef4444)" }}>{closingError}</p>}
@@ -1593,7 +1593,7 @@ export function Attendance() {
       {/* â”€â”€ Incidencia â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <ModalShell open={isIncidenceOpen} onClose={() => setIsIncidenceOpen(false)} width="max-w-[560px]">
         <div className="space-y-3 p-4">
-          <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>Marcar incidencia</h3>
+          <h3 className="text-[14px] text-[var(--t-text)]">Marcar incidencia</h3>
           <textarea value={incidenceReason} onChange={(event) => { setIncidenceReason(event.target.value); setIncidenceError(null); }} rows={4} placeholder="Describe el motivo de la incidencia" className="w-full rounded-xl px-3 py-2 text-[12px] outline-none" style={INPUT_STYLE} />
           {incidenceError && <p className="text-[11px]" style={{ color: "var(--t-danger, #ef4444)" }}>{incidenceError}</p>}
           <div className="flex gap-2">
@@ -1606,8 +1606,8 @@ export function Attendance() {
       {/* â”€â”€ Eliminar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <ModalShell open={isRemoveOpen} onClose={() => setIsRemoveOpen(false)} width="max-w-[520px]">
         <div className="space-y-3 p-4">
-          <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>Eliminar registro</h3>
-          <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+          <h3 className="text-[14px] text-[var(--t-text)]">Eliminar registro</h3>
+          <p className="text-[12px] text-[var(--t-text-secondary)]">
             El registro serÃ¡ marcado como eliminado y no aparecerÃ¡ en la lista. Esta acciÃ³n es reversible desde Gobernanza.
           </p>
           {removeError && <p className="text-[11px]" style={{ color: "var(--t-danger, #ef4444)" }}>{removeError}</p>}

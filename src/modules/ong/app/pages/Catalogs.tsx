@@ -75,8 +75,8 @@ export function Catalogs() {
       label: "Registro",
       render: (row) => (
         <div>
-          <div style={{ color: "var(--t-text)" }} className="font-medium">{row.primaryValue}</div>
-          <div className="mt-0.5 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+          <div className="font-medium text-[var(--t-text)]">{row.primaryValue}</div>
+          <div className="mt-0.5 text-[12px] text-[var(--t-text-dim)]">
             {row.secondaryValue}
           </div>
         </div>
@@ -86,7 +86,7 @@ export function Catalogs() {
       key: "tertiary",
       label: "Detalle",
       render: (row) => (
-        <span className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+        <span className="text-[12px] text-[var(--t-text-secondary)]">
           {row.tertiaryValue}
         </span>
       ),
@@ -126,7 +126,7 @@ export function Catalogs() {
           <div className="flex items-start gap-3">
             <ShieldAlert className="mt-0.5 h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div className="space-y-1">
-              <p className="text-[13px] leading-relaxed" style={{ color: "var(--t-text-secondary)" }}>
+              <p className="text-[13px] leading-relaxed text-[var(--t-text-secondary)]">
                 Los catálogos son diccionarios de datos gestionados por el sistema central. Por políticas de integridad corporativa, esta vista es de <strong>solo lectura</strong>. Su edición está deshabilitada para mantener la consistencia de las reglas de negocio.
               </p>
             </div>
@@ -187,10 +187,10 @@ export function Catalogs() {
           >
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <p className="text-[14px] font-medium" style={{ color: "var(--t-text)" }}>
+                <p className="text-[14px] font-medium text-[var(--t-text)]">
                   {selectedCatalog.label}
                 </p>
-                <p className="mt-0.5 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="mt-0.5 text-[12px] text-[var(--t-text-dim)]">
                   {selectedCatalog.description}
                 </p>
               </div>
@@ -225,10 +225,10 @@ export function Catalogs() {
           <div className="flex items-center gap-2">
             <Eye className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
             <div>
-              <h3 className="text-[14px] font-medium" style={{ color: "var(--t-text)" }}>
+              <h3 className="text-[14px] font-medium text-[var(--t-text)]">
                 Detalle del registro
               </h3>
-              <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+              <p className="text-[12px] text-[var(--t-text-dim)]">
                 {selectedCatalog?.label}
               </p>
             </div>

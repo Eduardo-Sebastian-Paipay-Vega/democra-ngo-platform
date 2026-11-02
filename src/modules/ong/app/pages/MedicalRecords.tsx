@@ -43,7 +43,7 @@ const columns: Column<SensitiveMedicalListRow>[] = [
           <UserRound className="h-3.5 w-3.5" style={{ color: "var(--t-text-dim)" }} />
           <span style={{ color: "var(--t-text)" }}>{row.personName}</span>
         </div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {row.documentLabel}
         </div>
       </div>
@@ -66,7 +66,7 @@ const columns: Column<SensitiveMedicalListRow>[] = [
         <StatusDot variant={row.hasRecord ? "warning" : "secondary"}>
           {row.hasRecord ? "Registrada" : "Pendiente"}
         </StatusDot>
-        <div className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="text-[11px] text-[var(--t-text-dim)]">
           {row.summary}
         </div>
       </div>
@@ -76,7 +76,7 @@ const columns: Column<SensitiveMedicalListRow>[] = [
     key: "updatedAt",
     label: "Actualizado",
     render: (row) => (
-      <span className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+      <span className="text-[12px] text-[var(--t-text-dim)]">
         {formatPeopleDate(row.updatedAt)}
       </span>
     ),
@@ -280,7 +280,7 @@ export function MedicalRecords() {
         >
           <div className="flex items-center gap-2">
             <ShieldAlert className="h-4 w-4" style={{ color: "var(--t-text-dim)" }} />
-            <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+            <p className="text-[12px] text-[var(--t-text-secondary)]">
               Los listados solo muestran metadatos operativos. El contenido clinico se abre con motivo de acceso y se edita solo si el rol actual puede escribir datos sensibles.
             </p>
           </div>

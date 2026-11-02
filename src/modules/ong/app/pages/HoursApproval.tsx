@@ -43,10 +43,10 @@ function DetailField({ label, value }: { label: string; value: string }) {
       className="rounded-xl px-3 py-2"
       style={{ background: "var(--t-hover)", border: "1px solid var(--t-border)" }}
     >
-      <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+      <p className="text-[11px] text-[var(--t-text-dim)]">
         {label}
       </p>
-      <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+      <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
         {value || "-"}
       </p>
     </div>
@@ -72,7 +72,7 @@ const columns: Column<OperationApprovalRow>[] = [
     label: "Actividad",
     render: (item) => (
       <div>
-        <div className="flex items-center gap-2" style={{ color: "var(--t-text-secondary)" }}>
+        <div className="flex items-center gap-2 text-[var(--t-text-secondary)]">
           {item.entityTitle}
           {item.hasEvidence && (
             <span className="flex items-center gap-1 rounded-full bg-blue-500/10 px-1.5 py-0.5 text-[10px] text-blue-500" title="Contiene evidencia adjunta">
@@ -80,7 +80,7 @@ const columns: Column<OperationApprovalRow>[] = [
             </span>
           )}
         </div>
-        <div className="mt-0.5 text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+        <div className="mt-0.5 text-[11px] text-[var(--t-text-dim)]">
           {item.entitySubtitle}
         </div>
       </div>
@@ -90,7 +90,7 @@ const columns: Column<OperationApprovalRow>[] = [
     key: "context",
     label: "Contexto",
     render: (item) => (
-      <div className="text-[12px]" style={{ color: "var(--t-text-tertiary)" }}>
+      <div className="text-[12px] text-[var(--t-text-tertiary)]">
         <div>{item.contextDate}</div>
         <div>{item.contextMeta}</div>
       </div>
@@ -313,7 +313,7 @@ export function HoursApproval() {
             className="flex items-center justify-between rounded-2xl px-4 py-3"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+            <p className="text-[12px] text-[var(--t-text-secondary)]">
               {error}
             </p>
             <button
@@ -381,10 +381,10 @@ export function HoursApproval() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               Detalle de aprobación
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               Registro de horas vinculado y estado actual de la aprobación.
             </p>
           </div>
@@ -401,7 +401,7 @@ export function HoursApproval() {
 
         <div className="max-h-[75vh] space-y-3 overflow-y-auto p-4">
           {detailLoading && (
-            <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+            <p className="text-[12px] text-[var(--t-text-secondary)]">
               Cargando detalle...
             </p>
           )}
@@ -411,7 +411,7 @@ export function HoursApproval() {
               className="flex items-center justify-between rounded-2xl px-4 py-3"
               style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
             >
-              <p className="text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+              <p className="text-[12px] text-[var(--t-text-secondary)]">
                 {detailError}
               </p>
               <button
@@ -454,10 +454,10 @@ export function HoursApproval() {
                   className="rounded-2xl px-4 py-3"
                   style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
                 >
-                  <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.08em]" style={{ color: "var(--t-text-tertiary)" }}>
+                  <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--t-text-tertiary)]">
                     {detail.context.title}
                   </p>
-                  <p className="mb-3 text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="mb-3 text-[12px] text-[var(--t-text-dim)]">
                     {detail.context.summary}
                   </p>
                   <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
@@ -477,10 +477,10 @@ export function HoursApproval() {
                   className="rounded-2xl px-4 py-3"
                   style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
                 >
-                  <p className="text-[11px]" style={{ color: "var(--t-text-dim)" }}>
+                  <p className="text-[11px] text-[var(--t-text-dim)]">
                     Comentario de resolución
                   </p>
-                  <p className="mt-1 text-[12px]" style={{ color: "var(--t-text-secondary)" }}>
+                  <p className="mt-1 text-[12px] text-[var(--t-text-secondary)]">
                     {detail.approval.comment}
                   </p>
                 </div>
@@ -530,10 +530,10 @@ export function HoursApproval() {
           style={{ borderBottom: "1px solid var(--t-border)" }}
         >
           <div>
-            <h3 className="text-[14px]" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-[14px] text-[var(--t-text)]">
               {resolutionTarget?.action === "approved" ? "Aprobar horas" : "Rechazar horas"}
             </h3>
-            <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-[12px] text-[var(--t-text-dim)]">
               {resolutionTarget?.action === "rejected" ? "El comentario es obligatorio para justificar el rechazo." : "El comentario es opcional y queda registrado en la aprobación y en el registro de horas."}
             </p>
           </div>
