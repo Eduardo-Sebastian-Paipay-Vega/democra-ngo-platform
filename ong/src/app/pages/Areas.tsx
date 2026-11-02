@@ -117,7 +117,7 @@ export function Areas() {
       label: "ÁREA",
       render: (row) => (
         <div>
-          <div className="font-medium" style={{ color: "var(--t-text)" }}>{row.name}</div>
+          <div className="font-medium text-[var(--t-text)]">{row.name}</div>
           <div className="mt-1 flex">
              <Badge variant="outline" className="text-[10px] font-normal" style={{ color: "var(--t-text-dim)" }}>
                {row.code}
@@ -130,7 +130,7 @@ export function Areas() {
       key: "description",
       label: "DESCRIPCIÓN",
       render: (row) => (
-        <span className="text-[13px] line-clamp-2" style={{ color: "var(--t-text-secondary)" }}>
+        <span className="text-[13px] line-clamp-2 text-[var(--t-text-secondary)]">
           {row.description || "-"}
         </span>
       ),
@@ -172,12 +172,12 @@ export function Areas() {
     content = <TableSkeleton rows={5} columns={4} />;
   } else if (error) {
     content = (
-      <div className="flex flex-col items-center justify-center p-12 text-center rounded-2xl border" style={{ background: "var(--t-surface)", borderColor: "var(--t-border)", boxShadow: "var(--t-shadow)" }}>
+      <div className="flex flex-col items-center justify-center p-12 text-center rounded-2xl border bg-[var(--t-surface)] border-[var(--t-border)] shadow-[var(--t-shadow)]">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10 mb-4">
           <AlertCircle className="h-6 w-6 text-red-500" />
         </div>
-        <h3 className="text-lg font-medium mb-2" style={{ color: "var(--t-text)" }}>No se pudo cargar las áreas</h3>
-        <p className="text-sm mb-6 max-w-md" style={{ color: "var(--t-text-secondary)" }}>{error}</p>
+        <h3 className="text-lg font-medium mb-2 text-[var(--t-text)]">No se pudo cargar las áreas</h3>
+        <p className="text-sm mb-6 max-w-md text-[var(--t-text-secondary)]">{error}</p>
         <Button onClick={refresh} variant="outline" className="gap-2">
           <RefreshCcw className="h-4 w-4" /> Reintentar
         </Button>
@@ -185,12 +185,12 @@ export function Areas() {
     );
   } else if (areas.length === 0) {
     content = (
-      <div className="flex flex-col items-center justify-center p-16 text-center rounded-2xl border" style={{ background: "var(--t-surface)", borderColor: "var(--t-border)", boxShadow: "var(--t-shadow)" }}>
-        <div className="flex h-16 w-16 items-center justify-center rounded-full mb-6" style={{ background: "var(--t-hover)" }}>
-          <FolderOpen className="h-8 w-8" style={{ color: "var(--t-muted)" }} />
+      <div className="flex flex-col items-center justify-center p-16 text-center rounded-2xl border bg-[var(--t-surface)] border-[var(--t-border)] shadow-[var(--t-shadow)]">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full mb-6 bg-[var(--t-hover)]">
+          <FolderOpen className="h-8 w-8 text-[var(--t-muted)]" />
         </div>
-        <h3 className="text-xl font-medium mb-2" style={{ color: "var(--t-text)" }}>No hay áreas registradas</h3>
-        <p className="text-sm mb-8 max-w-md" style={{ color: "var(--t-text-secondary)" }}>
+        <h3 className="text-xl font-medium mb-2 text-[var(--t-text)]">No hay áreas registradas</h3>
+        <p className="text-sm mb-8 max-w-md text-[var(--t-text-secondary)]">
           Las áreas organizacionales te permiten agrupar y organizar los proyectos de la ONG. Comienza creando la primera área.
         </p>
         <Button onClick={openCreateModal} className="gap-2">
@@ -321,10 +321,10 @@ export function Areas() {
       >
         <div className="space-y-6 p-6">
           <div>
-            <h3 className="text-lg font-medium" style={{ color: "var(--t-text)" }}>
+            <h3 className="text-lg font-medium text-[var(--t-text)]">
               {editingArea ? "Editar área" : "Nueva área"}
             </h3>
-            <p className="text-sm" style={{ color: "var(--t-text-dim)" }}>
+            <p className="text-sm text-[var(--t-text-dim)]">
               {editingArea ? "Modifica los datos del área seleccionada." : "Registra una nueva área organizativa."}
             </p>
           </div>
@@ -389,10 +389,10 @@ export function Areas() {
               />
             </div>
 
-            <div className="flex items-center justify-between rounded-lg border p-3" style={{ borderColor: "var(--t-border)", background: "var(--t-hover)" }}>
+            <div className="flex items-center justify-between rounded-lg border p-3 border-[var(--t-border)] bg-[var(--t-hover)]">
               <div className="space-y-0.5">
                 <Label htmlFor="active">Estado del área</Label>
-                <p className="text-[12px]" style={{ color: "var(--t-text-dim)" }}>
+                <p className="text-[12px] text-[var(--t-text-dim)]">
                   Las áreas inactivas no podrán recibir nuevos proyectos.
                 </p>
               </div>
