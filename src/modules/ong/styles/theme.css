@@ -134,6 +134,17 @@
   --color-accent-amber: #D97706;
   --radius-card: 12px;
   --radius-pill: 9999px;
+
+  /* Tokens de indicadores de estado (StatusDot / StatusPill, src/core).
+     Valores = colores actuales (emerald-400 / amber-400 / red-400 + hex),
+     centralizados para dar un único punto de ajuste. Se mantienen constantes
+     en claro/oscuro para no alterar la apariencia vigente. */
+  --color-status-success: #34d399;
+  --color-status-warning: #fbbf24;
+  --color-status-destructive: #f87171;
+  --color-status-info: #9b7aea;
+  --color-status-secondary: #a7a7a7;
+  --color-status-default: #f5f5f5;
 }
 
 @layer base {

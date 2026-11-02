@@ -14,22 +14,25 @@ interface StatusPillProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
 }
 
+// Reconectado a los tokens --color-status-* (ver styles/theme.css). Los valores
+// de los tokens replican los colores previos (emerald-400 / amber-400 / red-400
+// + hex) y se conservan los mismos niveles de opacidad; la apariencia no cambia.
 const dotColors: Record<StatusVariant, string> = {
-  success: "bg-emerald-400",
-  warning: "bg-amber-400",
-  destructive: "bg-red-400",
-  info: "bg-[#9B7AEA]",
-  secondary: "bg-[#A7A7A7]/60",
-  default: "bg-[#F5F5F5]/60",
+  success: "bg-status-success",
+  warning: "bg-status-warning",
+  destructive: "bg-status-destructive",
+  info: "bg-status-info",
+  secondary: "bg-status-secondary/60",
+  default: "bg-status-default/60",
 };
 
 const textColors: Record<StatusVariant, string> = {
-  success: "text-emerald-400/90",
-  warning: "text-amber-400/90",
-  destructive: "text-red-400/90",
-  info: "text-[#9B7AEA]/90",
-  secondary: "text-[#A7A7A7]",
-  default: "text-[#F5F5F5]/80",
+  success: "text-status-success/90",
+  warning: "text-status-warning/90",
+  destructive: "text-status-destructive/90",
+  info: "text-status-info/90",
+  secondary: "text-status-secondary",
+  default: "text-status-default/80",
 };
 
 export function StatusPill({
