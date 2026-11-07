@@ -5,7 +5,7 @@
 | Fecha | 2026-11-07 (UTC) |
 | Autor | Claude (Claude Code), a pedido de Eduardo Sebastián Paipay Vega |
 | Base evaluada | `b983aa7` (rama `claude/clever-noether-saioc5`) |
-| Estado | **Propuesto** — nada de este plan está implementado todavía |
+| Estado | F1 y F2 **implementadas** (pendiente de commit, ver `changes/2026-11-07_03-10_fase1-fase2-saneamiento/`) · F3–F8 **propuestas** |
 
 Este documento convierte la evaluación técnica del repositorio en un plan ejecutable por
 fases. **Cada afirmación fue verificada contra el código o ejecutando la herramienta
@@ -81,7 +81,7 @@ durante `auth.test.js` (cambio revertido; `git status` limpio).
 | Ubicación | Error | Naturaleza |
 |---|---|---|
 | `src/industries/ong/registry.tsx:592` | `"areas"` no está en `TENANT_ROUTE_IDS` (`src/core/tenant/registry-types.ts:11`) | tipo desactualizado |
-| `src/modules/ong/app/pages/Courses.tsx:182-184` | usa `nota`, `createdAt`, `certificadoId`; `InscripcionRow` (`cursos.service.ts:28`) tiene `creadoEn`, `certificadoUrl` y no tiene `nota` | **bug funcional**: el CSV exportado escribe `"undefined"` en *Nota* y vacío en fecha/certificado (en la copia no renderizada, ver H1) |
+| `src/modules/ong/app/pages/Courses.tsx:182-184` | usa `nota`, `createdAt`, `certificadoId`; `InscripcionRow` (`cursos.service.ts:28`) tiene `creadoEn`, `certificadoUrl` y no tiene `nota` | **deriva entre copias** (corregido en ejecución de F1): la página del gemelo se copió desde `ong/src` pero su `cursos.service.ts` es anterior; en `ong/src` página y servicio son coherentes. Afecta solo a la copia no renderizada (H1) |
 | `ong/src/app/pages/Courses.tsx:360` | `string \| null` → `string` | nulabilidad no manejada (copia en ejecución) |
 
 ### H5 — Configuración de secretos
@@ -132,6 +132,16 @@ Animación duplicada: `motion` (164 archivos) vs `framer-motion` (6 archivos).
 - Tipado: `strict: false`, `noImplicitAny: false`; 790 usos de `any`, 303 `@ts-ignore`/`@ts-nocheck`.
 
 ---
+
+### H9 — Regresión de seguridad: validación de `tenant_id` perdida (hallado al ejecutar F1)
+
+El refactor `76d6e62` movió `server/middleware/financial-state.js` a
+`server/domains/ong/middleware/financial-state.js` + el motor genérico
+`server/security/tenant-guards.js`, y **omitió `assertTenantScope` (409 `TEN-003`)**.
+Desde entonces `requireTenantWriteAccess()` (usado por `server/routes/iam.js` y
+`server/routes/sedes.js`) entregaba a los guards un `tenant_id` sin validar. El test que lo
+cubría (`financial-state.test.js`, caso "409 si el tenant_id del perfil no es un UUID
+valido") no se ejecutaba porque su suite no cargaba (H3). Restaurado en F1.
 
 ## 3. Reglas transversales
 

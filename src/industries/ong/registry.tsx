@@ -594,6 +594,7 @@ export const ongModuleDefinitions: RegisteredModuleDefinition[] = [
         title: "Áreas Organizacionales",
         breadcrumb: "Gobernanza",
         path: `${ONG_BASE_PATH}/governance/areas`,
+        legacyPath: "/admin/areas",
         icon: Database,
         moduleKeys: ["governance", "ong"],
         anyPermissions: ["governance.catalogs.read"],

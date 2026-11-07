@@ -10,7 +10,11 @@ export const config = {
   openAiApiKey: process.env.OPENAI_API_KEY || "",
   openAiModel: process.env.OPENAI_MODEL || "gpt-4.1-mini",
   openAiBaseUrl: process.env.OPENAI_BASE_URL || "https://api.openai.com/v1",
+  // El default solo es válido fuera de producción: assertServerConfig() exige
+  // MFA_OTP_PEPPER real cuando NODE_ENV=production.
   otpPepper: process.env.MFA_OTP_PEPPER || "dev-local-pepper",
+  // Clave propia para server/utils/crypto-aes.js (separada del pepper de OTP).
+  dataEncryptionKey: process.env.DATA_ENCRYPTION_KEY || "",
   otpTtlMinutes: Number(process.env.MFA_OTP_TTL_MINUTES || 10),
   otpEmailProvider: (process.env.OTP_EMAIL_PROVIDER || (process.env.RESEND_API_KEY ? "resend" : "none")).toLowerCase(),
   otpFromEmail: process.env.OTP_FROM_EMAIL || "",
@@ -40,5 +44,40 @@ export const assertServerConfig = () => {
     throw new Error(
       `Faltan variables de entorno requeridas para API: ${missing.join(", ")}`
     );
+  }
+
+  if (config.nodeEnv === "production") {
+    assertProductionSecrets();
+  }
+};
+
+const MIN_SECRET_LENGTH = 32;
+const PLACEHOLDER_PREFIX = "CHANGE_ME";
+
+const isWeakSecret = (value) =>
+  !value ||
+  String(value).length < MIN_SECRET_LENGTH ||
+  String(value).toUpperCase().startsWith(PLACEHOLDER_PREFIX);
+
+/**
+ * Controles que solo aplican en producción: sin ellos el pepper de OTP caería
+ * al literal "dev-local-pepper" (público en el repo) y EXPOSE_DEBUG_OTP podría
+ * devolver el código OTP en la respuesta HTTP.
+ */
+export const assertProductionSecrets = (env = process.env) => {
+  const problems = [];
+
+  if (isWeakSecret(env.MFA_OTP_PEPPER)) {
+    problems.push(
+      `MFA_OTP_PEPPER debe definirse con al menos ${MIN_SECRET_LENGTH} caracteres y no ser un placeholder`
+    );
+  }
+
+  if (String(env.EXPOSE_DEBUG_OTP || "false") === "true") {
+    problems.push("EXPOSE_DEBUG_OTP=true no está permitido en producción");
+  }
+
+  if (problems.length) {
+    throw new Error(`Configuración insegura para producción: ${problems.join("; ")}`);
   }
 };

@@ -1,17 +1,23 @@
-import { createChainableResult } from "../test-utils/mockSupabase.js";
+import { createChainableResult } from "../../../test-utils/mockSupabase.js";
 
-jest.mock("../supabase.js", () => ({
+jest.mock("../../../supabase.js", () => ({
   __esModule: true,
   serviceClient: { from: jest.fn() },
   resolveAuthContext: jest.fn(),
 }));
 
 // eslint-disable-next-line import/first
-import { getBearerToken, sendError } from "../../../utils/http.js";
-import { assertTenantScope } from "../../../utils/tenant-scope.js";
 import { financialWriteGuard } from "./financial-state.js";
 // eslint-disable-next-line import/first
-import { serviceClient, resolveAuthContext } from "../supabase.js";
+import { registerTenantWriteGuard, requireTenantWriteAccess } from "../../../security/tenant-guards.js";
+// eslint-disable-next-line import/first
+import { serviceClient, resolveAuthContext } from "../../../supabase.js";
+
+// Desde 76d6e62 el antiguo middleware requireFinancialWriteAccess() es la
+// composición del motor genérico de escritura + el guard financiero de ONG
+// (registrado por initOngDomain() en server/domains/ong/index.js).
+registerTenantWriteGuard(financialWriteGuard);
+const requireFinancialWriteAccess = () => requireTenantWriteAccess();
 
 const TENANT_ID = "11111111-1111-4111-8111-111111111111";
 

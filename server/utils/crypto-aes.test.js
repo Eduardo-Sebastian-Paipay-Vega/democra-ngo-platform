@@ -1,4 +1,5 @@
 import { encryptAes256, decryptAes256 } from "./crypto-aes.js";
+import { config } from "../config.js";
 
 describe("Modulo de Cifrado AES-256-GCM (server/utils/crypto-aes.js)", () => {
   const secretKey = "mi-clave-super-secreta-de-prueba";
@@ -14,10 +15,24 @@ describe("Modulo de Cifrado AES-256-GCM (server/utils/crypto-aes.js)", () => {
     expect(decrypted).toBe(originalText);
   });
 
-  test("mantiene compatibilidad utilizando la clave por defecto del servidor", () => {
+  test("lanza si no hay DATA_ENCRYPTION_KEY ni clave explicita (sin clave de respaldo)", () => {
+    const original = config.dataEncryptionKey;
+    config.dataEncryptionKey = "";
+    try {
+      expect(() => encryptAes256("dato")).toThrow(/DATA_ENCRYPTION_KEY/);
+      expect(() => decryptAes256("aa:bb:cc")).toThrow(/DATA_ENCRYPTION_KEY/);
+    } finally {
+      config.dataEncryptionKey = original;
+    }
+  });
+
+  test("usa DATA_ENCRYPTION_KEY como clave por defecto del servidor", () => {
+    const original = config.dataEncryptionKey;
+    config.dataEncryptionKey = "clave-de-cifrado-de-prueba-32-caracteres!";
     const originalText = "DNI: 72819283 - Contacto de Emergencia";
     const encrypted = encryptAes256(originalText);
     const decrypted = decryptAes256(encrypted);
+    config.dataEncryptionKey = original;
 
     expect(decrypted).toBe(originalText);
   });

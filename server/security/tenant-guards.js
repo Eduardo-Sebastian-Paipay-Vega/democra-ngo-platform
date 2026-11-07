@@ -1,6 +1,7 @@
 // Motor de Guards dinámicos para operaciones de escritura del Tenant (Fase 2)
 import { resolveAuthContext } from "../supabase.js";
 import { getBearerToken, sendError } from "../utils/http.js";
+import { assertTenantScope } from "../utils/tenant-scope.js";
 
 const WRITE_METHODS = new Set(["POST", "PUT", "PATCH", "DELETE"]);
 const writeGuards = [];
@@ -29,6 +30,14 @@ export function requireTenantWriteAccess() {
 
     const tenantId = authContext.profile?.tenant_id;
     if (!tenantId) return next();
+
+    // Validación de scope restaurada: existía en server/middleware/financial-state.js
+    // antes del refactor 76d6e62 y se perdió al generalizarlo en este motor.
+    try {
+      assertTenantScope(tenantId, "tenant-guards.requireTenantWriteAccess");
+    } catch {
+      return sendError(res, 409, "TEN-003", { error_type: "tenant" });
+    }
 
     // Ejecutar Guards inyectados dinámicamente
     for (const guard of writeGuards) {
