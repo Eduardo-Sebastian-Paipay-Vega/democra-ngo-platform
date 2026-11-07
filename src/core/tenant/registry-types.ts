@@ -35,6 +35,7 @@ export const TENANT_ROUTE_IDS = [
   "notifications-templates",
   "notifications-history",
   "catalogs",
+  "areas",
   "audit-log",
   "sensitive-access",
   "soft-delete",

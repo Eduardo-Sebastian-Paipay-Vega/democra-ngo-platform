@@ -1,9 +1,9 @@
 import { createStripePayment, createStripeSubscription } from "./payments/stripe.js";
 import { createCulqiCharge } from "./payments/culqi.js";
 import { createMercadoPagoPreference } from "./payments/mercadopago.js";
-import { verifyHmacSignature, processIncomingPaymentWebhook } from "../routes/webhooks-payments.js";
+import { verifyHmacSignature, processIncomingPaymentWebhook } from "../../routes/webhooks-payments.js";
 
-describe("Modulo M14: Donaciones y Pasarelas de Pago (server/services/payments/)", () => {
+describe("Modulo M14: Donaciones y Pasarelas de Pago (server/core/services/payments/)", () => {
   describe("Adaptador Stripe", () => {
     test("procesa cobro de donacion simulada en desarrollo", async () => {
       const res = await createStripePayment({

@@ -31,6 +31,21 @@ export default defineConfig({
     },
     globals: true,
     environment: "happy-dom",
+    // Credenciales ficticias y fijas: los clientes Supabase se crean al importar
+    // el módulo (ong/src/lib/db/core.ts), así que sin estas variables 70 archivos
+    // fallan antes de ejecutar un solo test. Se definen aquí (y no en .env) para
+    // que la suite sea hermética: nunca usa credenciales reales, haya o no .env.
+    // El dominio .invalid (RFC 2606) garantiza que nunca resuelva por DNS.
+    env: {
+      VITE_SUPABASE_URL: "https://democra-test.supabase.invalid",
+      VITE_SUPABASE_ANON_KEY: "test-anon-key",
+      VITE_ONG_DB_SUPABASE_URL: "https://democra-test.supabase.invalid",
+      VITE_ONG_DB_SUPABASE_ANON_KEY: "test-anon-key",
+      // readRequiredEnv() lee process.env solo con el nombre sin prefijo; en
+      // ong/src import.meta.env no expone VITE_*, así que hacen falta ambos.
+      ONG_DB_SUPABASE_URL: "https://democra-test.supabase.invalid",
+      ONG_DB_SUPABASE_ANON_KEY: "test-anon-key",
+    },
     setupFiles: ["./vitest.setup.ts"],
     // Holgura para waitFor/findBy a 5000 ms (ver vitest.setup.ts) y para tests
     // async de servicios bajo carga. El default de 5000 ms quedaría justo.

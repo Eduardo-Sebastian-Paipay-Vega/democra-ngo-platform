@@ -7,10 +7,16 @@ const AUTH_TAG_LENGTH_BYTES = 16; // 128 bits
 
 /**
  * Deriva una clave simétrica de 256 bits (32 bytes) a partir de una clave dada
- * o utilizando la pimienta configurada en el servidor por defecto.
+ * o de DATA_ENCRYPTION_KEY. No hay clave de respaldo: cifrar con un literal
+ * conocido (o con el pepper de OTP) equivaldría a no cifrar.
  */
 function derive32ByteKey(secretKey) {
-  const sourceKey = secretKey || config.otpPepper || "democra-default-aes-secret-key-32b";
+  const sourceKey = secretKey || config.dataEncryptionKey;
+  if (!sourceKey) {
+    throw new Error(
+      "[crypto-aes] Falta DATA_ENCRYPTION_KEY (o una clave explícita) para cifrar/descifrar."
+    );
+  }
   return crypto.createHash("sha256").update(String(sourceKey)).digest();
 }
 
