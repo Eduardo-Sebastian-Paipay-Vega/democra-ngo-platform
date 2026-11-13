@@ -144,6 +144,14 @@ Todo cambio lógico dentro del código fuente (frontend o backend) y la agregaci
 1. **Revisión de Impacto Relacional:** Antes de dar por completada la implementación de una función o cambio de lógica, se debe auditar si requiere persistencia, columnas adicionales o nuevas estructuras en la BD.
 2. **Verificación Directa mediante Supabase CLI:** Ante cualquier duda sobre la existencia o estructura actual del esquema en Supabase, se debe verificar activamente mediante el CLI de Supabase (`npx supabase`), inspeccionando las migraciones (`supabase/migrations/`) o ejecutando verificaciones remotas.
 
+### Agent Skills oficiales para trabajo de Supabase/PostgreSQL
+
+- Antes de trabajar con servicios, SDK, Auth, RLS, Storage, Edge Functions, Supabase CLI/MCP o errores de Supabase, cargar `.agents/skills/supabase/SKILL.md`.
+- Antes de diseñar o modificar esquemas, SQL, migraciones, índices, funciones, triggers, políticas RLS o consultas PostgreSQL, y al diagnosticar rendimiento, bloqueos o aislamiento multi-tenant, cargar `.agents/skills/supabase-postgres-best-practices/SKILL.md`.
+- Codex descubre estas skills desde `.agents/skills/`. Claude Code dispone de las mismas skills en `.claude/skills/`.
+- Las skills aportan instrucciones locales y no autorizan por sí mismas conexiones MCP, consultas remotas, cambios de esquema, despliegues ni acceso con credenciales. Para esos accesos se aplican las reglas de autorización y mínimo privilegio del proyecto.
+- Detalle de origen, versiones, instalación y validación: `docs/agent-skills-supabase.md`.
+
 ## Regla obligatoria: auditoría de cambios y versionado
 
 Cada vez que se realice un **cambio importante** (nueva funcionalidad, refactorización, corrección de error relevante, cambio de arquitectura, modificación de base de datos, cambio de UI significativo, etc.), se debe:
