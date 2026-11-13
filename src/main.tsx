@@ -4,13 +4,9 @@ import { RouterProvider } from "react-router";
 import { appRouter } from "./App";
 import "./styles/global.css";
 
-import { SettingsProvider } from "./core/context/SettingsContext";
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <SettingsProvider>
-      <RouterProvider router={appRouter} />
-    </SettingsProvider>
+    <RouterProvider router={appRouter} />
   </StrictMode>
 );
 

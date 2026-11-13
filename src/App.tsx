@@ -1,7 +1,5 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import { LandingPage } from "./pages/landing/LandingPage";
-import { LoginPage } from "./pages/login/LoginPage";
-import { NosotrosPage } from "./pages/nosotros/NosotrosPage";
 import { SettingsProvider } from "./core/context/SettingsContext";
 
 export const appRouter = createBrowserRouter([
@@ -11,11 +9,17 @@ export const appRouter = createBrowserRouter([
   },
   {
     path: "/login",
-    Component: LoginPage,
+    lazy: async () => {
+      const { LoginPage } = await import("./pages/login/LoginPage");
+      return { Component: LoginPage };
+    },
   },
   {
     path: "/nosotros",
-    Component: NosotrosPage,
+    lazy: async () => {
+      const { NosotrosPage } = await import("./pages/nosotros/NosotrosPage");
+      return { Component: NosotrosPage };
+    },
   },
   {
     path: "*",

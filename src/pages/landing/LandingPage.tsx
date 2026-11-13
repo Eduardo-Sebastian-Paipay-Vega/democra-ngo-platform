@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { GradientBackground } from "./components/GradientBackground";
 import { CursorSpotlight } from "./components/CursorSpotlight";
 import { Navbar } from "./components/Navbar";
@@ -11,7 +11,11 @@ import { HowItWorks } from "./components/HowItWorks";
 import { Pricing } from "./components/Pricing";
 import { FinalCTA } from "./components/FinalCTA";
 import { Footer } from "./components/Footer";
-import { ContactModal } from "./ContactModal";
+
+const ContactModal = lazy(async () => {
+  const { ContactModal: Modal } = await import("./ContactModal");
+  return { default: Modal };
+});
 
 // REQ-001 (dds/MEJORAS/09072026/REQ001.md): secciones con datos mock aÃºn sin
 // contenido real para este despliegue. Ocultas de forma no destructiva y
@@ -43,7 +47,11 @@ export function LandingPage() {
         )}
         <Footer onOpenContact={openContact} />
       </div>
-      <ContactModal isOpen={isContactOpen} onClose={closeContact} />
+      <Suspense fallback={null}>
+        {isContactOpen && (
+          <ContactModal isOpen={isContactOpen} onClose={closeContact} />
+        )}
+      </Suspense>
     </div>
   );
 }
