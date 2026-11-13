@@ -100,7 +100,7 @@ Antes de crear una nueva columna, tabla o relación debes inspeccionar el proyec
 - si existe una relación reutilizable;
 - si puede reutilizarse un modelo existente.
 Nunca duplicar estructuras.
-> **Importante:** El archivo `BD.json` (en la raíz del proyecto) es la fuente de información más actualizada de la base de datos viva y sirve como el mapa oficial del esquema (actualizado al 21/08/2026). Consúltalo siempre para resolver dudas de estructura.
+> **Importante:** `BD.json` (raíz) es un inventario estructural versionado, no una lectura en vivo. Su `audit_timestamp` registrado es 27/08/2026 11:12:52; confirma su vigencia antes de usarlo como esquema actual. Consulta `docs/general/base-datos/FUENTE_DE_VERDAD.md` para la jerarquía de fuentes y el procedimiento para actualizar la referencia.
 
 ### 5. Si el frontend requiere un nuevo atributo
 Realizar el flujo completo: esquema SQL, migraciones, ORM, modelos, DTO, validaciones, servicios, repositorios, endpoints, frontend, formularios, permisos y documentación. El atributo debe existir realmente en todo el sistema.
