@@ -1,4 +1,4 @@
-import { config } from "../config.js";
+import { config } from "../../config.js";
 
 /**
  * Servicio de envío de mensajes de WhatsApp utilizando la API Oficial de Meta Cloud API

@@ -102,6 +102,13 @@ jest.mock("../security/audit.js", () => ({
   insertAuthEvent: jest.fn(async () => ({ id: "auth-event-1" })),
 }));
 
+jest.mock("../core/services/email/index.js", () => ({
+  __esModule: true,
+  emailService: {
+    sendAlert: jest.fn(async () => ({ ok: true })),
+  },
+}));
+
 jest.mock("../utils/security.js", () => {
   const actual = jest.requireActual("../utils/security.js");
   return {
@@ -126,6 +133,8 @@ import {
 import { insertAuditLog, insertAuthEvent } from "../security/audit.js";
 // eslint-disable-next-line import/first
 import { verifyPinHash } from "../utils/security.js";
+// eslint-disable-next-line import/first
+import { emailService } from "../core/services/email/index.js";
 
 const originalMaxPinAttempts = config.maxPinAttempts;
 const originalPinBlockMinutes = config.pinBlockMinutes;
@@ -403,6 +412,28 @@ describe("POST /api/auth/step-up/verify-otp", () => {
     expect(insertAuthEvent).toHaveBeenCalledWith(
       expect.objectContaining({ eventType: "MFA_STEP_UP_OK", result: "success" })
     );
+  });
+
+  test("200 aunque la alerta de nuevo login lance de forma sincrona (p. ej. sin RESEND_API_KEY)", async () => {
+    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    emailService.sendAlert.mockImplementationOnce(() => {
+      throw new Error("[email.config] Falta la variable de entorno RESEND_API_KEY.");
+    });
+
+    const res = await request(app)
+      .post("/api/auth/step-up/verify-otp")
+      .set("Authorization", "Bearer valid")
+      .send({ challenge_id: "challenge-1", code: "123456" });
+
+    expect(res.status).toBe(200);
+    expect(res.body.session_id).toBe("session-from-otp");
+    expect(emailService.sendAlert).toHaveBeenCalled();
+    await new Promise((resolve) => setImmediate(resolve));
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      "[auth.step-up] fallo notificacion de nuevo login",
+      expect.objectContaining({ message: expect.stringContaining("RESEND_API_KEY") })
+    );
+    consoleErrorSpy.mockRestore();
   });
 
   test("200 verifica OTP de accion critica sin crear session", async () => {

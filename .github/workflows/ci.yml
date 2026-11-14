@@ -1,0 +1,48 @@
+name: CI
+
+# Puerta de calidad del monorepo (docs/PLAN_SANEAMIENTO.md, F1.7).
+# Las suites son herméticas: credenciales ficticias en jest.setup.js y
+# vitest.config.ts, y red bloqueada en vitest.setup.ts. No requiere secretos.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Typecheck, tests y build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci --no-audit --no-fund
+
+      - name: Typecheck frontend
+        run: npm run typecheck
+
+      - name: Typecheck backend
+        run: npm run typecheck:server
+
+      - name: Tests backend (Jest)
+        run: npm test
+
+      - name: Tests frontend (Vitest)
+        run: npm run test:web
+
+      - name: Build
+        run: npm run build

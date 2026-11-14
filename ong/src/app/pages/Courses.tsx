@@ -350,7 +350,7 @@ export function Courses() {
     setSavingCurso(true);
     setCursoFormErrors({});
     try {
-      let uploadedImageUrl = cursoForm.imageUrl;
+      let uploadedImageUrl: string | null = cursoForm.imageUrl;
       if (cursoForm.imageFile) {
         const upload = await uploadFileToStorage({
           ...getAssetsUploadBucket(),

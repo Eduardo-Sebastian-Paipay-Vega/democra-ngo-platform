@@ -40,6 +40,45 @@ if (typeof window !== "undefined") {
   window.PointerEvent = class PointerEvent extends Event {};
 }
 
+// ─── Red bloqueada: los tests deben ser herméticos ───────────────────────────
+// Cualquier fetch/XMLHttpRequest que un test no haya mockeado explícitamente
+// (vi.spyOn(globalThis, "fetch"), vi.stubGlobal("fetch", ...), vi.mock del
+// servicio) se rechaza con un error que nombra la URL, en vez de intentar una
+// conexión real. Así una petición accidental no depende del DNS ni de la red.
+class NetworkBlockedError extends Error {
+  constructor(target: string) {
+    super(`[vitest.setup] Red bloqueada en tests: petición no mockeada a ${target}`);
+    this.name = "NetworkBlockedError";
+  }
+}
+
+const describeRequest = (input: unknown): string => {
+  if (typeof input === "string") return input;
+  if (input instanceof URL) return input.href;
+  if (input && typeof input === "object" && "url" in input) return String((input as Request).url);
+  return String(input);
+};
+
+globalThis.fetch = vi.fn(async (input: unknown) => {
+  throw new NetworkBlockedError(describeRequest(input));
+}) as unknown as typeof fetch;
+
+if (typeof window !== "undefined") {
+  window.fetch = globalThis.fetch;
+  // @ts-ignore - XMLHttpRequest mínimo que falla de forma explícita al enviar.
+  window.XMLHttpRequest = class BlockedXMLHttpRequest {
+    private target = "";
+    open(_method: string, url: string) {
+      this.target = url;
+    }
+    setRequestHeader() {}
+    abort() {}
+    send() {
+      throw new NetworkBlockedError(this.target);
+    }
+  };
+}
+
 // ─── Silenciar ruido de React/jsdom durante tests ────────────────────────────
 // React en modo desarrollo + jsdom imprimen stack traces cuando un Error Boundary
 // captura una excepción. Estos mensajes van tanto por console.error como por

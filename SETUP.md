@@ -39,7 +39,9 @@ Variables clave (ver `.env.example` para la lista completa comentada):
 | `VITE_SUPABASE_ANON_KEY` / `SUPABASE_ANON_KEY` | Dashboard Supabase → Project Settings → API Keys → `anon` |
 | `SUPABASE_SERVICE_ROLE_KEY` | Dashboard Supabase → Project Settings → API Keys → `service_role` — **secreto**, el MCP de Supabase no lo expone a propósito, hay que copiarlo a mano |
 | `ONG_DB_SUPABASE_*` / `VITE_ONG_DB_SUPABASE_*` | Mismos valores del proyecto de arriba (módulo ONG comparte Supabase con la raíz) |
-| `OTP_EMAIL_PROVIDER` | `resend` para envío real (requiere `RESEND_API_KEY` real) o `none` + `EXPOSE_DEBUG_OTP=true` para pruebas locales sin enviar correos |
+| `MFA_OTP_PEPPER` | Secreto propio (`openssl rand -base64 48`). **Obligatorio en producción**: ≥ 32 caracteres y no `CHANGE_ME*`; si no, la API aborta al arrancar con `NODE_ENV=production` (`assertProductionSecrets`). En Vercel, cargarlo en Production **y** Preview antes de desplegar |
+| `DATA_ENCRYPTION_KEY` | Clave de `server/utils/crypto-aes.js` (`openssl rand -base64 32`), distinta del pepper. Sin ella el cifrado lanza: no hay clave de respaldo |
+| `OTP_EMAIL_PROVIDER` | `resend` para envío real (requiere `RESEND_API_KEY` real) o `none` + `EXPOSE_DEBUG_OTP=true` para pruebas locales sin enviar correos (`EXPOSE_DEBUG_OTP=true` está prohibido en producción: la API no arranca) |
 
 Sin `SUPABASE_URL` / `SUPABASE_ANON_KEY` / `SUPABASE_SERVICE_ROLE_KEY` el backend (`server/config.js: assertServerConfig`) **lanza excepción al arrancar** y `npm run dev` muere completo (usa `concurrently --kill-others-on-fail`).
 

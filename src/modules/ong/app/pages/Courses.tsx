@@ -174,14 +174,15 @@ function exportInscripcionesToCSV(cursoNombre: string, data: InscripcionRow[]) {
     toast.error("No hay inscripciones para exportar.");
     return;
   }
-  const headers = ["ID Inscripcion", "Voluntario", "Estado", "Nota", "Fecha Inscripcion", "ID Certificado"];
+  // Campos según InscripcionRow de este árbol (services/academico/cursos.service.ts),
+  // que no consulta "nota" ni el ID del certificado: se exporta lo que sí trae.
+  const headers = ["ID Inscripcion", "Voluntario", "Estado", "Fecha Inscripcion", "URL Certificado"];
   const csvRows = data.map((r) => [
     `"${r.id}"`,
     `"${r.voluntarioNombre || ""}"`,
     `"${r.estado || ""}"`,
-    `"${r.nota !== null ? r.nota : ""}"`,
-    `"${r.createdAt || ""}"`,
-    `"${r.certificadoId || ""}"`,
+    `"${r.creadoEn || ""}"`,
+    `"${r.certificadoUrl || ""}"`,
   ]);
   const csvContent = [headers.join(","), ...csvRows.map((e) => e.join(","))].join("\n");
   const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
