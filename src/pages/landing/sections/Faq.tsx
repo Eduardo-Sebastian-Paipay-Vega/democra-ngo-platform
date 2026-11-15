@@ -39,7 +39,7 @@ export function Faq() {
   return (
     <section className="lp-section" id="preguntas" aria-labelledby="lp-faq-title">
       <div className="lp-container lp-container-narrow">
-        <h2 id="lp-faq-title" className="lp-h1 lp-center" data-reveal>
+        <h2 id="lp-faq-title" className="lp-h1 lp-center">
           Preguntas, <span className="lp-accent-light">respondidas.</span>
         </h2>
         <div className="lp-faq">
@@ -48,7 +48,7 @@ export function Faq() {
             const btnId = `${baseId}-q${i}`;
             const panelId = `${baseId}-a${i}`;
             return (
-              <div className={`lp-faq-item${isOpen ? " is-open" : ""}`} key={item.q} data-reveal>
+              <div className={`lp-faq-item${isOpen ? " is-open" : ""}`} key={item.q}>
                 <h3>
                   <button
                     id={btnId}
