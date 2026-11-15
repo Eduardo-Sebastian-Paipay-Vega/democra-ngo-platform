@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "react-router";
 import { BrandMark } from "./BrandMark";
 import { IconArrowUpRight, IconChevronRight } from "./Icons";
@@ -6,13 +7,30 @@ interface Props {
   onOpenContact: () => void;
 }
 
-export function FinalCta({ onOpenContact }: Props) {
+interface FinalCtaProps extends Props {
+  /** Título del cierre; por defecto, el del landing. */
+  title?: ReactNode;
+  /** Texto opcional bajo el título. */
+  lede?: ReactNode;
+}
+
+interface SiteFooterProps extends Props {
+  /** Prefijo de las anclas de sección ("" en el landing, "/" en otras páginas públicas). */
+  anchorBase?: string;
+}
+
+export function FinalCta({
+  onOpenContact,
+  title = "¿Listo para organizar el trabajo de tu equipo?",
+  lede,
+}: FinalCtaProps) {
   return (
     <section className="lp-cta" aria-labelledby="lp-cta-title">
       <div className="lp-container lp-center" data-reveal>
         <h2 id="lp-cta-title" className="lp-h1 lp-cta-title">
-          ¿Listo para organizar el trabajo de tu equipo?
+          {title}
         </h2>
+        {lede && <p className="lp-sub lp-cta-lede">{lede}</p>}
         <a className="lp-btn lp-btn-lg" href="/ong/create">
           <IconArrowUpRight size={20} />
           Crear mi organización
@@ -27,11 +45,11 @@ export function FinalCta({ onOpenContact }: Props) {
   );
 }
 
-export function SiteFooter({ onOpenContact }: Props) {
+export function SiteFooter({ onOpenContact, anchorBase = "" }: SiteFooterProps) {
   return (
     <footer className="lp-footer">
       <div className="lp-footer-plate">
-        <BrandMark size="lg" />
+        <BrandMark size="lg" href={anchorBase || "#inicio"} />
 
         <div className="lp-footer-main">
           <div className="lp-footer-contact">
@@ -45,10 +63,10 @@ export function SiteFooter({ onOpenContact }: Props) {
 
           <nav className="lp-footer-cols" aria-label="Enlaces del pie de página">
             <ul aria-label="Navegación">
-              <li><a href="#funciones">Funciones</a></li>
-              <li><a href="#como-funciona">Cómo funciona</a></li>
-              <li><a href="#acceso">Acceso</a></li>
-              <li><a href="#preguntas">Preguntas</a></li>
+              <li><a href={`${anchorBase}#funciones`}>Funciones</a></li>
+              <li><a href={`${anchorBase}#como-funciona`}>Cómo funciona</a></li>
+              <li><a href={`${anchorBase}#acceso`}>Acceso</a></li>
+              <li><a href={`${anchorBase}#preguntas`}>Preguntas</a></li>
             </ul>
             <ul aria-label="Plataforma">
               <li><Link to="/login">Iniciar sesión</Link></li>

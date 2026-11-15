@@ -11,9 +11,14 @@ const SECTION_LINKS = [
 
 interface SiteHeaderProps {
   onOpenContact: () => void;
+  /**
+   * Prefijo de las anclas de sección. En el landing es "" (anclas locales);
+   * en otras páginas públicas (p. ej. /nosotros) es "/" para apuntar a /#seccion.
+   */
+  anchorBase?: string;
 }
 
-export function SiteHeader({ onOpenContact }: SiteHeaderProps) {
+export function SiteHeader({ onOpenContact, anchorBase = "" }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
@@ -40,12 +45,12 @@ export function SiteHeader({ onOpenContact }: SiteHeaderProps) {
     <header className="lp-header">
       <div className="lp-header-inner">
         <nav className="lp-nav" aria-label="Navegación principal">
-          <BrandMark />
+          <BrandMark href={anchorBase || "#inicio"} />
 
           <ul className="lp-nav-links">
             {SECTION_LINKS.map((l) => (
               <li key={l.href}>
-                <a href={l.href}>{l.label}</a>
+                <a href={`${anchorBase}${l.href}`}>{l.label}</a>
               </li>
             ))}
             <li>
@@ -74,9 +79,9 @@ export function SiteHeader({ onOpenContact }: SiteHeaderProps) {
           <div className="lp-mobile-menu" id="lp-mobile-menu">
             <ul>
               {SECTION_LINKS.map((l) => (
-                <li key={l.href}><a href={l.href} onClick={close}>{l.label}</a></li>
+                <li key={l.href}><a href={`${anchorBase}${l.href}`} onClick={close}>{l.label}</a></li>
               ))}
-              <li><a href="#acceso" onClick={close}>Acceso</a></li>
+              <li><a href={`${anchorBase}#acceso`} onClick={close}>Acceso</a></li>
               <li>
                 <button type="button" onClick={() => { close(); onOpenContact(); }}>Contacto</button>
               </li>
