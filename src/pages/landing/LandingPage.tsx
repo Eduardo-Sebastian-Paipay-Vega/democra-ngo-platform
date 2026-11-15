@@ -1,58 +1,57 @@
-import { lazy, Suspense, useState } from "react";
-import { GradientBackground } from "./components/GradientBackground";
-import { CursorSpotlight } from "./components/CursorSpotlight";
-import { Navbar } from "./components/Navbar";
-import { Hero } from "./components/Hero";
-import { TrustSection } from "./components/TrustSection";
-import { Features } from "./components/Features";
-import { VisualShowcase } from "./components/VisualShowcase";
-import { VisualImpact } from "./components/VisualImpact";
-import { HowItWorks } from "./components/HowItWorks";
-import { Pricing } from "./components/Pricing";
-import { FinalCTA } from "./components/FinalCTA";
-import { Footer } from "./components/Footer";
+import { lazy, Suspense, useRef, useState } from "react";
+import "./landing.css";
+import { SiteHeader } from "./sections/SiteHeader";
+import { Hero } from "./sections/Hero";
+import { ProductDemo } from "./sections/ProductDemo";
+import { AudienceStrip } from "./sections/AudienceStrip";
+import { Features } from "./sections/Features";
+import { Access } from "./sections/Access";
+import { Faq } from "./sections/Faq";
+import { FinalCta, SiteFooter } from "./sections/SiteFooter";
+import { useReveal } from "./sections/useReveal";
 
 const ContactModal = lazy(async () => {
   const { ContactModal: Modal } = await import("./ContactModal");
   return { default: Modal };
 });
 
-// REQ-001 (dds/MEJORAS/09072026/REQ001.md): secciones con datos mock aÃºn sin
-// contenido real para este despliegue. Ocultas de forma no destructiva y
-// reversible con este flag hasta que existan datos reales que mostrar.
-const SHOW_MOCK_SECTIONS = false;
-
+/**
+ * Landing pública de Democra. Composición basada en la auditoría de
+ * docs/reference-audit.md; tokens en docs/design-tokens.json (prefijo --lp-).
+ */
 export function LandingPage() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const openContact = () => setIsContactOpen(true);
-  const closeContact = () => setIsContactOpen(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  useReveal(rootRef);
 
   return (
-    <div className="min-h-screen bg-[#000000] text-white antialiased relative overflow-x-hidden">
-      <GradientBackground />
-      <CursorSpotlight />
-      <div className="relative z-10">
-        <Navbar onOpenContact={openContact} />
-        <Hero onOpenContact={openContact} />
-        {SHOW_MOCK_SECTIONS && (
-          <>
-            <TrustSection />
-            <Features />
-            <VisualShowcase />
-            <VisualImpact />
-            <HowItWorks />
-            <Pricing onOpenContact={openContact} />
-            <FinalCTA />
-          </>
-        )}
-        <Footer onOpenContact={openContact} />
-      </div>
+    <div className="lp" id="inicio" ref={rootRef}>
+      <a className="lp-skip" href="#lp-main">Saltar al contenido</a>
+      <div className="lp-frame" aria-hidden="true" />
+      <SiteHeader onOpenContact={openContact} />
+
+      <main id="lp-main">
+        <div className="lp-zone-top">
+          <div className="lp-zone-scrim" aria-hidden="true" />
+          <Hero onOpenContact={openContact} />
+          <ProductDemo />
+          <AudienceStrip />
+        </div>
+        <Features />
+        <Access />
+        <Faq />
+        <div className="lp-zone-end">
+          <FinalCta onOpenContact={openContact} />
+          <SiteFooter onOpenContact={openContact} />
+        </div>
+      </main>
+
       <Suspense fallback={null}>
         {isContactOpen && (
-          <ContactModal isOpen={isContactOpen} onClose={closeContact} />
+          <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
         )}
       </Suspense>
     </div>
   );
 }
-

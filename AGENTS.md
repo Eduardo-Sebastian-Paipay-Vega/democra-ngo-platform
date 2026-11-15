@@ -23,6 +23,14 @@ Detalle completo, comandos y solución de problemas comunes en **`SETUP.md`** (r
 4. **URLs y rutas en minúsculas**: Por convención y compatibilidad con Vercel/Linux, todas las rutas del navegador y nombres de carpetas de módulo deben escribirse strictly en minúsculas (`/ong/`, `/api/`, etc.).
 5. **El backend vive en `server/`, no en `api/`**: `api/server.js` es solo el adaptador Serverless para Vercel. La lógica real (rutas, middleware, controllers, servicios) pertenece a `server/`.
 
+## Flujo obligatorio de ramas y despliegues
+
+1. **`main` es producción**: debe ser la rama de producción del proyecto Vercel. No desarrollar ni hacer push directo a `main`; integrar releases mediante Pull Request desde `dev` después de completar las verificaciones obligatorias.
+2. **`dev` es integración**: mantenerla sincronizada con el trabajo aprobado para la próxima release. Vercel debe generar Preview Deployments para `dev` y las ramas de tarea, con variables de entorno del ámbito Preview separadas de Production.
+3. **Ramas cortas por tarea**: crear `feature/<nombre>`, `fix/<nombre>` o `docs/<nombre>` desde `dev`; traer los últimos cambios de `dev` antes de empezar y antes de resolver conflictos. Al terminar, abrir PR hacia `dev`.
+4. **Releases**: abrir PR de `dev` hacia `main` solo cuando build, pruebas y revisión estén completos. Si se hace un hotfix desde `main`, llevar también ese cambio a `dev` para evitar divergencias.
+5. **Protección remota**: configurar protección de `main` en GitHub para requerir PR y checks, y prohibir force-push. No afirmar que Vercel despliega desde `main` hasta verificar `Production Branch` en los ajustes del proyecto; `vercel.json` no controla esa selección.
+
 ## Regla obligatoria: Ciberseguridad Esencial, DevSecOps y AppSec
 
 > Vigente desde 2026-07-29. Aplica estrictamente a todo código de frontend, backend, APIs y base de datos.
@@ -136,6 +144,14 @@ Todo cambio lógico dentro del código fuente (frontend o backend) y la agregaci
 1. **Revisión de Impacto Relacional:** Antes de dar por completada la implementación de una función o cambio de lógica, se debe auditar si requiere persistencia, columnas adicionales o nuevas estructuras en la BD.
 2. **Verificación Directa mediante Supabase CLI:** Ante cualquier duda sobre la existencia o estructura actual del esquema en Supabase, se debe verificar activamente mediante el CLI de Supabase (`npx supabase`), inspeccionando las migraciones (`supabase/migrations/`) o ejecutando verificaciones remotas.
 
+### Agent Skills oficiales para trabajo de Supabase/PostgreSQL
+
+- Antes de trabajar con servicios, SDK, Auth, RLS, Storage, Edge Functions, Supabase CLI/MCP o errores de Supabase, cargar `.agents/skills/supabase/SKILL.md`.
+- Antes de diseñar o modificar esquemas, SQL, migraciones, índices, funciones, triggers, políticas RLS o consultas PostgreSQL, y al diagnosticar rendimiento, bloqueos o aislamiento multi-tenant, cargar `.agents/skills/supabase-postgres-best-practices/SKILL.md`.
+- Codex descubre estas skills desde `.agents/skills/`. Claude Code dispone de las mismas skills en `.claude/skills/`.
+- Las skills aportan instrucciones locales y no autorizan por sí mismas conexiones MCP, consultas remotas, cambios de esquema, despliegues ni acceso con credenciales. Para esos accesos se aplican las reglas de autorización y mínimo privilegio del proyecto.
+- Detalle de origen, versiones, instalación y validación: `docs/agent-skills-supabase.md`.
+
 ## Regla obligatoria: auditoría de cambios y versionado
 
 Cada vez que se realice un **cambio importante** (nueva funcionalidad, refactorización, corrección de error relevante, cambio de arquitectura, modificación de base de datos, cambio de UI significativo, etc.), se debe:
@@ -196,8 +212,8 @@ Cuando el cambio quede terminado y estable:
 3. Ejecutar las pruebas disponibles (`npm test` / `npm run test:web`).
 4. Confirmar que no se rompió funcionalidad existente.
 5. Commit.
-6. **Push inmediato a `origin/main`** — no acumular cambios grandes sin subirlos. Esto es autorización permanente para hacer push sin volver a preguntar, siempre que los pasos 1–4 se hayan verificado y el cambio esté genuinamente estable. Si algo queda incierto, roto, o parcialmente probado, no se hace push — se reporta el motivo en vez de forzarlo.
+6. **Push al branch de tarea o a `origin/dev`** una vez verificado; no empujar directamente a `origin/main`. Abrir PR hacia `dev` para integrar trabajo y PR de `dev` hacia `main` para releases. Si algo queda incierto, roto, o parcialmente probado, no se hace push — se reporta el motivo en vez de forzarlo.
 
 ## Objetivo de estas reglas
 
-Trazabilidad completa, auditorías técnicas simples, reversión sencilla ante problemas, consistencia arquitectónica en el monorepo y un remoto (`origin/main`) siempre sincronizado con el estado real del trabajo.
+Trazabilidad completa, auditorías técnicas simples, reversión sencilla ante problemas, consistencia arquitectónica en el monorepo, `dev` como rama de integración y `main` como rama de producción de Vercel.

@@ -1,6 +1,18 @@
 import { createSupabaseClient } from "../services/supabase";
-import { GradientBackground } from "../pages/landing/components/GradientBackground";
 import { CoreLogin } from "../core/auth";
+import { BrandMark } from "../pages/landing/sections/BrandMark";
+
+const HELP_URL =
+  "https://wa.me/51953714752?text=Hola,%20necesito%20ayuda%20para%20ingresar%20a%20mi%20cuenta%20de%20Democra.";
+
+// Presentación con el sistema .lp (estilos en src/pages/login/login.css).
+// CoreLogin pone estilos en línea a la tarjeta; aquí se reemplazan por los del sistema.
+const cardStyle: React.CSSProperties = {
+  background: "linear-gradient(var(--lp-card-bg), var(--lp-card-bg)), var(--lp-bg)",
+  backdropFilter: "none",
+  border: "1px solid var(--lp-card-border)",
+  boxShadow: "none",
+};
 
 export function LoginGateway() {
   async function handleSuccessfulLogin() {
@@ -37,62 +49,43 @@ export function LoginGateway() {
   }
 
   const headerNode = (
-    <div className="mb-8 text-center">
-      <img
-        src="/brand/d-core-monogram.png"
-        alt="Democra"
-        className="mx-auto mb-4 h-12 w-12 rounded-2xl object-contain"
-        style={{ background: "rgba(59,130,246,0.12)", border: "1px solid rgba(59,130,246,0.25)" }}
-      />
-      <h1 className="text-[22px] font-semibold" style={{ color: "#f5f5f5" }}>
-        Democra
-      </h1>
-      <p className="mt-1 text-[13px]" style={{ color: "#a0a0a0" }}>
-        Ingresa tus credenciales para acceder al sistema.
-      </p>
+    <div className="lp-auth-head">
+      <BrandMark href="/" />
+      <h1 className="lp-h2 lp-auth-title">Iniciar sesión</h1>
+      <p className="lp-auth-lede">Ingresa tus credenciales para acceder al sistema.</p>
     </div>
   );
 
   const footerNode = (
-    <>
-      <button
-        type="button"
-        onClick={() =>
-          window.open(
-            "https://wa.me/51953714752?text=Hola,%20necesito%20ayuda%20para%20ingresar%20a%20mi%20cuenta%20de%20Democra.",
-            "_blank",
-            "noopener,noreferrer"
-          )
-        }
-        className="mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-2xl text-[13px] font-medium transition-colors"
-        style={{
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          color: "#c0c0c0",
-        }}
-      >
-        ¿Necesitas ayuda para ingresar?
-      </button>
-      <p className="mt-6 text-center text-[11px]" style={{ color: "#707070" }}>
-        ¿Nuevo en la plataforma?{" "}
-        <a href="/" style={{ color: "#3b82f6" }}>
-          Ir a la página principal
-        </a>
+    <div className="lp-note lp-auth-foot">
+      <p>
+        <button
+          type="button"
+          onClick={() => window.open(HELP_URL, "_blank", "noopener,noreferrer")}
+        >
+          ¿Necesitas ayuda para ingresar?
+        </button>
       </p>
-    </>
+      <p>
+        ¿Nuevo en la plataforma? <a href="/">Ir a la página principal</a>
+      </p>
+    </div>
   );
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 text-white antialiased">
-      <GradientBackground />
-      <CoreLogin
-        supabase={createSupabaseClient()}
-        onLoginSuccess={handleSuccessfulLogin}
-        headerNode={headerNode}
-        footerNode={footerNode}
-        buttonClassName="mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-2xl text-[13px] font-semibold transition-opacity disabled:opacity-40"
-        buttonStyle={{ background: "#3b82f6", color: "#fff" }}
-      />
+    <div className="lp lp-auth">
+      <div className="lp-frame" aria-hidden="true" />
+      <main className="lp-auth-main">
+        <CoreLogin
+          supabase={createSupabaseClient()}
+          onLoginSuccess={handleSuccessfulLogin}
+          headerNode={headerNode}
+          footerNode={footerNode}
+          className="lp-auth-card"
+          style={cardStyle}
+          buttonClassName="lp-btn lp-btn-lg lp-btn-block lp-auth-submit"
+        />
+      </main>
     </div>
   );
 }

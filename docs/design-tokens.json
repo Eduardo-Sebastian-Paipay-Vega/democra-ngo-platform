@@ -1,0 +1,103 @@
+{
+  "$meta": {
+    "reference": "https://viewport.theresonance.studio/?ref=onepagelove",
+    "inspected": "2026-11-14",
+    "method": "Estilos calculados (getComputedStyle) vía Playwright MCP en 1440/1024/768/390 px; colores lab()/oklab() convertidos a sRGB con canvas.",
+    "legend": {
+      "confirmed": "valor medido en estilos calculados",
+      "inferred": "estimado a partir de capturas o de cambios de composición",
+      "adapted": "valor propio de Democra que sustituye un recurso no reutilizable"
+    },
+    "cssPrefix": "--lp-"
+  },
+  "color": {
+    "bg":            { "value": "#090d14", "status": "confirmed", "note": "body background" },
+    "bg-deep":       { "value": "#000000", "status": "confirmed", "note": "fuera del marco y placa del footer" },
+    "fg":            { "value": "#eef1ea", "status": "confirmed", "note": "texto principal y titulares" },
+    "fg-muted":      { "value": "rgba(255,255,255,0.77)", "status": "confirmed", "note": "párrafos, enlaces de nav" },
+    "fg-faq":        { "value": "rgba(238,241,234,0.9)", "status": "confirmed", "note": "preguntas del FAQ" },
+    "nav-bg":        { "value": "#070a0f", "status": "confirmed" },
+    "nav-border":    { "value": "#1d2738", "status": "confirmed" },
+    "primary":       { "value": "#519dfc", "status": "confirmed", "note": "botón grande y kicker de tarjeta destacada" },
+    "primary-nav":   { "value": "#6ca7ff", "status": "confirmed", "note": "botón compacto del nav" },
+    "primary-ring":  { "value": "#a7caff", "status": "confirmed", "note": "anillo interior 1px de los botones y del marco" },
+    "primary-ink":   { "value": "#090d14", "status": "confirmed", "note": "texto sobre botón azul" },
+    "accent-deep":   { "value": "#3a79dc", "status": "confirmed", "note": "palabra de acento del primer H2" },
+    "accent-light":  { "value": "#6ca7ff", "status": "confirmed", "note": "palabra de acento de H2 posteriores" },
+    "frame-outer":   { "value": "#2888ff", "status": "confirmed", "note": "anillo exterior 4px del marco de página" },
+    "card-bg":       { "value": "rgba(235,235,235,0.05)", "status": "confirmed" },
+    "card-border":   { "value": "rgba(235,245,235,0.10)", "status": "confirmed" },
+    "card-raised":   { "value": "#202f45", "status": "confirmed", "note": "tarjeta destacada de precios/acceso" },
+    "chip-bg":       { "value": "#13161d", "status": "confirmed", "note": "tarjetas de la franja de logos" },
+    "chip-border":   { "value": "rgba(241,241,241,0.07)", "status": "confirmed" },
+    "demo-bar":      { "value": "#0a0c11", "status": "confirmed", "note": "barras y controles de la ventana demo" },
+    "demo-shell":    { "value": "linear-gradient(rgba(255,255,255,.13),rgba(255,255,255,.08) 42%,rgba(255,255,255,.035))", "status": "confirmed" },
+    "demo-work":     { "value": "linear-gradient(#002b7a 0%,#030a1c 62%,#000 100%)", "status": "confirmed", "note": "lienzo de las tarjetas de features" },
+    "divider":       { "value": "rgba(235,235,235,0.08)", "status": "inferred", "note": "separador FAQ; medido 0.05 con borde 0, visible ~0.08 en captura" },
+    "success":       { "value": "#22c55e", "status": "inferred", "note": "bloque verde de la línea de tiempo" },
+    "warning":       { "value": "#f59e0b", "status": "inferred", "note": "bloque ámbar de la línea de tiempo" },
+    "danger":        { "value": "#ef4444", "status": "inferred", "note": "botón rojo de grabación" }
+  },
+  "gradient": {
+    "hero": { "status": "confirmed", "value": "linear-gradient(#000 0%,#020408 10%,#030a1c 22%,#021b4a 34%,#0049b8 46%,#4ca3ff 60%,#248aff 66%,#0068f0 72%,#004bbd 78%,#00358a 84%,#02225f 89%,#05183e 93%,#071127 96%,#0a0f19 98%,#090d14 100%)", "height": "1968px (hero + demo + franja de logos, 1440)" },
+    "hero-scrim": { "status": "confirmed", "value": "linear-gradient(#080808,rgba(8,8,8,0))" },
+    "cta": { "status": "confirmed", "value": "linear-gradient(#090d14 0%,#0a0f19 10%,#071127 21%,#05183e 33%,#02225f 45%,#00358a 57%,#004bbd 69%,#0068f0 80%,#248aff 91%,#4ca3ff 100%)", "height": "1184px (CTA + footer)" }
+  },
+  "font": {
+    "heading": { "value": "'Inter Tight', 'Inter', system-ui, sans-serif", "status": "adapted", "reference": "ritual 500 (licencia comercial, no reutilizable)" },
+    "body":    { "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif", "status": "confirmed", "note": "mismo stack de sistema que la referencia" }
+  },
+  "type": {
+    "display":  { "size": "70px", "lineHeight": "1", "tracking": "-0.03em", "weight": 500, "status": "confirmed", "mobile": "40px (inferred)" },
+    "h1":       { "size": "64px", "lineHeight": "1", "tracking": "-0.03em", "weight": 500, "status": "confirmed", "mobile": "34px (inferred)" },
+    "h2":       { "size": "32px", "lineHeight": "1.15", "tracking": "-0.03em", "weight": 500, "status": "confirmed", "mobile": "30px (inferred)" },
+    "body-lg":  { "size": "20px", "lineHeight": "1.6", "status": "confirmed", "mobile": "15px (inferred)" },
+    "body-md":  { "size": "18px", "lineHeight": "1.6", "status": "confirmed" },
+    "body":     { "size": "16px", "lineHeight": "1.5", "status": "confirmed" },
+    "small":    { "size": "14px", "lineHeight": "20px", "status": "confirmed" },
+    "faq":      { "size": "16px", "tracking": "-0.03em", "weight": 500, "status": "confirmed" },
+    "nav":      { "size": "16px", "status": "confirmed" },
+    "logo":     { "size": "20px", "status": "confirmed" }
+  },
+  "space": {
+    "container":        { "value": "1130px", "status": "confirmed", "note": "contenido a 155px del borde en 1440" },
+    "container-narrow": { "value": "960px", "status": "confirmed", "note": "lista FAQ" },
+    "nav-width":        { "value": "800px", "status": "confirmed", "note": "Democra usa 920px por llevar más acciones (adapted)" },
+    "nav-top":          { "value": "50px", "status": "confirmed", "note": "16px en móvil (inferred)" },
+    "section-y":        { "value": "144px", "status": "confirmed", "md": "112px", "sm": "80px" },
+    "card-pad":         { "value": "32px 24px", "status": "confirmed", "note": "texto interno a 48px por padding de la cabecera" },
+    "card-gap":         { "value": "24px", "status": "inferred" }
+  },
+  "radius": {
+    "frame":  { "value": "40px", "status": "confirmed" },
+    "nav":    { "value": "16px", "status": "confirmed" },
+    "button": { "value": "16px", "status": "confirmed" },
+    "card":   { "value": "18px", "status": "confirmed" },
+    "demo":   { "value": "16px", "status": "confirmed" },
+    "panel":  { "value": "8px", "status": "confirmed" },
+    "control":{ "value": "12px", "status": "confirmed" }
+  },
+  "shadow": {
+    "frame":  { "status": "confirmed", "value": "inset 0 12px 14px -12px rgba(255,255,255,.35), inset 0 -12px 14px -12px rgba(0,0,0,.45), inset 0 0 0 4px #a7caff, 0 0 0 4px #2888ff, 0 0 0 100vmax #000", "note": "el último valor (máscara negra) se infirió: el texto estaba truncado" },
+    "button": { "status": "confirmed", "value": "inset 0 0 0 1px #a7caff" },
+    "demo":   { "status": "confirmed", "value": "inset 0 0 0 1px rgba(255,255,255,.11), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -1px 0 rgba(114,132,168,.08)" },
+    "glass":  { "status": "confirmed", "value": "0 8px 19px rgba(0,0,0,.16), inset 0 .8px 0 rgba(255,255,255,.08)" }
+  },
+  "size": {
+    "button-sm": { "height": "36px", "padding": "0 28px", "font": "14px/500", "status": "confirmed" },
+    "button-lg": { "height": "54px", "padding": "0 24px", "font": "18px/500", "status": "confirmed" },
+    "nav":       { "height": "62px", "status": "confirmed" },
+    "chip":      { "width": "208px", "height": "88px", "status": "confirmed" }
+  },
+  "motion": {
+    "color":     { "value": "150ms cubic-bezier(0.4,0,0.2,1)", "status": "confirmed" },
+    "accordion": { "value": "420ms cubic-bezier(0.16,1,0.3,1)", "status": "confirmed" },
+    "chevron":   { "value": "300ms cubic-bezier(0.16,1,0.3,1)", "status": "confirmed" },
+    "reveal":    { "value": "opacity 0 → 1 al entrar en viewport", "status": "inferred", "note": "elementos del FAQ con clase opacity-0 antes de entrar" }
+  },
+  "breakpoint": {
+    "sm": { "value": "640px", "status": "inferred" },
+    "md": { "value": "768px", "status": "inferred", "note": "aparece el marco de página" },
+    "lg": { "value": "1024px", "status": "inferred", "note": "nav completo; por debajo, hamburguesa" }
+  }
+}

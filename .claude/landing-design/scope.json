@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "baseUrl": "http://localhost:5173",
+  "referenceRoute": "/",
+  "publicRoutes": [
+    "/",
+    "/nosotros",
+    "/login"
+  ],
+  "allowedSourcePaths": [
+    "src/pages/landing/LandingPage.tsx",
+    "src/pages/landing/landing.css",
+    "src/pages/landing/sections/",
+    "src/pages/nosotros/NosotrosPage.tsx",
+    "src/pages/login/",
+    "src/app/LoginGateway.tsx"
+  ],
+  "protectedSourcePaths": [
+    "server/",
+    "api/",
+    "ong/",
+    "supabase/",
+    "database/",
+    "migrations/",
+    "src/core/",
+    "src/modules/",
+    "src/industries/",
+    "src/services/",
+    "src/lib/",
+    "src/pages/landing/components/",
+    "src/pages/landing/ContactModal.tsx",
+    "src/pages/landing/contact-modal.css",
+    "src/core/shell/",
+    "index.html",
+    "src/core/auth/",
+    "src/pages/landing/components/GradientBackground.tsx"
+  ],
+  "excludedRoutes": [
+    "/app",
+    "/api",
+    "/ong",
+    "/admin",
+    "/dashboard"
+  ],
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "tablet",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "decisions": [
+    {
+      "date": "2026-11-15",
+      "decision": "/nosotros debe adoptar el sistema visual .lp del landing",
+      "by": "usuario"
+    },
+    {
+      "date": "2026-11-15",
+      "decision": "/login adopta el sistema visual .lp, solo presentación (opción A de AUDIT-login.md). Sin cambios en CoreLogin, lógica de auth ni redirección. src/app/ solo contiene LoginGateway.tsx; se autoriza ese archivo para presentación (headerNode, footerNode, wrapper, props visuales) y handleSuccessfulLogin queda intocable.",
+      "by": "usuario"
+    }
+  ]
+}

@@ -42,6 +42,19 @@ Este repositorio utiliza una arquitectura **Multi-Page Application (MPA)** unifi
 
 4. **El backend vive en `server/`, no en `api/`**: `api/server.js` es solo el adaptador que Vercel necesita para desplegar Express como Serverless Function. La lógica real (rutas, config, seguridad) va en `server/`. No dupliques rutas dentro de `api/`.
 
+5. **Separar desarrollo y producción con Git**:
+   - `main` es producción y debe ser la Production Branch de Vercel. Los cambios llegan mediante PR desde `dev`, nunca con pushes directos.
+   - `dev` es la rama remota de integración. Vercel debe tratarla como Preview, junto con ramas de tarea.
+   - Crear ramas breves desde `dev`: `feature/<nombre>`, `fix/<nombre>` o `docs/<nombre>`. Abrir PR hacia `dev`; al preparar una release, abrir PR de `dev` a `main`.
+   - Mantener los secretos y variables separados por entorno en Vercel: Production para `main`; Preview para `dev` y ramas de tarea.
+   - Proteger `main` en GitHub con PR obligatorio, checks requeridos y force-push deshabilitado. Confirmar en el dashboard de Vercel que `Production Branch` sea `main`; esta opción no se configura en `vercel.json`.
+
+   Flujo recomendado:
+
+   ```text
+   feature/fix/docs → dev (Preview) → PR de release → main (Production)
+   ```
+
 ---
 
 ## 🚀 Cómo Agregar un Nuevo Módulo (Paso a Paso)
