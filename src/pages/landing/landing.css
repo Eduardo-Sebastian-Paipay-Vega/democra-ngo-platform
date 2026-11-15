@@ -152,6 +152,7 @@
 .lp-btn-sm:hover { background: #8bb9ff; }
 .lp-btn-lg { height: 54px; padding: 0 24px; font-size: 18px; line-height: 28px; }
 .lp-btn-block { display: flex; width: 100%; }
+@media (max-width: 359px) { .lp-btn-lg { max-width: 100%; height: auto; min-height: 54px; padding-block: 12px; white-space: normal; text-align: center; } }
 
 .lp-note { margin-top: 16px; color: var(--lp-fg-muted); font-size: 14px; line-height: 20px; }
 .lp-note a,
@@ -306,7 +307,7 @@
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 220px;
+  min-width: 0;
   aspect-ratio: 908 / 452;
   border-radius: 10px;
   overflow: hidden;
@@ -315,7 +316,11 @@
     #000;
 }
 .lp-demo-canvas .lp-screen { width: 80%; height: 100%; min-width: 0; }
-@media (max-width: 767px) { .lp-demo-canvas .lp-screen { width: 88%; height: 86%; } }
+@media (max-width: 767px) {
+  /* Antes: min-height 220px + aspect-ratio forzaba un ancho mínimo de 442px y desbordaba la ventana <480px. */
+  .lp-demo-canvas { aspect-ratio: 4 / 3; }
+  .lp-demo-canvas .lp-screen { width: 88%; height: 86%; }
+}
 
 .lp-demo-side { display: none; }
 @media (min-width: 768px) { .lp-demo-side { display: flex; flex-direction: column; gap: 12px; min-width: 0; } }
@@ -375,9 +380,10 @@
   overflow: hidden;
   background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px calc(100% / var(--lp-weeks)));
 }
-.lp-timeline-ruler { display: grid; grid-template-columns: repeat(var(--lp-weeks), 1fr); height: 34px; align-items: end; padding-bottom: 6px; border-bottom: 1px solid var(--lp-divider); }
+.lp-timeline-ruler { display: grid; grid-template-columns: repeat(var(--lp-weeks), minmax(0, 1fr)); height: 34px; align-items: end; padding-bottom: 6px; border-bottom: 1px solid var(--lp-divider); }
 .lp-timeline-ruler span { padding-left: 4px; color: rgba(255, 255, 255, 0.45); font-size: 9px; white-space: nowrap; overflow: hidden; }
 @media (max-width: 1023px) { .lp-timeline:not(.is-compact) .lp-timeline-ruler span:nth-child(even) { visibility: hidden; } }
+@media (max-width: 767px) { .lp-timeline .lp-timeline-ruler span { overflow: visible; visibility: hidden; } .lp-timeline .lp-timeline-ruler span:nth-child(4n+1) { visibility: visible; } }
 .lp-timeline-rows { position: relative; margin: 14px 0 0; height: calc(4 * var(--lp-row)); }
 .lp-block {
   position: absolute;
@@ -391,6 +397,13 @@
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
+}
+.lp-block > svg { flex-shrink: 0; }
+.lp-block > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+/* Con bloques estrechos la etiqueta quedaba cortada («Cor», «Plani»): por debajo de 1024 solo se muestra el icono. */
+@media (max-width: 1023px) {
+  .lp-block { justify-content: center; padding: 0 4px; }
+  .lp-block > span { display: none; }
 }
 .lp-block-green { background: #1f9a4a; color: #d9ffe6; }
 .lp-block-blue { background: #3466c9; color: #e3edff; }
@@ -418,7 +431,10 @@
 }
 .lp-screen-top { display: flex; align-items: center; gap: 10px; padding: 10px 14px; color: rgba(255, 255, 255, 0.7); font-size: 7px; letter-spacing: 0.12em; text-transform: uppercase; }
 .lp-screen-top b { margin-left: auto; margin-right: auto; font-family: var(--lp-font-heading); font-size: 12px; color: #fff; letter-spacing: 0; }
-.lp-screen-top em { padding: 3px 9px; border-radius: 999px; background: #fff; color: #1d46d6; font-style: normal; font-weight: 700; }
+/* La píldora decorativa se cortaba en pantallas pequeñas: se oculta donde no cabe. */
+@media (max-width: 419px) { .lp-screen-top em { display: none; } }
+@media (max-width: 1023px) { .lp-screen-card .lp-screen-top em { display: none; } }
+.lp-screen-top em { flex-shrink: 0; white-space: nowrap; padding: 3px 9px; border-radius: 999px; background: #fff; color: #1d46d6; font-style: normal; font-weight: 700; }
 .lp-screen-body { display: flex; flex-direction: column; justify-content: center; flex: 1; padding: 0 8% 6%; }
 .lp-screen-kicker { color: rgba(255, 255, 255, 0.75); font-size: clamp(7px, 0.8vw, 11px); letter-spacing: 0.16em; text-transform: uppercase; }
 .lp-screen-body strong { margin-top: 0.3em; font-family: var(--lp-font-heading); font-size: clamp(22px, 5.2vw, 72px); font-weight: 600; line-height: 0.92; letter-spacing: -0.04em; color: #fff; }
@@ -498,7 +514,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 56%;
+  width: max(56%, min(240px, 100% - 32px));
   height: 36px;
   padding: 0 12px;
   border-radius: 12px;
@@ -524,9 +540,9 @@
 @media (max-width: 1023px) { .lp-feature-wide .lp-canvas { aspect-ratio: 1 / 1; } .lp-canvas-approval .lp-approval { top: 34%; } }
 
 /* ── Acceso ─────────────────────────────────────────────── */
-.lp-access { display: grid; grid-template-columns: 1fr; gap: 32px; margin-top: 48px; padding: 20px; }
+.lp-access { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; margin-top: 48px; padding: 20px; }
 @media (min-width: 640px) { .lp-access { padding: 32px; } }
-@media (min-width: 1024px) { .lp-access { grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 70px; } }
+@media (min-width: 1024px) { .lp-access { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; margin-top: 70px; } }
 .lp-access-copy { padding-top: 0; }
 @media (min-width: 1024px) { .lp-access-copy { padding-top: 32px; } }
 .lp-access-copy > p { margin-top: 16px; color: var(--lp-fg-muted); font-size: 15px; line-height: 1.6; }
@@ -604,7 +620,7 @@
 @media (min-width: 640px) { .lp-footer-plate { padding: 40px 32px; } }
 
 .lp-footer-main { display: grid; gap: 40px; margin-top: 48px; }
-@media (min-width: 1024px) { .lp-footer-main { grid-template-columns: 420px auto; justify-content: space-between; margin-top: 60px; } }
+@media (min-width: 1024px) { .lp-footer-main { grid-template-columns: minmax(0, 420px) auto; justify-content: space-between; margin-top: 60px; } }
 .lp-footer-heading { font-size: 16px; font-weight: 500; }
 .lp-footer-field {
   display: flex !important;
