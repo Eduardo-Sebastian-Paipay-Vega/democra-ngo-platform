@@ -1,0 +1,52 @@
+/*
+ * /login — presentación con el sistema visual .lp del landing.
+ * Todo acotado bajo .lp-auth. Reutiliza tokens --lp-* de ../landing/landing.css;
+ * no introduce colores, radios ni tamaños nuevos salvo los anotados.
+ * CoreLogin (src/core/auth) aplica estilos en línea a campos y tarjeta: la tarjeta
+ * se sobreescribe vía la prop `style` desde LoginGateway; los campos se dejan
+ * como están (pendiente L-13 de AUDIT-login.md).
+ */
+
+.lp-auth {
+  /* Degradado de cierre del landing (--lp-grad-end), fijo detrás de la tarjeta. */
+  background: var(--lp-grad-end) fixed;
+}
+
+.lp-auth-main {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: 96px var(--lp-gutter);
+}
+
+/* Tarjeta: mismo aspecto que .lp-card sobre --lp-bg, opaca para no perder
+   contraste sobre el degradado. CoreLogin añade rounded-3xl y p-8 (Tailwind,
+   en @layer utilities); estas reglas sin capa ganan la cascada. */
+.lp-auth-card {
+  border-radius: var(--lp-radius-card);
+  padding: 32px;
+}
+@media (max-width: 399px) {
+  .lp-auth-card { padding: 28px 20px; }
+}
+
+.lp-auth-head { margin-bottom: 32px; text-align: center; }
+.lp-auth-head .lp-brand { display: inline-flex; }
+.lp-auth-title { margin-top: 28px; }
+.lp-auth-lede { margin-top: 10px; color: var(--lp-fg-muted); font-size: 15px; line-height: 1.6; text-wrap: balance; }
+
+/* Botón principal: .lp-btn .lp-btn-lg .lp-btn-block. El sistema no define estado
+   deshabilitado (nivel C); se conserva la atenuación funcional previa. */
+.lp-auth-submit { margin-top: 8px; }
+.lp-auth-submit:disabled { opacity: 0.45; cursor: not-allowed; }
+.lp-auth-submit:disabled:hover { background: var(--lp-primary); }
+.lp-auth-submit:disabled:active { transform: none; }
+
+.lp-auth-foot { margin-top: 24px; text-align: center; }
+.lp-auth-foot p + p { margin-top: 8px; }
+
+/* Foco en campos: .lp :focus-visible da el anillo del sistema; aquí solo se
+   evita que el radio del campo salte de 12 a 8 px al enfocar. */
+.lp-auth-card input:focus-visible { border-radius: 12px; }
