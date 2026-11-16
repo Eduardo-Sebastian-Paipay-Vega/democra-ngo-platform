@@ -179,6 +179,14 @@ function formatDateTime(value: string | null | undefined): string {
   });
 }
 
+/** Hora local (HH:mm) de una actividad de la agenda; "Hoy" si no hay hora. */
+function formatAgendaTime(value: string | null | undefined): string {
+  if (!value) return "Hoy";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Hoy";
+  return new Intl.DateTimeFormat("es-PE", { hour: "2-digit", minute: "2-digit", hour12: false }).format(date);
+}
+
 function formatScheduleLabel(startAt: string | null | undefined, endAt: string | null | undefined): string {
   if (!startAt && !endAt) return "-";
   if (startAt && endAt) {
@@ -193,7 +201,7 @@ function BlockError({ message, onRetry }: { message: string; onRetry: () => void
       <span>{message}</span>
       <button
         type="button"
-        className="rounded-md px-2.5 py-1 text-[11px] bg-red-500/20 hover:bg-red-500/30 text-white font-medium transition-colors"
+        className="rounded-md px-2.5 py-1 text-[11px] bg-red-500/20 hover:bg-red-500/30 text-[var(--t-danger)] font-medium transition-colors"
         onClick={onRetry}
       >
         Reintentar
@@ -209,21 +217,21 @@ function FieldError({ message }: { message?: string | null }) {
 
 function DetailField({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl px-3 py-2 bg-zinc-950 border border-zinc-800">
-      <p className="text-[11px] text-zinc-400 font-medium">{label}</p>
-      <p className="mt-0.5 text-xs text-zinc-200">{value || "-"}</p>
+    <div className="rounded-xl px-3 py-2 bg-[var(--t-elevated)] border border-[var(--t-border)]">
+      <p className="text-[11px] text-[var(--t-text-tertiary)] font-medium">{label}</p>
+      <p className="mt-0.5 text-xs text-[var(--t-text)]">{value || "-"}</p>
     </div>
   );
 }
 
 function ModalHeader({ title, description, onClose }: { title: string; description: string; onClose: () => void }) {
   return (
-    <div className="flex items-start justify-between border-b border-white/5 p-4">
+    <div className="flex items-start justify-between border-b border-[var(--t-border)] p-4">
       <div>
-        <h3 className="text-base font-semibold text-zinc-100">{title}</h3>
-        <p className="text-xs text-zinc-400 mt-0.5">{description}</p>
+        <h3 className="text-base font-semibold text-[var(--t-text)]">{title}</h3>
+        <p className="text-xs text-[var(--t-text-tertiary)] mt-0.5">{description}</p>
       </div>
-      <button type="button" onClick={onClose} className="text-zinc-400 hover:text-zinc-200 p-1">
+      <button type="button" onClick={onClose} className="text-[var(--t-text-tertiary)] hover:text-[var(--t-text)] p-1">
         <X className="h-4 w-4" />
       </button>
     </div>
@@ -233,7 +241,7 @@ function ModalHeader({ title, description, onClose }: { title: string; descripti
 function toResolutionTitle(target: ResolutionTarget | null): string {
   if (!target) return "Resolver";
   const actionText = target.targetStatus === "approved" ? "Aprobar" : "Rechazar";
-  return target.kind === "hour" ? `${actionText} Horas` : `${actionText} Solicitud de AdmisiÃ³n`;
+  return target.kind === "hour" ? `${actionText} Horas` : `${actionText} Solicitud de Admisión`;
 }
 
 function getInitials(name: string): string {
@@ -358,11 +366,11 @@ export function Dashboard() {
     return [
       { name: "Jue", aprobadas: 0, solicitadas: 0 },
       { name: "Vie", aprobadas: 0, solicitadas: 0 },
-      { name: "SÃ¡b", aprobadas: 0, solicitadas: 0 },
+      { name: "Sáb", aprobadas: 0, solicitadas: 0 },
       { name: "Dom", aprobadas: 0, solicitadas: 0 },
       { name: "Lun", aprobadas: 0, solicitadas: 0 },
       { name: "Mar", aprobadas: 0, solicitadas: 0 },
-      { name: "MiÃ©", aprobadas: 0, solicitadas: 0 },
+      { name: "Mié", aprobadas: 0, solicitadas: 0 },
     ];
   }, [weeklyImpact.data]);
 
@@ -382,7 +390,7 @@ export function Dashboard() {
         items.push({
           id: `h-${h.id}`,
           user: h.volunteerName || "Voluntario",
-          action: `registrÃ³ ${h.hours}h de voluntariado`,
+          action: `registró ${h.hours}h de voluntariado`,
           target: h.activityName || "Actividad",
           time: formatDate(h.date),
           avatar: getInitials(h.volunteerName || "V"),
@@ -395,7 +403,7 @@ export function Dashboard() {
         items.push({
           id: `r-${r.id}`,
           user: r.name || "Postulante",
-          action: "enviÃ³ solicitud de admisiÃ³n",
+          action: "envió solicitud de admisión",
           target: r.email || "Registro",
           time: formatDate(r.submittedAt),
           avatar: getInitials(r.name || "P"),
@@ -407,8 +415,8 @@ export function Dashboard() {
       recentActivities.data.forEach((a) => {
         items.push({
           id: `a-${a.id}`,
-          user: "CoordinaciÃ³n",
-          action: `programÃ³ la actividad "${a.name}"`,
+          user: "Coordinación",
+          action: `programó la actividad "${a.name}"`,
           target: a.projectName || "Proyecto",
           time: formatScheduleLabel(a.startAt, a.endAt),
           avatar: "CO",
@@ -504,7 +512,7 @@ export function Dashboard() {
     if (Number.isNaN(parsedEstimated)) {
       // @ts-ignore
       // @ts-ignore
-      (validationErrors as any).estimatedHours = "Ingresa un nÃºmero vÃ¡lido de horas estimadas.";
+      (validationErrors as any).estimatedHours = "Ingresa un número válido de horas estimadas.";
     }
     if (Object.keys(validationErrors).length > 0) {
       setActivityFormErrors(validationErrors);
@@ -574,7 +582,7 @@ export function Dashboard() {
       const detail = await fetchDashboardAdmissionDetail(admissionId);
       setAdmissionDetail(detail);
     } catch (err) {
-      setAdmissionDetailError(toFriendlyError(err, "No se pudo cargar la solicitud de admisiÃ³n."));
+      setAdmissionDetailError(toFriendlyError(err, "No se pudo cargar la solicitud de admisión."));
     } finally {
       setAdmissionDetailLoading(false);
     }
@@ -630,7 +638,7 @@ export function Dashboard() {
       setIsHourDetailOpen(false);
       setIsAdmissionDetailOpen(false);
     } catch (err) {
-      setResolutionError(toFriendlyError(err, "No se pudo guardar la resoluciÃ³n en la BD."));
+      setResolutionError(toFriendlyError(err, "No se pudo guardar la resolución en la BD."));
     }
   }, [resolutionTarget, resolutionComment, resolveHour, resolveAdmission, closeResolutionModal]);
 
@@ -650,12 +658,12 @@ export function Dashboard() {
     {
       key: "volunteerName",
       label: "Voluntario",
-      render: (item) => <span className="font-medium text-zinc-100">{item.volunteerName}</span>,
+      render: (item) => <span className="font-medium text-[var(--t-text)]">{item.volunteerName}</span>,
     },
     {
       key: "activityName",
       label: "Actividad",
-      render: (item) => <span className="text-xs text-zinc-400">{item.activityName}</span>,
+      render: (item) => <span className="text-xs text-[var(--t-text-tertiary)]">{item.activityName}</span>,
     },
     {
       key: "hours",
@@ -669,7 +677,7 @@ export function Dashboard() {
     {
       key: "date",
       label: "Fecha",
-      render: (item) => <span className="font-mono text-xs text-zinc-400">{formatDate(item.date)}</span>,
+      render: (item) => <span className="font-mono text-xs text-[var(--t-text-tertiary)]">{formatDate(item.date)}</span>,
     },
     {
       key: "status",
@@ -696,19 +704,19 @@ export function Dashboard() {
       label: "Actividad y Proyecto",
       render: (item) => (
         <div>
-          <div className="font-medium text-zinc-100">{item.name}</div>
-          <div className="mt-0.5 text-[11px] text-zinc-400">
+          <div className="font-medium text-[var(--t-text)]">{item.name}</div>
+          <div className="mt-0.5 text-[11px] text-[var(--t-text-tertiary)]">
             {item.projectName}
-            {item.locationName ? ` â€¢ ${item.locationName}` : ""}
+            {item.locationName ? ` • ${item.locationName}` : ""}
           </div>
         </div>
       ),
     },
     {
       key: "date",
-      label: "ProgramaciÃ³n",
+      label: "Programación",
       render: (item) => (
-        <span className="font-mono text-xs text-zinc-400">
+        <span className="font-mono text-xs text-[var(--t-text-tertiary)]">
           {formatScheduleLabel(item.startAt, item.endAt)}
         </span>
       ),
@@ -716,7 +724,7 @@ export function Dashboard() {
     {
       key: "assignedVolunteers",
       label: "Voluntarios",
-      render: (item) => <span className="font-mono text-xs text-zinc-300">{item.assignedVolunteers} vol.</span>,
+      render: (item) => <span className="font-mono text-xs text-[var(--t-text-secondary)]">{item.assignedVolunteers} vol.</span>,
     },
     {
       key: "status",
@@ -740,17 +748,17 @@ export function Dashboard() {
     {
       key: "name",
       label: "Solicitante",
-      render: (item) => <span className="font-medium text-zinc-100">{item.name}</span>,
+      render: (item) => <span className="font-medium text-[var(--t-text)]">{item.name}</span>,
     },
     {
       key: "email",
-      label: "Correo ElectrÃ³nico",
-      render: (item) => <span className="text-xs text-zinc-400 font-mono">{item.email}</span>,
+      label: "Correo Electrónico",
+      render: (item) => <span className="text-xs text-[var(--t-text-tertiary)] font-mono">{item.email}</span>,
     },
     {
       key: "submittedAt",
-      label: "Fecha EnvÃ­o",
-      render: (item) => <span className="font-mono text-xs text-zinc-400">{formatDate(item.submittedAt)}</span>,
+      label: "Fecha Envío",
+      render: (item) => <span className="font-mono text-xs text-[var(--t-text-tertiary)]">{formatDate(item.submittedAt)}</span>,
     },
     {
       key: "status",
@@ -781,13 +789,13 @@ export function Dashboard() {
           <div className="flex-1 min-w-0">
             <PageHeader
               title="Panel Principal"
-              description="Resumen operativo general, mÃ©tricas clave en tiempo real y gestiÃ³n de la ONG."
+              description="Resumen operativo general, métricas clave en tiempo real y gestión de la ONG."
             />
           </div>
 
           {/* â”€â”€ Barra de acciones unificada (una sola fila) â”€â”€ */}
           <div className="flex flex-wrap items-center gap-2">
-            {/* BOTÃ“N ACTUALIZAR */}
+            {/* BOTÓN ACTUALIZAR */}
             <OutlineButton
               size="sm"
               onClick={refresh}
@@ -799,7 +807,7 @@ export function Dashboard() {
               Actualizar
             </OutlineButton>
 
-            {/* SELECTOR DE PERÃODO (Custom) */}
+            {/* SELECTOR DE PERÍODO (Custom) */}
             <Select
               value={periodFilter}
               onValueChange={(val) => setPeriodFilter(val as PeriodFilter)}
@@ -809,8 +817,8 @@ export function Dashboard() {
               </SelectTrigger>
               <SelectContent  className="text-[var(--color-text-primary)]">
                 <SelectItem value="month" className="text-[13px] hover:bg-[var(--t-hover)] focus:bg-[var(--t-hover)] focus:text-[var(--t-text)]">Este Mes</SelectItem>
-                <SelectItem value="quarter" className="text-[13px] hover:bg-[var(--t-hover)] focus:bg-[var(--t-hover)] focus:text-[var(--t-text)]">Ãšltimo Trimestre</SelectItem>
-                <SelectItem value="year" className="text-[13px] hover:bg-[var(--t-hover)] focus:bg-[var(--t-hover)] focus:text-[var(--t-text)]">Este AÃ±o</SelectItem>
+                <SelectItem value="quarter" className="text-[13px] hover:bg-[var(--t-hover)] focus:bg-[var(--t-hover)] focus:text-[var(--t-text)]">Último Trimestre</SelectItem>
+                <SelectItem value="year" className="text-[13px] hover:bg-[var(--t-hover)] focus:bg-[var(--t-hover)] focus:text-[var(--t-text)]">Este Año</SelectItem>
               </SelectContent>
             </Select>
 
@@ -832,7 +840,7 @@ export function Dashboard() {
               </SelectContent>
             </Select>
 
-            {/* BOTÃ“N PERSONALIZAR */}
+            {/* BOTÓN PERSONALIZAR */}
             <OutlineButton
               size="sm"
               onClick={() => setIsSettingsModalOpen(true)}
@@ -843,7 +851,7 @@ export function Dashboard() {
               Personalizar
             </OutlineButton>
 
-            {/* BOTÃ“N DESCARGAR REPORTE */}
+            {/* BOTÓN DESCARGAR REPORTE */}
             <OutlineButton
               size="sm"
               onClick={() => {
@@ -857,7 +865,7 @@ export function Dashboard() {
               Reporte PDF
             </OutlineButton>
 
-            {/* BOTÃ“N ACCIÃ“N RÃPIDA DROPDOWN */}
+            {/* BOTÓN ACCIÓN RÁPIDA DROPDOWN */}
             <div className="relative">
               <GradientButton
                 size="sm"
@@ -865,7 +873,7 @@ export function Dashboard() {
                 className="flex items-center gap-1.5 shadow-lg"
               >
                 <Zap className="h-4 w-4 fill-white" />
-                + AcciÃ³n RÃ¡pida
+                + Acción Rápida
                 <ChevronDown className="h-3.5 w-3.5" />
               </GradientButton>
 
@@ -942,7 +950,7 @@ export function Dashboard() {
         </div>
       </motion.div>
 
-      {/* 4 GRANDES TARJETAS DE MÃ‰TRICAS PRINCIPALES (100% REALES DESDE SUPABASE) */}
+      {/* 4 GRANDES TARJETAS DE MÉTRICAS PRINCIPALES (100% REALES DESDE SUPABASE) */}
       <motion.div variants={fadeUp as any}>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {/* 1. VOLUNTARIOS ACTIVOS */}
@@ -977,7 +985,7 @@ export function Dashboard() {
             </div>
             <div className="mt-3 flex items-baseline justify-between">
               <p className="text-3xl font-bold tabular-nums text-[var(--color-text-primary)]" >
-                {activeProjectsCount} <span className="text-sm font-normal text-[var(--color-text-muted)]" >proy.</span> â€¢ {activeActivitiesCount} <span className="text-sm font-normal text-[var(--color-text-muted)]" >act.</span>
+                {activeProjectsCount} <span className="text-sm font-normal text-[var(--color-text-muted)]" >proy.</span> • {activeActivitiesCount} <span className="text-sm font-normal text-[var(--color-text-muted)]" >act.</span>
               </p>
               <span className="text-xs font-medium text-[var(--color-accent-emerald)] bg-[var(--color-accent-emerald)/10] px-2.5 py-0.5 rounded-full flex items-center gap-1 border border-[var(--color-accent-emerald)]/20">
                 <CheckCircle2 className="h-3 w-3" /> Activos
@@ -1004,13 +1012,13 @@ export function Dashboard() {
             </div>
           </div>
 
-          {/* 4. PENDIENTES DE REVISIÃ“N */}
+          {/* 4. PENDIENTES DE REVISIÓN */}
           <div
             className="rounded-2xl p-4 shadow-sm hover:shadow-md transition-all bg-[var(--color-bg-card)] border border-[var(--color-border-subtle)] rounded-xl"
             
           >
             <div className="flex items-center justify-between">
-              <span className="text-[13px] font-medium text-[var(--color-text-secondary)]" >Pendientes de RevisiÃ³n</span>
+              <span className="text-[13px] font-medium text-[var(--color-text-secondary)]" >Pendientes de Revisión</span>
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[var(--color-accent-amber)/10] text-[var(--color-accent-amber)] border border-[var(--color-accent-amber)]/20">
                 <AlertCircle className="h-4 w-4" />
               </div>
@@ -1018,17 +1026,17 @@ export function Dashboard() {
             <div className="mt-3 flex items-baseline justify-between">
               <p className="text-3xl font-bold tabular-nums text-[var(--color-text-primary)]" >{pendingApprovalsCount} <span className="text-sm font-normal text-[var(--color-text-muted)]" >pend.</span></p>
               <span className="text-xs font-medium text-[var(--color-accent-amber)] bg-[var(--color-accent-amber)/10] px-2.5 py-0.5 rounded-full flex items-center gap-1 border border-[var(--color-accent-amber)]/20">
-                <Clock className="h-3 w-3" /> Requiere atenciÃ³n
+                <Clock className="h-3 w-3" /> Requiere atención
               </span>
             </div>
           </div>
         </div>
       </motion.div>
 
-      {/* SECCIÃ“N PRINCIPAL: GRÃFICO DE ÃREA Y AGENDA DE HOY */}
+      {/* SECCIÓN PRINCIPAL: GRÁFICO DE ÁREA Y AGENDA DE HOY */}
       {(widgetSettings.showEvolutionChart || widgetSettings.showTodayAgenda) && (
         <motion.div variants={fadeUp as any} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* GRÃFICO DE EVOLUCIÃ“N DE HORAS */}
+          {/* GRÁFICO DE EVOLUCIÓN DE HORAS */}
           {widgetSettings.showEvolutionChart && (
             <div
               className="lg:col-span-2 rounded-2xl p-5 space-y-4 shadow-sm bg-[var(--color-bg-card)] border border-[var(--color-border-subtle)] rounded-xl"
@@ -1038,10 +1046,10 @@ export function Dashboard() {
                 <div>
                   <h3 className="text-base font-semibold flex items-center gap-2 text-[var(--color-text-primary)]" >
                     <TrendingUp className="h-5 w-5 text-indigo-400" />
-                    EvoluciÃ³n del Voluntariado (Horas)
+                    Evolución del Voluntariado (Horas)
                   </h3>
                   <p className="text-[13px] mt-0.5 text-[var(--color-text-muted)]" >
-                    Comparativa de horas solicitadas vs validadas en los Ãºltimos meses.
+                    Comparativa de horas solicitadas vs validadas en los últimos 7 días.
                   </p>
                 </div>
 
@@ -1068,8 +1076,8 @@ export function Dashboard() {
                       <YAxis stroke="var(--color-text-secondary)" fontSize={11} tickLine={false} allowDecimals={false} domain={[0, 'auto']} />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: "#18181b",
-                          borderColor: "#27272a",
+                          backgroundColor: "var(--t-elevated)",
+                          borderColor: "var(--t-border)",
                           borderRadius: "12px",
                           fontSize: "12px",
                         }}
@@ -1096,13 +1104,13 @@ export function Dashboard() {
                   </ResponsiveContainer>
                 ) : (
                   <div className="h-full w-full flex flex-col items-center justify-center text-center space-y-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border shadow-inner bg-[#23211D] border-[var(--color-border-subtle)]" >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border shadow-inner bg-[var(--t-elevated)] border-[var(--color-border-subtle)]" >
                       <TrendingUp className="h-6 w-6 text-indigo-400/50" />
                     </div>
                     <div>
-                      <p className="text-[13px] font-semibold text-[var(--color-text-primary)]" >AÃºn no hay horas registradas</p>
+                      <p className="text-[13px] font-semibold text-[var(--color-text-primary)]" >Aún no hay horas registradas</p>
                       <p className="text-[12px] max-w-[250px] mx-auto mt-1 text-[var(--color-text-muted)]" >
-                        A medida que los voluntarios registren y validen sus horas, verÃ¡s el progreso aquÃ­.
+                        A medida que los voluntarios registren y validen sus horas, verás el progreso aquí.
                       </p>
                     </div>
                   </div>
@@ -1131,26 +1139,26 @@ export function Dashboard() {
                 <div className="mt-3 space-y-2.5">
                   {realAgendaItems.length > 0 ? (
                     realAgendaItems.map((item) => (
-                      <div key={item.id} className="p-3 rounded-xl bg-zinc-950 border border-zinc-800 flex items-start gap-3">
+                      <div key={item.id} className="p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)] flex items-start gap-3">
                         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 font-mono text-[11px] font-bold">
-                          {item.timeLabel || "09:00"}
+                          {formatAgendaTime(item.time)}
                         </div>
                         <div>
-                          <h4 className="text-xs font-semibold text-zinc-200">{item.title}</h4>
-                          <p className="text-[11px] text-zinc-400">{item.subtitle}</p>
-                          <span className="text-[10px] text-emerald-400 font-mono mt-1 block">ðŸ‘¥ {item.assignedCount ?? 0} voluntarios asignados</span>
+                          <h4 className="text-xs font-semibold text-[var(--t-text)]">{item.title}</h4>
+                          <p className="text-[11px] text-[var(--t-text-tertiary)]">{item.subtitle}</p>
+                          <span className="text-[10px] text-emerald-400 font-mono mt-1 block">👥 {item.assignedCount ?? 0} voluntarios asignados</span>
                         </div>
                       </div>
                     ))
                   ) : (
                     <div className="py-8 text-center space-y-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-400 mx-auto border border-zinc-700/50 shadow-inner">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--t-elevated)] text-[var(--t-text-tertiary)] mx-auto border border-[var(--t-border-strong)] shadow-inner">
                         <Calendar className="h-5 w-5 text-indigo-400" />
                       </div>
                       <div>
-                        <p className="text-xs text-zinc-300 font-semibold">Sin actividades programadas hoy</p>
-                        <p className="text-[11px] text-zinc-500 max-w-[200px] mx-auto mt-1">
-                          Las actividades creadas para la fecha actual aparecerÃ¡n aquÃ­.
+                        <p className="text-xs text-[var(--t-text-secondary)] font-semibold">Sin actividades programadas hoy</p>
+                        <p className="text-[11px] text-[var(--t-text-dim)] max-w-[200px] mx-auto mt-1">
+                          Las actividades creadas para la fecha actual aparecerán aquí.
                         </p>
                       </div>
                       <button
@@ -1226,12 +1234,12 @@ export function Dashboard() {
                   ))
                 ) : (
                   <div className="py-8 text-center space-y-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-400 mx-auto border border-zinc-700/50 shadow-inner">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--t-elevated)] text-[var(--t-text-tertiary)] mx-auto border border-[var(--t-border-strong)] shadow-inner">
                       <Radio className="h-5 w-5 text-indigo-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-zinc-300 font-semibold">Sin actividad reciente en el sistema</p>
-                      <p className="text-[11px] text-zinc-500 max-w-sm mx-auto mt-1">
+                      <p className="text-xs text-[var(--t-text-secondary)] font-semibold">Sin actividad reciente en el sistema</p>
+                      <p className="text-[11px] text-[var(--t-text-dim)] max-w-sm mx-auto mt-1">
                         Las acciones en tiempo real (horas registradas, admisiones y evidencias) se sincronizan de la BD.
                       </p>
                     </div>
@@ -1516,14 +1524,14 @@ export function Dashboard() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <div>
-              <label className="block font-medium text-zinc-300 mb-1">
+              <label className="block font-medium text-[var(--t-text-secondary)] mb-1">
                 Proyecto <span className="text-red-400">*</span>
               </label>
               <Select
   value={activityFormDraft.projectId}
   onValueChange={(val) => setActivityFormDraft((d) => ({ ...d, projectId: val }))}
 >
-  <SelectTrigger className="w-full h-10 rounded-xl px-3 outline-none border border-zinc-800 bg-zinc-900 text-zinc-200">
+  <SelectTrigger className="w-full h-10 rounded-xl px-3 outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)]">
     <SelectValue placeholder="Selecciona proyecto" />
   </SelectTrigger>
   <SelectContent  className="text-[var(--color-text-primary)]">
@@ -1538,48 +1546,48 @@ export function Dashboard() {
             </div>
 
             <div>
-              <label className="block font-medium text-zinc-300 mb-1">
-                TÃ­tulo de la Actividad <span className="text-red-400">*</span>
+              <label className="block font-medium text-[var(--t-text-secondary)] mb-1">
+                Título de la Actividad <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
                 value={activityFormDraft.title}
                 onChange={(e) => setActivityFormDraft((d) => ({ ...d, title: e.target.value }))}
-                placeholder="Ej. Taller de CapacitaciÃ³n Comunitario"
-                className="w-full rounded-xl px-3 py-2 outline-none border border-zinc-800 bg-zinc-900 text-zinc-200"
+                placeholder="Ej. Taller de Capacitación Comunitario"
+                className="w-full rounded-xl px-3 py-2 outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)]"
               />
               <FieldError message={activityFormErrors.title} />
             </div>
 
             <div>
-              <label className="block font-medium text-zinc-300 mb-1">Fecha / Hora Inicio</label>
+              <label className="block font-medium text-[var(--t-text-secondary)] mb-1">Fecha / Hora Inicio</label>
               <input
                 type="datetime-local"
                 value={activityFormDraft.startAt}
                 onChange={(e) => setActivityFormDraft((d) => ({ ...d, startAt: e.target.value }))}
-                className="w-full rounded-xl px-3 py-2 outline-none border border-zinc-800 bg-zinc-900 text-zinc-200"
+                className="w-full rounded-xl px-3 py-2 outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)]"
               />
               <FieldError message={activityFormErrors.startAt} />
             </div>
 
             <div>
-              <label className="block font-medium text-zinc-300 mb-1">Fecha / Hora Fin</label>
+              <label className="block font-medium text-[var(--t-text-secondary)] mb-1">Fecha / Hora Fin</label>
               <input
                 type="datetime-local"
                 value={activityFormDraft.endAt}
                 onChange={(e) => setActivityFormDraft((d) => ({ ...d, endAt: e.target.value }))}
-                className="w-full rounded-xl px-3 py-2 outline-none border border-zinc-800 bg-zinc-900 text-zinc-200"
+                className="w-full rounded-xl px-3 py-2 outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)]"
               />
               <FieldError message={activityFormErrors.endAt} />
             </div>
 
             <div>
-              <label className="block font-medium text-zinc-300 mb-1">Estado de la Actividad</label>
+              <label className="block font-medium text-[var(--t-text-secondary)] mb-1">Estado de la Actividad</label>
               <Select
   value={activityFormDraft.statusCode}
   onValueChange={(val) => setActivityFormDraft((d) => ({ ...d, statusCode: val }))}
 >
-  <SelectTrigger className="w-full h-10 rounded-xl px-3 outline-none border border-zinc-800 bg-zinc-900 text-zinc-200">
+  <SelectTrigger className="w-full h-10 rounded-xl px-3 outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)]">
     <SelectValue placeholder="Selecciona estado" />
   </SelectTrigger>
   <SelectContent  className="text-[var(--color-text-primary)]">
@@ -1593,24 +1601,24 @@ export function Dashboard() {
             </div>
 
             <div>
-              <label className="block font-medium text-zinc-300 mb-1">Horas Estimadas</label>
+              <label className="block font-medium text-[var(--t-text-secondary)] mb-1">Horas Estimadas</label>
               <input
                 type="number"
                 step="0.5"
                 value={activityFormDraft.estimatedHoursText}
                 onChange={(e) => setActivityFormDraft((d) => ({ ...d, estimatedHoursText: e.target.value }))}
                 placeholder="Ej. 4"
-                className="w-full rounded-xl px-3 py-2 outline-none border border-zinc-800 bg-zinc-900 text-zinc-200" /> <FieldError message={(activityFormErrors as any).estimatedHours} />
+                className="w-full rounded-xl px-3 py-2 outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)]" /> <FieldError message={(activityFormErrors as any).estimatedHours} />
             </div>
           </div>
 
           <div>
-            <label className="block font-medium text-zinc-300 mb-1 text-xs">UbicaciÃ³n</label>
+            <label className="block font-medium text-[var(--t-text-secondary)] mb-1 text-xs">Ubicación</label>
             <Select
   value={activityFormDraft.locationId}
   onValueChange={(val) => setActivityFormDraft((d) => ({ ...d, locationId: val }))}
 >
-  <SelectTrigger className="w-full h-10 rounded-xl px-3 outline-none border border-zinc-800 bg-zinc-900 text-zinc-200">
+  <SelectTrigger className="w-full h-10 rounded-xl px-3 outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)]">
     <SelectValue placeholder="Selecciona ubicación" />
   </SelectTrigger>
   <SelectContent  className="text-[var(--color-text-primary)]">
@@ -1624,17 +1632,17 @@ export function Dashboard() {
           </div>
 
           <div>
-            <label className="block font-medium text-zinc-300 mb-1 text-xs">DescripciÃ³n / Objetivos</label>
+            <label className="block font-medium text-[var(--t-text-secondary)] mb-1 text-xs">Descripción / Objetivos</label>
             <textarea
               rows={3}
               value={activityFormDraft.description}
               onChange={(e) => setActivityFormDraft((d) => ({ ...d, description: e.target.value }))}
               placeholder="Detalla los objetivos de la actividad..."
-              className="w-full rounded-xl p-3 text-xs outline-none border border-zinc-800 bg-zinc-900 text-zinc-200"
+              className="w-full rounded-xl p-3 text-xs outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)]"
             />
           </div>
 
-          <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
+          <div className="flex justify-end gap-2 pt-3 border-t border-[var(--t-border)]">
             <OutlineButton size="sm" onClick={closeActivityFormModal} disabled={isSavingActivity}>
               Cancelar
             </OutlineButton>
@@ -1650,20 +1658,20 @@ export function Dashboard() {
         <div className="space-y-4 p-5">
           <ModalHeader
             title="Detalle de la Actividad"
-            description="InformaciÃ³n detallada de la actividad registrada en la BD."
+            description="Información detallada de la actividad registrada en la BD."
             onClose={() => setIsActivityDetailOpen(false)}
           />
 
           {activityDetailLoading ? (
-            <p className="text-xs text-zinc-400 py-4 text-center">Cargando informaciÃ³n desde la base de datos...</p>
+            <p className="text-xs text-[var(--t-text-tertiary)] py-4 text-center">Cargando información desde la base de datos...</p>
           ) : activityDetailError ? (
             <BlockError message={activityDetailError} onRetry={() => activityDetailTargetId && void openActivityDetailModal(activityDetailTargetId)} />
           ) : activityDetail ? (
             <div className="space-y-3 text-xs">
               <div className="grid grid-cols-2 gap-3">
-                <DetailField label="TÃ­tulo" value={activityDetail.title} />
+                <DetailField label="Título" value={activityDetail.title} />
                 <DetailField label="Proyecto" value={activityDetail.projectName} />
-                <DetailField label="UbicaciÃ³n" value={activityDetail.locationName ?? "-"} />
+                <DetailField label="Ubicación" value={activityDetail.locationName ?? "-"} />
                 <DetailField label="Estado" value={activityDetail.statusLabel} />
                 <DetailField label="Inicio" value={formatDateTime(activityDetail.startAt)} />
                 <DetailField label="Fin" value={formatDateTime(activityDetail.endAt)} />
@@ -1672,14 +1680,14 @@ export function Dashboard() {
               </div>
 
               {activityDetail.description && (
-                <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
-                  <p className="text-[11px] text-zinc-400 font-medium mb-1">DescripciÃ³n</p>
-                  <p className="text-zinc-200">{activityDetail.description}</p>
+                <div className="p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
+                  <p className="text-[11px] text-[var(--t-text-tertiary)] font-medium mb-1">Descripción</p>
+                  <p className="text-[var(--t-text)]">{activityDetail.description}</p>
                 </div>
               )}
 
               {canManageActivities && (
-                <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
+                <div className="flex justify-end gap-2 pt-3 border-t border-[var(--t-border)]">
                   <OutlineButton
                     size="sm"
                     onClick={() => {
@@ -1711,12 +1719,12 @@ export function Dashboard() {
         <div className="space-y-4 p-5">
           <ModalHeader
             title="Detalle de Registro de Horas"
-            description="RevisiÃ³n de horas solicitadas por el voluntario."
+            description="Revisión de horas solicitadas por el voluntario."
             onClose={() => setIsHourDetailOpen(false)}
           />
 
           {hourDetailLoading ? (
-            <p className="text-xs text-zinc-400 py-4 text-center">Cargando datos de horas desde Supabase...</p>
+            <p className="text-xs text-[var(--t-text-tertiary)] py-4 text-center">Cargando datos de horas desde Supabase...</p>
           ) : hourDetailError ? (
             <BlockError message={hourDetailError} onRetry={() => hourDetailTargetId && void openHourDetailModal(hourDetailTargetId)} />
           ) : hourDetail ? (
@@ -1731,14 +1739,14 @@ export function Dashboard() {
               </div>
 
               {(hourDetail as any).comment && (
-                <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
-                  <p className="text-[11px] text-zinc-400 font-medium mb-1">Notas del Voluntario</p>
-                  <p className="text-zinc-200">{(hourDetail as any).comment}</p>
+                <div className="p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
+                  <p className="text-[11px] text-[var(--t-text-tertiary)] font-medium mb-1">Notas del Voluntario</p>
+                  <p className="text-[var(--t-text)]">{(hourDetail as any).comment}</p>
                 </div>
               )}
 
               {canResolveHours && hourDetail.status === "pending" && (
-                <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
+                <div className="flex justify-end gap-2 pt-3 border-t border-[var(--t-border)]">
                   <OutlineButton
                     size="sm"
                     onClick={() => {
@@ -1788,36 +1796,36 @@ export function Dashboard() {
         </div>
       </ModalShell>
 
-      {/* MODAL DETALLE DE ADMISIÃ“N (REAL DB FETCH) */}
+      {/* MODAL DETALLE DE ADMISIÓN (REAL DB FETCH) */}
       <ModalShell open={isAdmissionDetailOpen} onClose={() => setIsAdmissionDetailOpen(false)} width="max-w-[640px]">
         <div className="space-y-4 p-5">
           <ModalHeader
-            title="Detalle de Solicitud de AdmisiÃ³n"
-            description="InformaciÃ³n del postulante para unirse a la ONG."
+            title="Detalle de Solicitud de Admisión"
+            description="Información del postulante para unirse a la ONG."
             onClose={() => setIsAdmissionDetailOpen(false)}
           />
 
           {admissionDetailLoading ? (
-            <p className="text-xs text-zinc-400 py-4 text-center">Cargando solicitud de admisiÃ³n desde Supabase...</p>
+            <p className="text-xs text-[var(--t-text-tertiary)] py-4 text-center">Cargando solicitud de admisión desde Supabase...</p>
           ) : admissionDetailError ? (
             <BlockError message={admissionDetailError} onRetry={() => admissionDetailTargetId && void openAdmissionDetailModal(admissionDetailTargetId)} />
           ) : admissionDetail ? (
             <div className="space-y-3 text-xs">
               <div className="grid grid-cols-2 gap-3"> <DetailField label="Nombre Completo" value={admissionDetail.fullName} />
-                <DetailField label="Correo ElectrÃ³nico" value={admissionDetail.email} /> <DetailField label="TelÃ©fono" value={(admissionDetail as any).phone ?? "-"} />
-                <DetailField label="Fecha de EnvÃ­o" value={formatDate(admissionDetail.submittedAt)} />
+                <DetailField label="Correo Electrónico" value={admissionDetail.email} /> <DetailField label="Teléfono" value={(admissionDetail as any).phone ?? "-"} />
+                <DetailField label="Fecha de Envío" value={formatDate(admissionDetail.submittedAt)} />
                 <DetailField label="Estado" value={admissionDetail.status} />
               </div>
 
               {admissionDetail.notes && (
-                <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
-                  <p className="text-[11px] text-zinc-400 font-medium mb-1">Motivo / Notas de PostulaciÃ³n</p>
-                  <p className="text-zinc-200">{admissionDetail.notes}</p>
+                <div className="p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
+                  <p className="text-[11px] text-[var(--t-text-tertiary)] font-medium mb-1">Motivo / Notas de Postulación</p>
+                  <p className="text-[var(--t-text)]">{admissionDetail.notes}</p>
                 </div>
               )}
 
               {canResolveAdmissions && (admissionDetail.status === "pending" || admissionDetail.status === "interviewing") && (
-                <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
+                <div className="flex justify-end gap-2 pt-3 border-t border-[var(--t-border)]">
                   <OutlineButton
                     size="sm"
                     onClick={() =>
@@ -1835,7 +1843,7 @@ export function Dashboard() {
                       })
                     }
                   >
-                    Aprobar PostulaciÃ³n
+                    Aprobar Postulación
                   </OutlineButton>
 
                   <OutlineButton
@@ -1856,7 +1864,7 @@ export function Dashboard() {
                     }
                     className="border-red-500/30 text-red-400 hover:bg-red-500/10"
                   >
-                    Rechazar PostulaciÃ³n
+                    Rechazar Postulación
                   </OutlineButton>
                 </div>
               )}
@@ -1865,17 +1873,17 @@ export function Dashboard() {
         </div>
       </ModalShell>
 
-      {/* MODAL DE RESOLUCIÃ“N (APROBAR / RECHAZAR CON COMENTARIOS EN BD) */}
+      {/* MODAL DE RESOLUCIÓN (APROBAR / RECHAZAR CON COMENTARIOS EN BD) */}
       <ModalShell open={Boolean(resolutionTarget)} onClose={closeResolutionModal} width="max-w-[540px]">
         <div className="space-y-4 p-5">
           <ModalHeader
             title={toResolutionTitle(resolutionTarget)}
             description={
               resolutionTarget?.kind === "hour"
-                ? "El comentario se guardarÃ¡ en ong.aprobaciones y ong.horas_actividad."
+                ? "El comentario se guardará en ong.aprobaciones y ong.horas_actividad."
                 : resolutionTarget?.targetStatus === "rejected"
                 ? "Ingresa el motivo del rechazo."
-                : "Puedes ingresar observaciones adicionales de aprobaciÃ³n."
+                : "Puedes ingresar observaciones adicionales de aprobación."
             }
             onClose={closeResolutionModal}
           />
@@ -1893,43 +1901,43 @@ export function Dashboard() {
                   ? "Escribe el motivo del rechazo..."
                   : "Comentario o notas adicionales para el registro (Opcional)..."
               }
-              className="w-full rounded-xl p-3 outline-none border border-zinc-800 bg-zinc-900 text-zinc-200"
+              className="w-full rounded-xl p-3 outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)]"
             />
 
             <FieldError message={resolutionError} />
 
-            <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
+            <div className="flex justify-end gap-2 pt-3 border-t border-[var(--t-border)]">
               <OutlineButton size="sm" onClick={closeResolutionModal} disabled={isResolutionSubmitting}>
                 Cancelar
               </OutlineButton>
               <GradientButton size="sm" onClick={() => void submitResolution()} disabled={isResolutionSubmitting}>
-                {isResolutionSubmitting ? "Guardando en BD..." : "Confirmar ResoluciÃ³n"}
+                {isResolutionSubmitting ? "Guardando en BD..." : "Confirmar Resolución"}
               </GradientButton>
             </div>
           </div>
         </div>
       </ModalShell>
 
-      {/* MODAL CANCELAR ACTIVIDAD (CANCELACIÃ“N REAL EN BD) */}
+      {/* MODAL CANCELAR ACTIVIDAD (CANCELACIÓN REAL EN BD) */}
       <ModalShell open={Boolean(cancelTarget)} onClose={() => !isCancellingActivity && setCancelTarget(null)} width="max-w-[500px]">
         <div className="space-y-4 p-5">
           <ModalHeader
             title="Cancelar Actividad"
-            description="ActualizarÃ¡ el estado de la actividad a cancelada en Supabase."
+            description="Actualizará el estado de la actividad a cancelada en Supabase."
             onClose={() => !isCancellingActivity && setCancelTarget(null)}
           />
 
           <div className="space-y-3 text-xs">
-            <p className="text-zinc-300">
-              {cancelTarget ? `Â¿Confirmas la cancelaciÃ³n de "${cancelTarget.name}"?` : "Selecciona una actividad."}
+            <p className="text-[var(--t-text-secondary)]">
+              {cancelTarget ? `¿Confirmas la cancelación de "${cancelTarget.name}"?` : "Selecciona una actividad."}
             </p>
 
-            <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
+            <div className="flex justify-end gap-2 pt-3 border-t border-[var(--t-border)]">
               <OutlineButton size="sm" onClick={() => setCancelTarget(null)} disabled={isCancellingActivity}>
                 Volver
               </OutlineButton>
               <GradientButton size="sm" onClick={() => void submitCancelActivity()} disabled={isCancellingActivity}>
-                {isCancellingActivity ? "Cancelando..." : "Confirmar CancelaciÃ³n"}
+                {isCancellingActivity ? "Cancelando..." : "Confirmar Cancelación"}
               </GradientButton>
             </div>
           </div>
@@ -1939,71 +1947,71 @@ export function Dashboard() {
       {/* MODAL PERSONALIZAR DASHBOARD */}
       <ModalShell open={isSettingsModalOpen} onClose={() => setIsSettingsModalOpen(false)} width="max-w-[500px]">
         <div className="space-y-4 p-5">
-          <div className="flex items-center justify-between border-b border-white/5 pb-3">
-            <h3 className="text-base font-semibold text-zinc-100 flex items-center gap-2">
+          <div className="flex items-center justify-between border-b border-[var(--t-border)] pb-3">
+            <h3 className="text-base font-semibold text-[var(--t-text)] flex items-center gap-2">
               <Settings className="h-5 w-5 text-indigo-400" />
               Personalizar Dashboard
             </h3>
-            <button type="button" className="text-zinc-400 hover:text-zinc-200" onClick={() => setIsSettingsModalOpen(false)}>
+            <button type="button" className="text-[var(--t-text-tertiary)] hover:text-[var(--t-text)]" onClick={() => setIsSettingsModalOpen(false)}>
               <X className="h-4 w-4" />
             </button>
           </div>
 
           <div className="space-y-3 text-xs">
-            <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
               <div>
-                <span className="font-medium text-zinc-200 block">GrÃ¡fico de EvoluciÃ³n de Horas</span>
-                <span className="text-[11px] text-zinc-400">Mostrar grÃ¡fico comparativo de tendencias.</span>
+                <span className="font-medium text-[var(--t-text)] block">Gráfico de Evolución de Horas</span>
+                <span className="text-[11px] text-[var(--t-text-tertiary)]">Mostrar gráfico comparativo de tendencias.</span>
               </div>
               <input
                 type="checkbox"
                 checked={widgetSettings.showEvolutionChart}
                 onChange={(e) => setWidgetSettings((s) => ({ ...s, showEvolutionChart: e.target.checked }))}
-                className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
               <div>
-                <span className="font-medium text-zinc-200 block">Agenda y Compromisos de Hoy</span>
-                <span className="text-[11px] text-zinc-400">Mostrar lista de eventos programados para hoy.</span>
+                <span className="font-medium text-[var(--t-text)] block">Agenda y Compromisos de Hoy</span>
+                <span className="text-[11px] text-[var(--t-text-tertiary)]">Mostrar lista de eventos programados para hoy.</span>
               </div>
               <input
                 type="checkbox"
                 checked={widgetSettings.showTodayAgenda}
                 onChange={(e) => setWidgetSettings((s) => ({ ...s, showTodayAgenda: e.target.checked }))}
-                className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
               <div>
-                <span className="font-medium text-zinc-200 block">Feed de Actividad en Vivo</span>
-                <span className="text-[11px] text-zinc-400">Mostrar historial dinÃ¡mico en tiempo real.</span>
+                <span className="font-medium text-[var(--t-text)] block">Feed de Actividad en Vivo</span>
+                <span className="text-[11px] text-[var(--t-text-tertiary)]">Mostrar historial dinámico en tiempo real.</span>
               </div>
               <input
                 type="checkbox"
                 checked={widgetSettings.showActivityFeed}
                 onChange={(e) => setWidgetSettings((s) => ({ ...s, showActivityFeed: e.target.checked }))}
-                className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
               <div>
-                <span className="font-medium text-zinc-200 block">Accesos Directos Operativos</span>
-                <span className="text-[11px] text-zinc-400">Mostrar botones de acceso rÃ¡pido.</span>
+                <span className="font-medium text-[var(--t-text)] block">Accesos Directos Operativos</span>
+                <span className="text-[11px] text-[var(--t-text-tertiary)]">Mostrar botones de acceso rápido.</span>
               </div>
               <input
                 type="checkbox"
                 checked={widgetSettings.showQuickAccess}
                 onChange={(e) => setWidgetSettings((s) => ({ ...s, showQuickAccess: e.target.checked }))}
-                className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
               />
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
+          <div className="flex justify-end gap-2 pt-3 border-t border-[var(--t-border)]">
             <OutlineButton size="sm" onClick={() => setIsSettingsModalOpen(false)}>
               Cancelar
             </OutlineButton>

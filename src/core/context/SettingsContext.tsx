@@ -5,11 +5,14 @@ import { format as dateFnsFormat } from 'date-fns'
 import { es, enUS, ptBR } from 'date-fns/locale'
 
 export type Theme    = 'dark' | 'light' | 'system'
+export type ThemeIntensity = 'suave' | 'normal' | 'vibrante'
 export type Density  = 'compact' | 'normal' | 'comfy'
 export type FontSize = '12' | '13' | '14' | '15'
 
 export interface AppSettings {
   theme:          Theme
+  /** Intensidad de la paleta (usada por el ThemeProvider de /ong). */
+  themeIntensity: ThemeIntensity
   density:        Density
   fontSize:       FontSize
   animaciones:    boolean
@@ -31,6 +34,7 @@ interface SettingsCtx extends AppSettings {
 
 const DEFAULT: AppSettings = {
   theme:         'dark',
+  themeIntensity: 'normal',
   density:       'normal',
   fontSize:      '14',
   animaciones:   true,
@@ -59,7 +63,32 @@ const DENSITY_VARS: Record<Density, Record<string, string>> = {
   comfy:   { '--page-p': '34px', '--topbar-h': '62px', '--nav-py': '10px', '--card-p': '32px 36px', '--row-py': '15px', '--gap-md': '22px' },
 }
 
-function resolveTheme(theme: Theme): 'dark' | 'light' {
+/*
+ * Caché local de las preferencias de apariencia. La fuente de verdad es
+ * profiles.preferences (BD); esta copia solo evita el parpadeo al cargar
+ * (antes de que responda Supabase) y sirve sin sesión.
+ */
+const CACHE_KEY = 'democra.settings.v1'
+const CACHED_FIELDS = ['theme', 'themeIntensity', 'density', 'fontSize', 'animaciones', 'sidebarPinned'] as const
+
+function readCache(): Partial<AppSettings> {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY)
+    return raw ? (JSON.parse(raw) as Partial<AppSettings>) : {}
+  } catch {
+    return {}
+  }
+}
+
+function writeCache(s: AppSettings) {
+  try {
+    const subset: Partial<AppSettings> = {}
+    CACHED_FIELDS.forEach((k) => { (subset as any)[k] = s[k] })
+    localStorage.setItem(CACHE_KEY, JSON.stringify(subset))
+  } catch { /* almacenamiento no disponible: se ignora */ }
+}
+
+export function resolveTheme(theme: Theme): 'dark' | 'light' {
   if (theme === 'system') {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   }
@@ -83,8 +112,18 @@ function applyAll(s: AppSettings) {
   }
 }
 
-export function SettingsProvider({ children }: { children: ReactNode }) {
-  const [settings, setSettings] = useState<AppSettings>(DEFAULT)
+interface SettingsProviderProps {
+  children: ReactNode
+  /** Tema si el usuario no tiene preferencia guardada (cada app decide el suyo). */
+  defaultTheme?: Theme
+}
+
+export function SettingsProvider({ children, defaultTheme }: SettingsProviderProps) {
+  const [settings, setSettings] = useState<AppSettings>(() => ({
+    ...DEFAULT,
+    ...(defaultTheme ? { theme: defaultTheme } : {}),
+    ...readCache(),
+  }))
 
   const refreshSettings = async () => {
     try {
@@ -98,6 +137,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         setSettings(prev => ({ 
           ...prev, 
           theme: p.theme || prev.theme,
+          themeIntensity: p.themeIntensity || prev.themeIntensity,
           density: p.density || prev.density,
           fontSize: p.fontSize || prev.fontSize,
           animaciones: p.animaciones ?? prev.animaciones,
@@ -117,9 +157,18 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     refreshSettings()
+    // El provider se monta antes del login (p. ej. /ong/login): al iniciar
+    // sesión hay que volver a leer las preferencias de ese usuario.
+    const { data } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'SIGNED_IN') refreshSettings()
+    })
+    return () => data.subscription.unsubscribe()
   }, [])
 
-  useEffect(() => { applyAll(settings) }, [settings])
+  useEffect(() => {
+    applyAll(settings)
+    writeCache(settings)
+  }, [settings])
 
   useEffect(() => {
     if (settings.theme !== 'system') return
@@ -150,6 +199,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
           preferences: {
             ...currentPrefs,
             theme: newSettings.theme,
+            themeIntensity: newSettings.themeIntensity,
             density: newSettings.density,
             fontSize: newSettings.fontSize,
             animaciones: newSettings.animaciones,

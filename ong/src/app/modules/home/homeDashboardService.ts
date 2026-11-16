@@ -750,12 +750,14 @@ export async function fetchTodayTimeline(limit = 6): Promise<DashboardTimelineIt
     return [];
   }
 
-  const projectMap = await getProjectNameMap(
-    uniqueNonEmpty(rows.map((activity) => activity.id_proyecto)),
-    tenantId
-  );
+  const visible = rows.slice(0, limit);
 
-  return rows.slice(0, limit).map((activity) => {
+  const [projectMap, assignedCountById] = await Promise.all([
+    getProjectNameMap(uniqueNonEmpty(visible.map((activity) => activity.id_proyecto)), tenantId),
+    getAssignedCountMap(visible.map((activity) => activity.id), tenantId),
+  ]);
+
+  return visible.map((activity) => {
     const projectName = activity.id_proyecto ? projectMap.get(activity.id_proyecto) ?? "Proyecto" : "Proyecto";
     const status = mapActivityStatus(activity.codigo_estado);
     return {
@@ -764,8 +766,32 @@ export async function fetchTodayTimeline(limit = 6): Promise<DashboardTimelineIt
       subtitle: projectName,
       time: activity.fecha_inicio ?? activity.fecha_fin ?? "Hoy",
       dotColor: dotColorByStatus[status],
+      assignedCount: assignedCountById.get(activity.id) ?? 0,
     };
   });
+}
+
+/**
+ * Voluntarios asignados (no eliminados) por actividad. Antes `assignedCount`
+ * nunca se calculaba y la agenda mostraba siempre «0 voluntarios asignados»
+ * (AUDIT-ong-ui-2026-11-16, B-2). Si la consulta falla, la agenda se muestra
+ * igual y el conteo cae a 0.
+ */
+async function getAssignedCountMap(activityIds: string[], tenantId: string): Promise<Map<string, number>> {
+  const counts = new Map<string, number>();
+  if (!activityIds.length) return counts;
+  const { data, error } = await db
+    .schema("ong")
+    .from("asignaciones_actividad")
+    .select("id_actividad")
+    .eq("tenant_id", tenantId)
+    .eq("is_deleted", false)
+    .in("id_actividad", activityIds);
+  if (error) return counts;
+  for (const row of (data ?? []) as { id_actividad: string }[]) {
+    counts.set(row.id_actividad, (counts.get(row.id_actividad) ?? 0) + 1);
+  }
+  return counts;
 }
 
 export function buildDashboardAlerts(metrics: DashboardMetricValues): DashboardAlertItem[] {

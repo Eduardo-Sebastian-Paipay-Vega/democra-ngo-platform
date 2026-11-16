@@ -3,7 +3,6 @@ import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Search, Bell, Menu, Sun, Moon, Sparkles } from "lucide-react";
 import { useTheme, type Intensity } from "@ong/app/lib/theme-context";
-import { useSettings } from "@/core/context/SettingsContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -118,7 +117,6 @@ export function Topbar({
 }: TopbarProps) {
   const { t } = useTranslation();
   const { theme, toggleTheme, intensity, setIntensity } = useTheme();
-  const { theme: globalTheme, saveSettings } = useSettings();
   const [showIntensity, setShowIntensity] = useState(false);
   const intensityRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
@@ -271,12 +269,9 @@ export function Topbar({
             )}
           </div>
 
-          {/* Theme toggle — syncs with SettingsContext + DB */}
+          {/* Theme toggle — ThemeProvider guarda en SettingsContext (BD) y aplica los tokens */}
           <button
-            onClick={() => {
-              const next = globalTheme === 'dark' ? 'light' : 'dark';
-              saveSettings({ theme: next });
-            }}
+            onClick={toggleTheme}
             className="flex h-8 w-8 items-center justify-center rounded-lg transition-colors duration-200 hover:bg-[var(--t-hover)]"
             style={{ color: "var(--t-text-secondary)" }}
             aria-label={theme === "oscuro" ? t("Cambiar a modo claro") : t("Cambiar a modo oscuro")}
