@@ -17,7 +17,9 @@ body {
     color 180ms ease-out;
 }
 
-/* Fix bright white/yellow background in Webkit Autofill (Chrome/Safari) for Dark Mode */
+/* Autocompletado WebKit (Chrome/Safari): neutraliza el fondo amarillo/blanco
+   del navegador usando los tokens del tema activo. Antes forzaba colores
+   oscuros fijos también en modo claro (AUDIT-ong-ui-2026-11-16, D-3). */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -30,11 +32,11 @@ textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus,
 textarea:-webkit-autofill:active {
-  -webkit-text-fill-color: #F5F5F5 !important;
-  -webkit-box-shadow: 0 0 0px 1000px #18181b inset !important;
-  box-shadow: 0 0 0px 1000px #18181b inset !important;
+  -webkit-text-fill-color: var(--t-text, #1A1915) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--t-surface, #FFFFFF) inset !important;
+  box-shadow: 0 0 0px 1000px var(--t-surface, #FFFFFF) inset !important;
   transition: background-color 50000s ease-in-out 0s !important;
-  caret-color: #F5F5F5 !important;
+  caret-color: var(--t-text, #1A1915) !important;
 }
 
 

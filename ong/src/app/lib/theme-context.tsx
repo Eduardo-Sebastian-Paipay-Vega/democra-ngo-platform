@@ -6,6 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { useSettings } from "@/core/context/SettingsContext";
 
 /* ─── Types ─── */
 export type Theme = "claro" | "oscuro";
@@ -261,28 +262,53 @@ function getTokens(theme: Theme, intensity: Intensity) {
   return theme === "oscuro" ? darkTokens[intensity] : lightTokens[intensity];
 }
 
-/* ─── Context ─── */
+/* ─── Context ───
+ * Fuente única de verdad: SettingsContext (src/core), que persiste en
+ * profiles.preferences. Este provider solo traduce su tema ('dark' | 'light'
+ * | 'system') a 'oscuro' | 'claro' y aplica los tokens --t-*. Antes tenía su
+ * propio estado en localStorage y el botón del Topbar cambiaba el otro
+ * sistema, por eso el cambio de tema no hacía nada (AUDIT-ong-ui-2026-11-16, A-1/A-3).
+ */
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
+const INTENSITIES: Intensity[] = ["suave", "normal", "vibrante"];
+
+function useSystemPrefersDark() {
+  const query = "(prefers-color-scheme: dark)";
+  const [prefersDark, setPrefersDark] = useState(() =>
+    typeof window !== "undefined" && typeof window.matchMedia === "function"
+      ? window.matchMedia(query).matches
+      : false
+  );
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
+    const mq = window.matchMedia(query);
+    const onChange = (e: MediaQueryListEvent) => setPrefersDark(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  return prefersDark;
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    try { return (localStorage.getItem("app-theme") as Theme) || "claro"; }
-    catch { return "claro"; }
-  });
-  const [intensity, setIntensityState] = useState<Intensity>(() => {
-    try { return (localStorage.getItem("app-intensity") as Intensity) || "normal"; }
-    catch { return "normal"; }
-  });
+  const { theme: savedTheme, themeIntensity, saveSettings } = useSettings();
+  const prefersDark = useSystemPrefersDark();
 
-  const setTheme = useCallback((t: Theme) => {
-    setThemeState(t);
-    try { localStorage.setItem("app-theme", t); } catch {}
-  }, []);
+  const theme: Theme =
+    savedTheme === "dark" || (savedTheme === "system" && prefersDark) ? "oscuro" : "claro";
+  const intensity: Intensity = INTENSITIES.includes(themeIntensity as Intensity)
+    ? (themeIntensity as Intensity)
+    : "normal";
 
-  const setIntensity = useCallback((i: Intensity) => {
-    setIntensityState(i);
-    try { localStorage.setItem("app-intensity", i); } catch {}
-  }, []);
+  const setTheme = useCallback(
+    (t: Theme) => { void saveSettings({ theme: t === "oscuro" ? "dark" : "light" }); },
+    [saveSettings]
+  );
+
+  const setIntensity = useCallback(
+    (i: Intensity) => { void saveSettings({ themeIntensity: i }); },
+    [saveSettings]
+  );
 
   const toggleTheme = useCallback(() => {
     setTheme(theme === "oscuro" ? "claro" : "oscuro");

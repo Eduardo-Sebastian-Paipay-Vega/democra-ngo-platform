@@ -120,18 +120,20 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Tokens Panel Principal (Bento Grid) */
-  --color-bg-main: #100F0D;
-  --color-bg-card: #171512;
-  --color-bg-hover: #1F1D1A;
-  --color-border-subtle: #26231F;
-  --color-text-primary: #F9F7F3;
-  --color-text-secondary: #A4A29F;
-  --color-text-muted: #686561;
-  --color-accent-primary: #356C92;
-  --color-accent-emerald: #08996A;
+  /* Tokens Panel Principal (Bento Grid). Antes eran hex oscuros fijos y el
+     panel salía negro también en modo claro (AUDIT-ong-ui-2026-11-16, A-2);
+     ahora siguen a los tokens --t-* del ThemeProvider. */
+  --color-bg-main: var(--t-bg);
+  --color-bg-card: var(--t-surface);
+  --color-bg-hover: var(--t-hover);
+  --color-border-subtle: var(--t-border);
+  --color-text-primary: var(--t-text);
+  --color-text-secondary: var(--t-text-secondary);
+  --color-text-muted: var(--t-text-dim);
+  --color-accent-primary: var(--t-primary);
+  --color-accent-emerald: var(--t-success);
   --color-accent-purple: #8B5CF6;
-  --color-accent-amber: #D97706;
+  --color-accent-amber: var(--t-warning);
   --radius-card: 12px;
   --radius-pill: 9999px;
 
