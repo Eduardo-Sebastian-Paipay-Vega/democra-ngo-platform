@@ -71,7 +71,7 @@ export function Catalogs() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#100F0D] text-[#F9F7F3] p-6 font-sans">
+    <div className="min-h-screen bg-[var(--t-bg)] text-[var(--t-text)] p-6 font-sans">
       <motion.div variants={stagger} initial="hidden" animate="visible" className="space-y-6 max-w-7xl mx-auto">
         
         {/* Header Superior */}
@@ -80,9 +80,9 @@ export function Catalogs() {
           <div className="flex items-center gap-2">
             <button 
               onClick={refresh}
-              className="px-3 py-1.5 bg-[#171512] border border-[#26231F] rounded-lg text-sm font-medium hover:bg-[#1F1D1A] transition-colors flex items-center gap-2 cursor-pointer"
+              className="px-3 py-1.5 bg-[var(--t-surface)] border border-[var(--t-border)] rounded-lg text-sm font-medium hover:bg-[var(--t-hover)] transition-colors flex items-center gap-2 cursor-pointer"
             >
-              <Activity className="w-4 h-4 text-[#A4A29F]" strokeWidth={1.5} />
+              <Activity className="w-4 h-4 text-[var(--t-text-secondary)]" strokeWidth={1.5} />
               Actualizar
             </button>
             <button className="px-3 py-1.5 bg-[#356C92] text-white border border-[#356C92] rounded-lg text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer">
@@ -101,33 +101,33 @@ export function Catalogs() {
             {/* 4 KPI Cards */}
             <motion.div variants={fadeUp} className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {kpis.map((kpi, idx) => (
-                <div key={idx} className="bg-[#171512] border border-[#26231F] rounded-xl p-4 flex flex-col justify-between h-[110px]">
+                <div key={idx} className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-xl p-4 flex flex-col justify-between h-[110px]">
                   <div className="flex justify-between items-start">
-                    <span className="text-xs text-[#A4A29F]">{kpi.label}</span>
+                    <span className="text-xs text-[var(--t-text-secondary)]">{kpi.label}</span>
                     <span className={`text-xs px-2.5 py-0.5 rounded-full flex items-center gap-1 border
-                      ${kpi.badge.type === 'emerald' ? 'bg-[#161D17] text-[#08996A] border-[#08996A]/20' : 
-                        kpi.badge.type === 'purple' ? 'bg-[#1F181E] text-[#8B5CF6] border-[#8B5CF6]/20' : 
-                        'bg-[#231C11] text-[#D97706] border-[#D97706]/20'}`}
+                      ${kpi.badge.type === 'emerald' ? 'bg-[var(--t-success-soft)] text-[#08996A] border-[#08996A]/20' : 
+                        kpi.badge.type === 'purple' ? 'bg-[var(--t-danger-soft)] text-[#8B5CF6] border-[#8B5CF6]/20' : 
+                        'bg-[var(--t-warning-soft)] text-[#D97706] border-[#D97706]/20'}`}
                     >
                       {kpi.badge.text}
                     </span>
                   </div>
-                  <div className="text-2xl font-bold text-white mt-2">{kpi.value}</div>
+                  <div className="text-2xl font-bold text-[var(--t-text)] mt-2">{kpi.value}</div>
                 </div>
               ))}
             </motion.div>
 
             {/* Tarjeta de Gráfico / Evolución */}
-            <motion.div variants={fadeUp} className="h-[280px] bg-[#171512] border border-[#26231F] rounded-xl p-4 flex flex-col">
+            <motion.div variants={fadeUp} className="h-[280px] bg-[var(--t-surface)] border border-[var(--t-border)] rounded-xl p-4 flex flex-col">
               <h2 className="text-sm font-medium mb-4">Evolución de Datos</h2>
               <div className="flex-1 flex items-center justify-center">
                 {/* Empty State */}
                 <div className="flex flex-col items-center">
-                  <div className="bg-[#23211D] p-3 rounded-xl mb-3">
-                    <BarChart2 className="w-6 h-6 text-[#A4A29F]" strokeWidth={1.5} />
+                  <div className="bg-[var(--t-elevated)] p-3 rounded-xl mb-3">
+                    <BarChart2 className="w-6 h-6 text-[var(--t-text-secondary)]" strokeWidth={1.5} />
                   </div>
                   <p className="text-sm font-medium">Sin datos suficientes</p>
-                  <p className="text-xs text-[#A4A29F] text-center max-w-xs mt-1">
+                  <p className="text-xs text-[var(--t-text-secondary)] text-center max-w-xs mt-1">
                     El historial de métricas se generará a medida que interactúes con el sistema.
                   </p>
                 </div>
@@ -135,7 +135,7 @@ export function Catalogs() {
             </motion.div>
 
             {/* Tarjeta de Feed en Vivo (Registros seleccionados) */}
-            <motion.div variants={fadeUp} className="bg-[#171512] border border-[#26231F] rounded-xl p-4">
+            <motion.div variants={fadeUp} className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-xl p-4">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-sm font-medium">Feed en Vivo (Últimos Registros)</h2>
                 <div className="flex items-center gap-2">
@@ -143,27 +143,27 @@ export function Catalogs() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#08996A] opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[#08996A]"></span>
                   </span>
-                  <span className="text-xs text-[#A4A29F]">Conectado</span>
+                  <span className="text-xs text-[var(--t-text-secondary)]">Conectado</span>
                 </div>
               </div>
               <div className="space-y-3">
                 {rowsLoading ? (
-                  <p className="text-xs text-[#A4A29F]">Cargando feed...</p>
+                  <p className="text-xs text-[var(--t-text-secondary)]">Cargando feed...</p>
                 ) : rowsError ? (
                   <p className="text-xs text-[#D97706]">{rowsError}</p>
                 ) : rows.length === 0 ? (
-                  <p className="text-xs text-[#A4A29F]">No hay registros para mostrar en el feed.</p>
+                  <p className="text-xs text-[var(--t-text-secondary)]">No hay registros para mostrar en el feed.</p>
                 ) : (
                   rows.slice(0, 5).map((row, idx) => (
-                    <div key={idx} className="flex items-center gap-3 p-2 bg-[#1F1D1A]/30 rounded-lg border border-[#26231F]/50">
-                      <div className="bg-[#23211D] p-2 rounded-lg flex-shrink-0">
-                        <Database className="w-4 h-4 text-[#A4A29F]" strokeWidth={1.5} />
+                    <div key={idx} className="flex items-center gap-3 p-2 bg-[var(--t-elevated)] rounded-lg border border-[var(--t-border)]">
+                      <div className="bg-[var(--t-elevated)] p-2 rounded-lg flex-shrink-0">
+                        <Database className="w-4 h-4 text-[var(--t-text-secondary)]" strokeWidth={1.5} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-[#F9F7F3] truncate">{row.primaryValue}</p>
-                        <p className="text-xs text-[#A4A29F] truncate">{row.secondaryValue}</p>
+                        <p className="text-sm font-medium text-[var(--t-text)] truncate">{row.primaryValue}</p>
+                        <p className="text-xs text-[var(--t-text-secondary)] truncate">{row.secondaryValue}</p>
                       </div>
-                      <div className="text-xs text-[#686561] flex-shrink-0">
+                      <div className="text-xs text-[var(--t-text-dim)] flex-shrink-0">
                         {row.raw?.activo ? 'Activo' : 'Inactivo'}
                       </div>
                     </div>
@@ -178,16 +178,16 @@ export function Catalogs() {
           <div className="lg:col-span-1 space-y-4 flex flex-col">
             
             {/* Tarjeta Agenda de Hoy */}
-            <motion.div variants={fadeUp} className="bg-[#171512] border border-[#26231F] rounded-xl p-4 min-h-[200px] flex flex-col">
+            <motion.div variants={fadeUp} className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-xl p-4 min-h-[200px] flex flex-col">
               <h2 className="text-sm font-medium mb-4">Agenda de Hoy</h2>
               <div className="flex-1 flex items-center justify-center py-4">
                 {/* Empty State */}
                 <div className="flex flex-col items-center">
-                  <div className="bg-[#23211D] p-3 rounded-xl mb-3">
-                    <Calendar className="w-6 h-6 text-[#A4A29F]" strokeWidth={1.5} />
+                  <div className="bg-[var(--t-elevated)] p-3 rounded-xl mb-3">
+                    <Calendar className="w-6 h-6 text-[var(--t-text-secondary)]" strokeWidth={1.5} />
                   </div>
                   <p className="text-sm font-medium">Agenda despejada</p>
-                  <p className="text-xs text-[#A4A29F] text-center max-w-xs mt-1">
+                  <p className="text-xs text-[var(--t-text-secondary)] text-center max-w-xs mt-1">
                     No tienes eventos programados para hoy.
                   </p>
                 </div>
@@ -195,7 +195,7 @@ export function Catalogs() {
             </motion.div>
 
             {/* Tarjeta Accesos Directos (Catálogos) */}
-            <motion.div variants={fadeUp} className="bg-[#171512] border border-[#26231F] rounded-xl p-4 flex-1">
+            <motion.div variants={fadeUp} className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-xl p-4 flex-1">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-sm font-medium">Accesos Directos</h2>
                 <button className="text-xs text-[#356C92] hover:underline cursor-pointer">Ver todos</button>
@@ -203,19 +203,19 @@ export function Catalogs() {
               
               <div className="space-y-2">
                 {catalogsLoading ? (
-                  <p className="text-xs text-[#A4A29F]">Cargando accesos...</p>
+                  <p className="text-xs text-[var(--t-text-secondary)]">Cargando accesos...</p>
                 ) : catalogs.slice(0, 8).map((cat) => (
                   <button 
                     key={cat.key}
                     onClick={() => setSelectedCatalogKey(cat.key)}
-                    className={`w-full hover:bg-[#1F1D1A] transition-colors rounded-lg p-3 flex justify-between items-center group cursor-pointer
-                      ${selectedCatalogKey === cat.key ? 'bg-[#1F1D1A]' : 'bg-[#1F1D1A]/50'}`}
+                    className={`w-full hover:bg-[var(--t-hover)] transition-colors rounded-lg p-3 flex justify-between items-center group cursor-pointer
+                      ${selectedCatalogKey === cat.key ? 'bg-[var(--t-active)]' : 'bg-transparent'}`}
                   >
                     <div className="flex items-center gap-3">
-                      <FileText className="w-4 h-4 text-[#A4A29F] group-hover:text-[#F9F7F3] transition-colors" strokeWidth={1.5} />
-                      <span className="text-sm font-medium text-[#F9F7F3] text-left truncate max-w-[150px]">{cat.label}</span>
+                      <FileText className="w-4 h-4 text-[var(--t-text-secondary)] group-hover:text-[var(--t-text)] transition-colors" strokeWidth={1.5} />
+                      <span className="text-sm font-medium text-[var(--t-text)] text-left truncate max-w-[150px]">{cat.label}</span>
                     </div>
-                    <div className="bg-[#100F0D] text-xs px-2 py-1 rounded text-[#A4A29F] flex items-center gap-1">
+                    <div className="bg-[var(--t-bg)] text-xs px-2 py-1 rounded text-[var(--t-text-secondary)] flex items-center gap-1">
                       {cat.rowCount ?? 0}
                     </div>
                   </button>

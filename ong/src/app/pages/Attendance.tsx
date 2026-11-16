@@ -2047,7 +2047,6 @@ function QrScanModal({
             Ingreso Manual (Pistolas Lectoras USB o Código Teclado):
           </label>
           <div className="flex gap-2">
-      // @ts-ignore
             <input
       // @ts-ignore
               ref={scanInputRef}

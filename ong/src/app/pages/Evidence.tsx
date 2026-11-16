@@ -97,7 +97,7 @@ function SelectField({
       value={value}
       onChange={(event) => onChange(event.target.value)}
       disabled={disabled}
-      className="h-9 rounded-xl px-3 text-[12px] outline-none border border-zinc-800 bg-zinc-900 text-zinc-300 disabled:cursor-not-allowed disabled:opacity-50 hover:border-zinc-700"
+      className="h-9 w-auto rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text-secondary)] disabled:cursor-not-allowed disabled:opacity-50 hover:border-[var(--t-border-strong)]"
     >
       {options.map((option) => (
         <option key={option.value} value={option.value}>
@@ -114,7 +114,7 @@ function ErrorBlock({ message, onRetry }: { message: string; onRetry: () => void
       <p>{message}</p>
       <button
         type="button"
-        className="rounded-md px-2.5 py-1 text-[11px] bg-red-500/20 hover:bg-red-500/30 text-white font-medium transition-colors"
+        className="rounded-md px-2.5 py-1 text-[11px] bg-red-500/15 hover:bg-red-500/25 text-[var(--t-danger)] font-medium transition-colors"
         onClick={onRetry}
       >
         Reintentar
@@ -488,8 +488,8 @@ export function Evidence() {
       label: "Actividad y Proyecto",
       render: (item) => (
         <div>
-          <div className="font-semibold text-zinc-100">{item.activityName}</div>
-          <div className="mt-0.5 text-[11px] text-zinc-400 font-medium">{item.projectName}</div>
+          <div className="font-semibold text-[var(--t-text)]">{item.activityName}</div>
+          <div className="mt-0.5 text-[11px] text-[var(--t-text-tertiary)] font-medium">{item.projectName}</div>
         </div>
       ),
     },
@@ -511,8 +511,8 @@ export function Evidence() {
       key: "author",
       label: "Autor / Voluntario",
       render: (item) => (
-        <span className="text-xs text-zinc-300 flex items-center gap-1.5">
-          <User className="h-3.5 w-3.5 text-zinc-500" />
+        <span className="text-xs text-[var(--t-text-secondary)] flex items-center gap-1.5">
+          <User className="h-3.5 w-3.5 text-[var(--t-text-dim)]" />
           {item.volunteerName}
         </span>
       ),
@@ -521,8 +521,8 @@ export function Evidence() {
       key: "uploadedAt",
       label: "Fecha",
       render: (item) => (
-        <span className="text-xs font-mono text-zinc-400 flex items-center gap-1">
-          <Calendar className="h-3 w-3 text-zinc-500" />
+        <span className="text-xs font-mono text-[var(--t-text-tertiary)] flex items-center gap-1">
+          <Calendar className="h-3 w-3 text-[var(--t-text-dim)]" />
           {item.uploadedAt}
         </span>
       ),
@@ -560,16 +560,16 @@ export function Evidence() {
             <OutlineButton
               size="sm"
               onClick={() => setIsSettingsOpen(true)}
-              className="flex items-center gap-1.5 text-zinc-300 border-zinc-800 hover:bg-zinc-800"
+              className="flex items-center gap-1.5 text-[var(--t-text-secondary)] border-[var(--t-border)] hover:bg-[var(--t-hover)]"
             >
-              <Settings className="h-4 w-4 text-zinc-400" />
+              <Settings className="h-4 w-4 text-[var(--t-text-tertiary)]" />
               Ajustes
             </OutlineButton>
 
             <OutlineButton
               size="sm"
               onClick={() => downloadEvidenceZip(rows)}
-              className="flex items-center gap-1.5 text-zinc-300 border-zinc-800 hover:bg-zinc-800"
+              className="flex items-center gap-1.5 text-[var(--t-text-secondary)] border-[var(--t-border)] hover:bg-[var(--t-hover)]"
             >
               <Download className="h-4 w-4 text-emerald-400" />
               Descargar Paquete ZIP
@@ -586,60 +586,60 @@ export function Evidence() {
       {/* KPIS DE RESUMEN DE 4 COLUMNAS CON ICONOS VECTORIALES LIMPIOS */}
       <motion.div variants={fadeUp}>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-2xl p-4 bg-zinc-900/80 border border-zinc-800/80 hover:border-indigo-500/30 transition-all shadow-sm">
+          <div className="rounded-2xl p-4 bg-[var(--t-surface)] border border-[var(--t-border)] hover:border-indigo-500/30 transition-all shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[12px] font-medium text-zinc-400">Total Archivos</span>
+              <span className="text-[12px] font-medium text-[var(--t-text-tertiary)]">Total Archivos</span>
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
                 <Folder className="h-4 w-4" />
               </div>
             </div>
             <div className="mt-2 flex items-baseline justify-between">
-              <p className="text-2xl font-bold text-zinc-100 tabular-nums">{kpiStats.total}</p>
+              <p className="text-2xl font-bold text-[var(--t-text)] tabular-nums">{kpiStats.total}</p>
               <span className="text-[11px] font-medium text-indigo-300 bg-indigo-500/10 px-2 py-0.5 rounded-md border border-indigo-500/20 flex items-center gap-1">
                 <Layers className="h-3 w-3" /> Consolidado
               </span>
             </div>
           </div>
 
-          <div className="rounded-2xl p-4 bg-zinc-900/80 border border-zinc-800/80 hover:border-emerald-500/30 transition-all shadow-sm">
+          <div className="rounded-2xl p-4 bg-[var(--t-surface)] border border-[var(--t-border)] hover:border-emerald-500/30 transition-all shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[12px] font-medium text-zinc-400">Imágenes / Videos</span>
+              <span className="text-[12px] font-medium text-[var(--t-text-tertiary)]">Imágenes / Videos</span>
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                 <ImageIcon className="h-4 w-4" />
               </div>
             </div>
             <div className="mt-2 flex items-baseline justify-between">
-              <p className="text-2xl font-bold text-zinc-100 tabular-nums">{kpiStats.imagesAndVideos}</p>
+              <p className="text-2xl font-bold text-[var(--t-text)] tabular-nums">{kpiStats.imagesAndVideos}</p>
               <span className="text-[11px] font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20 flex items-center gap-1">
                 <ImageIcon className="h-3 w-3" /> Fotos de campo
               </span>
             </div>
           </div>
 
-          <div className="rounded-2xl p-4 bg-zinc-900/80 border border-zinc-800/80 hover:border-purple-500/30 transition-all shadow-sm">
+          <div className="rounded-2xl p-4 bg-[var(--t-surface)] border border-[var(--t-border)] hover:border-purple-500/30 transition-all shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[12px] font-medium text-zinc-400">Documentos / PDFs</span>
+              <span className="text-[12px] font-medium text-[var(--t-text-tertiary)]">Documentos / PDFs</span>
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
                 <FileText className="h-4 w-4" />
               </div>
             </div>
             <div className="mt-2 flex items-baseline justify-between">
-              <p className="text-2xl font-bold text-zinc-100 tabular-nums">{kpiStats.documents}</p>
+              <p className="text-2xl font-bold text-[var(--t-text)] tabular-nums">{kpiStats.documents}</p>
               <span className="text-[11px] font-medium text-purple-300 bg-purple-500/10 px-2 py-0.5 rounded-md border border-purple-500/20 flex items-center gap-1">
                 <FileCheck className="h-3 w-3" /> Listas firmadas
               </span>
             </div>
           </div>
 
-          <div className="rounded-2xl p-4 bg-zinc-900/80 border border-zinc-800/80 hover:border-amber-500/30 transition-all shadow-sm">
+          <div className="rounded-2xl p-4 bg-[var(--t-surface)] border border-[var(--t-border)] hover:border-amber-500/30 transition-all shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[12px] font-medium text-zinc-400">Pendientes de Validación</span>
+              <span className="text-[12px] font-medium text-[var(--t-text-tertiary)]">Pendientes de Validación</span>
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
                 <Clock className="h-4 w-4" />
               </div>
             </div>
             <div className="mt-2 flex items-baseline justify-between">
-              <p className="text-2xl font-bold text-zinc-100 tabular-nums">{kpiStats.pendingValidation}</p>
+              <p className="text-2xl font-bold text-[var(--t-text)] tabular-nums">{kpiStats.pendingValidation}</p>
               <span className="text-[11px] font-medium text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20 flex items-center gap-1">
                 <Clock className="h-3 w-3" /> Requiere revisión
               </span>
@@ -657,14 +657,14 @@ export function Evidence() {
             onSearchChange={setSearchValue}
           />
 
-          <div className="flex items-center gap-1 rounded-xl p-1 bg-zinc-950 border border-zinc-800 shrink-0">
+          <div className="flex items-center gap-1 rounded-xl p-1 bg-[var(--t-elevated)] border border-[var(--t-border)] shrink-0">
             <button
               type="button"
               onClick={() => setViewMode("gallery")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 viewMode === "gallery"
                   ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-zinc-400 hover:text-zinc-200"
+                  : "text-[var(--t-text-tertiary)] hover:text-[var(--t-text)]"
               }`}
             >
               <Grid className="h-3.5 w-3.5" />
@@ -676,7 +676,7 @@ export function Evidence() {
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 viewMode === "table"
                   ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-zinc-400 hover:text-zinc-200"
+                  : "text-[var(--t-text-tertiary)] hover:text-[var(--t-text)]"
               }`}
             >
               <LayoutList className="h-3.5 w-3.5" />
@@ -705,13 +705,13 @@ export function Evidence() {
             type="date"
             value={dateFrom}
             onChange={(event) => setDateFrom(event.target.value)}
-            className="h-9 rounded-xl px-3 text-[12px] outline-none border border-zinc-800 bg-zinc-900 text-zinc-300"
+            className="h-9 w-auto rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text-secondary)]"
           />
           <input
             type="date"
             value={dateTo}
             onChange={(event) => setDateTo(event.target.value)}
-            className="h-9 rounded-xl px-3 text-[12px] outline-none border border-zinc-800 bg-zinc-900 text-zinc-300"
+            className="h-9 w-auto rounded-xl px-3 text-[12px] outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text-secondary)]"
           />
 
           {(searchValue || activityFilter !== "all" || volunteerFilter !== "all" || typeFilter !== "all" || dateFrom || dateTo) && (
@@ -744,12 +744,12 @@ export function Evidence() {
         {viewMode === "gallery" ? (
           <div>
             {rows.length === 0 && !loading ? (
-              <div className="flex flex-col items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900/60 p-12 text-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-800 text-zinc-400 mb-4 shadow-sm border border-zinc-700/50">
+              <div className="flex flex-col items-center justify-center rounded-2xl border border-[var(--t-border)] bg-[var(--t-surface)] p-12 text-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--t-elevated)] text-[var(--t-text-tertiary)] mb-4 shadow-sm border border-[var(--t-border-strong)]">
                   <ImageIcon className="h-7 w-7 text-indigo-400" />
                 </div>
-                <h3 className="text-base font-semibold text-zinc-100">Sin evidencias encontradas</h3>
-                <p className="mt-1 text-xs text-zinc-400 max-w-sm">
+                <h3 className="text-base font-semibold text-[var(--t-text)]">Sin evidencias encontradas</h3>
+                <p className="mt-1 text-xs text-[var(--t-text-tertiary)] max-w-sm">
                   No se encontraron evidencias que coincidan con los filtros o el rango de fechas.
                 </p>
                 <div className="mt-5 flex gap-2">
@@ -781,22 +781,22 @@ export function Evidence() {
                   return (
                     <div
                       key={item.id}
-                      className="group rounded-2xl border border-zinc-800 bg-zinc-900/80 overflow-hidden hover:border-zinc-700 transition-all flex flex-col justify-between shadow-sm"
+                      className="group rounded-2xl border border-[var(--t-border)] bg-[var(--t-surface)] overflow-hidden hover:border-[var(--t-border-strong)] transition-all flex flex-col justify-between shadow-sm"
                     >
                       <div>
                         {/* THUMBNAIL DE MINIATURA VISUAL */}
-                        <div className="relative h-40 w-full bg-zinc-950 flex items-center justify-center overflow-hidden border-b border-zinc-800/80">
+                        <div className="relative h-40 w-full bg-[var(--t-elevated)] flex items-center justify-center overflow-hidden border-b border-[var(--t-border)]">
                           {isImage ? (
-                            <div className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-br from-indigo-950/40 via-zinc-900 to-zinc-950 text-indigo-400 group-hover:scale-105 transition-transform duration-300">
+                            <div className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-br from-indigo-950/40 via-[var(--t-surface)] to-[var(--t-elevated)] text-indigo-400 group-hover:scale-105 transition-transform duration-300">
                               <ImageIcon className="h-10 w-10 text-indigo-400/80 mb-1" />
-                              <span className="text-[10px] font-mono text-zinc-400 px-3 truncate max-w-full">
+                              <span className="text-[10px] font-mono text-[var(--t-text-tertiary)] px-3 truncate max-w-full">
                                 {item.route.split("/").pop()}
                               </span>
                             </div>
                           ) : (
-                            <div className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-br from-purple-950/40 via-zinc-900 to-zinc-950 text-purple-400 group-hover:scale-105 transition-transform duration-300">
+                            <div className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-br from-purple-950/40 via-[var(--t-surface)] to-[var(--t-elevated)] text-purple-400 group-hover:scale-105 transition-transform duration-300">
                               <FileText className="h-10 w-10 text-purple-400/80 mb-1" />
-                              <span className="text-[10px] font-mono text-zinc-400 px-3 truncate max-w-full">
+                              <span className="text-[10px] font-mono text-[var(--t-text-tertiary)] px-3 truncate max-w-full">
                                 {item.route.split("/").pop()}
                               </span>
                             </div>
@@ -825,19 +825,19 @@ export function Evidence() {
                             {item.typeName}
                           </span>
 
-                          <h4 className="font-semibold text-zinc-100 text-xs truncate" title={item.activityName}>
+                          <h4 className="font-semibold text-[var(--t-text)] text-xs truncate" title={item.activityName}>
                             {item.activityName}
                           </h4>
 
-                          <p className="text-[11px] text-zinc-400 truncate">{item.projectName}</p>
+                          <p className="text-[11px] text-[var(--t-text-tertiary)] truncate">{item.projectName}</p>
 
-                          <div className="pt-2 flex items-center justify-between text-[11px] text-zinc-400 border-t border-zinc-800/60 font-mono">
+                          <div className="pt-2 flex items-center justify-between text-[11px] text-[var(--t-text-tertiary)] border-t border-[var(--t-border)] font-mono">
                             <span className="flex items-center gap-1 truncate max-w-[120px]">
-                              <User className="h-3 w-3 text-zinc-500" />
+                              <User className="h-3 w-3 text-[var(--t-text-dim)]" />
                               {item.volunteerName}
                             </span>
                             <span className="flex items-center gap-1">
-                              <Calendar className="h-3 w-3 text-zinc-500" />
+                              <Calendar className="h-3 w-3 text-[var(--t-text-dim)]" />
                               {item.uploadedAt}
                             </span>
                           </div>
@@ -845,7 +845,7 @@ export function Evidence() {
                       </div>
 
                       {/* FOOTER DE LA TARJETA */}
-                      <div className="px-4 py-2.5 bg-zinc-950/60 border-t border-zinc-800/80 flex items-center justify-between">
+                      <div className="px-4 py-2.5 bg-[var(--t-elevated)] border-t border-[var(--t-border)] flex items-center justify-between">
                         <button
                           type="button"
                           onClick={() => openLightbox(item)}
@@ -858,7 +858,7 @@ export function Evidence() {
                           <button
                             type="button"
                             onClick={() => beginEdit(item)}
-                            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                            className="p-1.5 rounded-lg text-[var(--t-text-tertiary)] hover:text-[var(--t-text)] hover:bg-[var(--t-hover)] transition-colors"
                             title="Editar"
                           >
                             <Pencil className="h-3.5 w-3.5" />
@@ -866,7 +866,7 @@ export function Evidence() {
                           <button
                             type="button"
                             onClick={() => void removeRow(item)}
-                            className="p-1.5 rounded-lg text-zinc-400 hover:text-red-400 hover:bg-zinc-800 transition-colors"
+                            className="p-1.5 rounded-lg text-[var(--t-text-tertiary)] hover:text-red-400 hover:bg-[var(--t-hover)] transition-colors"
                             title="Eliminar"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
@@ -907,60 +907,60 @@ export function Evidence() {
       {/* MODAL CONFIGURACIÓN / SETTINGS */}
       <ModalShell open={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} width="max-w-[560px]">
         <div className="space-y-4 p-5">
-          <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-            <h3 className="text-base font-semibold text-zinc-100 flex items-center gap-2">
+          <div className="flex items-center justify-between border-b border-[var(--t-border)] pb-3">
+            <h3 className="text-base font-semibold text-[var(--t-text)] flex items-center gap-2">
               <Settings className="h-5 w-5 text-indigo-400" />
               Opciones de Evidencias
             </h3>
-            <button type="button" className="text-zinc-400 hover:text-zinc-200" onClick={() => setIsSettingsOpen(false)}>
+            <button type="button" className="text-[var(--t-text-tertiary)] hover:text-[var(--t-text)]" onClick={() => setIsSettingsOpen(false)}>
               <X className="h-4 w-4" />
             </button>
           </div>
 
           <div className="space-y-4 text-xs">
             <div>
-              <label className="block text-zinc-300 font-medium mb-1">
+              <label className="block text-[var(--t-text-secondary)] font-medium mb-1">
                 Tamaño Máximo por Archivo (MB)
               </label>
               <input
                 type="number"
                 value={settingsState.maxFileSizeMB}
                 onChange={(e) => setSettingsState((s) => ({ ...s, maxFileSizeMB: parseInt(e.target.value) || 0 }))}
-                className="w-full rounded-xl px-3 py-2 outline-none border border-zinc-800 bg-zinc-900 text-zinc-200"
+                className="w-full rounded-xl px-3 py-2 outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)]"
               />
-              <p className="mt-1 text-[11px] text-zinc-500">
+              <p className="mt-1 text-[11px] text-[var(--t-text-dim)]">
                 Límite de peso permitido por archivo individual cargado al servidor.
               </p>
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
               <div>
-                <span className="font-medium text-zinc-200 block">Marca de Agua Automática</span>
-                <span className="text-[11px] text-zinc-400">Insertar logo de la ONG y fecha en fotos de evidencia.</span>
+                <span className="font-medium text-[var(--t-text)] block">Marca de Agua Automática</span>
+                <span className="text-[11px] text-[var(--t-text-tertiary)]">Insertar logo de la ONG y fecha en fotos de evidencia.</span>
               </div>
               <input
                 type="checkbox"
                 checked={settingsState.autoWatermark}
                 onChange={(e) => setSettingsState((s) => ({ ...s, autoWatermark: e.target.checked }))}
-                className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
               <div>
-                <span className="font-medium text-zinc-200 block">Privacidad y Pixelado Automático</span>
-                <span className="text-[11px] text-zinc-400">Activar pixelado de rostros de menores de edad.</span>
+                <span className="font-medium text-[var(--t-text)] block">Privacidad y Pixelado Automático</span>
+                <span className="text-[11px] text-[var(--t-text-tertiary)]">Activar pixelado de rostros de menores de edad.</span>
               </div>
               <input
                 type="checkbox"
                 checked={settingsState.autoBlurMinors}
                 onChange={(e) => setSettingsState((s) => ({ ...s, autoBlurMinors: e.target.checked }))}
-                className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
               />
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
+          <div className="flex justify-end gap-2 pt-3 border-t border-[var(--t-border)]">
             <OutlineButton size="sm" onClick={() => setIsSettingsOpen(false)}>
               Cancelar
             </OutlineButton>
@@ -981,50 +981,50 @@ export function Evidence() {
       <ModalShell open={isLightboxOpen} onClose={() => setIsLightboxOpen(false)} width="max-w-[840px]">
         {selectedLightboxItem && (
           <div className="space-y-4 p-5">
-            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+            <div className="flex items-center justify-between border-b border-[var(--t-border)] pb-3">
               <div>
-                <h3 className="text-base font-semibold text-zinc-100 flex items-center gap-2">
+                <h3 className="text-base font-semibold text-[var(--t-text)] flex items-center gap-2">
                   <Eye className="h-5 w-5 text-indigo-400" />
                   Previsualización de Evidencia
                 </h3>
-                <p className="text-xs text-zinc-400 mt-0.5">
+                <p className="text-xs text-[var(--t-text-tertiary)] mt-0.5">
                   {selectedLightboxItem.activityName} • {selectedLightboxItem.projectName}
                 </p>
               </div>
-              <button type="button" className="text-zinc-400 hover:text-zinc-200" onClick={() => setIsLightboxOpen(false)}>
+              <button type="button" className="text-[var(--t-text-tertiary)] hover:text-[var(--t-text)]" onClick={() => setIsLightboxOpen(false)}>
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="relative rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 flex flex-col items-center justify-center p-8 min-h-[260px]">
+            <div className="relative rounded-2xl overflow-hidden border border-[var(--t-border)] bg-[var(--t-elevated)] flex flex-col items-center justify-center p-8 min-h-[260px]">
               <ImageIcon className="h-16 w-16 text-indigo-400/70 mb-3" />
-              <p className="font-mono text-xs text-zinc-300 font-semibold">{selectedLightboxItem.route}</p>
-              <p className="text-[11px] text-zinc-500 mt-1">Simulación de visor en alta resolución</p>
+              <p className="font-mono text-xs text-[var(--t-text-secondary)] font-semibold">{selectedLightboxItem.route}</p>
+              <p className="text-[11px] text-[var(--t-text-dim)] mt-1">Simulación de visor en alta resolución</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-              <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
-                <span className="text-[11px] text-zinc-400 block font-medium">Tipo</span>
-                <span className="text-zinc-200 font-semibold mt-0.5 block">{selectedLightboxItem.typeName}</span>
+              <div className="p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
+                <span className="text-[11px] text-[var(--t-text-tertiary)] block font-medium">Tipo</span>
+                <span className="text-[var(--t-text)] font-semibold mt-0.5 block">{selectedLightboxItem.typeName}</span>
               </div>
-              <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
-                <span className="text-[11px] text-zinc-400 block font-medium">Autor / Voluntario</span>
-                <span className="text-zinc-200 font-semibold mt-0.5 block">{selectedLightboxItem.volunteerName}</span>
+              <div className="p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
+                <span className="text-[11px] text-[var(--t-text-tertiary)] block font-medium">Autor / Voluntario</span>
+                <span className="text-[var(--t-text)] font-semibold mt-0.5 block">{selectedLightboxItem.volunteerName}</span>
               </div>
-              <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
-                <span className="text-[11px] text-zinc-400 block font-medium">Fecha de Carga</span>
-                <span className="text-zinc-200 font-semibold mt-0.5 block font-mono">{selectedLightboxItem.uploadedAt}</span>
+              <div className="p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
+                <span className="text-[11px] text-[var(--t-text-tertiary)] block font-medium">Fecha de Carga</span>
+                <span className="text-[var(--t-text)] font-semibold mt-0.5 block font-mono">{selectedLightboxItem.uploadedAt}</span>
               </div>
             </div>
 
             {selectedLightboxItem.description && selectedLightboxItem.description !== "Sin observacion" && (
-              <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-xs">
-                <span className="text-[11px] text-zinc-400 block font-medium mb-1">Descripción / Notas de Campo</span>
-                <p className="text-zinc-200">{selectedLightboxItem.description}</p>
+              <div className="p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)] text-xs">
+                <span className="text-[11px] text-[var(--t-text-tertiary)] block font-medium mb-1">Descripción / Notas de Campo</span>
+                <p className="text-[var(--t-text)]">{selectedLightboxItem.description}</p>
               </div>
             )}
 
-            <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-zinc-800">
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-[var(--t-border)]">
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -1054,7 +1054,7 @@ export function Evidence() {
                 onClick={() => {
                   toast.success(`Descargando "${selectedLightboxItem.route.split("/").pop()}"...`);
                 }}
-                className="flex items-center gap-1.5 text-zinc-300 border-zinc-800"
+                className="flex items-center gap-1.5 text-[var(--t-text-secondary)] border-[var(--t-border)]"
               >
                 <Download className="h-4 w-4 text-indigo-400" /> Descargar Archivo
               </OutlineButton>
@@ -1066,19 +1066,19 @@ export function Evidence() {
       {/* ── MODAL REFACTORIZADO DE CARGA DE EVIDENCIAS EN LOTE Y ENLACES ─────────────── */}
       <ModalShell open={isFormModalOpen} onClose={closeFormModal} width="max-w-[900px]">
         <div className="space-y-4 p-5">
-          <div className="flex items-start justify-between border-b border-zinc-800 pb-3">
+          <div className="flex items-start justify-between border-b border-[var(--t-border)] pb-3">
             <div>
-              <h3 className="text-base font-semibold text-zinc-100 flex items-center gap-2">
+              <h3 className="text-base font-semibold text-[var(--t-text)] flex items-center gap-2">
                 <UploadCloud className="h-5 w-5 text-indigo-400" />
                 {editingEvidenceId ? "Editar Evidencia" : "Cargar Evidencias de Campo"}
               </h3>
-              <p className="text-xs text-zinc-400 mt-0.5">
+              <p className="text-xs text-[var(--t-text-tertiary)] mt-0.5">
                 Adjunta fotografías, reportes firmados o enlaces externos para validar actividades.
               </p>
             </div>
             <button
               type="button"
-              className="text-zinc-400 hover:text-zinc-200 p-1 rounded-lg hover:bg-zinc-800 transition-colors"
+              className="text-[var(--t-text-tertiary)] hover:text-[var(--t-text)] p-1 rounded-lg hover:bg-[var(--t-hover)] transition-colors"
               onClick={closeFormModal}
             >
               <X className="h-5 w-5" />
@@ -1088,7 +1088,7 @@ export function Evidence() {
           {/* FILA 1: FILTROS EN CASCADA, TIPO Y AUTOR */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
             <div>
-              <label className="block text-zinc-300 font-medium mb-1">
+              <label className="block text-[var(--t-text-secondary)] font-medium mb-1">
                 Proyecto <span className="text-red-400">*</span>
               </label>
               <SelectField
@@ -1102,7 +1102,7 @@ export function Evidence() {
             </div>
 
             <div>
-              <label className="block text-zinc-300 font-medium mb-1">
+              <label className="block text-[var(--t-text-secondary)] font-medium mb-1">
                 Actividad Vinculada <span className="text-red-400">*</span>
               </label>
               <SelectField
@@ -1114,7 +1114,7 @@ export function Evidence() {
             </div>
 
             <div>
-              <label className="block text-zinc-300 font-medium mb-1">
+              <label className="block text-[var(--t-text-secondary)] font-medium mb-1">
                 Tipo de Evidencia <span className="text-red-400">*</span>
               </label>
               <SelectField
@@ -1131,7 +1131,7 @@ export function Evidence() {
             </div>
 
             <div>
-              <label className="block text-zinc-300 font-medium mb-1">
+              <label className="block text-[var(--t-text-secondary)] font-medium mb-1">
                 Autor / Voluntario
               </label>
               <SelectField
@@ -1160,32 +1160,32 @@ export function Evidence() {
 
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="flex flex-col items-center justify-center p-6 rounded-2xl border border-dashed border-zinc-800 bg-zinc-950 hover:bg-zinc-900/60 cursor-pointer transition-colors text-center group"
+              className="flex flex-col items-center justify-center p-6 rounded-2xl border border-dashed border-[var(--t-border)] bg-[var(--t-elevated)] hover:bg-[var(--t-hover)] cursor-pointer transition-colors text-center group"
             >
               <UploadCloud className="h-9 w-9 text-indigo-400 group-hover:scale-110 transition-transform mb-2" />
-              <p className="text-xs text-zinc-200 font-semibold">
+              <p className="text-xs text-[var(--t-text)] font-semibold">
                 Haz clic para examinar o arrastra tus archivos aquí
               </p>
-              <p className="text-[11px] text-zinc-500 mt-1">Soporta JPG, PNG, PDF y ZIP de hasta 20MB</p>
+              <p className="text-[11px] text-[var(--t-text-dim)] mt-1">Soporta JPG, PNG, PDF y ZIP de hasta 20MB</p>
 
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400 pt-3 border-t border-zinc-800/80" onClick={(e) => e.stopPropagation()}>
-                <label className="flex items-center gap-1.5 cursor-pointer hover:text-zinc-200">
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-xs text-[var(--t-text-tertiary)] pt-3 border-t border-[var(--t-border)]" onClick={(e) => e.stopPropagation()}>
+                <label className="flex items-center gap-1.5 cursor-pointer hover:text-[var(--t-text)]">
                   <input
                     type="checkbox"
                     checked={formCompressImages}
                     onChange={(e) => setFormCompressImages(e.target.checked)}
-                    className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                    className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
                   />
                   <Zap className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
                   Comprimir imágenes antes de subir (Recomendado)
                 </label>
 
-                <label className="flex items-center gap-1.5 cursor-pointer hover:text-zinc-200">
+                <label className="flex items-center gap-1.5 cursor-pointer hover:text-[var(--t-text)]">
                   <input
                     type="checkbox"
                     checked={formExtractExif}
                     onChange={(e) => setFormExtractExif(e.target.checked)}
-                    className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                    className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
                   />
                   <Compass className="h-3.5 w-3.5 text-emerald-400" />
                   Extraer metadata GPS / Fecha de fotos (EXIF)
@@ -1196,8 +1196,8 @@ export function Evidence() {
 
           {/* FILA 3: LISTA DE ARCHIVOS EN COLA (FILE QUEUE PREVIEW) */}
           {selectedFiles.length > 0 && (
-            <div className="space-y-2 p-3 rounded-2xl bg-zinc-950 border border-zinc-800 text-xs animate-in fade-in">
-              <div className="flex items-center justify-between text-zinc-300 font-semibold border-b border-zinc-800 pb-2">
+            <div className="space-y-2 p-3 rounded-2xl bg-[var(--t-elevated)] border border-[var(--t-border)] text-xs animate-in fade-in">
+              <div className="flex items-center justify-between text-[var(--t-text-secondary)] font-semibold border-b border-[var(--t-border)] pb-2">
                 <span>Archivos Listos para Subir ({selectedFiles.length}):</span>
                 <button
                   type="button"
@@ -1214,15 +1214,15 @@ export function Evidence() {
                   return (
                     <div
                       key={idx}
-                      className="flex items-center justify-between p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-200"
+                      className="flex items-center justify-between p-2.5 rounded-xl bg-[var(--t-surface)] border border-[var(--t-border)] text-[var(--t-text)]"
                     >
                       <div className="flex items-center gap-3 truncate">
                         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
                           {isImg ? <ImageIcon className="h-4 w-4" /> : <FileText className="h-4 w-4" />}
                         </div>
                         <div className="truncate">
-                          <p className="font-semibold text-zinc-100 truncate text-xs">{file.name}</p>
-                          <p className="text-[10px] text-zinc-400 font-mono">
+                          <p className="font-semibold text-[var(--t-text)] truncate text-xs">{file.name}</p>
+                          <p className="text-[10px] text-[var(--t-text-tertiary)] font-mono">
                             {(file.size / (1024 * 1024)).toFixed(2)} MB
                           </p>
                         </div>
@@ -1237,7 +1237,7 @@ export function Evidence() {
                         <button
                           type="button"
                           onClick={() => setSelectedFiles((files) => files.filter((_, i) => i !== idx))}
-                          className="p-1 rounded-lg text-zinc-400 hover:text-red-400 hover:bg-zinc-800 transition-colors"
+                          className="p-1 rounded-lg text-[var(--t-text-tertiary)] hover:text-red-400 hover:bg-[var(--t-hover)] transition-colors"
                           title="Eliminar de la cola"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -1252,12 +1252,12 @@ export function Evidence() {
 
           {/* FILA 4: ENLACES EXTERNOS MÚLTIPLES */}
           <div className="space-y-2">
-            <label className="block text-xs font-medium text-zinc-300">
+            <label className="block text-xs font-medium text-[var(--t-text-secondary)]">
               Enlaces de Respaldo Externos (Google Drive, YouTube, OneDrive, Dropbox):
             </label>
             <div className="flex gap-2">
               <div className="relative flex-1">
-                <LinkIcon className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
+                <LinkIcon className="absolute left-3 top-2.5 h-4 w-4 text-[var(--t-text-dim)]" />
                 <input
                   value={linkInput}
                   onChange={(e) => setLinkInput(e.target.value)}
@@ -1268,7 +1268,7 @@ export function Evidence() {
                     }
                   }}
                   placeholder="Pega la URL de Google Drive, YouTube o carpeta externa y presiona Enter..."
-                  className="h-10 w-full rounded-xl pl-9 pr-3 text-xs outline-none border border-zinc-800 bg-zinc-900 text-zinc-200 focus:border-indigo-500"
+                  className="h-10 w-full rounded-xl pl-9 pr-3 text-xs outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)] focus:border-indigo-500"
                 />
               </div>
               <GradientButton size="sm" type="button" onClick={addExternalLink}>
@@ -1293,7 +1293,7 @@ export function Evidence() {
                       <button
                         type="button"
                         onClick={() => removeExternalLink(item.id)}
-                        className="ml-1 text-zinc-400 hover:text-red-400"
+                        className="ml-1 text-[var(--t-text-tertiary)] hover:text-red-400"
                       >
                         <X className="h-3.5 w-3.5" />
                       </button>
@@ -1306,7 +1306,7 @@ export function Evidence() {
 
           {/* FILA 5: TAREAS REALIZADAS / OBSERVACIONES DE CAMPO */}
           <div>
-            <label className="block text-xs font-medium text-zinc-300 mb-1">
+            <label className="block text-xs font-medium text-[var(--t-text-secondary)] mb-1">
               Descripción / Notas de Campo (Opcional)
             </label>
             <textarea
@@ -1314,30 +1314,30 @@ export function Evidence() {
               onChange={(event) => setFormDescription(event.target.value)}
               rows={2}
               placeholder="Ej. Se completó la jornada con 40 asistentes. Fotografías de entrega adjuntas..."
-              className="w-full rounded-xl p-3 text-xs outline-none border border-zinc-800 bg-zinc-900 text-zinc-200 focus:border-indigo-500"
+              className="w-full rounded-xl p-3 text-xs outline-none border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text)] focus:border-indigo-500"
             />
           </div>
 
           {/* CONFIGURACIÓN Y ESTADO */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-xs">
-            <label className="flex items-center gap-2 cursor-pointer text-zinc-300 hover:text-zinc-100">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)] text-xs">
+            <label className="flex items-center gap-2 cursor-pointer text-[var(--t-text-secondary)] hover:text-[var(--t-text)]">
               <input
                 type="checkbox"
                 checked={formNotifyCoordinator}
                 onChange={(e) => setFormNotifyCoordinator(e.target.checked)}
-                className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
               />
               <Mail className="h-3.5 w-3.5 text-indigo-400" />
               Notificar por correo al coordinador del proyecto
             </label>
 
             {!editingEvidenceId && (
-              <label className="flex items-center gap-2 cursor-pointer text-zinc-300 hover:text-zinc-100">
+              <label className="flex items-center gap-2 cursor-pointer text-[var(--t-text-secondary)] hover:text-[var(--t-text)]">
                 <input
                   type="checkbox"
                   checked={formKeepModalOpen}
                   onChange={(e) => setFormKeepModalOpen(e.target.checked)}
-                  className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                  className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
                 />
                 <RefreshCw className="h-3.5 w-3.5 text-amber-400" />
                 Mantener modal abierto al guardar (Modo Lote)
@@ -1346,7 +1346,7 @@ export function Evidence() {
           </div>
 
           {/* FOOTER DEL MODAL */}
-          <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
+          <div className="flex justify-end gap-2 pt-3 border-t border-[var(--t-border)]">
             <OutlineButton size="sm" onClick={closeFormModal}>
               Cancelar
             </OutlineButton>

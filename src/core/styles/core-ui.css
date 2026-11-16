@@ -44,6 +44,11 @@
 }
 
 /* ─── Forms ──────────────────────────────────────────────────── */
+/* En @layer base: son estilos por defecto. Sin capa, ganaban a TODAS las
+   utilidades de Tailwind (que viven en @layer utilities) y en /ong forzaban
+   width:100% y fondo gris en cada input/select/label, ignorando sus clases
+   (AUDIT-ong-ui-2026-11-16, Fase 3). */
+@layer base {
 input, select, textarea {
   background: var(--s3);
   border: 1px solid var(--border);
@@ -68,6 +73,7 @@ label {
   color: var(--tx-2);
   display: block;
   margin-bottom: 5px;
+}
 }
 
 /* ─── Buttons ────────────────────────────────────────────────── */

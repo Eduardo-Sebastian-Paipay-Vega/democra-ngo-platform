@@ -125,12 +125,12 @@ const roleColumns: Column<RoleRow>[] = [
       return (
         <div className="flex flex-wrap items-center gap-1.5">
           {topModules.map(mod => (
-            <span key={mod} className="px-2 py-0.5 rounded-full text-xs bg-[#1a2332] text-[#3b82f6] border border-[#25334b]">
+            <span key={mod} className="px-2 py-0.5 rounded-full text-xs bg-[var(--t-info-soft)] text-[#3b82f6] border border-[var(--t-border-strong)]">
               {translateModule(mod)}
             </span>
           ))}
           {extraCount > 0 && (
-            <span title={row.permissions.slice(topModules.length).map(p => sanitizePermissionDescription(p.description, p.id)).join(', ')} className="px-2 py-0.5 rounded-full text-xs bg-[#2a2a2a] text-[#A4A29F] border border-[#333] cursor-help">
+            <span title={row.permissions.slice(topModules.length).map(p => sanitizePermissionDescription(p.description, p.id)).join(', ')} className="px-2 py-0.5 rounded-full text-xs bg-[var(--t-elevated)] text-[var(--t-text-secondary)] border border-[var(--t-border-strong)] cursor-help">
               +{extraCount} más
             </span>
           )}
@@ -169,7 +169,7 @@ const permissionColumns: Column<PermissionCatalogRow>[] = [
       <div>
         <div style={{ color: "var(--color-text-primary)" }}>{sanitizePermissionDescription(row.description, row.id)}</div>
         <div className="mt-0.5 text-[11px]" style={{ color: "var(--color-text-muted)" }}>
-          <code className="text-[10px] bg-black/20 px-1 py-0.5 rounded text-gray-400">{row.id}</code>
+          <code className="text-[10px] bg-[var(--t-hover)] px-1 py-0.5 rounded text-[var(--t-text-tertiary)]">{row.id}</code>
         </div>
       </div>
     ),
@@ -402,7 +402,7 @@ export function Roles() {
             <button
               onClick={() => setActiveTab("roles")}
               className={`flex items-center gap-2 text-sm font-medium transition-colors pb-3 -mb-3 border-b-2 ${
-                activeTab === "roles" ? "text-blue-500 border-blue-500" : "text-gray-400 border-transparent hover:text-gray-300"
+                activeTab === "roles" ? "text-blue-500 border-blue-500" : "text-[var(--t-text-tertiary)] border-transparent hover:text-[var(--t-text-secondary)]"
               }`}
             >
               <Shield className="h-4 w-4" />
@@ -411,7 +411,7 @@ export function Roles() {
             <button
               onClick={() => setActiveTab("permissions")}
               className={`flex items-center gap-2 text-sm font-medium transition-colors pb-3 -mb-3 border-b-2 ${
-                activeTab === "permissions" ? "text-blue-500 border-blue-500" : "text-gray-400 border-transparent hover:text-gray-300"
+                activeTab === "permissions" ? "text-blue-500 border-blue-500" : "text-[var(--t-text-tertiary)] border-transparent hover:text-[var(--t-text-secondary)]"
               }`}
             >
               <ListChecks className="h-4 w-4" />
@@ -535,7 +535,7 @@ export function Roles() {
                             {sanitizePermissionDescription(permission.description, permission.id)}
                           </p>
                           <p className="text-[11px]" style={{ color: "var(--color-text-muted)" }}>
-                            {translateModule(permission.module)} · <code className="text-[10px] bg-black/20 px-1 py-0.5 rounded">{permission.id}</code>
+                            {translateModule(permission.module)} · <code className="text-[10px] bg-[var(--t-hover)] px-1 py-0.5 rounded">{permission.id}</code>
                           </p>
                         </div>
                       ))}
@@ -595,7 +595,7 @@ export function Roles() {
             </div>
             <button
               type="button"
-              className="rounded-lg p-1.5 text-[#7A7A7A] hover:text-[#C8C5BF] hover:bg-[#1F1D1A] transition-colors"
+              className="rounded-lg p-1.5 text-[var(--t-text-dim)] hover:text-[var(--t-text-secondary)] hover:bg-[var(--t-hover)] transition-colors"
               onClick={() => setIsFormOpen(false)}
               aria-label="Cerrar"
             >
@@ -609,7 +609,7 @@ export function Roles() {
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-1.5">
-              <label className="text-[13px] font-medium text-[#A4A29F]">Nombre del Rol</label>
+              <label className="text-[13px] font-medium text-[var(--t-text-secondary)]">Nombre del Rol</label>
               <input
                 value={form.name}
                 onChange={(event) =>
@@ -624,7 +624,7 @@ export function Roles() {
               />
             </div>
             <div className="space-y-1.5">
-              <label className="text-[13px] font-medium text-[#A4A29F]">Nivel de Jerarquía (0-100)</label>
+              <label className="text-[13px] font-medium text-[var(--t-text-secondary)]">Nivel de Jerarquía (0-100)</label>
               <input
                 type="number"
                 min="0"
@@ -647,9 +647,9 @@ export function Roles() {
           </div>
 
           <div className="flex items-center gap-2 mt-1">
-            <Shield className="h-3.5 w-3.5 text-[#5A5A5A]" />
-            <span className="text-[12px] font-medium text-[#7A7A7A]">Permisos por módulo</span>
-            <span className="text-[11px] text-[#5A5A5A]">
+            <Shield className="h-3.5 w-3.5 text-[var(--t-text-dim)]" />
+            <span className="text-[12px] font-medium text-[var(--t-text-dim)]">Permisos por módulo</span>
+            <span className="text-[11px] text-[var(--t-text-dim)]">
               — {form.permissionIds.length} seleccionados
             </span>
           </div>
@@ -660,14 +660,14 @@ export function Roles() {
               const allSelected = allModuleIds.every((id) => form.permissionIds.includes(id));
               
               return (
-                <details key={module} className="group rounded-xl border border-[#26231F] bg-[#171512] overflow-hidden">
-                  <summary className="flex items-center justify-between cursor-pointer p-3.5 bg-[#1F1D1A] group-open:border-b border-[#26231F]">
+                <details key={module} className="group rounded-xl border border-[var(--t-border)] bg-[var(--t-surface)] overflow-hidden">
+                  <summary className="flex items-center justify-between cursor-pointer p-3.5 bg-[var(--t-elevated)] group-open:border-b border-[var(--t-border)]">
                     <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 flex items-center justify-center rounded-full bg-[#100F0D] group-open:rotate-180 transition-transform">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#A4A29F]"><path d="m6 9 6 6 6-6"/></svg>
+                      <div className="w-6 h-6 flex items-center justify-center rounded-full bg-[var(--t-bg)] group-open:rotate-180 transition-transform">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--t-text-secondary)]"><path d="m6 9 6 6 6-6"/></svg>
                       </div>
-                      <h4 className="text-sm font-semibold text-[#F9F7F3]">Módulo: {translateModule(module)}</h4>
-                      <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#100F0D] border border-[#26231F] text-[#A4A29F]">
+                      <h4 className="text-sm font-semibold text-[var(--t-text)]">Módulo: {translateModule(module)}</h4>
+                      <span className="text-[11px] px-2 py-0.5 rounded-full bg-[var(--t-bg)] border border-[var(--t-border)] text-[var(--t-text-secondary)]">
                         {permissions.filter(p => form.permissionIds.includes(p.id)).length} / {permissions.length}
                       </span>
                     </div>
@@ -689,13 +689,13 @@ export function Roles() {
                       </button>
                     </div>
                   </summary>
-                  <div className="p-3 grid gap-2.5 grid-cols-1 md:grid-cols-2 bg-[#171512]">
+                  <div className="p-3 grid gap-2.5 grid-cols-1 md:grid-cols-2 bg-[var(--t-surface)]">
                     {permissions.map((permission) => {
                       const isSelected = form.permissionIds.includes(permission.id);
                       return (
                         <label
                           key={permission.id}
-                          className="flex items-center gap-3 rounded-lg px-3.5 h-[58px] cursor-pointer transition-all duration-150 hover:bg-[#1F1D1A]"
+                          className="flex items-center gap-3 rounded-lg px-3.5 h-[58px] cursor-pointer transition-all duration-150 hover:bg-[var(--t-hover)]"
                           style={{
                             border: `1px solid ${isSelected ? "#356C92" : "#2A2A2A"}`,
                             background: isSelected ? "rgba(53,108,146,0.07)" : "transparent",
@@ -703,7 +703,7 @@ export function Roles() {
                         >
                           <input
                             type="checkbox"
-                            className="w-4 h-4 flex-shrink-0 rounded border-[#3A3A3A] text-[#356C92] focus:ring-[#356C92]/40 bg-[#100F0D] accent-[#356C92]"
+                            className="w-4 h-4 flex-shrink-0 rounded border-[var(--t-border-strong)] text-[#356C92] focus:ring-[#356C92]/40 bg-[var(--t-bg)] accent-[#356C92]"
                             checked={isSelected}
                             onChange={() => togglePermission(permission.id)}
                           />
