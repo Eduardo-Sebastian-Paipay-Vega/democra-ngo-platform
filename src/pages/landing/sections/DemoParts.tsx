@@ -13,7 +13,7 @@ export const TIMELINE_TRACKS: { label: string; tone: Tone; icon: typeof IconUser
   { label: "Convocatoria", tone: "green", icon: IconUsers },
   { label: "Planificación", tone: "blue", icon: IconCalendar },
   { label: "Jornada", tone: "blue", icon: IconCalendar },
-  { label: "Registro de horas", tone: "amber", icon: IconClock },
+  { label: "Horas", tone: "amber", icon: IconClock },
 ];
 
 /** start y size en fracción del ancho total de la línea de tiempo. */
