@@ -39,7 +39,7 @@ export function ProductDemo() {
             <div className="lp-bar-stats">
               <div className="lp-bar lp-bar-stat"><small>A</small>06</div>
               <div className="lp-bar lp-bar-stat"><small>P</small>12</div>
-              <div className="lp-bar lp-bar-stat"><small>%</small>72%</div>
+              <div className="lp-bar lp-bar-stat"><small>%</small>72</div>
             </div>
           </div>
 
