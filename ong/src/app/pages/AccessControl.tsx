@@ -341,16 +341,16 @@ export function AccessControl() {
       variants={fadeUp}
       initial="initial"
       animate="animate"
-      className="bg-[#100F0D] text-[#F9F7F3] min-h-screen p-6 font-sans access-control-dashboard"
+      className="bg-[var(--t-bg)] text-[var(--t-text)] min-h-screen p-6 font-sans access-control-dashboard"
     >
       {/* Header Superior */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
           <h1 className="text-2xl font-bold">Panel Principal</h1>
-          <p className="text-sm text-[#A4A29F]">Control de Accesos y Membresías</p>
+          <p className="text-sm text-[var(--t-text-secondary)]">Control de Accesos y Membresías</p>
         </div>
         <div className="flex gap-2">
-          <button onClick={() => { refreshLinks(); refreshMemberships(); }} className="bg-[#171512] border border-[#26231F] px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-[#1F1D1A] transition-colors flex items-center gap-2 text-[#F9F7F3]">
+          <button onClick={() => { refreshLinks(); refreshMemberships(); }} className="bg-[var(--t-surface)] border border-[var(--t-border)] px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-[var(--t-hover)] transition-colors flex items-center gap-2 text-[var(--t-text)]">
             Actualizar
           </button>
           <button onClick={openCreate} className="bg-[#356C92] text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-[#356C92]/90 transition-colors flex items-center gap-2">
@@ -374,41 +374,41 @@ export function AccessControl() {
           
           {/* Fila de 4 KPI Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4 relative overflow-hidden">
-              <h3 className="text-xs text-[#A4A29F] mb-1">Miembros</h3>
-              <p className="text-2xl font-bold text-white">{memberships.filter((m: any) => m.status === 'active').length}</p>
-              <div className="absolute top-3 right-3 bg-[#161D17] text-[#08996A] border border-[#08996A]/20 text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
+            <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4 relative overflow-hidden">
+              <h3 className="text-xs text-[var(--t-text-secondary)] mb-1">Miembros</h3>
+              <p className="text-2xl font-bold text-[var(--t-text)]">{memberships.filter((m: any) => m.status === 'active').length}</p>
+              <div className="absolute top-3 right-3 bg-[var(--t-success-soft)] text-[#08996A] border border-[#08996A]/20 text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
                 <Users className="w-3 h-3" /> Activos
               </div>
             </div>
             
-            <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4 relative overflow-hidden">
-              <h3 className="text-xs text-[#A4A29F] mb-1">Códigos</h3>
-              <p className="text-2xl font-bold text-white">{links.filter((l: any) => l.is_active).length}</p>
-              <div className="absolute top-3 right-3 bg-[#1F181E] text-[#8B5CF6] border border-[#8B5CF6]/20 text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
+            <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4 relative overflow-hidden">
+              <h3 className="text-xs text-[var(--t-text-secondary)] mb-1">Códigos</h3>
+              <p className="text-2xl font-bold text-[var(--t-text)]">{links.filter((l: any) => l.is_active).length}</p>
+              <div className="absolute top-3 right-3 bg-[var(--t-danger-soft)] text-[#8B5CF6] border border-[#8B5CF6]/20 text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
                 <Link2 className="w-3 h-3" /> Activos
               </div>
             </div>
             
-            <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4 relative overflow-hidden">
-              <h3 className="text-xs text-[#A4A29F] mb-1">Usos</h3>
-              <p className="text-2xl font-bold text-white">{links.reduce((acc: number, l: any) => acc + l.used_count, 0)}</p>
-              <div className="absolute top-3 right-3 bg-[#231C11] text-[#D97706] border border-[#D97706]/20 text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
+            <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4 relative overflow-hidden">
+              <h3 className="text-xs text-[var(--t-text-secondary)] mb-1">Usos</h3>
+              <p className="text-2xl font-bold text-[var(--t-text)]">{links.reduce((acc: number, l: any) => acc + l.used_count, 0)}</p>
+              <div className="absolute top-3 right-3 bg-[var(--t-warning-soft)] text-[#D97706] border border-[#D97706]/20 text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
                 <Activity className="w-3 h-3" /> Total
               </div>
             </div>
 
-            <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4 relative overflow-hidden">
-              <h3 className="text-xs text-[#A4A29F] mb-1">Roles Base</h3>
-              <p className="text-2xl font-bold text-white">{roles.length}</p>
-              <div className="absolute top-3 right-3 bg-[#161D17] text-[#08996A] border border-[#08996A]/20 text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
+            <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4 relative overflow-hidden">
+              <h3 className="text-xs text-[var(--t-text-secondary)] mb-1">Roles Base</h3>
+              <p className="text-2xl font-bold text-[var(--t-text)]">{roles.length}</p>
+              <div className="absolute top-3 right-3 bg-[var(--t-success-soft)] text-[#08996A] border border-[#08996A]/20 text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
                 Sistema
               </div>
             </div>
           </div>
 
           {/* Tarjeta de Gráfico / Evolución */}
-          <div className="h-[280px] bg-[#171512] border border-[#26231F] rounded-[12px] p-4 flex flex-col">
+          <div className="h-[280px] bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4 flex flex-col">
             <h2 className="text-sm font-semibold mb-4 flex items-center gap-2">
               <BarChart2 className="w-4 h-4 text-[#8B5CF6]" />
               Evolución de Registros
@@ -435,12 +435,12 @@ export function AccessControl() {
                 </ResponsiveContainer>
               </div>
             ) : (
-              <div className="flex-1 flex flex-col items-center justify-center bg-[#23211D]/30 rounded-xl border border-dashed border-[#26231F]">
-                <div className="bg-[#23211D] p-3 rounded-xl mb-3">
-                  <BarChart2 className="w-6 h-6 text-[#686561]" />
+              <div className="flex-1 flex flex-col items-center justify-center bg-[var(--t-elevated)] rounded-xl border border-dashed border-[var(--t-border)]">
+                <div className="bg-[var(--t-elevated)] p-3 rounded-xl mb-3">
+                  <BarChart2 className="w-6 h-6 text-[var(--t-text-dim)]" />
                 </div>
                 <p className="text-sm font-medium">Sin datos suficientes</p>
-                <p className="text-xs text-[#A4A29F] text-center max-w-xs mt-1">
+                <p className="text-xs text-[var(--t-text-secondary)] text-center max-w-xs mt-1">
                   Aún no hay suficientes altas de miembros para generar la gráfica de crecimiento.
                 </p>
               </div>
@@ -448,7 +448,7 @@ export function AccessControl() {
           </div>
 
           {/* Tarjeta de Feed en Vivo (Membresías) */}
-          <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4">
+          <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4">
              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <h2 className="text-sm font-semibold flex items-center gap-2">
                 <Users className="w-4 h-4 text-[#08996A]" />
@@ -456,7 +456,7 @@ export function AccessControl() {
               </h2>
             </div>
             
-            <div className="[&_th]:!bg-[#100F0D] [&_th]:!text-[#A4A29F] [&_th]:!border-[#26231F] [&_td]:!border-[#26231F] [&_tr:hover]:!bg-[#1F1D1A]">
+            <div className="[&_th]:!bg-[var(--t-bg)] [&_th]:!text-[var(--t-text-secondary)] [&_th]:!border-[var(--t-border)] [&_td]:!border-[var(--t-border)] [&_tr:hover]:!bg-[var(--t-elevated)]">
               <DataTable
                 columns={membershipColumns}
                 data={memberships.slice(0, 5)}
@@ -472,35 +472,35 @@ export function AccessControl() {
         <div className="lg:col-span-1 space-y-4">
           
           {/* Tarjeta Accesos Directos */}
-          <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4">
-            <h2 className="text-sm font-semibold mb-4 text-[#F9F7F3]">Accesos Directos</h2>
+          <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4">
+            <h2 className="text-sm font-semibold mb-4 text-[var(--t-text)]">Accesos Directos</h2>
             <div className="space-y-2">
               <button 
                 onClick={openCreate}
-                className="w-full text-left hover:bg-[#1F1D1A] transition-colors rounded-[12px] p-3 flex justify-between items-center bg-[#1F1D1A]/50 border border-transparent hover:border-[#26231F]"
+                className="w-full text-left hover:bg-[var(--t-hover)] transition-colors rounded-[12px] p-3 flex justify-between items-center bg-[var(--t-elevated)] border border-transparent hover:border-[var(--t-border)]"
               >
                 <div className="flex items-center gap-2">
-                  <div className="bg-[#23211D] p-1.5 rounded-md">
-                    <Plus className="w-4 h-4 text-[#A4A29F]" />
+                  <div className="bg-[var(--t-elevated)] p-1.5 rounded-md">
+                    <Plus className="w-4 h-4 text-[var(--t-text-secondary)]" />
                   </div>
-                  <span className="text-sm font-medium text-[#F9F7F3]">Nuevo Código</span>
+                  <span className="text-sm font-medium text-[var(--t-text)]">Nuevo Código</span>
                 </div>
-                <div className="bg-[#100F0D] text-xs px-2 py-1 rounded text-[#A4A29F]">
+                <div className="bg-[var(--t-bg)] text-xs px-2 py-1 rounded text-[var(--t-text-secondary)]">
                   <Link2 className="w-3 h-3" />
                 </div>
               </button>
 
               <button 
                 onClick={() => { refreshLinks(); refreshMemberships(); }}
-                className="w-full text-left hover:bg-[#1F1D1A] transition-colors rounded-[12px] p-3 flex justify-between items-center bg-[#1F1D1A]/50 border border-transparent hover:border-[#26231F]"
+                className="w-full text-left hover:bg-[var(--t-hover)] transition-colors rounded-[12px] p-3 flex justify-between items-center bg-[var(--t-elevated)] border border-transparent hover:border-[var(--t-border)]"
               >
                 <div className="flex items-center gap-2">
-                  <div className="bg-[#23211D] p-1.5 rounded-md">
-                    <Activity className="w-4 h-4 text-[#A4A29F]" />
+                  <div className="bg-[var(--t-elevated)] p-1.5 rounded-md">
+                    <Activity className="w-4 h-4 text-[var(--t-text-secondary)]" />
                   </div>
-                  <span className="text-sm font-medium text-[#F9F7F3]">Recargar Datos</span>
+                  <span className="text-sm font-medium text-[var(--t-text)]">Recargar Datos</span>
                 </div>
-                <div className="bg-[#100F0D] text-xs px-2 py-1 rounded text-[#A4A29F]">
+                <div className="bg-[var(--t-bg)] text-xs px-2 py-1 rounded text-[var(--t-text-secondary)]">
                   <Activity className="w-3 h-3" />
                 </div>
               </button>
@@ -508,7 +508,7 @@ export function AccessControl() {
           </div>
 
           {/* Tarjeta Códigos Activos */}
-          <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4">
+          <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-sm font-semibold flex items-center gap-2">
                 <Link2 className="w-4 h-4 text-[#356C92]" />
@@ -517,30 +517,30 @@ export function AccessControl() {
             </div>
             
             {links.filter((l: any) => l.is_active).length === 0 ? (
-              <div className="flex flex-col items-center justify-center bg-[#23211D]/30 rounded-[12px] border border-dashed border-[#26231F] py-8">
-                <div className="bg-[#23211D] p-3 rounded-[12px] mb-3">
-                  <Link2 className="w-6 h-6 text-[#686561]" />
+              <div className="flex flex-col items-center justify-center bg-[var(--t-elevated)] rounded-[12px] border border-dashed border-[var(--t-border)] py-8">
+                <div className="bg-[var(--t-elevated)] p-3 rounded-[12px] mb-3">
+                  <Link2 className="w-6 h-6 text-[var(--t-text-dim)]" />
                 </div>
                 <p className="text-sm font-medium">Sin códigos activos</p>
-                <p className="text-xs text-[#A4A29F] text-center mt-1">
+                <p className="text-xs text-[var(--t-text-secondary)] text-center mt-1">
                   Genera un nuevo enlace de invitación para permitir el registro.
                 </p>
               </div>
             ) : (
               <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1 scrollbar-none">
                 {links.filter((l: any) => l.is_active).map((c: any) => (
-                  <div key={c.id} className="bg-[#1F1D1A]/50 hover:bg-[#1F1D1A] transition-colors p-3 rounded-[12px] border border-[#26231F]">
+                  <div key={c.id} className="bg-[var(--t-elevated)] hover:bg-[var(--t-hover)] transition-colors p-3 rounded-[12px] border border-[var(--t-border)]">
                     <div className="flex justify-between items-start mb-1">
-                      <span className="text-xs font-semibold text-white cursor-pointer hover:underline" onClick={() => setSelectedLink(c)}>{c.code}</span>
+                      <span className="text-xs font-semibold text-[var(--t-text)] cursor-pointer hover:underline" onClick={() => setSelectedLink(c)}>{c.code}</span>
                       <div className="flex gap-1">
-                         <button onClick={() => handleRevoke(c)} className="text-[#A4A29F] hover:text-[#ef4444]" title="Revocar"><Trash2 className="w-3 h-3" /></button>
+                         <button onClick={() => handleRevoke(c)} className="text-[var(--t-text-secondary)] hover:text-[#ef4444]" title="Revocar"><Trash2 className="w-3 h-3" /></button>
                       </div>
                     </div>
-                    <div className="text-[11px] text-[#A4A29F] flex items-center gap-1 mt-1">
+                    <div className="text-[11px] text-[var(--t-text-secondary)] flex items-center gap-1 mt-1">
                       <Activity className="w-3 h-3" />
                       Usos: {c.used_count} / {c.max_uses}
                     </div>
-                    <div className="text-[11px] text-[#A4A29F] flex items-center gap-1 mt-1">
+                    <div className="text-[11px] text-[var(--t-text-secondary)] flex items-center gap-1 mt-1">
                       <Clock className="w-3 h-3" />
                       {c.expires_at ? new Date(c.expires_at).toLocaleDateString("es-PE") : "Sin vencimiento"}
                     </div>
@@ -556,38 +556,38 @@ export function AccessControl() {
         <div className="flex flex-col gap-4 p-6 relative">
           <button 
             onClick={() => setShowCreateModal(false)}
-            className="absolute top-6 right-6 text-[#A4A29F] hover:text-[#F9F7F3] transition-colors"
+            className="absolute top-6 right-6 text-[var(--t-text-secondary)] hover:text-[var(--t-text)] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
           
-          <h2 className="text-lg font-semibold text-[#F9F7F3] pr-8">
+          <h2 className="text-lg font-semibold text-[var(--t-text)] pr-8">
             Nuevo código de acceso
           </h2>
 
           {createdLink ? (
             <div className="flex flex-col gap-4">
-              <p className="text-sm text-[#A4A29F]">
+              <p className="text-sm text-[var(--t-text-secondary)]">
                 Comparte este código con la persona que se registrará. Al usarlo, se le asignará
                 automáticamente el rol seleccionado.
               </p>
               <button
                 onClick={() => copyToClipboard(createdLink.code, "Código de acceso")}
-                className="w-full relative group flex flex-col items-center justify-center font-mono text-2xl font-bold py-6 px-4 rounded-xl border border-[#26231F] bg-[#100F0D] text-[#F9F7F3] hover:border-[#356C92]/50 hover:bg-[#1F1D1A] transition-all cursor-pointer"
+                className="w-full relative group flex flex-col items-center justify-center font-mono text-2xl font-bold py-6 px-4 rounded-xl border border-[var(--t-border)] bg-[var(--t-bg)] text-[var(--t-text)] hover:border-[#356C92]/50 hover:bg-[var(--t-hover)] transition-all cursor-pointer"
                 title="Haz clic para copiar"
               >
                 <div className="flex items-center gap-3">
                   <span>{createdLink.code}</span>
-                  <Copy className="w-5 h-5 text-[#A4A29F] group-hover:text-[#F9F7F3] transition-colors" />
+                  <Copy className="w-5 h-5 text-[var(--t-text-secondary)] group-hover:text-[var(--t-text)] transition-colors" />
                 </div>
-                <div className="absolute bottom-2 text-[11px] font-sans font-medium text-[#A4A29F] opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-2 text-[11px] font-sans font-medium text-[var(--t-text-secondary)] opacity-0 group-hover:opacity-100 transition-opacity">
                   Haz clic para copiar al portapapeles
                 </div>
               </button>
               <div className="flex justify-end gap-3 mt-2">
                 <button 
                   onClick={() => setShowCreateModal(false)}
-                  className="border border-[#26231F] text-[#F9F7F3] bg-[#171512] px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#1F1D1A] transition-colors"
+                  className="border border-[var(--t-border)] text-[var(--t-text)] bg-[var(--t-surface)] px-4 py-2 rounded-lg text-sm font-medium hover:bg-[var(--t-hover)] transition-colors"
                 >
                   Cerrar
                 </button>
@@ -596,7 +596,7 @@ export function AccessControl() {
           ) : (
             <div className="flex flex-col gap-4">
               <div>
-                <label className="text-xs text-[#A4A29F] block mb-1.5 font-medium">
+                <label className="text-xs text-[var(--t-text-secondary)] block mb-1.5 font-medium">
                   Tipo de registro
                 </label>
                 <Select
@@ -608,10 +608,10 @@ export function AccessControl() {
                     }))
                   }
                 >
-                  <SelectTrigger className="w-full bg-[#100F0D] border-[#26231F] text-[#A4A29F] h-[34px] rounded-md px-3 py-1">
+                  <SelectTrigger className="w-full bg-[var(--t-bg)] border-[var(--t-border)] text-[var(--t-text-secondary)] h-[34px] rounded-md px-3 py-1">
                     <SelectValue placeholder="Selecciona un tipo" />
                   </SelectTrigger>
-                  <SelectContent className="z-[120] bg-[#171512] border-[#26231F] text-[#F9F7F3]">
+                  <SelectContent className="z-[120] bg-[var(--t-surface)] border-[var(--t-border)] text-[var(--t-text)]">
                     <SelectItem value="VOLUNTEER_JOIN">Voluntario</SelectItem>
                     <SelectItem value="STAFF_JOIN">Staff / colaborador</SelectItem>
                     <SelectItem value="BENEFICIARY_JOIN">Beneficiario</SelectItem>
@@ -621,7 +621,7 @@ export function AccessControl() {
               </div>
 
               <div>
-                <label className="text-xs text-[#A4A29F] block mb-1.5 font-medium">
+                <label className="text-xs text-[var(--t-text-secondary)] block mb-1.5 font-medium">
                   Rol asignado (opcional)
                 </label>
                 <Select
@@ -630,10 +630,10 @@ export function AccessControl() {
                     setLinkForm((prev) => ({ ...prev, assignedRoleId: val === "NONE" ? "" : val }))
                   }
                 >
-                  <SelectTrigger className="w-full bg-[#100F0D] border-[#26231F] text-[#A4A29F] h-[34px] rounded-md px-3 py-1">
+                  <SelectTrigger className="w-full bg-[var(--t-bg)] border-[var(--t-border)] text-[var(--t-text-secondary)] h-[34px] rounded-md px-3 py-1">
                     <SelectValue placeholder="Sin rol (solo membresía)" />
                   </SelectTrigger>
-                  <SelectContent className="z-[120] bg-[#171512] border-[#26231F] text-[#F9F7F3]">
+                  <SelectContent className="z-[120] bg-[var(--t-surface)] border-[var(--t-border)] text-[var(--t-text)]">
                     <SelectItem value="NONE">Sin rol (solo membresía)</SelectItem>
                     {roles.map((role) => (
                       <SelectItem key={role.id} value={role.id}>
@@ -645,7 +645,7 @@ export function AccessControl() {
               </div>
 
               <div>
-                <label className="text-xs text-[#A4A29F] block mb-1.5 font-medium">
+                <label className="text-xs text-[var(--t-text-secondary)] block mb-1.5 font-medium">
                   Sede
                 </label>
                 <Select
@@ -657,10 +657,10 @@ export function AccessControl() {
                     }))
                   }
                 >
-                  <SelectTrigger className="w-full bg-[#100F0D] border-[#26231F] text-[#A4A29F] h-[34px] rounded-md px-3 py-1">
+                  <SelectTrigger className="w-full bg-[var(--t-bg)] border-[var(--t-border)] text-[var(--t-text-secondary)] h-[34px] rounded-md px-3 py-1">
                     <SelectValue placeholder="Selecciona una sede" />
                   </SelectTrigger>
-                  <SelectContent className="z-[120] bg-[#171512] border-[#26231F] text-[#F9F7F3]">
+                  <SelectContent className="z-[120] bg-[var(--t-surface)] border-[var(--t-border)] text-[var(--t-text)]">
                     <SelectItem value="GLOBAL">Todas las sedes (Global)</SelectItem>
                     <SelectItem value="SEDE">Sede específica</SelectItem>
                   </SelectContent>
@@ -669,7 +669,7 @@ export function AccessControl() {
 
               {linkForm.targetType === "SEDE" && (
                 <div>
-                  <label className="text-xs text-[#A4A29F] block mb-1.5 font-medium">
+                  <label className="text-xs text-[var(--t-text-secondary)] block mb-1.5 font-medium">
                     Sede
                   </label>
                   <Select
@@ -678,10 +678,10 @@ export function AccessControl() {
                       setLinkForm((prev) => ({ ...prev, assignedSedeId: val === "NONE" ? "" : val }))
                     }
                   >
-                    <SelectTrigger className="w-full bg-[#100F0D] border-[#26231F] text-[#A4A29F] h-[34px] rounded-md px-3 py-1">
+                    <SelectTrigger className="w-full bg-[var(--t-bg)] border-[var(--t-border)] text-[var(--t-text-secondary)] h-[34px] rounded-md px-3 py-1">
                       <SelectValue placeholder="Selecciona una sede" />
                     </SelectTrigger>
-                    <SelectContent className="z-[120] bg-[#171512] border-[#26231F] text-[#F9F7F3]">
+                    <SelectContent className="z-[120] bg-[var(--t-surface)] border-[var(--t-border)] text-[var(--t-text)]">
                       <SelectItem value="NONE">Selecciona una sede</SelectItem>
                       {sedes.map((sede) => (
                         <SelectItem key={sede.id} value={sede.id}>
@@ -695,7 +695,7 @@ export function AccessControl() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-[#A4A29F] block mb-1.5 font-medium">
+                  <label className="text-xs text-[var(--t-text-secondary)] block mb-1.5 font-medium">
                     Límite de usos
                   </label>
                   <input
@@ -710,7 +710,7 @@ export function AccessControl() {
                 </div>
 
                 <div>
-                  <label className="text-xs text-[#A4A29F] block mb-1.5 font-medium">
+                  <label className="text-xs text-[var(--t-text-secondary)] block mb-1.5 font-medium">
                     Expiración (opcional)
                   </label>
                   <input
@@ -726,7 +726,7 @@ export function AccessControl() {
                 <button 
                   onClick={() => setShowCreateModal(false)} 
                   disabled={submitting}
-                  className="border border-[#26231F] text-[#F9F7F3] bg-[#171512] px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#1F1D1A] transition-colors disabled:opacity-50"
+                  className="border border-[var(--t-border)] text-[var(--t-text)] bg-[var(--t-surface)] px-4 py-2 rounded-lg text-sm font-medium hover:bg-[var(--t-hover)] transition-colors disabled:opacity-50"
                 >
                   Cancelar
                 </button>
@@ -748,30 +748,30 @@ export function AccessControl() {
           <div className="flex flex-col gap-5 p-6 relative w-full max-w-4xl max-h-[90vh] overflow-y-auto scrollbar-none">
             <button 
               onClick={() => setSelectedLink(null)}
-              className="absolute top-6 right-6 text-[#A4A29F] hover:text-[#F9F7F3] transition-colors"
+              className="absolute top-6 right-6 text-[var(--t-text-secondary)] hover:text-[var(--t-text)] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
-            <h2 className="text-xl font-bold text-[#F9F7F3] pr-8 mb-1 flex items-center gap-2">
+            <h2 className="text-xl font-bold text-[var(--t-text)] pr-8 mb-1 flex items-center gap-2">
               <Link2 className="w-5 h-5 text-[#356C92]" />
               Detalle del Código
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div className="md:col-span-2 flex flex-col gap-4">
-                <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4">
-                  <h3 className="text-sm font-semibold text-[#F9F7F3] mb-3">Información de Acceso</h3>
+                <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4">
+                  <h3 className="text-sm font-semibold text-[var(--t-text)] mb-3">Información de Acceso</h3>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs text-[#A4A29F] block mb-1.5 font-medium">Código</label>
+                      <label className="text-xs text-[var(--t-text-secondary)] block mb-1.5 font-medium">Código</label>
                       <div className="flex items-center gap-2">
-                        <div className="font-mono text-sm font-bold py-2 px-3 rounded-lg border border-[#26231F] bg-[#100F0D] text-[#F9F7F3] flex-1">
+                        <div className="font-mono text-sm font-bold py-2 px-3 rounded-lg border border-[var(--t-border)] bg-[var(--t-bg)] text-[var(--t-text)] flex-1">
                           {selectedLink.code}
                         </div>
                         <button 
                           onClick={() => copyToClipboard(selectedLink.code, "Código")}
-                          className="bg-[#1F1D1A] border border-[#26231F] p-2 rounded-lg text-[#A4A29F] hover:text-[#F9F7F3] hover:bg-[#26231F] transition-colors"
+                          className="bg-[var(--t-elevated)] border border-[var(--t-border)] p-2 rounded-lg text-[var(--t-text-secondary)] hover:text-[var(--t-text)] hover:bg-[var(--t-hover)] transition-colors"
                           title="Copiar código"
                         >
                           <Copy className="w-4 h-4" />
@@ -780,14 +780,14 @@ export function AccessControl() {
                     </div>
 
                     <div>
-                      <label className="text-xs text-[#A4A29F] block mb-1.5 font-medium">Enlace de Redirección</label>
+                      <label className="text-xs text-[var(--t-text-secondary)] block mb-1.5 font-medium">Enlace de Redirección</label>
                       <div className="flex items-center gap-2">
-                        <div className="text-xs py-2.5 px-3 rounded-lg border border-[#26231F] bg-[#100F0D] text-[#A4A29F] flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
+                        <div className="text-xs py-2.5 px-3 rounded-lg border border-[var(--t-border)] bg-[var(--t-bg)] text-[var(--t-text-secondary)] flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
                           {`https://democra.pro/ong/join?code=${selectedLink.code}`}
                         </div>
                         <button 
                           onClick={() => copyToClipboard(`https://democra.pro/ong/join?code=${selectedLink.code}`, "Enlace")}
-                          className="bg-[#1F1D1A] border border-[#26231F] p-2 rounded-lg text-[#A4A29F] hover:text-[#F9F7F3] hover:bg-[#26231F] transition-colors"
+                          className="bg-[var(--t-elevated)] border border-[var(--t-border)] p-2 rounded-lg text-[var(--t-text-secondary)] hover:text-[var(--t-text)] hover:bg-[var(--t-hover)] transition-colors"
                           title="Copiar enlace"
                         >
                           <Copy className="w-4 h-4" />
@@ -806,8 +806,8 @@ export function AccessControl() {
                   </div>
                 </div>
 
-                <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4">
-                  <h3 className="text-sm font-semibold text-[#F9F7F3] mb-3">Detalles</h3>
+                <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4">
+                  <h3 className="text-sm font-semibold text-[var(--t-text)] mb-3">Detalles</h3>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <SettingsDetailField 
                       label="Tipo" 
@@ -828,16 +828,16 @@ export function AccessControl() {
                   </div>
                 </div>
 
-                <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4">
-                  <h3 className="text-sm font-semibold flex items-center gap-2 mb-3 text-[#F9F7F3]">
+                <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4">
+                  <h3 className="text-sm font-semibold flex items-center gap-2 mb-3 text-[var(--t-text)]">
                     <Users className="w-4 h-4 text-[#08996A]" />
                     Historial de Usos ({selectedLink.used_count})
                   </h3>
                   
                   <div className="max-h-[100px] overflow-y-auto scrollbar-thin">
-                    <div className="flex flex-col items-center justify-center bg-[#23211D]/30 rounded-lg border border-dashed border-[#26231F] py-4">
-                      <p className="text-sm font-medium text-[#F9F7F3]">Sin canjes ni escaneos registrados.</p>
-                      <p className="text-xs text-[#A4A29F] text-center mt-1">
+                    <div className="flex flex-col items-center justify-center bg-[var(--t-elevated)] rounded-lg border border-dashed border-[var(--t-border)] py-4">
+                      <p className="text-sm font-medium text-[var(--t-text)]">Sin canjes ni escaneos registrados.</p>
+                      <p className="text-xs text-[var(--t-text-secondary)] text-center mt-1">
                         Los registros de este código aparecerán aquí.
                       </p>
                     </div>
@@ -846,9 +846,9 @@ export function AccessControl() {
               </div>
 
               <div className="md:col-span-1 flex flex-col gap-4">
-                <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4 flex flex-col items-center justify-center text-center">
-                  <h3 className="text-sm font-semibold text-[#F9F7F3] mb-4">Código QR</h3>
-                  <div className="bg-white p-2 rounded-xl mb-4 border border-[#26231F]">
+                <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4 flex flex-col items-center justify-center text-center">
+                  <h3 className="text-sm font-semibold text-[var(--t-text)] mb-4">Código QR</h3>
+                  <div className="bg-white p-2 rounded-xl mb-4 border border-[var(--t-border)]">
                     <QRCodeSVG 
                       id="qr-code-svg"
                       value={`https://democra.pro/ong/join?code=${selectedLink.code}`} 
@@ -861,7 +861,7 @@ export function AccessControl() {
                   </div>
                   <button
                     onClick={handleDownloadQR}
-                    className="w-full bg-[#1F1D1A] border border-[#26231F] text-[#F9F7F3] px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#26231F] transition-colors flex items-center justify-center gap-2"
+                    className="w-full bg-[var(--t-elevated)] border border-[var(--t-border)] text-[var(--t-text)] px-4 py-2 rounded-lg text-sm font-medium hover:bg-[var(--t-hover)] transition-colors flex items-center justify-center gap-2"
                   >
                     <Download className="w-4 h-4" />
                     Descargar QR
@@ -871,7 +871,7 @@ export function AccessControl() {
                 {selectedLink.is_active && (
                   <button 
                     onClick={() => handleRevoke(selectedLink)}
-                    className="w-full mt-auto border border-[#ef4444] text-[#ef4444] bg-[#171512] px-4 py-3 rounded-lg text-sm font-medium hover:bg-[#ef4444]/10 transition-colors flex items-center justify-center gap-2"
+                    className="w-full mt-auto border border-[#ef4444] text-[#ef4444] bg-[var(--t-surface)] px-4 py-3 rounded-lg text-sm font-medium hover:bg-[#ef4444]/10 transition-colors flex items-center justify-center gap-2"
                   >
                     <Trash2 className="w-4 h-4" />
                     Revocar código

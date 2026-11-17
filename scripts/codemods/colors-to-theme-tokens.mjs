@@ -47,6 +47,8 @@ function neutralToken(prop, shade, { hover, input }) {
       if (n <= 300) return t("text-secondary");
       if (n <= 400) return t("text-tertiary");
       return t("text-dim");
+    case "ring-offset":
+      return t("surface");
     case "border":
     case "divide":
     case "ring":
@@ -86,7 +88,7 @@ const HEX = {
 };
 
 const NEUTRAL_RE =
-  /(?<![\w-])((?:[a-z-]+:)*)(bg|text|border|divide|ring|placeholder|from|via|to)-(zinc|gray|neutral|stone|slate)-(\d{2,3})(?:\/\d{1,3})?(?![\w-])/g;
+  /(?<![\w-])((?:[a-z/-]+:)*)(bg|text|border|divide|ring-offset|ring|placeholder|from|via|to)-(zinc|gray|neutral|stone|slate)-(\d{2,3})(?:\/\d{1,3})?(?![\w-])/g;
 const HEX_RE =
   /(?<![\w-])((?:[a-z-]+:)*)(bg|text|border|divide|ring|placeholder|from|via|to)-\[#([0-9a-fA-F]{3,8})\](?:\/\d{1,3})?(?![\w-])/g;
 const COLORED_BG_RE =
@@ -112,11 +114,12 @@ function convertClassString(cls, ctx) {
     count++;
     return `${pre}${prop}-${t(name)}`;
   });
-  // text-white sobre superficie neutra → texto del tema.
+  // text-white (también hover:/group-hover:) sobre superficie neutra → texto
+  // del tema; en modo claro sería blanco sobre blanco.
   if (!COLORED_BG_RE.test(out)) {
-    out = out.replace(/(?<![\w:-])text-white(?![\w/-])/g, () => {
+    out = out.replace(/(?<![\w-])((?:[a-z/-]+:)*)text-white(?![\w/-])/g, (m, pre) => {
       count++;
-      return `text-${t("text")}`;
+      return `${pre}text-${t("text")}`;
     });
   }
   return { out, count };
@@ -124,8 +127,14 @@ function convertClassString(cls, ctx) {
 
 function convertSource(src) {
   let total = 0;
-  // Cadenas de clases: "…", '…', `…` (sin interpolación anidada compleja).
-  const result = src.replace(/(["'`])((?:(?!\1)[^\\\n]|\\.)*)\1/g, (whole, q, body, offset) => {
+  // Cadenas de clases: "…" y '…' de una línea; `…` puede ser multilínea
+  // (className={`… \n ${cond ? 'a' : 'b'}`}). Las plantillas con otra
+  // plantilla anidada dentro de ${} no se emparejan bien y se omiten.
+  const STRING_RE = /`((?:[^`\\]|\\.)*)`|"((?:[^"\\\n]|\\.)*)"|'((?:[^'\\\n]|\\.)*)'/g;
+  const result = src.replace(STRING_RE, (whole, bt, dq, sq, offset) => {
+    const q = bt !== undefined ? "`" : dq !== undefined ? '"' : "'";
+    const body = bt ?? dq ?? sq;
+    if (q === "`" && body.split("\n").length > 12) return whole; // probablemente no es una lista de clases
     if (!/(zinc|gray|neutral|stone|slate)-\d|-\[#|text-white/.test(body)) return whole;
     const before = src.slice(Math.max(0, offset - 300), offset);
     const tagOpen = before.lastIndexOf("<");

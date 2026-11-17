@@ -280,7 +280,7 @@ function getTemporalStatusBadge(startAt: string | null, endAt: string | null, st
 
 function AvatarStack({ count }: { count: number }) {
   if (count <= 0) {
-    return <span className="text-[11px] text-zinc-500 italic">Sin asignar</span>;
+    return <span className="text-[11px] text-[var(--t-text-dim)] italic">Sin asignar</span>;
   }
   const maxVisible = 2;
   const visibleCount = Math.min(count, maxVisible);
@@ -291,14 +291,14 @@ function AvatarStack({ count }: { count: number }) {
       {Array.from({ length: visibleCount }).map((_, i) => (
         <div
           key={i}
-          className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-indigo-800 text-[10px] font-bold text-white ring-2 ring-zinc-900 shadow"
+          className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-indigo-800 text-[10px] font-bold text-white ring-2 ring-[var(--t-border)] shadow"
           title={`Miembro ${i + 1}`}
         >
           {`V${i + 1}`}
         </div>
       ))}
       {extra > 0 && (
-        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-800 text-[10px] font-semibold text-zinc-300 ring-2 ring-zinc-900">
+        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--t-elevated)] text-[10px] font-semibold text-[var(--t-text-secondary)] ring-2 ring-[var(--t-border)]">
           +{extra}
         </div>
       )}
@@ -310,11 +310,11 @@ function ProgressBar({ count, total }: { count: number; total: number }) {
   const percentage = total > 0 ? Math.min(100, Math.round((count / total) * 100)) : 0;
   return (
     <div className="w-full max-w-[140px] space-y-1">
-      <div className="flex items-center justify-between text-[11px] text-zinc-400">
-        <span className="font-medium text-zinc-200">{percentage}%</span>
+      <div className="flex items-center justify-between text-[11px] text-[var(--t-text-tertiary)]">
+        <span className="font-medium text-[var(--t-text)]">{percentage}%</span>
         <span>({count}/{total})</span>
       </div>
-      <div className="h-1.5 w-full rounded-full bg-zinc-800 overflow-hidden">
+      <div className="h-1.5 w-full rounded-full bg-[var(--t-elevated)] overflow-hidden">
         <div
           className="h-full bg-emerald-500 rounded-full transition-all duration-300"
           style={{ width: `${percentage}%` }}
@@ -483,7 +483,7 @@ function isTaskOverdue(deadline?: string | null, statusCode?: string | null): bo
 }
 
 function formatTaskDeadline(deadline?: string | null, statusCode?: string | null) {
-  if (!deadline) return <span className="text-zinc-500 text-xs">Sin fecha</span>;
+  if (!deadline) return <span className="text-[var(--t-text-dim)] text-xs">Sin fecha</span>;
   const cleanDate = deadline.slice(0, 10);
   const dateObj = new Date(cleanDate + "T00:00:00");
   const formatted = formatDateString(deadline);
@@ -501,7 +501,7 @@ function formatTaskDeadline(deadline?: string | null, statusCode?: string | null
       </div>
     );
   }
-  return <span className="text-xs text-zinc-300 font-medium">📅 {formatted}</span>;
+  return <span className="text-xs text-[var(--t-text-secondary)] font-medium">📅 {formatted}</span>;
 }
 
 function SelectField({
@@ -1410,7 +1410,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             <img
               src={row.imageUrl}
               alt={row.name}
-              className="h-10 w-10 shrink-0 rounded-xl object-cover border border-zinc-800 group-hover/item:border-indigo-500 transition-colors"
+              className="h-10 w-10 shrink-0 rounded-xl object-cover border border-[var(--t-border)] group-hover/item:border-indigo-500 transition-colors"
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).style.display = "none";
               }}
@@ -1423,7 +1423,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             </div>
           )}
           <div>
-            <span className="font-semibold text-zinc-100 group-hover/item:text-indigo-400 group-hover/item:underline transition-colors">
+            <span className="font-semibold text-[var(--t-text)] group-hover/item:text-indigo-400 group-hover/item:underline transition-colors">
               {row.name}
             </span>
             <div className="mt-0.5 text-[12px] font-medium text-indigo-300 font-mono">
@@ -1484,7 +1484,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
           type="checkbox"
           checked={selectedTaskIds.includes(row.id)}
           onChange={() => toggleSelectTaskRow(row.id)}
-          className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500 focus:ring-offset-zinc-900 cursor-pointer"
+          className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500 focus:ring-offset-[var(--t-surface)] cursor-pointer"
         />
       ),
     },
@@ -1502,7 +1502,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               checked={isDone}
               onChange={() => void handleQuickToggleTaskComplete(row)}
               title={isDone ? "Marcar como pendiente" : "Marcar como completada"}
-              className="mt-1 h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-emerald-500 cursor-pointer"
+              className="mt-1 h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-emerald-500 focus:ring-emerald-500 cursor-pointer"
             />
             <div
               className="cursor-pointer group/task"
@@ -1510,13 +1510,13 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               title="Ver detalle de la tarea"
             >
               <div
-                className={`font-semibold text-zinc-100 group-hover/task:text-indigo-400 transition-colors ${
-                  isDone ? "line-through text-zinc-500" : ""
+                className={`font-semibold text-[var(--t-text)] group-hover/task:text-indigo-400 transition-colors ${
+                  isDone ? "line-through text-[var(--t-text-dim)]" : ""
                 }`}
               >
                 {row.title}
               </div>
-              <div className="mt-0.5 text-[11px] text-zinc-400 font-medium flex items-center gap-1.5">
+              <div className="mt-0.5 text-[11px] text-[var(--t-text-tertiary)] font-medium flex items-center gap-1.5">
                 <Calendar className="h-3 w-3 text-indigo-400 shrink-0" />
                 {row.activityName || "Sin actividad asignada"}
               </div>
@@ -1602,16 +1602,16 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
-                className="h-7 w-7 rounded-lg border border-zinc-800 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white flex items-center justify-center transition-colors"
+                className="h-7 w-7 rounded-lg border border-[var(--t-border)] bg-[var(--t-surface)] hover:bg-[var(--t-hover)] text-[var(--t-text-secondary)] hover:text-[var(--t-text)] flex items-center justify-center transition-colors"
                 title="Más opciones de la tarea"
               >
                 <MoreVertical className="h-3.5 w-3.5" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 bg-zinc-900 border-zinc-800 text-zinc-200">
+            <DropdownMenuContent align="end" className="w-48 bg-[var(--t-surface)] border-[var(--t-border)] text-[var(--t-text)]">
               <DropdownMenuItem
                 onClick={() => void openDetail(row.id)}
-                className="flex items-center gap-2 text-xs cursor-pointer hover:bg-zinc-800"
+                className="flex items-center gap-2 text-xs cursor-pointer hover:bg-[var(--t-hover)]"
               >
                 <Eye className="h-3.5 w-3.5 text-indigo-400" />
                 Ver Detalle
@@ -1620,14 +1620,14 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 <>
                   <DropdownMenuItem
                     onClick={() => openTaskEdit(row)}
-                    className="flex items-center gap-2 text-xs cursor-pointer hover:bg-zinc-800"
+                    className="flex items-center gap-2 text-xs cursor-pointer hover:bg-[var(--t-hover)]"
                   >
                     <Pencil className="h-3.5 w-3.5 text-sky-400" />
                     Editar Tarea
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => void handleQuickToggleTaskComplete(row)}
-                    className="flex items-center gap-2 text-xs cursor-pointer hover:bg-zinc-800"
+                    className="flex items-center gap-2 text-xs cursor-pointer hover:bg-[var(--t-hover)]"
                   >
                     <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
                     {row.statusCode === "completada" ? "Reabrir Tarea" : "Marcar Completada"}
@@ -1657,7 +1657,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
           type="checkbox"
           checked={selectedActivityIds.includes(row.id)}
           onChange={() => toggleSelectActivityRow(row.id)}
-          className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500 focus:ring-offset-zinc-900 cursor-pointer"
+          className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500 focus:ring-offset-[var(--t-surface)] cursor-pointer"
         />
       ),
     },
@@ -1670,10 +1670,10 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
           onClick={() => void openDetail(row.id)}
           title="Ver detalle de la actividad"
         >
-          <div className="font-semibold text-zinc-100 group-hover/act:text-indigo-400 group-hover/act:underline transition-colors">
+          <div className="font-semibold text-[var(--t-text)] group-hover/act:text-indigo-400 group-hover/act:underline transition-colors">
             {row.title}
           </div>
-          <div className="mt-0.5 text-[11px] text-zinc-400 font-medium flex items-center gap-1.5">
+          <div className="mt-0.5 text-[11px] text-[var(--t-text-tertiary)] font-medium flex items-center gap-1.5">
             <FolderKanban className="h-3 w-3 text-indigo-400 shrink-0" />
             {row.projectName}
           </div>
@@ -1699,12 +1699,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
         return (
           <div className="space-y-1">
             {tempBadge && <div>{tempBadge}</div>}
-            <div className="text-xs text-zinc-200 font-medium flex items-center gap-1.5">
+            <div className="text-xs text-[var(--t-text)] font-medium flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5 text-indigo-400 shrink-0" />
               {formatActivityWindow(row.startAt, row.endAt)}
             </div>
             {duration && (
-              <span className="text-[10px] font-mono text-zinc-400 bg-zinc-800/80 px-1.5 py-0.5 rounded border border-zinc-700">
+              <span className="text-[10px] font-mono text-[var(--t-text-tertiary)] bg-[var(--t-elevated)] px-1.5 py-0.5 rounded border border-[var(--t-border-strong)]">
                 {duration}
               </span>
             )}
@@ -1725,8 +1725,8 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
           );
         }
         return (
-          <Badge variant="secondary" className="text-xs text-zinc-400 bg-zinc-800/60 border-zinc-700 flex items-center gap-1">
-            <Globe className="h-3 w-3 text-zinc-500" />
+          <Badge variant="secondary" className="text-xs text-[var(--t-text-tertiary)] bg-[var(--t-elevated)] border-[var(--t-border-strong)] flex items-center gap-1">
+            <Globe className="h-3 w-3 text-[var(--t-text-dim)]" />
             {row.locationName || "Virtual"}
           </Badge>
         );
@@ -1786,16 +1786,16 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
-                className="h-7 w-7 rounded-lg border border-zinc-800 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white flex items-center justify-center transition-colors"
+                className="h-7 w-7 rounded-lg border border-[var(--t-border)] bg-[var(--t-surface)] hover:bg-[var(--t-hover)] text-[var(--t-text-secondary)] hover:text-[var(--t-text)] flex items-center justify-center transition-colors"
                 title="Más opciones de actividad"
               >
                 <MoreVertical className="h-3.5 w-3.5" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 bg-zinc-900 border-zinc-800 text-zinc-200">
+            <DropdownMenuContent align="end" className="w-48 bg-[var(--t-surface)] border-[var(--t-border)] text-[var(--t-text)]">
               <DropdownMenuItem
                 onClick={() => void openDetail(row.id)}
-                className="flex items-center gap-2 text-xs cursor-pointer hover:bg-zinc-800"
+                className="flex items-center gap-2 text-xs cursor-pointer hover:bg-[var(--t-hover)]"
               >
                 <Eye className="h-3.5 w-3.5 text-indigo-400" />
                 Ver Detalle
@@ -1804,14 +1804,14 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 <>
                   <DropdownMenuItem
                     onClick={() => openActivityEdit(row)}
-                    className="flex items-center gap-2 text-xs cursor-pointer hover:bg-zinc-800"
+                    className="flex items-center gap-2 text-xs cursor-pointer hover:bg-[var(--t-hover)]"
                   >
                     <Pencil className="h-3.5 w-3.5 text-sky-400" />
                     Editar Actividad
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => openAssignVolunteerModal(row)}
-                    className="flex items-center gap-2 text-xs cursor-pointer hover:bg-zinc-800"
+                    className="flex items-center gap-2 text-xs cursor-pointer hover:bg-[var(--t-hover)]"
                   >
                     <UserPlus className="h-3.5 w-3.5 text-emerald-400" />
                     Asignar Personal
@@ -1863,10 +1863,10 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               </div>
             )}
             <div className="truncate max-w-[200px]">
-              <span className="font-semibold text-zinc-100 group-hover/ass:text-indigo-400 group-hover/ass:underline transition-colors block truncate">
+              <span className="font-semibold text-[var(--t-text)] group-hover/ass:text-indigo-400 group-hover/ass:underline transition-colors block truncate">
                 {assignedName}
               </span>
-              <span className="text-[11px] text-zinc-400 font-mono block truncate">
+              <span className="text-[11px] text-[var(--t-text-tertiary)] font-mono block truncate">
                 {subtext}
               </span>
             </div>
@@ -1907,12 +1907,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
       label: "Contexto (Proyecto / Actividad)",
       render: (row) => (
         <div className="space-y-0.5 max-w-[220px]">
-          <div className="flex items-center gap-1.5 text-xs font-medium text-zinc-100 truncate">
+          <div className="flex items-center gap-1.5 text-xs font-medium text-[var(--t-text)] truncate">
             <FolderKanban className="h-3.5 w-3.5 text-indigo-400 shrink-0" />
             <span className="truncate">{row.projectName}</span>
           </div>
           {row.activityName && (
-            <div className="flex items-center gap-1.5 text-[11px] text-zinc-400 truncate">
+            <div className="flex items-center gap-1.5 text-[11px] text-[var(--t-text-tertiary)] truncate">
               <Layers className="h-3 w-3 text-sky-400 shrink-0" />
               <span className="truncate">{row.activityName}</span>
             </div>
@@ -1926,7 +1926,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
       render: (row) => {
         if (row.role) {
           return (
-            <span className="text-xs text-zinc-300 bg-zinc-800/80 px-2.5 py-1 rounded-lg border border-zinc-700 font-medium">
+            <span className="text-xs text-[var(--t-text-secondary)] bg-[var(--t-elevated)] px-2.5 py-1 rounded-lg border border-[var(--t-border-strong)] font-medium">
               {row.role}
             </span>
           );
@@ -1938,7 +1938,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             </span>
           );
         }
-        return <span className="text-xs text-zinc-500">-</span>;
+        return <span className="text-xs text-[var(--t-text-dim)]">-</span>;
       },
     },
     {
@@ -1958,7 +1958,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
       key: "updated",
       label: "Actualizado",
       render: (row) => (
-        <span className="text-xs text-zinc-400 font-mono">
+        <span className="text-xs text-[var(--t-text-tertiary)] font-mono">
           {formatDateString(row.updatedAt) || formatDateString(row.createdAt) || "Reciente"}
         </span>
       ),
@@ -1972,16 +1972,16 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
-                className="h-7 w-7 rounded-lg border border-zinc-800 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white flex items-center justify-center transition-colors"
+                className="h-7 w-7 rounded-lg border border-[var(--t-border)] bg-[var(--t-surface)] hover:bg-[var(--t-hover)] text-[var(--t-text-secondary)] hover:text-[var(--t-text)] flex items-center justify-center transition-colors"
                 title="Más opciones de la asignación"
               >
                 <MoreVertical className="h-3.5 w-3.5" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 bg-zinc-900 border-zinc-800 text-zinc-200">
+            <DropdownMenuContent align="end" className="w-48 bg-[var(--t-surface)] border-[var(--t-border)] text-[var(--t-text)]">
               <DropdownMenuItem
                 onClick={() => void openDetail(row.id, row.kind)}
-                className="flex items-center gap-2 text-xs cursor-pointer hover:bg-zinc-800"
+                className="flex items-center gap-2 text-xs cursor-pointer hover:bg-[var(--t-hover)]"
               >
                 <Eye className="h-3.5 w-3.5 text-indigo-400" />
                 Ver Detalle
@@ -1990,7 +1990,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 <>
                   <DropdownMenuItem
                     onClick={() => openAssignmentEdit(row)}
-                    className="flex items-center gap-2 text-xs cursor-pointer hover:bg-zinc-800"
+                    className="flex items-center gap-2 text-xs cursor-pointer hover:bg-[var(--t-hover)]"
                   >
                     <Pencil className="h-3.5 w-3.5 text-sky-400" />
                     Editar / Reasignar
@@ -2035,18 +2035,18 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 className="flex flex-col gap-3 rounded-2xl p-4 min-w-[280px]"
                 style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
               >
-                <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
-                  <span className="text-xs font-semibold text-zinc-100 flex items-center gap-2">
+                <div className="flex items-center justify-between pb-2 border-b border-[var(--t-border)]">
+                  <span className="text-xs font-semibold text-[var(--t-text)] flex items-center gap-2">
                     <CheckSquare className="h-3.5 w-3.5 text-indigo-400" />
                     {st.label}
                   </span>
-                  <span className="text-[10px] bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded-full font-medium">
+                  <span className="text-[10px] bg-[var(--t-elevated)] text-[var(--t-text-tertiary)] px-2 py-0.5 rounded-full font-medium">
                     {itemsInState.length}
                   </span>
                 </div>
 
                 {itemsInState.length === 0 ? (
-                  <div className="p-6 text-center text-xs text-zinc-500 italic">
+                  <div className="p-6 text-center text-xs text-[var(--t-text-dim)] italic">
                     Sin tareas en este estado
                   </div>
                 ) : (
@@ -2058,10 +2058,10 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                       return (
                         <div
                           key={task.id}
-                          className={`group cursor-pointer rounded-xl p-4 bg-zinc-950/40 border transition-all space-y-3 ${
+                          className={`group cursor-pointer rounded-xl p-4 bg-[var(--t-elevated)] border transition-all space-y-3 ${
                             isOverdue
                               ? "border-red-500/40 bg-red-950/10 hover:border-red-500"
-                              : "border-zinc-800/80 hover:border-indigo-500/60 hover:bg-zinc-900/80"
+                              : "border-[var(--t-border)] hover:border-indigo-500/60 hover:bg-[var(--t-hover)]"
                           }`}
                           onClick={() => void openDetail(task.id)}
                         >
@@ -2074,13 +2074,13 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                                   e.stopPropagation();
                                   void handleQuickToggleTaskComplete(task);
                                 }}
-                                className="mt-1 h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-emerald-500 cursor-pointer"
+                                className="mt-1 h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-emerald-500 focus:ring-emerald-500 cursor-pointer"
                               />
                               <div>
-                                <h4 className={`text-xs font-semibold text-zinc-100 group-hover:text-indigo-400 transition-colors line-clamp-2 ${isDone ? "line-through text-zinc-500" : ""}`}>
+                                <h4 className={`text-xs font-semibold text-[var(--t-text)] group-hover:text-indigo-400 transition-colors line-clamp-2 ${isDone ? "line-through text-[var(--t-text-dim)]" : ""}`}>
                                   {task.title}
                                 </h4>
-                                <p className="text-[11px] text-zinc-400 flex items-center gap-1 mt-0.5">
+                                <p className="text-[11px] text-[var(--t-text-tertiary)] flex items-center gap-1 mt-0.5">
                                   <Calendar className="h-3 w-3 text-indigo-400 shrink-0" />
                                   {task.activityName || "Sin actividad"}
                                 </p>
@@ -2093,11 +2093,11 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                             <div>{formatTaskDeadline(task.deadline, task.statusCode)}</div>
                           </div>
 
-                          <div className="flex items-center justify-between pt-2 border-t border-zinc-800/80">
+                          <div className="flex items-center justify-between pt-2 border-t border-[var(--t-border)]">
                             {task.volunteerCount > 0 ? (
                               <AvatarStack count={task.volunteerCount} />
                             ) : (
-                              <span className="text-[10px] text-zinc-500 italic">Sin asignar</span>
+                              <span className="text-[10px] text-[var(--t-text-dim)] italic">Sin asignar</span>
                             )}
 
                             <DropdownMenu>
@@ -2105,12 +2105,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                                 <button
                                   type="button"
                                   onClick={(e) => e.stopPropagation()}
-                                  className="h-6 w-6 rounded border border-zinc-800 bg-zinc-900 text-zinc-400 hover:text-white flex items-center justify-center"
+                                  className="h-6 w-6 rounded border border-[var(--t-border)] bg-[var(--t-surface)] text-[var(--t-text-tertiary)] hover:text-[var(--t-text)] flex items-center justify-center"
                                 >
                                   <MoreVertical className="h-3 w-3" />
                                 </button>
                               </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end" className="w-40 bg-zinc-900 border-zinc-800 text-zinc-200">
+                              <DropdownMenuContent align="end" className="w-40 bg-[var(--t-surface)] border-[var(--t-border)] text-[var(--t-text)]">
                                 <DropdownMenuItem onClick={() => void openDetail(task.id)} className="text-xs">
                                   Ver Detalle
                                 </DropdownMenuItem>
@@ -2163,18 +2163,18 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 className="flex flex-col gap-3 rounded-2xl p-4 min-w-[280px]"
                 style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
               >
-                <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
-                  <span className="text-xs font-semibold text-zinc-100 flex items-center gap-2">
+                <div className="flex items-center justify-between pb-2 border-b border-[var(--t-border)]">
+                  <span className="text-xs font-semibold text-[var(--t-text)] flex items-center gap-2">
                     <Calendar className="h-3.5 w-3.5 text-indigo-400" />
                     {st.label}
                   </span>
-                  <span className="text-[10px] bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded-full font-medium">
+                  <span className="text-[10px] bg-[var(--t-elevated)] text-[var(--t-text-tertiary)] px-2 py-0.5 rounded-full font-medium">
                     {itemsInState.length}
                   </span>
                 </div>
 
                 {itemsInState.length === 0 ? (
-                  <div className="p-6 text-center text-xs text-zinc-500 italic">
+                  <div className="p-6 text-center text-xs text-[var(--t-text-dim)] italic">
                     Sin actividades en este estado
                   </div>
                 ) : (
@@ -2183,21 +2183,21 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                       <div
                         key={activity.id}
                         onClick={() => void openDetail(activity.id)}
-                        className="group cursor-pointer rounded-xl p-4 bg-zinc-950/40 border border-zinc-800/80 hover:border-indigo-500/60 hover:shadow-lg hover:bg-zinc-900/80 transition-all space-y-3"
+                        className="group cursor-pointer rounded-xl p-4 bg-[var(--t-elevated)] border border-[var(--t-border)] hover:border-indigo-500/60 hover:shadow-lg hover:bg-[var(--t-hover)] transition-all space-y-3"
                       >
                         <div className="flex items-start justify-between gap-2">
                           <div>
-                            <h4 className="text-xs font-semibold text-zinc-100 group-hover:text-indigo-400 transition-colors line-clamp-1">
+                            <h4 className="text-xs font-semibold text-[var(--t-text)] group-hover:text-indigo-400 transition-colors line-clamp-1">
                               {activity.title}
                             </h4>
-                            <p className="text-[11px] text-zinc-400 flex items-center gap-1 mt-0.5">
+                            <p className="text-[11px] text-[var(--t-text-tertiary)] flex items-center gap-1 mt-0.5">
                               <FolderKanban className="h-3 w-3 text-indigo-400 shrink-0" />
                               {activity.projectName}
                             </p>
                           </div>
                         </div>
 
-                        <div className="text-xs text-zinc-300 font-medium flex items-center gap-1.5">
+                        <div className="text-xs text-[var(--t-text-secondary)] font-medium flex items-center gap-1.5">
                           <Calendar className="h-3.5 w-3.5 text-indigo-400 shrink-0" />
                           {formatActivityWindow(activity.startAt, activity.endAt)}
                         </div>
@@ -2207,7 +2207,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                           total={activity.estimatedHours || 1}
                         />
 
-                        <div className="flex items-center justify-between pt-2 border-t border-zinc-800/80">
+                        <div className="flex items-center justify-between pt-2 border-t border-[var(--t-border)]">
                           {activity.assignedVolunteers > 0 ? (
                             <AvatarStack count={activity.assignedVolunteers} />
                           ) : (
@@ -2271,18 +2271,18 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               className="flex flex-col gap-3 rounded-2xl p-4 min-w-[280px]"
               style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
             >
-              <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
-                <span className="text-xs font-semibold text-zinc-100 flex items-center gap-2">
+              <div className="flex items-center justify-between pb-2 border-b border-[var(--t-border)]">
+                <span className="text-xs font-semibold text-[var(--t-text)] flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-indigo-500" />
                   {st.label}
                 </span>
-                <span className="text-[10px] bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded-full font-medium">
+                <span className="text-[10px] bg-[var(--t-elevated)] text-[var(--t-text-tertiary)] px-2 py-0.5 rounded-full font-medium">
                   {itemsInState.length}
                 </span>
               </div>
 
               {itemsInState.length === 0 ? (
-                <div className="p-6 text-center text-xs text-zinc-500 italic">
+                <div className="p-6 text-center text-xs text-[var(--t-text-dim)] italic">
                   Sin proyectos en este estado
                 </div>
               ) : (
@@ -2291,7 +2291,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                     <div
                       key={project.id}
                       onClick={() => void openDetail(project.id)}
-                      className="group cursor-pointer rounded-xl p-4 bg-zinc-950/40 border border-zinc-800/80 hover:border-indigo-500/60 hover:shadow-lg hover:bg-zinc-900/80 transition-all space-y-3"
+                      className="group cursor-pointer rounded-xl p-4 bg-[var(--t-elevated)] border border-[var(--t-border)] hover:border-indigo-500/60 hover:shadow-lg hover:bg-[var(--t-hover)] transition-all space-y-3"
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex items-center gap-2.5">
@@ -2299,7 +2299,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                             <img
                               src={project.imageUrl}
                               alt={project.name}
-                              className="h-9 w-9 rounded-lg object-cover bg-zinc-800"
+                              className="h-9 w-9 rounded-lg object-cover bg-[var(--t-elevated)]"
                             />
                           ) : (
                             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 group-hover:bg-indigo-500/20 transition-colors">
@@ -2307,16 +2307,16 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                             </div>
                           )}
                           <div>
-                            <h4 className="text-xs font-semibold text-zinc-100 group-hover:text-indigo-400 transition-colors line-clamp-1">
+                            <h4 className="text-xs font-semibold text-[var(--t-text)] group-hover:text-indigo-400 transition-colors line-clamp-1">
                               {project.name}
                             </h4>
-                            <p className="text-[11px] text-zinc-400 font-mono">{project.code}</p>
+                            <p className="text-[11px] text-[var(--t-text-tertiary)] font-mono">{project.code}</p>
                           </div>
                         </div>
                       </div>
 
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-zinc-400">Área:</span>
+                        <span className="text-[var(--t-text-tertiary)]">Área:</span>
                         <Badge variant="outline">{project.areaName}</Badge>
                       </div>
 
@@ -2325,14 +2325,14 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                         total={project.taskCount || 0}
                       />
 
-                      <div className="flex items-center justify-between pt-2 border-t border-zinc-800/80">
+                      <div className="flex items-center justify-between pt-2 border-t border-[var(--t-border)]">
                         <AvatarStack count={project.volunteerCount} />
                         <span className="text-xs font-semibold text-emerald-400">
                           {formatCurrency(project.budget)}
                         </span>
                       </div>
 
-                      <div className="flex items-center justify-end gap-1 pt-1 border-t border-zinc-800/40">
+                      <div className="flex items-center justify-end gap-1 pt-1 border-t border-[var(--t-border)]">
                         <button
                           type="button"
                           onClick={(e) => {
@@ -2350,7 +2350,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                               e.stopPropagation();
                               openProjectEdit(project);
                             }}
-                            className="text-[11px] font-medium text-zinc-300 hover:text-white px-2 py-1"
+                            className="text-[11px] font-medium text-[var(--t-text-secondary)] hover:text-[var(--t-text)] px-2 py-1"
                           >
                             Editar
                           </button>
@@ -2396,8 +2396,8 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 rounded-xl shadow-sm"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <span className="text-[13px] font-medium text-zinc-400"> Mostrando <strong className="text-zinc-200">{projectRows.length}</strong> de{" "}
-              <strong className="text-zinc-200">{projectRows.length}</strong> proyectos
+            <span className="text-[13px] font-medium text-[var(--t-text-tertiary)]"> Mostrando <strong className="text-[var(--t-text)]">{projectRows.length}</strong> de{" "}
+              <strong className="text-[var(--t-text)]">{projectRows.length}</strong> proyectos
             </span>
             <div className="flex items-center gap-2">
               <OutlineButton
@@ -2407,7 +2407,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               >
                 Anterior
               </OutlineButton>
-              <span className="text-xs text-zinc-300 px-2 font-medium">Página {currentPage}</span>
+              <span className="text-xs text-[var(--t-text-secondary)] px-2 font-medium">Página {currentPage}</span>
               <OutlineButton
                 size="sm"
                 onClick={() => setCurrentPage((p) => p + 1)}
@@ -2450,13 +2450,13 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
       return (
         <div className="space-y-4">
           {activityRows.length > 0 && (
-            <div className="flex items-center justify-between px-2 text-xs text-zinc-400">
-              <label className="flex items-center gap-2 cursor-pointer font-medium hover:text-zinc-200">
+            <div className="flex items-center justify-between px-2 text-xs text-[var(--t-text-tertiary)]">
+              <label className="flex items-center gap-2 cursor-pointer font-medium hover:text-[var(--t-text)]">
                 <input
                   type="checkbox"
                   checked={allSelected}
                   onChange={toggleSelectAllActivities}
-                  className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500 focus:ring-offset-zinc-900 cursor-pointer"
+                  className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-input-bg)] text-indigo-600 focus:ring-indigo-500 focus:ring-offset-[var(--t-surface)] cursor-pointer"
                 />
                 Seleccionar todo el listado ({activityRows.length} actividades)
               </label>
@@ -2474,8 +2474,8 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 rounded-xl shadow-sm"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <span className="text-[13px] font-medium text-zinc-400"> Mostrando <strong className="text-zinc-200">{activityRows.length}</strong> de{" "}
-              <strong className="text-zinc-200">{activityRows.length}</strong> actividades
+            <span className="text-[13px] font-medium text-[var(--t-text-tertiary)]"> Mostrando <strong className="text-[var(--t-text)]">{activityRows.length}</strong> de{" "}
+              <strong className="text-[var(--t-text)]">{activityRows.length}</strong> actividades
             </span>
             <div className="flex items-center gap-2">
               <OutlineButton
@@ -2485,7 +2485,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               >
                 Anterior
               </OutlineButton>
-              <span className="text-xs text-zinc-300 px-2 font-medium">Página {currentPage}</span>
+              <span className="text-xs text-[var(--t-text-secondary)] px-2 font-medium">Página {currentPage}</span>
               <OutlineButton
                 size="sm"
                 onClick={() => setCurrentPage((p) => p + 1)}
@@ -2522,7 +2522,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
       return (
         <div className="flex flex-col items-center justify-center p-12 space-y-3">
           <RefreshCw className="h-6 w-6 animate-spin text-indigo-400" />
-          <p className="text-xs text-zinc-400">Cargando información completa del registro...</p>
+          <p className="text-xs text-[var(--t-text-tertiary)]">Cargando información completa del registro...</p>
         </div>
       );
     }
@@ -2536,7 +2536,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             const detail = details.detail as ProjectDetailData;
             return (
               <div className="space-y-6">
-                <div className="relative overflow-hidden rounded-2xl p-6 border border-zinc-800 bg-gradient-to-r from-indigo-950/60 via-zinc-900 to-zinc-950">
+                <div className="relative overflow-hidden rounded-2xl p-6 border border-[var(--t-border)] bg-gradient-to-r from-indigo-950/60 via-[var(--t-surface)] to-[var(--t-elevated)]">
                   <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
                       {detail.project.imageUrl ? (
@@ -2552,22 +2552,22 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                       )}
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700">
+                          <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-[var(--t-elevated)] text-[var(--t-text-secondary)] border border-[var(--t-border-strong)]">
                             {detail.project.code}
                           </span>
                           <StatusDot variant={getProjectStatusVariant(detail.project.stateKind)}>
                             {detail.project.stateLabel}
                           </StatusDot>
                         </div>
-                        <h2 className="text-xl font-bold text-zinc-100">{detail.project.name}</h2>
-                        <p className="text-xs text-zinc-400 flex items-center gap-2">
+                        <h2 className="text-xl font-bold text-[var(--t-text)]">{detail.project.name}</h2>
+                        <p className="text-xs text-[var(--t-text-tertiary)] flex items-center gap-2">
                           <Building2 className="h-3.5 w-3.5 text-indigo-400" />
-                          Área: <strong className="text-zinc-200 font-medium">{detail.project.areaName}</strong>
+                          Área: <strong className="text-[var(--t-text)] font-medium">{detail.project.areaName}</strong>
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 bg-zinc-900/80 backdrop-blur px-3 py-2 rounded-xl border border-zinc-800 text-xs text-zinc-300">
+                    <div className="flex items-center gap-2 bg-[var(--t-surface)] backdrop-blur px-3 py-2 rounded-xl border border-[var(--t-border)] text-xs text-[var(--t-text-secondary)]">
                       <Calendar className="h-4 w-4 text-indigo-400" />
                       <span>
                         {formatActivityWindow(detail.project.startDate, detail.project.endDate)}
@@ -2577,8 +2577,8 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 </div>
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                  <div className="rounded-xl p-4 border border-zinc-800 bg-zinc-900/60 space-y-1">
-                    <span className="text-[11px] text-zinc-400 flex items-center gap-1.5">
+                  <div className="rounded-xl p-4 border border-[var(--t-border)] bg-[var(--t-surface)] space-y-1">
+                    <span className="text-[11px] text-[var(--t-text-tertiary)] flex items-center gap-1.5">
                       <DollarSign className="h-3.5 w-3.5 text-amber-400" /> Presupuesto
                     </span>
                     <p className="text-lg font-bold text-emerald-400">
@@ -2586,52 +2586,52 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                     </p>
                   </div>
 
-                  <div className="rounded-xl p-4 border border-zinc-800 bg-zinc-900/60 space-y-1">
-                    <span className="text-[11px] text-zinc-400 flex items-center gap-1.5">
+                  <div className="rounded-xl p-4 border border-[var(--t-border)] bg-[var(--t-surface)] space-y-1">
+                    <span className="text-[11px] text-[var(--t-text-tertiary)] flex items-center gap-1.5">
                       <Layers className="h-3.5 w-3.5 text-indigo-400" /> Actividades
                     </span>
-                    <p className="text-lg font-bold text-zinc-100">
+                    <p className="text-lg font-bold text-[var(--t-text)]">
                       {detail.linkedActivities.length} registradas
                     </p>
                   </div>
 
-                  <div className="rounded-xl p-4 border border-zinc-800 bg-zinc-900/60 space-y-1">
-                    <span className="text-[11px] text-zinc-400 flex items-center gap-1.5">
+                  <div className="rounded-xl p-4 border border-[var(--t-border)] bg-[var(--t-surface)] space-y-1">
+                    <span className="text-[11px] text-[var(--t-text-tertiary)] flex items-center gap-1.5">
                       <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Tareas Totales
                     </span>
-                    <p className="text-lg font-bold text-zinc-100">
+                    <p className="text-lg font-bold text-[var(--t-text)]">
                       {detail.linkedTasks.length} vinculadas
                     </p>
                   </div>
 
-                  <div className="rounded-xl p-4 border border-zinc-800 bg-zinc-900/60 space-y-1">
-                    <span className="text-[11px] text-zinc-400 flex items-center gap-1.5">
+                  <div className="rounded-xl p-4 border border-[var(--t-border)] bg-[var(--t-surface)] space-y-1">
+                    <span className="text-[11px] text-[var(--t-text-tertiary)] flex items-center gap-1.5">
                       <Users className="h-3.5 w-3.5 text-sky-400" /> Voluntarios
                     </span>
-                    <p className="text-lg font-bold text-zinc-100">
+                    <p className="text-lg font-bold text-[var(--t-text)]">
                       {detail.volunteerAssignments.length} asignados
                     </p>
                   </div>
                 </div>
 
-                <div className="rounded-xl p-4 border border-zinc-800 bg-zinc-900/50 space-y-2">
-                  <h4 className="text-xs font-semibold text-zinc-300 flex items-center gap-1.5">
+                <div className="rounded-xl p-4 border border-[var(--t-border)] bg-[var(--t-surface)] space-y-2">
+                  <h4 className="text-xs font-semibold text-[var(--t-text-secondary)] flex items-center gap-1.5">
                     <FileText className="h-4 w-4 text-indigo-400" /> Descripción del Proyecto
                   </h4>
-                  <p className="text-xs text-zinc-300 leading-relaxed">
+                  <p className="text-xs text-[var(--t-text-secondary)] leading-relaxed">
                     {detail.project.description || "Sin descripción registrada."}
                   </p>
 
-                  <div className="flex flex-wrap gap-4 pt-3 border-t border-zinc-800/80 text-[11px] text-zinc-500">
+                  <div className="flex flex-wrap gap-4 pt-3 border-t border-[var(--t-border)] text-[11px] text-[var(--t-text-dim)]">
                     <span>
-                      Registrado por: <strong className="text-zinc-400">{detail.createdBy || "Sistema"}</strong>
+                      Registrado por: <strong className="text-[var(--t-text-tertiary)]">{detail.createdBy || "Sistema"}</strong>
                     </span>
                     <span>
-                      Fecha de registro: <strong className="text-zinc-400">{formatDateString(detail.project.createdAt)}</strong>
+                      Fecha de registro: <strong className="text-[var(--t-text-tertiary)]">{formatDateString(detail.project.createdAt)}</strong>
                     </span>
                     {detail.updatedBy && (
                       <span>
-                        Última modificación por: <strong className="text-zinc-400">{detail.updatedBy}</strong>
+                        Última modificación por: <strong className="text-[var(--t-text-tertiary)]">{detail.updatedBy}</strong>
                       </span>
                     )}
                   </div>
@@ -2698,24 +2698,24 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             return (
               <div className="space-y-6">
                 {/* 1. HEADER DE LA TAREA Y BREADCRUMB */}
-                <div className="relative overflow-hidden rounded-2xl p-6 border border-zinc-800 bg-gradient-to-r from-indigo-950/60 via-zinc-900 to-zinc-950 space-y-3 shadow-lg">
+                <div className="relative overflow-hidden rounded-2xl p-6 border border-[var(--t-border)] bg-gradient-to-r from-indigo-950/60 via-[var(--t-surface)] to-[var(--t-elevated)] space-y-3 shadow-lg">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="space-y-1.5 flex-1">
                       {/* Jerarquía: Proyecto > Actividad */}
-                      <div className="flex items-center flex-wrap gap-2 text-xs text-zinc-400 font-medium">
-                        <span className="flex items-center gap-1 bg-zinc-900/80 px-2.5 py-1 rounded-md border border-zinc-800 text-zinc-300">
+                      <div className="flex items-center flex-wrap gap-2 text-xs text-[var(--t-text-tertiary)] font-medium">
+                        <span className="flex items-center gap-1 bg-[var(--t-surface)] px-2.5 py-1 rounded-md border border-[var(--t-border)] text-[var(--t-text-secondary)]">
                           <FolderKanban className="h-3.5 w-3.5 text-indigo-400" />
-                          <span>Proyecto: <strong className="text-zinc-100 font-semibold">{projectName}</strong></span>
+                          <span>Proyecto: <strong className="text-[var(--t-text)] font-semibold">{projectName}</strong></span>
                         </span>
-                        <span className="text-zinc-600">/</span>
-                        <span className="flex items-center gap-1 bg-zinc-900/80 px-2.5 py-1 rounded-md border border-zinc-800 text-zinc-300">
+                        <span className="text-[var(--t-text-dim)]">/</span>
+                        <span className="flex items-center gap-1 bg-[var(--t-surface)] px-2.5 py-1 rounded-md border border-[var(--t-border)] text-[var(--t-text-secondary)]">
                           <Layers className="h-3.5 w-3.5 text-sky-400" />
-                          <span>Actividad: <strong className="text-zinc-100 font-semibold">{activityTitle}</strong></span>
+                          <span>Actividad: <strong className="text-[var(--t-text)] font-semibold">{activityTitle}</strong></span>
                         </span>
                       </div>
 
                       {/* Título prominente */}
-                      <h2 className="text-xl font-bold text-zinc-100 tracking-tight pt-1">
+                      <h2 className="text-xl font-bold text-[var(--t-text)] tracking-tight pt-1">
                         {task.title}
                       </h2>
 
@@ -2750,7 +2750,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                     </div>
 
                     {/* 2. BARRA DE ACCIONES DIRECTAS */}
-                    <div className="flex items-center flex-wrap gap-2 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-zinc-800">
+                    <div className="flex items-center flex-wrap gap-2 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-[var(--t-border)]">
                       <Button
                         size="sm"
                         variant="outline"
@@ -2758,7 +2758,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                           closeDetail();
                           openTaskEdit(task);
                         }}
-                        className="h-8 text-xs bg-zinc-800/90 border-zinc-700 text-zinc-200 hover:bg-zinc-700 flex items-center gap-1.5"
+                        className="h-8 text-xs bg-[var(--t-elevated)] border-[var(--t-border-strong)] text-[var(--t-text)] hover:bg-[var(--t-hover)] flex items-center gap-1.5"
                       >
                         <Pencil className="h-3.5 w-3.5 text-indigo-400" />
                         Editar Tarea
@@ -2768,7 +2768,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                         size="sm"
                         variant="outline"
                         onClick={() => void handleQuickToggleTaskComplete(task)}
-                        className="h-8 text-xs bg-zinc-800/90 border-zinc-700 text-zinc-200 hover:bg-zinc-700 flex items-center gap-1.5"
+                        className="h-8 text-xs bg-[var(--t-elevated)] border-[var(--t-border-strong)] text-[var(--t-text)] hover:bg-[var(--t-hover)] flex items-center gap-1.5"
                       >
                         <RefreshCw className="h-3.5 w-3.5 text-amber-400" />
                         {isCompleted ? "Reabrir Tarea" : "Cambiar Estado"}
@@ -2793,8 +2793,8 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 {/* 3. GRID DE METADATOS (3 COLUMNAS) */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {/* Responsable */}
-                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
-                    <span className="text-[11px] font-medium text-zinc-400 flex items-center gap-1.5">
+                  <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-surface)] p-4 space-y-2">
+                    <span className="text-[11px] font-medium text-[var(--t-text-tertiary)] flex items-center gap-1.5">
                       <User className="h-3.5 w-3.5 text-indigo-400" /> Responsable / Asignado
                     </span>
                     <div className="flex items-center gap-3 pt-1">
@@ -2802,8 +2802,8 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                         {getInitials(assigneeName)}
                       </div>
                       <div className="truncate">
-                        <p className="text-xs font-semibold text-zinc-100 truncate">{assigneeName}</p>
-                        <p className="text-[11px] text-zinc-400 truncate">
+                        <p className="text-xs font-semibold text-[var(--t-text)] truncate">{assigneeName}</p>
+                        <p className="text-[11px] text-[var(--t-text-tertiary)] truncate">
                           {assignedId ? "Asignado a la tarea" : "Sin persona asignada"}
                         </p>
                       </div>
@@ -2811,12 +2811,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                   </div>
 
                   {/* Fecha Límite */}
-                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
-                    <span className="text-[11px] font-medium text-zinc-400 flex items-center gap-1.5">
+                  <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-surface)] p-4 space-y-2">
+                    <span className="text-[11px] font-medium text-[var(--t-text-tertiary)] flex items-center gap-1.5">
                       <Calendar className="h-3.5 w-3.5 text-sky-400" /> Fecha Límite de Entrega
                     </span>
                     <div className="pt-1">
-                      <p className="text-sm font-semibold text-zinc-100">
+                      <p className="text-sm font-semibold text-[var(--t-text)]">
                         {formatDateString(task.deadline) || "Sin fecha límite"}
                       </p>
                       <div className="mt-1">
@@ -2827,22 +2827,22 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                         ) : task.deadline ? (
                           <span className="text-[11px] text-emerald-400 font-medium">A tiempo / Programada</span>
                         ) : (
-                          <span className="text-[11px] text-zinc-500">Sin fecha restricción</span>
+                          <span className="text-[11px] text-[var(--t-text-dim)]">Sin fecha restricción</span>
                         )}
                       </div>
                     </div>
                   </div>
 
                   {/* Horas y Esfuerzo */}
-                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
-                    <span className="text-[11px] font-medium text-zinc-400 flex items-center gap-1.5">
+                  <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-surface)] p-4 space-y-2">
+                    <span className="text-[11px] font-medium text-[var(--t-text-tertiary)] flex items-center gap-1.5">
                       <Clock className="h-3.5 w-3.5 text-amber-400" /> Tiempo y Horas
                     </span>
                     <div className="pt-1 space-y-1">
-                      <p className="text-sm font-semibold text-zinc-100">
+                      <p className="text-sm font-semibold text-[var(--t-text)]">
                         {task.estimatedHours ? `${task.estimatedHours} hrs estimadas` : "Sin estimación de horas"}
                       </p>
-                      <p className="text-[11px] text-zinc-400">
+                      <p className="text-[11px] text-[var(--t-text-tertiary)]">
                         {isCompleted ? "Tarea finalizada" : "Esfuerzo estimado para ejecución"}
                       </p>
                     </div>
@@ -2850,33 +2850,33 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 </div>
 
                 {/* 4. SECCIÓN DE DESCRIPCIÓN */}
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 space-y-2">
-                  <h4 className="text-xs font-semibold text-zinc-300 flex items-center gap-1.5">
+                <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-surface)] p-4 space-y-2">
+                  <h4 className="text-xs font-semibold text-[var(--t-text-secondary)] flex items-center gap-1.5">
                     <FileText className="h-4 w-4 text-indigo-400" /> Descripción e Instrucciones
                   </h4>
-                  <p className="text-xs text-zinc-300 leading-relaxed font-sans whitespace-pre-wrap">
+                  <p className="text-xs text-[var(--t-text-secondary)] leading-relaxed font-sans whitespace-pre-wrap">
                     {task.description || "Sin instrucciones ni descripción detallada registrada."}
                   </p>
                 </div>
 
                 {/* 5. SECCIÓN DE ENTREGABLES Y ADJUNTOS */}
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 space-y-3">
+                <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-surface)] p-4 space-y-3">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-semibold text-zinc-300 flex items-center gap-1.5">
+                    <h4 className="text-xs font-semibold text-[var(--t-text-secondary)] flex items-center gap-1.5">
                       <Paperclip className="h-4 w-4 text-indigo-400" /> Entregables y Archivos Adjuntos
                     </h4>
-                    <span className="text-[11px] text-zinc-400 font-mono">2 archivos de referencia</span>
+                    <span className="text-[11px] text-[var(--t-text-tertiary)] font-mono">2 archivos de referencia</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="flex items-center justify-between p-3 rounded-xl border border-zinc-800 bg-zinc-950/60 hover:border-indigo-500/40 transition-colors">
+                    <div className="flex items-center justify-between p-3 rounded-xl border border-[var(--t-border)] bg-[var(--t-elevated)] hover:border-indigo-500/40 transition-colors">
                       <div className="flex items-center gap-3">
                         <div className="h-9 w-9 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center font-bold text-xs shrink-0">
                           PDF
                         </div>
                         <div className="truncate max-w-[170px]">
-                          <p className="text-xs font-medium text-zinc-200 truncate">informe_final_v1.pdf</p>
-                          <p className="text-[10px] text-zinc-400">1.4 MB • Documento de entrega</p>
+                          <p className="text-xs font-medium text-[var(--t-text)] truncate">informe_final_v1.pdf</p>
+                          <p className="text-[10px] text-[var(--t-text-tertiary)]">1.4 MB • Documento de entrega</p>
                         </div>
                       </div>
                       <Button
@@ -2890,14 +2890,14 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                       </Button>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 rounded-xl border border-zinc-800 bg-zinc-950/60 hover:border-indigo-500/40 transition-colors">
+                    <div className="flex items-center justify-between p-3 rounded-xl border border-[var(--t-border)] bg-[var(--t-elevated)] hover:border-indigo-500/40 transition-colors">
                       <div className="flex items-center gap-3">
                         <div className="h-9 w-9 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center font-bold text-xs shrink-0">
                           PNG
                         </div>
                         <div className="truncate max-w-[170px]">
-                          <p className="text-xs font-medium text-zinc-200 truncate">captura_evidencia.png</p>
-                          <p className="text-[10px] text-zinc-400">850 KB • Evidencia visual</p>
+                          <p className="text-xs font-medium text-[var(--t-text)] truncate">captura_evidencia.png</p>
+                          <p className="text-[10px] text-[var(--t-text-tertiary)]">850 KB • Evidencia visual</p>
                         </div>
                       </div>
                       <Button
@@ -2914,16 +2914,16 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 </div>
 
                 {/* 6. BITÁCORA DE ACTIVIDAD Y COMENTARIOS */}
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 space-y-4">
-                  <h4 className="text-xs font-semibold text-zinc-300 flex items-center gap-1.5">
+                <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-surface)] p-4 space-y-4">
+                  <h4 className="text-xs font-semibold text-[var(--t-text-secondary)] flex items-center gap-1.5">
                     <MessageSquare className="h-4 w-4 text-indigo-400" /> Bitácora de Actividad y Comentarios
                   </h4>
 
                   {/* Historial de eventos */}
-                  <div className="space-y-2 text-xs text-zinc-400 pl-3 border-l-2 border-zinc-800">
+                  <div className="space-y-2 text-xs text-[var(--t-text-tertiary)] pl-3 border-l-2 border-[var(--t-border)]">
                     <div className="flex items-center gap-2">
                       <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 shrink-0" />
-                      <span>Registrada por <strong className="text-zinc-200">{detail.createdBy || "Sistema"}</strong> el {formatDateString(task.createdAt)}</span>
+                      <span>Registrada por <strong className="text-[var(--t-text)]">{detail.createdBy || "Sistema"}</strong> el {formatDateString(task.createdAt)}</span>
                     </div>
                     {isCompleted && (
                       <div className="flex items-center gap-2">
@@ -2934,18 +2934,18 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                   </div>
 
                   {/* Lista de Comentarios */}
-                  <div className="space-y-3 pt-2 border-t border-zinc-800/80">
+                  <div className="space-y-3 pt-2 border-t border-[var(--t-border)]">
                     {commentsList.map((c) => (
-                      <div key={c.id} className="flex items-start gap-3 p-3 rounded-xl bg-zinc-950/60 border border-zinc-800/80">
+                      <div key={c.id} className="flex items-start gap-3 p-3 rounded-xl bg-[var(--t-elevated)] border border-[var(--t-border)]">
                         <div className="h-7 w-7 rounded-full bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold shrink-0">
                           {getInitials(c.author)}
                         </div>
                         <div className="space-y-1 flex-1">
                           <div className="flex items-center justify-between text-[11px]">
-                            <span className="font-semibold text-zinc-200">{c.author}</span>
-                            <span className="text-zinc-500">{c.date}</span>
+                            <span className="font-semibold text-[var(--t-text)]">{c.author}</span>
+                            <span className="text-[var(--t-text-dim)]">{c.date}</span>
                           </div>
-                          <p className="text-xs text-zinc-300 leading-normal">{c.text}</p>
+                          <p className="text-xs text-[var(--t-text-secondary)] leading-normal">{c.text}</p>
                         </div>
                       </div>
                     ))}
@@ -2963,7 +2963,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                           handleAddComment(task.id, assigneeName !== "Sin asignar" ? assigneeName : "Sebastián Paipay");
                         }
                       }}
-                      className="h-9 flex-1 rounded-xl px-3 text-xs outline-none bg-zinc-950 border border-zinc-800 text-zinc-200 focus:border-indigo-500 transition-colors"
+                      className="h-9 flex-1 rounded-xl px-3 text-xs outline-none bg-[var(--t-elevated)] border border-[var(--t-border)] text-[var(--t-text)] focus:border-indigo-500 transition-colors"
                     />
                     <Button
                       size="sm"
@@ -2990,26 +2990,26 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             return (
               <div className="space-y-6">
                 {/* Header */}
-                <div className="relative overflow-hidden rounded-2xl p-6 border border-zinc-800 bg-gradient-to-r from-purple-950/60 via-zinc-900 to-zinc-950 space-y-3 shadow-lg">
+                <div className="relative overflow-hidden rounded-2xl p-6 border border-[var(--t-border)] bg-gradient-to-r from-purple-950/60 via-[var(--t-surface)] to-[var(--t-elevated)] space-y-3 shadow-lg">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="space-y-1.5 flex-1">
-                      <div className="flex items-center flex-wrap gap-2 text-xs text-zinc-400 font-medium">
-                        <span className="flex items-center gap-1 bg-zinc-900/80 px-2.5 py-1 rounded-md border border-zinc-800 text-zinc-300">
+                      <div className="flex items-center flex-wrap gap-2 text-xs text-[var(--t-text-tertiary)] font-medium">
+                        <span className="flex items-center gap-1 bg-[var(--t-surface)] px-2.5 py-1 rounded-md border border-[var(--t-border)] text-[var(--t-text-secondary)]">
                           <FolderKanban className="h-3.5 w-3.5 text-indigo-400" />
-                          <span>Proyecto: <strong className="text-zinc-100 font-semibold">{assignment.projectName}</strong></span>
+                          <span>Proyecto: <strong className="text-[var(--t-text)] font-semibold">{assignment.projectName}</strong></span>
                         </span>
                         {assignment.activityName && (
                           <>
-                            <span className="text-zinc-600">/</span>
-                            <span className="flex items-center gap-1 bg-zinc-900/80 px-2.5 py-1 rounded-md border border-zinc-800 text-zinc-300">
+                            <span className="text-[var(--t-text-dim)]">/</span>
+                            <span className="flex items-center gap-1 bg-[var(--t-surface)] px-2.5 py-1 rounded-md border border-[var(--t-border)] text-[var(--t-text-secondary)]">
                               <Layers className="h-3.5 w-3.5 text-sky-400" />
-                              <span>Actividad: <strong className="text-zinc-100 font-semibold">{assignment.activityName}</strong></span>
+                              <span>Actividad: <strong className="text-[var(--t-text)] font-semibold">{assignment.activityName}</strong></span>
                             </span>
                           </>
                         )}
                       </div>
 
-                      <h2 className="text-xl font-bold text-zinc-100 tracking-tight pt-1 flex items-center gap-2">
+                      <h2 className="text-xl font-bold text-[var(--t-text)] tracking-tight pt-1 flex items-center gap-2">
                         {isResource ? <Package className="h-5 w-5 text-purple-400" /> : <User className="h-5 w-5 text-indigo-400" />}
                         {assignedName}
                       </h2>
@@ -3026,7 +3026,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                       </div>
                     </div>
 
-                    <div className="flex items-center flex-wrap gap-2 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-zinc-800">
+                    <div className="flex items-center flex-wrap gap-2 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-[var(--t-border)]">
                       {canManage && (
                         <>
                           <Button
@@ -3036,7 +3036,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                               closeDetail();
                               openAssignmentEdit(assignment);
                             }}
-                            className="h-8 text-xs bg-zinc-800/90 border-zinc-700 text-zinc-200 hover:bg-zinc-700 flex items-center gap-1.5"
+                            className="h-8 text-xs bg-[var(--t-elevated)] border-[var(--t-border-strong)] text-[var(--t-text)] hover:bg-[var(--t-hover)] flex items-center gap-1.5"
                           >
                             <Pencil className="h-3.5 w-3.5 text-indigo-400" />
                             Editar Rol
@@ -3061,32 +3061,32 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
                 {/* Metadata Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
-                    <span className="text-[11px] font-medium text-zinc-400 flex items-center gap-1.5">
+                  <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-surface)] p-4 space-y-2">
+                    <span className="text-[11px] font-medium text-[var(--t-text-tertiary)] flex items-center gap-1.5">
                       {isResource ? <Package className="h-3.5 w-3.5 text-purple-400" /> : <User className="h-3.5 w-3.5 text-indigo-400" />} Entidad Asignada
                     </span>
-                    <p className="text-sm font-semibold text-zinc-100">{assignedName}</p>
-                    <p className="text-[11px] text-zinc-400">{isResource ? "Recurso de Inventario" : "Personal Voluntario"}</p>
+                    <p className="text-sm font-semibold text-[var(--t-text)]">{assignedName}</p>
+                    <p className="text-[11px] text-[var(--t-text-tertiary)]">{isResource ? "Recurso de Inventario" : "Personal Voluntario"}</p>
                   </div>
 
-                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
-                    <span className="text-[11px] font-medium text-zinc-400 flex items-center gap-1.5">
+                  <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-surface)] p-4 space-y-2">
+                    <span className="text-[11px] font-medium text-[var(--t-text-tertiary)] flex items-center gap-1.5">
                       <FolderKanban className="h-3.5 w-3.5 text-sky-400" /> Rol o Cantidad
                     </span>
-                    <p className="text-sm font-semibold text-zinc-100">
+                    <p className="text-sm font-semibold text-[var(--t-text)]">
                       {assignment.role || (assignment.quantityRequired !== null ? `${assignment.quantityAssigned ?? 0} / ${assignment.quantityRequired} unidades` : "Sin especificidad")}
                     </p>
-                    <p className="text-[11px] text-zinc-400">Responsabilidad asignada</p>
+                    <p className="text-[11px] text-[var(--t-text-tertiary)]">Responsabilidad asignada</p>
                   </div>
 
-                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
-                    <span className="text-[11px] font-medium text-zinc-400 flex items-center gap-1.5">
+                  <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-surface)] p-4 space-y-2">
+                    <span className="text-[11px] font-medium text-[var(--t-text-tertiary)] flex items-center gap-1.5">
                       <Calendar className="h-3.5 w-3.5 text-amber-400" /> Última Actualización
                     </span>
-                    <p className="text-sm font-semibold text-zinc-100">
+                    <p className="text-sm font-semibold text-[var(--t-text)]">
                       {formatDateString(assignment.updatedAt) || formatDateString(assignment.createdAt) || "Reciente"}
                     </p>
-                    <p className="text-[11px] text-zinc-400">Fecha de registro operativo</p>
+                    <p className="text-[11px] text-[var(--t-text-tertiary)]">Fecha de registro operativo</p>
                   </div>
                 </div>
               </div>
@@ -3164,12 +3164,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-indigo-500/50 transition-all"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)]">
               <span className="text-xs font-medium">Total Proyectos</span>
               <FolderKanban className="h-4 w-4 text-indigo-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">{projectRows.length}</span>
+              <span className="text-2xl font-bold text-[var(--t-text)]">{projectRows.length}</span>
               <span className="text-xs font-medium text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
                 Registrados
               </span>
@@ -3180,12 +3180,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-emerald-500/50 transition-all"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)]">
               <span className="text-xs font-medium">En Ejecución</span>
               <Layers className="h-4 w-4 text-emerald-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">{activeProjectsCount}</span>
+              <span className="text-2xl font-bold text-[var(--t-text)]">{activeProjectsCount}</span>
               <span className="text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                 Activos
               </span>
@@ -3196,12 +3196,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-amber-500/50 transition-all"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)]">
               <span className="text-xs font-medium">Presupuesto Total</span>
               <DollarSign className="h-4 w-4 text-amber-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-xl font-bold text-zinc-100">{formatCurrency(totalBudgetSum)}</span>
+              <span className="text-xl font-bold text-[var(--t-text)]">{formatCurrency(totalBudgetSum)}</span>
               <span className="text-xs font-medium text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
                 Asignado
               </span>
@@ -3212,12 +3212,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-indigo-500/50 transition-all"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)]">
               <span className="text-xs font-medium">Tareas Completadas</span>
               <CheckCircle2 className="h-4 w-4 text-indigo-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">{taskPercent}%</span>
+              <span className="text-2xl font-bold text-[var(--t-text)]">{taskPercent}%</span>
               <span className="text-xs font-medium text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
                 Global
               </span>
@@ -3234,15 +3234,15 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               setAssignmentFilters({ searchTerm: "", kind: "all", projectId: "all" });
               toast.info("Mostrando todas las asignaciones.");
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-indigo-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-indigo-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-indigo-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-indigo-400 transition-colors">
               <span className="text-xs font-medium">Total Asignaciones</span>
               <Users className="h-4 w-4 text-indigo-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">{assignmentRows.length}</span>
+              <span className="text-2xl font-bold text-[var(--t-text)]">{assignmentRows.length}</span>
               <span className="text-[11px] font-medium text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
                 Registradas
               </span>
@@ -3254,15 +3254,15 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               setAssignmentFilters((prev) => ({ ...prev, kind: "project-volunteer" }));
               toast.info("Filtrando asignaciones de Voluntarios.");
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-sky-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-sky-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-sky-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-sky-400 transition-colors">
               <span className="text-xs font-medium">Voluntarios / Personal</span>
               <User className="h-4 w-4 text-sky-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">
+              <span className="text-2xl font-bold text-[var(--t-text)]">
                 {assignmentRows.filter((a) => a.kind === "project-volunteer" || a.kind === "activity-volunteer").length}
               </span>
               <span className="text-[11px] font-medium text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">
@@ -3276,15 +3276,15 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               setAssignmentFilters((prev) => ({ ...prev, kind: "project-resource" }));
               toast.info("Filtrando Recursos Materiales / Equipos.");
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-purple-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-purple-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-purple-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-purple-400 transition-colors">
               <span className="text-xs font-medium">Recursos Materiales</span>
               <Package className="h-4 w-4 text-purple-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">
+              <span className="text-2xl font-bold text-[var(--t-text)]">
                 {assignmentRows.filter((a) => a.kind === "project-resource").length}
               </span>
               <span className="text-[11px] font-medium text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full border border-purple-500/20">
@@ -3298,15 +3298,15 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               const activeCount = assignmentRows.filter((a) => a.active !== false).length;
               toast.info(`Asignaciones vigentes: ${activeCount} de ${assignmentRows.length}.`);
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-emerald-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-emerald-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-emerald-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-emerald-400 transition-colors">
               <span className="text-xs font-medium">Asignaciones Vigentes</span>
               <CheckCircle2 className="h-4 w-4 text-emerald-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">
+              <span className="text-2xl font-bold text-[var(--t-text)]">
                 {assignmentRows.filter((a) => a.active !== false).length}
               </span>
               <span className="text-[11px] font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
@@ -3324,15 +3324,15 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               setActivityFilters({ searchTerm: "", projectId: "all", statusCode: "all", locationId: "all", dateFrom: null, dateTo: null });
               toast.info("Mostrando todas las actividades.");
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-indigo-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-indigo-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-indigo-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-indigo-400 transition-colors">
               <span className="text-xs font-medium">Total Actividades</span>
               <Calendar className="h-4 w-4 text-indigo-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">{activityRows.length}</span>
+              <span className="text-2xl font-bold text-[var(--t-text)]">{activityRows.length}</span>
               <span className="text-[11px] font-medium text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
                 Ver todas
               </span>
@@ -3344,16 +3344,16 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               setActivityFilters((prev) => ({ ...prev, statusCode: "en_progreso" }));
               toast.info("Filtrando actividades 'En Progreso'.");
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-emerald-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-emerald-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-emerald-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-emerald-400 transition-colors">
               <span className="text-xs font-medium">Control de Horas</span>
               <Clock className="h-4 w-4 text-emerald-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-xl font-bold text-zinc-100">
-                {totalRegisteredHoursSum}h <span className="text-xs text-zinc-400 font-normal">/ {totalEstimatedHoursSum}h</span>
+              <span className="text-xl font-bold text-[var(--t-text)]">
+                {totalRegisteredHoursSum}h <span className="text-xs text-[var(--t-text-tertiary)] font-normal">/ {totalEstimatedHoursSum}h</span>
               </span>
               <span className="text-[11px] font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                 En progreso
@@ -3366,15 +3366,15 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               setActivityFilters((prev) => ({ ...prev, statusCode: "planificada" }));
               toast.info("Filtrando actividades 'Planificadas'.");
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-sky-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-sky-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-sky-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-sky-400 transition-colors">
               <span className="text-xs font-medium font-sans">Personal / Voluntarios</span>
               <Users className="h-4 w-4 text-sky-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">{totalAssignedVolunteersSum}</span>
+              <span className="text-2xl font-bold text-[var(--t-text)]">{totalAssignedVolunteersSum}</span>
               <span className="text-[11px] font-medium text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">
                 Planificadas
               </span>
@@ -3385,15 +3385,15 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             onClick={() => {
               toast.info(`Actividades en campo: ${fieldLocationsCount} de ${activityRows.length}.`);
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-amber-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-amber-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-amber-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-amber-400 transition-colors">
               <span className="text-xs font-medium">En Campo</span>
               <MapPin className="h-4 w-4 text-amber-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">{fieldLocationsCount}</span>
+              <span className="text-2xl font-bold text-[var(--t-text)]">{fieldLocationsCount}</span>
               <span className="text-[11px] font-medium text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
                 Ubicaciones
               </span>
@@ -3409,15 +3409,15 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               setTaskFilters({ searchTerm: "", activityId: "all", statusCode: "all", priority: "all" });
               toast.info("Mostrando todas las tareas.");
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-indigo-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-indigo-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-indigo-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-indigo-400 transition-colors">
               <span className="text-xs font-medium">Total Tareas</span>
               <CheckSquare className="h-4 w-4 text-indigo-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">{taskRows.length}</span>
+              <span className="text-2xl font-bold text-[var(--t-text)]">{taskRows.length}</span>
               <span className="text-[11px] font-medium text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
                 Registradas
               </span>
@@ -3429,15 +3429,15 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               setTaskFilters((prev) => ({ ...prev, statusCode: "en_progreso" }));
               toast.info("Filtrando tareas 'En Progreso'.");
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-amber-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-amber-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-amber-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-amber-400 transition-colors">
               <span className="text-xs font-medium">En Progreso</span>
               <Clock className="h-4 w-4 text-amber-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">{tasksInProgressCount}</span>
+              <span className="text-2xl font-bold text-[var(--t-text)]">{tasksInProgressCount}</span>
               <span className="text-[11px] font-medium text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
                 En Progreso
               </span>
@@ -3449,15 +3449,15 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               setTaskFilters((prev) => ({ ...prev, statusCode: "completada" }));
               toast.info("Filtrando tareas 'Completadas'.");
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-emerald-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-emerald-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-emerald-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-emerald-400 transition-colors">
               <span className="text-xs font-medium">Completadas</span>
               <CheckCircle2 className="h-4 w-4 text-emerald-400" />
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-2xl font-bold text-zinc-100">{tasksCompletedCount}</span>
+              <span className="text-2xl font-bold text-[var(--t-text)]">{tasksCompletedCount}</span>
               <span className="text-[11px] font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                 Completadas
               </span>
@@ -3469,10 +3469,10 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               setTaskFilters((prev) => ({ ...prev, statusCode: "vencidas" }));
               toast.info("Filtrando tareas 'Vencidas'.");
             }}
-            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-red-500/60 hover:bg-zinc-900/80 transition-all group"
+            className="rounded-2xl p-5 shadow-sm space-y-2 cursor-pointer hover:border-red-500/60 hover:bg-[var(--t-hover)] transition-all group"
             style={{ background: "var(--t-surface)", border: "1px solid var(--t-border)" }}
           >
-            <div className="flex items-center justify-between text-zinc-400 group-hover:text-red-400 transition-colors">
+            <div className="flex items-center justify-between text-[var(--t-text-tertiary)] group-hover:text-red-400 transition-colors">
               <span className="text-xs font-medium">Tareas Vencidas</span>
               <AlertTriangle className="h-4 w-4 text-red-400" />
             </div>
@@ -3488,12 +3488,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
       {/* BARRA FLOTANTE DE ACCIONES MASIVAS */}
       {section === "activities" && selectedActivityIds.length > 0 && (
-        <div className="sticky top-4 z-30 flex items-center justify-between gap-4 p-4 rounded-2xl bg-gradient-to-r from-indigo-950 via-zinc-900 to-zinc-950 border-2 border-indigo-500/60 shadow-2xl animate-in fade-in slide-in-from-top-3 duration-200">
+        <div className="sticky top-4 z-30 flex items-center justify-between gap-4 p-4 rounded-2xl bg-gradient-to-r from-indigo-950 via-[var(--t-surface)] to-[var(--t-elevated)] border-2 border-indigo-500/60 shadow-2xl animate-in fade-in slide-in-from-top-3 duration-200">
           <div className="flex items-center gap-3">
             <span className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">
               ✓
             </span>
-            <span className="text-xs font-semibold text-zinc-100">
+            <span className="text-xs font-semibold text-[var(--t-text)]">
               {selectedActivityIds.length} {selectedActivityIds.length === 1 ? "actividad seleccionada" : "actividades seleccionadas"}
             </span>
           </div>
@@ -3513,7 +3513,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               size="sm"
               variant="outline"
               onClick={handleBulkExportActivities}
-              className="h-8 text-xs bg-zinc-800 border-zinc-700 text-zinc-200 hover:bg-zinc-700 flex items-center gap-1.5"
+              className="h-8 text-xs bg-[var(--t-elevated)] border-[var(--t-border-strong)] text-[var(--t-text)] hover:bg-[var(--t-hover)] flex items-center gap-1.5"
             >
               <Download className="h-3.5 w-3.5" />
               Exportar ({selectedActivityIds.length})
@@ -3533,12 +3533,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
       )}
 
       {section === "tasks" && selectedTaskIds.length > 0 && (
-        <div className="sticky top-4 z-30 flex items-center justify-between gap-4 p-4 rounded-2xl bg-gradient-to-r from-indigo-950 via-zinc-900 to-zinc-950 border-2 border-indigo-500/60 shadow-2xl animate-in fade-in slide-in-from-top-3 duration-200">
+        <div className="sticky top-4 z-30 flex items-center justify-between gap-4 p-4 rounded-2xl bg-gradient-to-r from-indigo-950 via-[var(--t-surface)] to-[var(--t-elevated)] border-2 border-indigo-500/60 shadow-2xl animate-in fade-in slide-in-from-top-3 duration-200">
           <div className="flex items-center gap-3">
             <span className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">
               ✓
             </span>
-            <span className="text-xs font-semibold text-zinc-100">
+            <span className="text-xs font-semibold text-[var(--t-text)]">
               {selectedTaskIds.length} {selectedTaskIds.length === 1 ? "tarea seleccionada" : "tareas seleccionadas"}
             </span>
           </div>
@@ -3558,7 +3558,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               size="sm"
               variant="outline"
               onClick={handleBulkExportTasks}
-              className="h-8 text-xs bg-zinc-800 border-zinc-700 text-zinc-200 hover:bg-zinc-700 flex items-center gap-1.5"
+              className="h-8 text-xs bg-[var(--t-elevated)] border-[var(--t-border-strong)] text-[var(--t-text)] hover:bg-[var(--t-hover)] flex items-center gap-1.5"
             >
               <Download className="h-3.5 w-3.5" />
               Exportar ({selectedTaskIds.length})
@@ -3584,7 +3584,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
       >
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
           <div className="relative w-full max-w-[260px]">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
+            <Search className="absolute left-3 top-2.5 h-4 w-4 text-[var(--t-text-tertiary)]" />
             <input
               type="text"
               placeholder={
@@ -3773,7 +3773,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 <OutlineButton
                   size="sm"
                   onClick={() => exportAssignmentsToCSV(assignmentRows)}
-                  className="flex items-center gap-1.5 h-9 text-xs bg-zinc-900 border-zinc-800 text-zinc-300 hover:bg-zinc-800"
+                  className="flex items-center gap-1.5 h-9 text-xs bg-[var(--t-surface)] border-[var(--t-border)] text-[var(--t-text-secondary)] hover:bg-[var(--t-hover)]"
                 >
                   <Download className="h-3.5 w-3.5 text-indigo-400" />
                   Exportar
@@ -3782,14 +3782,14 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             )}
 
             {(section === "projects" || section === "activities" || section === "tasks") && (
-              <div className="flex items-center rounded-xl p-1 bg-zinc-950 border border-zinc-800">
+              <div className="flex items-center rounded-xl p-1 bg-[var(--t-elevated)] border border-[var(--t-border)]">
                 <button
                   type="button"
                   onClick={() => setViewMode("table")}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     viewMode === "table"
                       ? "bg-indigo-600 text-white shadow-sm"
-                      : "text-zinc-400 hover:text-zinc-200"
+                      : "text-[var(--t-text-tertiary)] hover:text-[var(--t-text)]"
                   }`}
                 >
                   <LayoutList className="h-3.5 w-3.5" />
@@ -3801,7 +3801,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     viewMode === "kanban"
                       ? "bg-indigo-600 text-white shadow-sm"
-                      : "text-zinc-400 hover:text-zinc-200"
+                      : "text-[var(--t-text-tertiary)] hover:text-[var(--t-text)]"
                   }`}
                 >
                   <Kanban className="h-3.5 w-3.5" />
@@ -3872,19 +3872,19 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
       {/* Modal para Asignación Rápida de Voluntario */}
       <ModalShell open={assignVolunteerOpen} onClose={() => setAssignVolunteerOpen(false)} width="max-w-[500px]">
-        <div className="border-b border-zinc-800 px-6 py-4 flex items-center justify-between">
+        <div className="border-b border-[var(--t-border)] px-6 py-4 flex items-center justify-between">
           <div>
-            <h3 className="text-base font-semibold text-zinc-100 flex items-center gap-2">
+            <h3 className="text-base font-semibold text-[var(--t-text)] flex items-center gap-2">
               <UserPlus className="h-5 w-5 text-emerald-400" />
               Asignar Personal / Voluntario
             </h3>
-            <p className="text-xs text-zinc-400 mt-0.5">
-              Actividad: <strong className="text-zinc-200">{selectedActivityForAssign?.title}</strong>
+            <p className="text-xs text-[var(--t-text-tertiary)] mt-0.5">
+              Actividad: <strong className="text-[var(--t-text)]">{selectedActivityForAssign?.title}</strong>
             </p>
           </div>
           <button
             onClick={() => setAssignVolunteerOpen(false)}
-            className="text-zinc-400 hover:text-zinc-200 text-sm font-semibold px-2 py-1 rounded-lg hover:bg-zinc-800"
+            className="text-[var(--t-text-tertiary)] hover:text-[var(--t-text)] text-sm font-semibold px-2 py-1 rounded-lg hover:bg-[var(--t-hover)]"
           >
             ✕
           </button>
@@ -3892,7 +3892,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
         <div className="p-6 space-y-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+            <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
               Voluntario o Personal <span className="text-red-400">*</span>
             </label>
             <SelectField
@@ -3904,7 +3904,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-zinc-300">
+            <label className="text-xs font-medium text-[var(--t-text-secondary)]">
               Rol en la Actividad
             </label>
             <InputField
@@ -3915,7 +3915,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-2 border-t border-zinc-800 px-6 py-3">
+        <div className="flex items-center justify-end gap-2 border-t border-[var(--t-border)] px-6 py-3">
           <OutlineButton size="sm" onClick={() => setAssignVolunteerOpen(false)}>
             Cancelar
           </OutlineButton>
@@ -3931,19 +3931,19 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
       {/* Modal para Registrar Horas de Voluntariado */}
       <ModalShell open={registerHoursOpen} onClose={() => setRegisterHoursOpen(false)} width="max-w-[500px]">
-        <div className="border-b border-zinc-800 px-6 py-4 flex items-center justify-between">
+        <div className="border-b border-[var(--t-border)] px-6 py-4 flex items-center justify-between">
           <div>
-            <h3 className="text-base font-semibold text-zinc-100 flex items-center gap-2">
+            <h3 className="text-base font-semibold text-[var(--t-text)] flex items-center gap-2">
               <Clock className="h-5 w-5 text-indigo-400" />
               Registrar Horas de Voluntariado
             </h3>
-            <p className="text-xs text-zinc-400 mt-0.5">
-              Actividad: <strong className="text-zinc-200">{selectedActivityForHours?.title}</strong>
+            <p className="text-xs text-[var(--t-text-tertiary)] mt-0.5">
+              Actividad: <strong className="text-[var(--t-text)]">{selectedActivityForHours?.title}</strong>
             </p>
           </div>
           <button
             onClick={() => setRegisterHoursOpen(false)}
-            className="text-zinc-400 hover:text-zinc-200 text-sm font-semibold px-2 py-1 rounded-lg hover:bg-zinc-800"
+            className="text-[var(--t-text-tertiary)] hover:text-[var(--t-text)] text-sm font-semibold px-2 py-1 rounded-lg hover:bg-[var(--t-hover)]"
           >
             ✕
           </button>
@@ -3951,7 +3951,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
         <div className="p-6 space-y-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+            <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
               Voluntario / Colaborador <span className="text-red-400">*</span>
             </label>
             <SelectField
@@ -3964,7 +3964,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-zinc-300">
+              <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                 Horas Trabajadas <span className="text-red-400">*</span>
               </label>
               <InputField
@@ -3976,7 +3976,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-zinc-300">
+              <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                 Fecha del Registro <span className="text-red-400">*</span>
               </label>
               <InputField
@@ -3989,7 +3989,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-2 border-t border-zinc-800 px-6 py-3">
+        <div className="flex items-center justify-end gap-2 border-t border-[var(--t-border)] px-6 py-3">
           <OutlineButton size="sm" onClick={() => setRegisterHoursOpen(false)}>
             Cancelar
           </OutlineButton>
@@ -4005,10 +4005,10 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
       {/* Modal de Creación y Edición Rediseñado */}
       <ModalShell open={formOpen} onClose={closeForm} width="max-w-[960px]">
-        <div className="border-b border-zinc-800 px-6 py-4 space-y-3">
+        <div className="border-b border-[var(--t-border)] px-6 py-4 space-y-3">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h3 className="text-base font-semibold text-zinc-100 flex items-center gap-2">
+              <h3 className="text-base font-semibold text-[var(--t-text)] flex items-center gap-2">
                 <FolderKanban className="h-5 w-5 text-indigo-400" />
                 {section === "projects"
                   ? editingProjectId
@@ -4026,7 +4026,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                   ? `Editar ${getAssignmentKindLabel(assignmentFormKind).toLowerCase()}`
                   : "Crear Asignación"}
               </h3>
-              <p className="text-xs text-zinc-400 mt-0.5">
+              <p className="text-xs text-[var(--t-text-tertiary)] mt-0.5">
                 {section === "projects" && projectForm.code ? (
                   <span className="font-mono text-indigo-400 font-medium">Código: {projectForm.code}</span>
                 ) : (
@@ -4036,21 +4036,21 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
             </div>
             <button
               onClick={closeForm}
-              className="text-zinc-400 hover:text-zinc-200 text-sm font-semibold px-2 py-1 rounded-lg hover:bg-zinc-800"
+              className="text-[var(--t-text-tertiary)] hover:text-[var(--t-text)] text-sm font-semibold px-2 py-1 rounded-lg hover:bg-[var(--t-hover)]"
             >
               ✕
             </button>
           </div>
 
           {section === "projects" && (
-            <div className="flex items-center gap-2 pt-2 border-t border-zinc-800/80">
+            <div className="flex items-center gap-2 pt-2 border-t border-[var(--t-border)]">
               <button
                 type="button"
                 onClick={() => setFormTab("general")}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                   formTab === "general"
                     ? "bg-indigo-600 text-white shadow-sm font-semibold"
-                    : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60"
+                    : "text-[var(--t-text-tertiary)] hover:text-[var(--t-text)] hover:bg-[var(--t-hover)]"
                 }`}
               >
                 <Info className="h-3.5 w-3.5" />
@@ -4063,7 +4063,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                   formTab === "team_budget"
                     ? "bg-indigo-600 text-white shadow-sm font-semibold"
-                    : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60"
+                    : "text-[var(--t-text-tertiary)] hover:text-[var(--t-text)] hover:bg-[var(--t-hover)]"
                 }`}
               >
                 <Users className="h-3.5 w-3.5" />
@@ -4076,7 +4076,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                   formTab === "advanced"
                     ? "bg-indigo-600 text-white shadow-sm font-semibold"
-                    : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60"
+                    : "text-[var(--t-text-tertiary)] hover:text-[var(--t-text)] hover:bg-[var(--t-hover)]"
                 }`}
               >
                 <Settings className="h-3.5 w-3.5" />
@@ -4093,7 +4093,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 <div className="space-y-4">
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
                         Nombre del Proyecto <span className="text-red-400">*</span>
                       </label>
                       <InputField
@@ -4104,8 +4104,8 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300">
-                        Código ID del Proyecto <span className="text-zinc-500">(Auto-generado / Correlativo)</span>
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)]">
+                        Código ID del Proyecto <span className="text-[var(--t-text-dim)]">(Auto-generado / Correlativo)</span>
                       </label>
                       <InputField
                         value={projectForm.code || (editingProjectId ? "" : "Generación automática")}
@@ -4118,7 +4118,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
                   <div className="grid gap-4 md:grid-cols-3">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
                         Área u Organización <span className="text-red-400">*</span>
                       </label>
                       <SelectField
@@ -4130,7 +4130,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
                         Estado del Proyecto <span className="text-red-400">*</span>
                       </label>
                       <SelectField
@@ -4142,7 +4142,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300">
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                         Nivel de Prioridad
                       </label>
                       <SelectField
@@ -4165,7 +4165,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+                    <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
                       Descripción del Proyecto <span className="text-red-400">*</span>
                     </label>
                     <TextareaField
@@ -4176,11 +4176,11 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-zinc-300">
+                    <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                       Imagen / Banner del Proyecto
                     </label>
 
-                    <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4 space-y-3">
+                    <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-elevated)] p-4 space-y-3">
                       {projectForm.imageUrl || projectForm.imageFile ? (
                         <div className="flex items-center justify-between gap-4">
                           <div className="flex items-center gap-3">
@@ -4192,14 +4192,14 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                               <img
                                 src={projectForm.imageUrl}
                                 alt="Portada"
-                                className="h-14 w-14 rounded-xl object-cover border border-zinc-700"
+                                className="h-14 w-14 rounded-xl object-cover border border-[var(--t-border-strong)]"
                               />
                             )}
                             <div>
-                              <p className="text-xs font-semibold text-zinc-200">
+                              <p className="text-xs font-semibold text-[var(--t-text)]">
                                 {projectForm.imageFile ? projectForm.imageFile.name : "Imagen del proyecto"}
                               </p>
-                              <p className="text-[11px] text-zinc-400">
+                              <p className="text-[11px] text-[var(--t-text-tertiary)]">
                                 {projectForm.imageFile
                                   ? `${(projectForm.imageFile.size / 1024).toFixed(1)} KB`
                                   : "URL almacenada en Supabase Storage"}
@@ -4208,7 +4208,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <label className="cursor-pointer px-3 py-1.5 rounded-lg border border-zinc-700 text-xs font-medium text-zinc-200 hover:bg-zinc-800 transition-colors flex items-center gap-1.5">
+                            <label className="cursor-pointer px-3 py-1.5 rounded-lg border border-[var(--t-border-strong)] text-xs font-medium text-[var(--t-text)] hover:bg-[var(--t-hover)] transition-colors flex items-center gap-1.5">
                               <Upload className="h-3.5 w-3.5" />
                               Cambiar
                               <input
@@ -4251,7 +4251,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 <div className="space-y-4">
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300">
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                         Líder del Proyecto / Responsable
                       </label>
                       <SelectField
@@ -4263,10 +4263,10 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300">
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                         Equipo de Colaboradores Vinculados
                       </label>
-                      <div className="h-10 rounded-xl border border-zinc-800 bg-zinc-950/60 px-3 flex items-center text-xs text-zinc-400">
+                      <div className="h-10 rounded-xl border border-[var(--t-border)] bg-[var(--t-elevated)] px-3 flex items-center text-xs text-[var(--t-text-tertiary)]">
                         {catalogs.volunteers.length} voluntarios disponibles para asignación
                       </div>
                     </div>
@@ -4274,7 +4274,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300">
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                         Fecha de Inicio
                       </label>
                       <InputField
@@ -4286,7 +4286,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300">
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                         Fecha de Finalización Estimada
                       </label>
                       <InputField
@@ -4300,7 +4300,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300">
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                         Tipo de Moneda
                       </label>
                       <SelectField
@@ -4321,7 +4321,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-300">
+                      <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                         Presupuesto Asignado
                       </label>
                       <InputField
@@ -4337,13 +4337,13 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
               {formTab === "advanced" && (
                 <div className="space-y-6">
-                  <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4 space-y-2">
-                    <h4 className="text-xs font-semibold text-zinc-200 flex items-center gap-1.5">
+                  <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-elevated)] p-4 space-y-2">
+                    <h4 className="text-xs font-semibold text-[var(--t-text)] flex items-center gap-1.5">
                       <Info className="h-4 w-4 text-indigo-400" /> Información del Registro en Base de Datos
                     </h4>
-                    <div className="grid grid-cols-2 gap-3 text-xs text-zinc-400 pt-2">
-                      <div>ID del Proyecto: <strong className="text-zinc-200 font-mono">{editingProjectId || "Nuevo Registro"}</strong></div>
-                      <div>Tenant ID: <strong className="text-zinc-200 font-mono">Supabase Multi-Tenant</strong></div>
+                    <div className="grid grid-cols-2 gap-3 text-xs text-[var(--t-text-tertiary)] pt-2">
+                      <div>ID del Proyecto: <strong className="text-[var(--t-text)] font-mono">{editingProjectId || "Nuevo Registro"}</strong></div>
+                      <div>Tenant ID: <strong className="text-[var(--t-text)] font-mono">Supabase Multi-Tenant</strong></div>
                     </div>
                   </div>
 
@@ -4352,7 +4352,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                       <div className="flex items-center gap-2 text-red-400 font-semibold text-xs">
                         <ShieldAlert className="h-4 w-4" /> Zona de Peligro (Danger Zone)
                       </div>
-                      <p className="text-xs text-zinc-400">
+                      <p className="text-xs text-[var(--t-text-tertiary)]">
                         Archivar o eliminar este proyecto quitará su visualización activa del panel general de la ONG.
                       </p>
 
@@ -4384,8 +4384,8 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               {/* FILA 1: Contexto de Proyecto y Actividad */}
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300">
-                    Proyecto <span className="text-zinc-500">(Filtro de actividad)</span>
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)]">
+                    Proyecto <span className="text-[var(--t-text-dim)]">(Filtro de actividad)</span>
                   </label>
                   <SelectField
                     value={taskFormProjectFilter}
@@ -4398,7 +4398,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                     Actividad Vinculada <span className="text-red-400">*</span>
                   </label>
                   <SelectField
@@ -4416,7 +4416,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
               {/* FILA 2: Título de la Tarea */}
               <div className="space-y-1.5">
-                <label className="text-xs font-medium text-zinc-300">
+                <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                   Título de la Tarea <span className="text-red-400">*</span>
                 </label>
                 <InputField
@@ -4429,7 +4429,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               {/* FILA 3: Asignación, Prioridad y Estado */}
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                     Responsable / Asignado <span className="text-red-400">*</span>
                   </label>
                   <SelectField
@@ -4446,7 +4446,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                     Nivel de Prioridad <span className="text-red-400">*</span>
                   </label>
                   <SelectField
@@ -4468,7 +4468,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                     Estado Inicial <span className="text-red-400">*</span>
                   </label>
                   <SelectField
@@ -4488,7 +4488,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               {/* FILA 4: Fechas y Estimación */}
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300">Fecha Límite de Entrega</label>
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)]">Fecha Límite de Entrega</label>
                   <InputField
                     value={taskForm.deadline}
                     onChange={(value) => setTaskForm((current) => ({ ...current, deadline: value }))}
@@ -4498,7 +4498,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300">Tiempo Estimado (Horas)</label>
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)]">Tiempo Estimado (Horas)</label>
                   <InputField
                     value={taskForm.estimatedHours || "0"}
                     onChange={(value) => setTaskForm((current) => ({ ...current, estimatedHours: value }))}
@@ -4510,7 +4510,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
               {/* FILA 5: Descripción */}
               <div className="space-y-1.5">
-                <label className="text-xs font-medium text-zinc-300">Descripción / Instrucciones Detalladas</label>
+                <label className="text-xs font-medium text-[var(--t-text-secondary)]">Descripción / Instrucciones Detalladas</label>
                 <TextareaField
                   value={taskForm.description}
                   onChange={(value) => setTaskForm((current) => ({ ...current, description: value }))}
@@ -4520,8 +4520,8 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
               {/* FILA 6: Archivos y Notificación */}
               <div className="space-y-3 pt-2">
-                <label className="text-xs font-medium text-zinc-300">
-                  Adjuntar Referencias / Archivos Guía <span className="text-zinc-500">(Opcional - PDF, PNG, DOCX)</span>
+                <label className="text-xs font-medium text-[var(--t-text-secondary)]">
+                  Adjuntar Referencias / Archivos Guía <span className="text-[var(--t-text-dim)]">(Opcional - PDF, PNG, DOCX)</span>
                 </label>
                 <ImageUploadField
                   label="Arrastra un archivo de referencia o haz clic para subir (Máx 5MB)"
@@ -4542,9 +4542,9 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                         sendEmailNotification: e.target.checked,
                       }))
                     }
-                    className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                    className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                   />
-                  <label htmlFor="sendEmailTask" className="text-xs text-zinc-300 cursor-pointer select-none">
+                  <label htmlFor="sendEmailTask" className="text-xs text-[var(--t-text-secondary)] cursor-pointer select-none">
                     Notificar automáticamente por correo electrónico al responsable asignado
                   </label>
                 </div>
@@ -4558,7 +4558,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               {/* FILA 1: Proyecto y Estado */}
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
                     Proyecto Asociado <span className="text-red-400">*</span>
                   </label>
                   <SelectField
@@ -4570,7 +4570,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
                     Estado Inicial <span className="text-red-400">*</span>
                   </label>
                   <SelectField
@@ -4585,7 +4585,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               {/* FILA 2: Título y Prioridad */}
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
                     Título de la Actividad <span className="text-red-400">*</span>
                   </label>
                   <InputField
@@ -4596,7 +4596,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                     Nivel de Prioridad
                   </label>
                   <SelectField
@@ -4621,7 +4621,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               {/* FILA 3: Fechas y Horas Estimadas */}
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
                     Fecha Inicio <span className="text-red-400">*</span>
                   </label>
                   <InputField
@@ -4633,7 +4633,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300 flex items-center gap-1">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)] flex items-center gap-1">
                     Fecha Fin <span className="text-red-400">*</span>
                   </label>
                   <InputField
@@ -4645,7 +4645,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-zinc-300">
+                  <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                     Horas Estimadas
                   </label>
                   <InputField
@@ -4658,13 +4658,13 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               </div>
 
               {/* FILA 4: Conmutador de Modalidad (Presencial / Virtual) y Ubicación / Enlace */}
-              <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4 space-y-3">
-                <label className="text-xs font-semibold text-zinc-200">
+              <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-elevated)] p-4 space-y-3">
+                <label className="text-xs font-semibold text-[var(--t-text)]">
                   Tipo de Modalidad
                 </label>
 
                 <div className="flex items-center gap-6">
-                  <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-zinc-300">
+                  <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-[var(--t-text-secondary)]">
                     <input
                       type="radio"
                       name="modality"
@@ -4676,7 +4676,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                     📍 Presencial (En Campo / Sede)
                   </label>
 
-                  <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-zinc-300">
+                  <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-[var(--t-text-secondary)]">
                     <input
                       type="radio"
                       name="modality"
@@ -4691,7 +4691,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
                 {(activityForm.modality || "presencial") === "presencial" ? (
                   <div className="space-y-1.5 pt-2">
-                    <label className="text-xs font-medium text-zinc-300">
+                    <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                       Ubicación / Sede de la Actividad
                     </label>
                     <SelectField
@@ -4703,7 +4703,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                   </div>
                 ) : (
                   <div className="space-y-1.5 pt-2">
-                    <label className="text-xs font-medium text-zinc-300">
+                    <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                       Enlace de la Reunión (Google Meet / Zoom / Teams)
                     </label>
                     <InputField
@@ -4717,12 +4717,12 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
               {/* FILA 5: Asignación de Personal / Voluntarios */}
               <div className="space-y-1.5">
-                <label className="text-xs font-medium text-zinc-300">
+                <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                   Asignar Personal / Voluntarios a la Actividad
                 </label>
-                <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3 max-h-40 overflow-y-auto space-y-2">
+                <div className="rounded-xl border border-[var(--t-border)] bg-[var(--t-elevated)] p-3 max-h-40 overflow-y-auto space-y-2">
                   {catalogs.volunteers.length === 0 ? (
-                    <p className="text-xs text-zinc-500 italic">No hay voluntarios registrados disponibles.</p>
+                    <p className="text-xs text-[var(--t-text-dim)] italic">No hay voluntarios registrados disponibles.</p>
                   ) : (
                     catalogs.volunteers.map((vol) => {
                       const isAssigned = (activityForm.assignedVolunteerIds || []).includes(vol.value);
@@ -4732,7 +4732,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                           className={`flex items-center justify-between p-2 rounded-lg text-xs cursor-pointer border transition-colors ${
                             isAssigned
                               ? "bg-indigo-600/10 border-indigo-500/40 text-indigo-300"
-                              : "bg-zinc-900/60 border-zinc-800 text-zinc-300 hover:bg-zinc-800/80"
+                              : "bg-[var(--t-surface)] border-[var(--t-border)] text-[var(--t-text-secondary)] hover:bg-[var(--t-hover)]"
                           }`}
                         >
                           <div className="flex items-center gap-2">
@@ -4748,7 +4748,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
                                   return { ...c, assignedVolunteerIds: nextList };
                                 });
                               }}
-                              className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                              className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
                             />
                             <span>{vol.label}</span>
                           </div>
@@ -4762,7 +4762,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
 
               {/* FILA 6: Descripción u Objetivos */}
               <div className="space-y-1.5">
-                <label className="text-xs font-medium text-zinc-300">
+                <label className="text-xs font-medium text-[var(--t-text-secondary)]">
                   Descripción u Objetivos de la Actividad
                 </label>
                 <TextareaField
@@ -4773,13 +4773,13 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
               </div>
 
               {/* FILA 7: Checkbox de Notificación Automática */}
-              <div className="pt-2 border-t border-zinc-800/80">
-                <label className="flex items-center gap-2.5 text-xs text-zinc-300 cursor-pointer font-medium">
+              <div className="pt-2 border-t border-[var(--t-border)]">
+                <label className="flex items-center gap-2.5 text-xs text-[var(--t-text-secondary)] cursor-pointer font-medium">
                   <input
                     type="checkbox"
                     checked={activityForm.sendEmailNotification ?? true}
                     onChange={(e) => setActivityForm((c) => ({ ...c, sendEmailNotification: e.target.checked }))}
-                    className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-indigo-600 focus:ring-indigo-500"
+                    className="h-4 w-4 rounded border-[var(--t-border-strong)] bg-[var(--t-surface)] text-indigo-600 focus:ring-indigo-500"
                   />
                   <span>[✓] Enviar notificación automática por correo a los miembros asignados</span>
                 </label>
@@ -4797,7 +4797,7 @@ export function ProjectsWorkspace({ section }: { section: ProjectModuleSection }
           ) : null}
         </div>
 
-        <div className="flex items-center justify-between border-t border-zinc-800 px-6 py-3">
+        <div className="flex items-center justify-between border-t border-[var(--t-border)] px-6 py-3">
           <div>
             {section === "projects" && editingProjectId && (
               <button

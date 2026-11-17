@@ -279,38 +279,27 @@ export function MedicalRecords() {
       variants={stagger as any} 
       initial="hidden" 
       animate="visible" 
-      className="bg-[#100F0D] text-[#F9F7F3] min-h-screen p-6 font-sans w-full"
-      style={{
-        '--t-surface': '#171512',
-        '--t-border': '#26231F',
-        '--t-text': '#F9F7F3',
-        '--t-text-secondary': '#A4A29F',
-        '--t-text-tertiary': '#686561',
-        '--t-hover': '#1F1D1A',
-        '--t-muted': '#686561',
-        '--t-border-strong': '#26231F',
-        '--t-input-bg': '#100F0D',
-      } as React.CSSProperties}
+      className="bg-[var(--t-bg)] text-[var(--t-text)] min-h-screen p-6 font-sans w-full"
     >
       {/* Header Superior */}
       <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
           <h1 className="text-2xl font-bold">Panel Principal</h1>
-          <p className="text-sm text-[#A4A29F] mt-1">Control de acceso y registro clínico sensible</p>
+          <p className="text-sm text-[var(--t-text-secondary)] mt-1">Control de acceso y registro clínico sensible</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {scope === "beneficiaries" ? (
-             <button className="bg-[#1F1D1A] border border-[#356C92] px-4 py-2 rounded-lg text-sm text-[#356C92] font-medium" onClick={() => setScope("beneficiaries")}>Beneficiarios</button>
+             <button className="bg-[var(--t-elevated)] border border-[#356C92] px-4 py-2 rounded-lg text-sm text-[#356C92] font-medium" onClick={() => setScope("beneficiaries")}>Beneficiarios</button>
           ) : (
-             <button className="bg-[#171512] border border-[#26231F] px-4 py-2 rounded-lg text-sm text-[#A4A29F] hover:bg-[#1F1D1A] transition-colors" onClick={() => setScope("beneficiaries")}>Beneficiarios</button>
+             <button className="bg-[var(--t-surface)] border border-[var(--t-border)] px-4 py-2 rounded-lg text-sm text-[var(--t-text-secondary)] hover:bg-[var(--t-hover)] transition-colors" onClick={() => setScope("beneficiaries")}>Beneficiarios</button>
           )}
           {scope === "volunteers" ? (
-             <button className="bg-[#1F1D1A] border border-[#356C92] px-4 py-2 rounded-lg text-sm text-[#356C92] font-medium" onClick={() => setScope("volunteers")}>Voluntarios</button>
+             <button className="bg-[var(--t-elevated)] border border-[#356C92] px-4 py-2 rounded-lg text-sm text-[#356C92] font-medium" onClick={() => setScope("volunteers")}>Voluntarios</button>
           ) : (
-             <button className="bg-[#171512] border border-[#26231F] px-4 py-2 rounded-lg text-sm text-[#A4A29F] hover:bg-[#1F1D1A] transition-colors" onClick={() => setScope("volunteers")}>Voluntarios</button>
+             <button className="bg-[var(--t-surface)] border border-[var(--t-border)] px-4 py-2 rounded-lg text-sm text-[var(--t-text-secondary)] hover:bg-[var(--t-hover)] transition-colors" onClick={() => setScope("volunteers")}>Voluntarios</button>
           )}
           <button 
-            className="p-2.5 rounded-lg text-[#A4A29F] hover:text-[#F9F7F3] bg-[#171512] hover:bg-[#1F1D1A] border border-[#26231F] transition-colors shadow-sm ml-2" 
+            className="p-2.5 rounded-lg text-[var(--t-text-secondary)] hover:text-[var(--t-text)] bg-[var(--t-surface)] hover:bg-[var(--t-hover)] border border-[var(--t-border)] transition-colors shadow-sm ml-2" 
             onClick={records.refresh} 
             disabled={records.loading} 
             title="Actualizar"
@@ -327,34 +316,34 @@ export function MedicalRecords() {
           
           {/* Fila de 4 KPI Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-             <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4 relative overflow-hidden">
-                <p className="text-xs text-[#A4A29F]">Total Personas</p>
-                <p className="text-2xl font-bold text-white mt-1">{totalPeople}</p>
-                <div className="absolute top-3 right-3 bg-[#1F181E] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+             <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4 relative overflow-hidden">
+                <p className="text-xs text-[var(--t-text-secondary)]">Total Personas</p>
+                <p className="text-2xl font-bold text-[var(--t-text)] mt-1">{totalPeople}</p>
+                <div className="absolute top-3 right-3 bg-[var(--t-danger-soft)] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
                    <Users className="w-3 h-3 text-[#8B5CF6]" />
                    <span className="text-[10px] font-medium text-[#8B5CF6]">Activos</span>
                 </div>
              </div>
-             <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4 relative overflow-hidden">
-                <p className="text-xs text-[#A4A29F]">Con Ficha</p>
-                <p className="text-2xl font-bold text-white mt-1">{withRecordCount}</p>
-                <div className="absolute top-3 right-3 bg-[#161D17] border border-[#08996A]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+             <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4 relative overflow-hidden">
+                <p className="text-xs text-[var(--t-text-secondary)]">Con Ficha</p>
+                <p className="text-2xl font-bold text-[var(--t-text)] mt-1">{withRecordCount}</p>
+                <div className="absolute top-3 right-3 bg-[var(--t-success-soft)] border border-[#08996A]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
                    <Activity className="w-3 h-3 text-[#08996A]" />
                    <span className="text-[10px] font-medium text-[#08996A]">Completas</span>
                 </div>
              </div>
-             <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4 relative overflow-hidden">
-                <p className="text-xs text-[#A4A29F]">Pendientes</p>
-                <p className="text-2xl font-bold text-white mt-1">{withoutRecordCount}</p>
-                <div className="absolute top-3 right-3 bg-[#231C11] border border-[#D97706]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+             <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4 relative overflow-hidden">
+                <p className="text-xs text-[var(--t-text-secondary)]">Pendientes</p>
+                <p className="text-2xl font-bold text-[var(--t-text)] mt-1">{withoutRecordCount}</p>
+                <div className="absolute top-3 right-3 bg-[var(--t-warning-soft)] border border-[#D97706]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
                    <ShieldAlert className="w-3 h-3 text-[#D97706]" />
                    <span className="text-[10px] font-medium text-[#D97706]">Atención</span>
                 </div>
              </div>
-             <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4 relative overflow-hidden">
-                <p className="text-xs text-[#A4A29F]">Cobertura</p>
-                <p className="text-2xl font-bold text-white mt-1">{coveragePercent}%</p>
-                <div className="absolute top-3 right-3 bg-[#1F181E] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+             <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4 relative overflow-hidden">
+                <p className="text-xs text-[var(--t-text-secondary)]">Cobertura</p>
+                <p className="text-2xl font-bold text-[var(--t-text)] mt-1">{coveragePercent}%</p>
+                <div className="absolute top-3 right-3 bg-[var(--t-danger-soft)] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
                    <BarChart className="w-3 h-3 text-[#8B5CF6]" />
                    <span className="text-[10px] font-medium text-[#8B5CF6]">Global</span>
                 </div>
@@ -362,11 +351,11 @@ export function MedicalRecords() {
           </div>
 
           {/* Tarjeta de Gráfico / Evolución */}
-          <div className={`bg-[#171512] border border-[#26231F] rounded-[12px] flex flex-col items-center p-6 ${evolutionData.length > 0 ? 'h-[280px] justify-center' : 'py-10'}`}>
-             <div className="bg-[#23211D] p-3 rounded-xl mb-3">
-                <LucideBarChart className="w-6 h-6 text-[#A4A29F]" />
+          <div className={`bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] flex flex-col items-center p-6 ${evolutionData.length > 0 ? 'h-[280px] justify-center' : 'py-10'}`}>
+             <div className="bg-[var(--t-elevated)] p-3 rounded-xl mb-3">
+                <LucideBarChart className="w-6 h-6 text-[var(--t-text-secondary)]" />
              </div>
-             <p className="text-sm font-medium text-[#F9F7F3] mb-4">Evolución de Fichas</p>
+             <p className="text-sm font-medium text-[var(--t-text)] mb-4">Evolución de Fichas</p>
              {evolutionData.length > 0 ? (
                <div className="w-full h-full min-h-[150px]">
                  <ResponsiveContainer width="100%" height="100%">
@@ -378,14 +367,14 @@ export function MedicalRecords() {
                  </ResponsiveContainer>
                </div>
              ) : (
-               <p className="text-sm text-[#A4A29F] text-center max-w-xs mt-1">No hay datos suficientes para generar el gráfico de evolución en este momento.</p>
+               <p className="text-sm text-[var(--t-text-secondary)] text-center max-w-xs mt-1">No hay datos suficientes para generar el gráfico de evolución en este momento.</p>
              )}
           </div>
 
           {/* Tarjeta de Feed en Vivo (Tabla) */}
-          <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4">
+          <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4">
              <div className="mb-5">
-                <h2 className="text-base font-medium text-[#F9F7F3]">Registros recientes</h2>
+                <h2 className="text-base font-medium text-[var(--t-text)]">Registros recientes</h2>
              </div>
              
              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
@@ -402,8 +391,8 @@ export function MedicalRecords() {
                          key={filter.value}
                          className={`inline-flex h-8 items-center rounded-lg px-3.5 text-xs font-medium transition-colors ${
                            isActive
-                             ? "bg-[#1F181E] border border-[#8B5CF6]/30 text-[#8B5CF6]"
-                             : "bg-[#100F0D] border border-[#26231F] text-[#A4A29F] hover:bg-[#1F1D1A]"
+                             ? "bg-[var(--t-danger-soft)] border border-[#8B5CF6]/30 text-[#8B5CF6]"
+                             : "bg-[var(--t-bg)] border border-[var(--t-border)] text-[var(--t-text-secondary)] hover:bg-[var(--t-hover)]"
                          }`}
                          onClick={() => setRecordFilter(filter.value as any)}
                        >
@@ -415,18 +404,18 @@ export function MedicalRecords() {
 
                 {/* Search */}
                 <div className="relative w-full sm:max-w-xs">
-                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#A4A29F]" />
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--t-text-secondary)]" />
                   <input
                     placeholder="Buscar por persona, DNI o contexto..."
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
-                    className="h-9 w-full rounded-lg pl-9 pr-4 text-xs bg-[#100F0D] border border-[#26231F] text-[#F9F7F3] outline-none focus:border-[#356C92] transition-colors"
+                    className="h-9 w-full rounded-lg pl-9 pr-4 text-xs bg-[var(--t-bg)] border border-[var(--t-border)] text-[var(--t-text)] outline-none focus:border-[#356C92] transition-colors"
                   />
                 </div>
              </div>
 
              {/* Tabla */}
-             <div className="overflow-x-auto rounded-xl border border-[#26231F] bg-[#100F0D]">
+             <div className="overflow-x-auto rounded-xl border border-[var(--t-border)] bg-[var(--t-bg)]">
                {records.error && (
                  <div className="p-4"><PeopleErrorBlock message={records.error} onRetry={records.refresh} /></div>
                )}
@@ -450,20 +439,20 @@ export function MedicalRecords() {
         <div className="lg:col-span-1 space-y-4">
           
           {/* Tarjeta Agenda de Hoy */}
-          <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-6 flex flex-col min-h-[220px]">
+          <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-6 flex flex-col min-h-[220px]">
              <div className="flex items-center gap-3 mb-4">
-               <div className="bg-[#23211D] p-2.5 rounded-xl">
-                  <Calendar className="w-5 h-5 text-[#A4A29F]" />
+               <div className="bg-[var(--t-elevated)] p-2.5 rounded-xl">
+                  <Calendar className="w-5 h-5 text-[var(--t-text-secondary)]" />
                </div>
-               <p className="text-sm font-medium text-[#F9F7F3]">Agenda de Hoy</p>
+               <p className="text-sm font-medium text-[var(--t-text)]">Agenda de Hoy</p>
              </div>
              
              {agenda.length > 0 ? (
                <div className="space-y-3 overflow-y-auto pr-2">
                  {agenda.map(item => (
                    <div key={item.id} className="border-l-2 border-[#356C92] pl-3 py-1">
-                     <p className="text-xs text-[#F9F7F3] font-medium truncate">{item.titulo}</p>
-                     <p className="text-[10px] text-[#A4A29F]">
+                     <p className="text-xs text-[var(--t-text)] font-medium truncate">{item.titulo}</p>
+                     <p className="text-[10px] text-[var(--t-text-secondary)]">
                        {new Date(item.fecha_inicio).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })} - {new Date(item.fecha_fin).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
                      </p>
                    </div>
@@ -471,34 +460,34 @@ export function MedicalRecords() {
                </div>
              ) : (
                <div className="flex-1 flex flex-col items-center justify-center py-4">
-                 <p className="text-sm text-[#A4A29F] text-center max-w-xs mt-2">Sin actividades ni atenciones programadas para el día de hoy.</p>
+                 <p className="text-sm text-[var(--t-text-secondary)] text-center max-w-xs mt-2">Sin actividades ni atenciones programadas para el día de hoy.</p>
                </div>
              )}
           </div>
 
           {/* Tarjeta Accesos Directos */}
-          <div className="bg-[#171512] border border-[#26231F] rounded-[12px] p-4">
-             <h2 className="text-sm font-medium text-[#F9F7F3] mb-3">Accesos Directos</h2>
+          <div className="bg-[var(--t-surface)] border border-[var(--t-border)] rounded-[12px] p-4">
+             <h2 className="text-sm font-medium text-[var(--t-text)] mb-3">Accesos Directos</h2>
              <div className="space-y-2">
                 <button 
-                   className="w-full text-left hover:bg-[#1F1D1A] transition-colors rounded-lg p-3 flex justify-between items-center bg-[#1F1D1A]/50 border border-transparent hover:border-[#26231F]"
+                   className="w-full text-left hover:bg-[var(--t-hover)] transition-colors rounded-lg p-3 flex justify-between items-center bg-[var(--t-elevated)] border border-transparent hover:border-[var(--t-border)]"
                    onClick={() => setRecordFilter("withoutRecord")}
                 >
-                   <span className="text-sm text-[#F9F7F3]">Fichas Pendientes</span>
-                   <span className="bg-[#100F0D] text-xs px-2.5 py-1 rounded-md text-[#F9F7F3] border border-[#26231F] font-medium min-w-[28px] text-center">{withoutRecordCount}</span>
+                   <span className="text-sm text-[var(--t-text)]">Fichas Pendientes</span>
+                   <span className="bg-[var(--t-bg)] text-xs px-2.5 py-1 rounded-md text-[var(--t-text)] border border-[var(--t-border)] font-medium min-w-[28px] text-center">{withoutRecordCount}</span>
                 </button>
                 <button 
-                   className="w-full text-left hover:bg-[#1F1D1A] transition-colors rounded-lg p-3 flex justify-between items-center bg-[#1F1D1A]/50 border border-transparent hover:border-[#26231F]"
+                   className="w-full text-left hover:bg-[var(--t-hover)] transition-colors rounded-lg p-3 flex justify-between items-center bg-[var(--t-elevated)] border border-transparent hover:border-[var(--t-border)]"
                    onClick={() => setRecordFilter("withRecord")}
                 >
-                   <span className="text-sm text-[#F9F7F3]">Fichas Registradas</span>
-                   <span className="bg-[#100F0D] text-xs px-2.5 py-1 rounded-md text-[#F9F7F3] border border-[#26231F] font-medium min-w-[28px] text-center">{withRecordCount}</span>
+                   <span className="text-sm text-[var(--t-text)]">Fichas Registradas</span>
+                   <span className="bg-[var(--t-bg)] text-xs px-2.5 py-1 rounded-md text-[var(--t-text)] border border-[var(--t-border)] font-medium min-w-[28px] text-center">{withRecordCount}</span>
                 </button>
                 <button 
-                   className="w-full text-left hover:bg-[#1F1D1A] transition-colors rounded-lg p-3 flex justify-between items-center bg-[#1F1D1A]/50 border border-transparent hover:border-[#26231F]"
+                   className="w-full text-left hover:bg-[var(--t-hover)] transition-colors rounded-lg p-3 flex justify-between items-center bg-[var(--t-elevated)] border border-transparent hover:border-[var(--t-border)]"
                 >
-                   <span className="text-sm text-[#F9F7F3]">Auditoría de accesos</span>
-                   <ChevronRight className="w-4 h-4 text-[#A4A29F]" />
+                   <span className="text-sm text-[var(--t-text)]">Auditoría de accesos</span>
+                   <ChevronRight className="w-4 h-4 text-[var(--t-text-secondary)]" />
                 </button>
              </div>
           </div>
